@@ -62,10 +62,7 @@ $jsonLd = $jsonLd ?? null;
         <link rel="stylesheet" href="<?= asset('/css/industries.css?v=1.0.0.1') ?>">
     <?php endif; ?>
 
-    <?php if (isset($pageId) && $pageId === 'contactus'): ?>
-        <link rel="stylesheet" href="<?= asset('/css/contactus.css?v=1.0.0.1') ?>">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/css/intlTelInput.css">
-    <?php endif; ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/css/intlTelInput.css">
 </head>
 <body class="bg-background antialiased <?= isset($pageId) ? 'page-' . $pageId : '' ?>">
     <?php if ($gtmId): ?>
@@ -105,6 +102,9 @@ $jsonLd = $jsonLd ?? null;
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
     <script src="<?= asset('/js/main.js?v=1.0.0.1') ?>" defer></script>
 
+    <!-- Intl. Phone Core (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/js/intlTelInput.min.js"></script>
+
     <?php if (isset($pageId) && $pageId === 'home'): ?>
         <script src="<?= asset('/js/home.js?v=1.0.0.1') ?>" defer></script>
     <?php endif; ?>
@@ -138,7 +138,6 @@ $jsonLd = $jsonLd ?? null;
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'contactus'): ?>
-        <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/js/intlTelInput.min.js"></script>
         <script src="<?= asset('/js/contactus.js?v=1.0.0.1') ?>" defer></script>
     <?php endif; ?>
 

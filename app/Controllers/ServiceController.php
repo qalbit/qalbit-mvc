@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Support\Faqs;
 use App\Support\PageCache;
 use App\Support\Schema;
+use App\Support\Session;
 use App\Support\View;
 
 class ServiceController
@@ -17,8 +18,11 @@ class ServiceController
      * Core renderer for the Services index page: /services/
      * Used by HTTP entry point and can be used by cron/CLI.
      */
-    private function renderIndexPage(): string
-    {
+    private function renderIndexPage(
+        array $contactErrors = [],
+        array $contactOld = [],
+        ?string $contactSuccess = null
+    ): string {
         $allServices = config('services', []);
 
         // Filter to only enabled services
@@ -68,6 +72,10 @@ class ServiceController
             'seo'      => $seo,
             'services' => $enabledServices,
             'faqs'     => $faqs,
+
+            'contactErrors'  => $contactErrors,
+            'contactOld'     => $contactOld,
+            'contactSuccess' => $contactSuccess,
         ]);
 
         return View::render('layouts/main', [
@@ -83,6 +91,17 @@ class ServiceController
      */
     public function index(): string
     {
+        // Read contact flashes (from any contact form posting back to /services/)
+        $errors  = Session::getFlash('contact_errors', []);
+        $old     = Session::getFlash('contact_old', []);
+        $success = Session::getFlash('contact_success');
+
+        $hasFlash = !empty($errors) || !empty($old) || !empty($success);
+
+        if ($hasFlash) {
+            return $this->renderIndexPage($errors, $old, $success);
+        }
+
         return PageCache::remember(
             self::CACHE_KEY_INDEX,
             self::CACHE_TTL,

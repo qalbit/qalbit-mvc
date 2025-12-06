@@ -92,5 +92,11 @@
 ?>
 
 <?php
+    // CTA block – pass contact flash state into the CTA + small form
+    $errors  = $contactErrors  ?? [];
+    $old     = $contactOld     ?? [];
+    $success = $contactSuccess ?? null;
+    $leadFrom= 'lead_home_page';
+
     include __DIR__ . '/../../partials/contact/cta-section.php';
 ?>

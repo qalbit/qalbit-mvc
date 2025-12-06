@@ -8,14 +8,11 @@
 $variant    = $variant    ?? 'page';
 $action     = $action     ?? '/contact-us/';
 $redirectTo = $redirectTo ?? ($_SERVER['REQUEST_URI'] ?? '/');
+$leadFrom   = $leadFrom   ?? 'lead_contact_page';
 
 $errors  = $errors  ?? \App\Support\Session::getFlash('contact_errors', []);
 $old     = $old     ?? \App\Support\Session::getFlash('contact_old', []);
 $success = $success ?? \App\Support\Session::getFlash('contact_success');
-
-$recaptchaConfig   = config('recaptcha', []);
-$recaptchaSiteKey  = $recaptchaConfig['site_key'] ?? '';
-$formIdPrefix      = 'contact-' . preg_replace('/[^a-z0-9_-]/i', '', $variant);
 ?>
 
 <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
@@ -44,59 +41,125 @@ $formIdPrefix      = 'contact-' . preg_replace('/[^a-z0-9_-]/i', '', $variant);
     <?php endif; ?>
 
     <form
-        action="<?= htmlspecialchars($action) ?>"
-        method="post"
-        class="space-y-3"
-        data-track="contact-form"
-        data-variant="<?= htmlspecialchars($variant) ?>"
         data-contact-form
+        data-track="contact-form"
+        method="post"
+        action="<?= htmlspecialchars($action) ?>"
+        class="space-y-3"
         novalidate
+        aria-label="Project enquiry form"
+        data-variant="<?= htmlspecialchars($variant) ?>"
     >
         <input type="hidden" name="redirect_to" value="<?= htmlspecialchars($redirectTo) ?>">
-        <input type="hidden" name="source" value="<?= htmlspecialchars($variant) ?>">
-        <input type="hidden" name="recaptcha_token" value="">
-
-        <div class="space-y-1">
-            <label class="text-sm font-medium text-slate-700">Name</label>
+        
+        <!-- Full name -->
+        <div class="space-y-1.5">
+            <label
+                for="contact-name"
+                class="block text-xs font-medium text-slate-800"
+            >
+                Full name <span class="text-red-500">*</span>
+            </label>
             <input
-                name="name"
                 type="text"
-                class="block w-full rounded border <?= !empty($errors['name']) ? 'border-red-400' : 'border-slate-300' ?> px-3 py-3.5 text-md text-slate-900 focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500"
-                placeholder="Your name"
-                value="<?= htmlspecialchars($old['name'] ?? '') ?>"
+                id="contact-name"
+                name="name"
+                required
+                autocomplete="name"
+                class="block w-full rounded-md border <?php echo !empty($errors['name']) ? 'border-red-400' : 'border-slate-300'; ?> bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                placeholder="Your full name"
+                aria-required="true"
+                value="<?= htmlspecialchars($old['name'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
             >
             <?php if (!empty($errors['name'])): ?>
-                <p class="mt-1 text-[11px] text-red-600"><?= htmlspecialchars($errors['name']) ?></p>
+                <p class="text-[11px] text-red-600">
+                    <?= htmlspecialchars($errors['name'], ENT_QUOTES, 'UTF-8') ?>
+                </p>
             <?php endif; ?>
         </div>
 
-        <div class="space-y-1">
-            <label class="text-sm font-medium text-slate-700">Email</label>
+        <!-- Phone -->
+        <div class="space-y-1.5 text-black">
+            <label
+                for="contact-phone-inline"
+                class="block text-xs font-medium text-slate-800"
+            >
+                Phone / WhatsApp <span class="text-red-500">*</span>
+            </label>
             <input
-                name="email"
+                type="tel"
+                id="contact-phone-inline"
+                name="phone"
+                inputmode="tel"
+                autocomplete="tel"
+                data-intl-tel-input
+                class="block w-full rounded-md border <?php echo !empty($errors['phone']) ? 'border-red-400' : 'border-slate-300'; ?> bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                placeholder="e.g. +1 415 555 1234"
+                aria-describedby="contact-phone-help"
+                value="<?= htmlspecialchars($old['phone'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+            >
+            <?php if (!empty($errors['phone'])): ?>
+                <p class="text-[11px] text-red-600">
+                    <?= htmlspecialchars($errors['phone'], ENT_QUOTES, 'UTF-8') ?>
+                </p>
+            <?php endif; ?>
+        </div>
+
+        <!-- Email -->
+        <div class="space-y-1.5">
+            <label
+                for="contact-email"
+                class="block text-xs font-medium text-slate-800"
+            >
+                Work email <span class="text-red-500">*</span>
+            </label>
+            <input
                 type="email"
-                class="block w-full rounded border <?= !empty($errors['email']) ? 'border-red-400' : 'border-slate-300' ?> px-3 py-3.5 text-md text-slate-900 focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500"
-                placeholder="you@example.com"
-                value="<?= htmlspecialchars($old['email'] ?? '') ?>"
+                id="contact-email"
+                name="email"
+                required
+                autocomplete="email"
+                class="block w-full rounded-md border <?php echo !empty($errors['email']) ? 'border-red-400' : 'border-slate-300'; ?> bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                placeholder="you@company.com"
+                aria-required="true"
+                value="<?= htmlspecialchars($old['email'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
             >
             <?php if (!empty($errors['email'])): ?>
-                <p class="mt-1 text-[11px] text-red-600"><?= htmlspecialchars($errors['email']) ?></p>
+                <p class="text-[11px] text-red-600">
+                    <?= htmlspecialchars($errors['email'], ENT_QUOTES, 'UTF-8') ?>
+                </p>
             <?php endif; ?>
         </div>
 
-        <div class="space-y-1">
-            <label class="text-sm font-medium text-slate-700">Short project overview</label>
+        <!-- Project details -->
+        <div class="space-y-1.5">
+            <label
+                for="contact-message"
+                class="block text-xs font-medium text-slate-800"
+            >
+                Short project overview <span class="text-red-500">*</span>
+            </label>
             <textarea
+                id="contact-message"
                 name="message"
-                rows="3"
-                class="block w-full rounded border <?= !empty($errors['message']) ? 'border-red-400' : 'border-slate-300' ?> px-3 py-3.5 text-md text-slate-900 focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500"
-                placeholder="Timeline, budget range or main challenge"
-            ><?= htmlspecialchars($old['message'] ?? '') ?></textarea>
+                rows="4"
+                required
+                class="block w-full rounded-md border <?php echo !empty($errors['message']) ? 'border-red-400' : 'border-slate-300'; ?> bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                placeholder="Tell us about your product, current challenges, tech stack and what success would look like for you."
+                aria-required="true"
+            ><?= htmlspecialchars($old['message'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
             <?php if (!empty($errors['message'])): ?>
-                <p class="mt-1 text-[11px] text-red-600"><?= htmlspecialchars($errors['message']) ?></p>
+                <p class="text-[11px] text-red-600">
+                    <?= htmlspecialchars($errors['message'], ENT_QUOTES, 'UTF-8') ?>
+                </p>
             <?php endif; ?>
         </div>
-
+        
+        <input type="hidden" name="recaptcha_token" id="recaptcha_token" value="">
+        <input type="hidden" name="lead_from" id="lead_from" value="<?= $leadFrom ?>">
+        <input type="hidden" name="lead_source" id="lead_source" value="<?= $_GET['source'] ?? 'general' ?>">
+        <input type="hidden" name="lead_topic" id="lead_topic" value="<?= $_GET['topic'] ?? 'general' ?>">
+        
         <button
             type="submit"
             class="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-4 py-3.5 text-sm font-medium text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:ring-offset-white"

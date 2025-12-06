@@ -88,7 +88,6 @@
         initContactProofSection(ctx);
         initContactLocationsSection(ctx);
         initContactFinalCtaSection(ctx);
-        initContactInputSection();
     });
 
     // --------------------------------------------------------
@@ -456,58 +455,5 @@
 
         // Hint for smoother animation
         cta.style.willChange = "transform, opacity";
-    }
-
-    // --------------------------------------------------------
-    // HELPER) Input Contact Field Picker
-    // --------------------------------------------------------
-    function initContactInputSection() {
-        if (typeof window.intlTelInput !== "function") {
-            console.warn("[intlTelInput] Library not available");
-            return;
-        }
-
-        var inputs = document.querySelectorAll("[data-intl-tel-input]");
-        if (!inputs.length) return;
-        inputs.forEach(function (input) {
-            if (input.__itiInstance) {
-                return;
-            }
-            var form = input.form || null;
-            var iti = window.intlTelInput(input, {
-                initialCountry: "auto",
-                geoIpLookup: (success, failure) => {
-                    fetch("https://ipapi.co/json")
-                    .then((res) => res.json())
-                    .then((data) => success(data.country_code))
-                    .catch(() => failure());
-                },
-                hiddenInput: (_) => ({
-                    phone: "phone_full",
-                    country: "country_code"
-                }),
-                separateDialCode: true,
-                nationalMode: false,
-                autoHideDialCode: false,
-                utilsScript:
-                    "https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/js/utils.min.js",
-            });
-
-            input.__itiInstance = iti;
-
-            if (!form) return;
-
-            // On submit, normalize the value to full international (E.164)
-            form.addEventListener("submit", function () {
-                try {
-                    if (iti.isValidNumber()) {
-                        // Replace value with fully qualified international number
-                        input.value = iti.getNumber(); // e.g. +14155551234
-                    }
-                } catch (e) {
-                    console.warn("[intlTelInput] Failed to normalize phone:", e);
-                }
-            });
-        });
     }
 })();

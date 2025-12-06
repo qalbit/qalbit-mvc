@@ -5,11 +5,13 @@
  * Uses the reusable small contact form partial.
  */
 
-$redirectTo = $_SERVER['REQUEST_URI'] ?? '/';
+$currentPath = $_SERVER['REQUEST_URI'] ?? '/';
+$redirectTo  = $currentPath . '#section-contact-cta';
+$leadFrom = $leadFrom ?? 'lead_contact_page';
 ?>
 
 <section
-    id="home-contact-cta"
+    id="section-contact-cta"
     class="py-16 bg-slate-950 text-slate-50"
     data-contact-cta-section
 >
@@ -123,9 +125,10 @@ $redirectTo = $_SERVER['REQUEST_URI'] ?? '/';
             <div class="flex items-stretch" data-contact-cta-form>
                 <?php
                     // Reuse the small form partial
-                    $variant    = 'home_cta';
+                    $variant    = 'contact_cta';
                     $action     = '/contact-us/';
                     $redirectTo = $redirectTo;
+                    $leadFrom   = $leadFrom;
                     include __DIR__ . '/form-small.php';
                 ?>
             </div>

@@ -144,12 +144,6 @@
                         Share a few details and we will follow up with questions, ballpark estimates or the next best step.
                     </p>
 
-                    <?php
-                    /** @var array $errors */
-                    /** @var array $old */
-                    /** @var string|null $success */
-                    ?>
-
                     <!-- Success message -->
                     <?php if (!empty($success)): ?>
                         <div class="mt-4 rounded-md border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs sm:text-sm text-emerald-800">

@@ -778,3 +778,8 @@ html {
 [id^="tech-"] {
     scroll-margin-top: 64px;
 }
+
+.iti {
+    width: 100%;
+    display: block;
+}

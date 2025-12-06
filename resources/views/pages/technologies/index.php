@@ -50,5 +50,5 @@
 <?php endif; ?>
 
 <?php
-    include __DIR__ . '/../../partials/contact/cta-section.php';
+    include __DIR__ . '/../../partials/technologies/section-cta.php';
 ?>

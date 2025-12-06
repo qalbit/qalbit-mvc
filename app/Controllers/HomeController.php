@@ -10,6 +10,7 @@ use App\Support\PageCache;
 use App\Support\Reviews;
 use App\Support\Schema;
 use App\Support\Service;
+use App\Support\Session;
 use App\Support\Technology;
 use App\Support\View;
 use App\Support\WordPressClient;
@@ -22,8 +23,11 @@ class HomeController
     /**
      * Core renderer used by both HTTP and cron.
      */
-    private function renderPage(): string
-    {
+    private function renderPage(
+        array $contactErrors = [],
+        array $contactOld = [],
+        ?string $contactSuccess = null
+    ): string {
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
 
         $seo = [
@@ -84,6 +88,10 @@ class HomeController
             'clients'       => $clients,
             'faqs'          => $faqs,
             'blogPosts'     => $blogPosts,
+
+            'contactErrors'   => $contactErrors,
+            'contactOld'      => $contactOld,
+            'contactSuccess'  => $contactSuccess,
         ]);
 
         // Wrap it in main layout
@@ -100,6 +108,19 @@ class HomeController
      */
     public function index(): string
     {
+        // Read contact flashes once
+        $errors  = Session::getFlash('contact_errors', []);
+        $old     = Session::getFlash('contact_old', []);
+        $success = Session::getFlash('contact_success');
+
+        $hasFlash = !empty($errors) || !empty($old) || !empty($success);
+
+        // If there's any contact flash, do NOT use cache – render personalised page
+        if ($hasFlash) {
+            return $this->renderPage($errors, $old, $success);
+        }
+
+        // No flash data -> safe to use cached canonical home page
         return PageCache::remember(
             self::CACHE_KEY,
             self::CACHE_TTL,
