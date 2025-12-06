@@ -1,0 +1,24 @@
+RewriteEngine On
+
+############################################
+# 1) Let WordPress in /blog handle its own routes
+############################################
+RewriteRule ^blog/ - [L]
+
+############################################
+# 2) Serve /assets/... from /public/assets/...
+#    /assets/css/app.css -> /public/assets/css/app.css
+############################################
+RewriteRule ^assets/(.+)$ public/assets/$1 [L]
+
+############################################
+# 3) Front controller: route everything else through public/index.php
+#    Conditions:
+#    - NOT under /public
+#    - NOT under /blog (WordPress)
+#    - NOT a real file
+############################################
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteCond %{REQUEST_URI} !^/blog/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ public/index.php [L]

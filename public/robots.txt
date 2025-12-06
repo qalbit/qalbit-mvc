@@ -1,0 +1,37 @@
+User-agent: *
+Allow: /
+
+Disallow: /emailtemplates/
+Disallow: /vendor/
+Disallow: /sass/
+Disallow: /tmp/
+Disallow: /logs/
+Disallow: */feed/
+Disallow: /blog/wp-admin/
+Disallow: /blog/wp-includes/
+Disallow: /blog/wp-content/plugins/
+Disallow: /blog/wp-content/themes/
+Disallow: /blog-inner.php
+Disallow: /blog/tag/
+Disallow: /blog/wp-json/
+Disallow: /blog/wp-content/plugins/
+Disallow: /?estimate=*
+Disallow: /?ref=*
+Disallow: /?selected=*
+Disallow: /?s=*
+Disallow: /constant.php
+Disallow: /z-token.php
+Disallow: /formHandler.php
+Disallow: /structuredDataMarkup.php
+Disallow: /mail.php
+Disallow: /helper.php
+Disallow: /*?ref=
+Disallow: /*?estimate
+
+Crawl-delay: 5
+
+# Main site sitemap (custom PHP)
+Sitemap: https://qalbit.com/sitemap.xml
+
+# Blog sitemap (from WordPress)
+Sitemap: https://qalbit.com/blog/sitemap_index.xml

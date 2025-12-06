@@ -1,0 +1,15 @@
+# Node Modules and Config
+node_modules
+package-lock.json
+
+# Composer and Config
+vendor
+composer.lock
+
+# Env Variables
+.env
+.env*
+
+# Public Directory 
+public/blog
+public/tools
