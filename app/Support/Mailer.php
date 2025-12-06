@@ -51,11 +51,14 @@ class Mailer
     protected function buildBody(array $data): string
     {
         $lines = [
-            "Name: "    . ($data['name'] ?? ''),
-            "Email: "   . ($data['email'] ?? ''),
-            "Budget: "  . ($data['budget'] ?? ''),
-            "Message:",
-            ($data['message'] ?? ''),
+            "Name: "        . ($data['name'] ?? ''),
+            "Email: "       . ($data['email'] ?? ''),
+            "Phone: "       . ($data['phone'] ?? ''),
+            "Country: "     . ($data['lead_country'] ?? ''),
+            "Message:"      . ($data['message'] ?? ''),
+            "Lead From:"    . ($data['lead_from'] ?? ''),
+            "Lead Source:"  . ($data['lead_source'] ?? ''),
+            "Lead Topic:"   . ($data['lead_topic'] ?? ''),
         ];
 
         return implode("\n", $lines);

@@ -167,7 +167,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
 
                 <!-- CTA visible only on lg+; prevents crowding -->
                 <a
-                    href="/contact-us"
+                    href="/contact-us/"
                     class="btn btn-primary btn-radius-pill ml-3 whitespace-nowrap"
                     title="Get Free Estimate"
                 >
@@ -312,7 +312,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
             <!-- Drawer footer CTA -->
             <div class="border-t border-slate-100 px-4 py-4">
                 <a
-                    href="/contact-us"
+                    href="/contact-us/"
                     class="btn btn-primary btn-radius-pill w-full justify-center"
                     title="Get Free Estimate"
                 >

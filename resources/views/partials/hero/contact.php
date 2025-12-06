@@ -97,7 +97,6 @@
                     </div>
                 </div>
 
-                <!-- Internal links (SEO helper) -->
                 <nav
                     class="flex flex-col gap-3 text-xs text-slate-500"
                     aria-label="Popular pages"
@@ -158,7 +157,6 @@
                         </div>
                     <?php endif; ?>
 
-                    <!-- Global error message (e.g., reCAPTCHA or generic error) -->
                     <?php if (!empty($errors['global'])): ?>
                         <div class="mt-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-xs sm:text-sm text-red-800">
                             <?= htmlspecialchars($errors['global'], ENT_QUOTES, 'UTF-8') ?>
@@ -167,16 +165,13 @@
 
                     <form
                         data-contact-form
+                        data-track="contact-form"
                         method="post"
                         action="/contact-us/"
                         class="mt-6 space-y-5"
                         novalidate
                         aria-label="Project enquiry form"
                     >
-                        <!-- You may want a CSRF token here if your framework uses it -->
-                        <!-- <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>"> -->
-
-                        <!-- Optional redirect_to, if you use it -->
                         <input type="hidden" name="redirect_to" value="/contact-us/">
 
                         <!-- Full name -->
@@ -201,6 +196,37 @@
                             <?php if (!empty($errors['name'])): ?>
                                 <p class="text-[11px] text-red-600">
                                     <?= htmlspecialchars($errors['name'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                            <?php endif; ?>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="space-y-1.5">
+                            <label
+                                for="contact-phone"
+                                class="block text-xs font-medium text-slate-800"
+                            >
+                                Phone / WhatsApp <span class="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="tel"
+                                id="contact-phone"
+                                name="phone"
+                                inputmode="tel"
+                                autocomplete="tel"
+                                data-intl-tel-input
+                                class="block w-full rounded-md border <?php echo !empty($errors['phone']) ? 'border-red-400' : 'border-slate-300'; ?> bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                                placeholder="e.g. +1 415 555 1234"
+                                aria-describedby="contact-phone-help"
+                                value="<?= htmlspecialchars($old['phone'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                            >
+                            <?php if (!empty($errors['phone'])): ?>
+                                <p class="text-[11px] text-red-600">
+                                    <?= htmlspecialchars($errors['phone'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                            <?php else: ?>
+                                <p id="contact-phone-help" class="text-[11px] text-slate-500">
+                                    Helps us follow up faster by call or WhatsApp.
                                 </p>
                             <?php endif; ?>
                         </div>
@@ -259,26 +285,10 @@
                             <?php endif; ?>
                         </div>
 
-                        <!-- Budget (optional) -->
-                        <div class="space-y-1.5">
-                            <label
-                                for="contact-budget"
-                                class="block text-xs font-medium text-slate-800"
-                            >
-                                Approximate budget (optional)
-                            </label>
-                            <input
-                                type="text"
-                                id="contact-budget"
-                                name="budget"
-                                class="block w-full rounded-md border border-slate-300 bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                                placeholder="e.g. $10k–$30k or ₹8L–₹25L"
-                                value="<?= htmlspecialchars($old['budget'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                            >
-                        </div>
-
-                        <!-- Hidden recaptcha token (your JS should populate this) -->
                         <input type="hidden" name="recaptcha_token" id="recaptcha_token" value="">
+                        <input type="hidden" name="lead_from" id="lead_from" value="lead_contact_page">
+                        <input type="hidden" name="lead_source" id="lead_source" value="<?= $_GET['source'] ?? 'general' ?>">
+                        <input type="hidden" name="lead_topic" id="lead_topic" value="<?= $_GET['topic'] ?? 'general' ?>">
 
                         <!-- Submit -->
                         <div class="space-y-3 pt-1">

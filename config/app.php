@@ -10,7 +10,7 @@ return [
     'timezone'      => 'Asia/Kolkata',
     
     'contact_email' => 'info@qalbit.com',
-    'from_email'    => 'no-reply@qalbit.com',
+    'from_email'    => 'info@qalbit.com',
 
     // Global indexing toggle
     'indexing' => [

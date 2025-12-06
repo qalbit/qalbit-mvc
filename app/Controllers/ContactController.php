@@ -106,44 +106,39 @@ class ContactController
     public function submit(): void
     {
         $data = [
-            'name'    => trim($_POST['name']    ?? ''),
-            'email'   => trim($_POST['email']   ?? ''),
-            'budget'  => trim($_POST['budget']  ?? ''),
-            'message' => trim($_POST['message'] ?? ''),
-            'source'  => trim($_POST['source']  ?? ''),
+            'name'        => trim($_POST['name']        ?? ''),
+            'email'       => trim($_POST['email']       ?? ''),
+            'phone'       => trim($_POST['phone']       ?? ''),
+            'message'     => trim($_POST['message']     ?? ''),
+            'lead_country'=> trim($_POST['country_code']?? ''),
+            'lead_from'   => trim($_POST['lead_from']   ?? ''),
+            'lead_source' => trim($_POST['lead_source'] ?? ''),
+            'lead_topic'  => trim($_POST['lead_topic']  ?? ''),
         ];
 
         $redirectTo = $_POST['redirect_to'] ?? '/contact-us/';
-
         $errors = [];
-
         // --- Field validation ---
-
-        // Name
         if ($data['name'] === '') {
             $errors['name'] = 'Please enter your name.';
         } elseif (mb_strlen($data['name']) < 2) {
             $errors['name'] = 'Name must be at least 2 characters.';
         }
 
-        // Email
         if ($data['email'] === '') {
             $errors['email'] = 'Please enter your email address.';
         } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Please enter a valid email address.';
         }
 
-        // Message
         if ($data['message'] === '') {
             $errors['message'] = 'Please tell us a bit about your project.';
         } elseif (mb_strlen($data['message']) < 10) {
             $errors['message'] = 'Please provide at least a few sentences so we can understand your needs.';
         }
 
-        // --- reCAPTCHA (add its error on top of field errors) ---
         $token = $_POST['recaptcha_token'] ?? null;
-        if (!\App\Support\Recaptcha::verify($token, 'contact')) {
-            // you can keep this as 'global' so it shows at the top of the form
+        if (!Recaptcha::verify($token, 'contact')) {
             $errors['global'] = 'We could not verify that you are a human. Please try again.';
         }
         
@@ -153,8 +148,6 @@ class ContactController
             header('Location: ' . $redirectTo);
             exit;
         }
-
-        // --- If here, all validation passed → send email ---
 
         $mailer = new Mailer();
         $sent   = $mailer->sendContact($data);
