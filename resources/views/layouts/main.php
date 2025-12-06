@@ -47,19 +47,7 @@ $jsonLd = $jsonLd ?? null;
     <?php include __DIR__ . '/../partials/head.php'; ?>
     
     <?php if (isset($pageId) && $pageId === 'home'): ?>
-        <link rel="stylesheet" href="<?= asset('/css/home.css?v=1.0.0.1') ?>">
-    <?php endif; ?>
-    
-    <?php if (isset($pageId) && $pageId === 'services'): ?>
-        <link rel="stylesheet" href="<?= asset('/css/services.css?v=1.0.0.1') ?>">
-    <?php endif; ?>
-    
-    <?php if (isset($pageId) && $pageId === 'technologies'): ?>
-        <link rel="stylesheet" href="<?= asset('/css/technologies.css?v=1.0.0.1') ?>">
-    <?php endif; ?>
-
-    <?php if (isset($pageId) && $pageId === 'industries'): ?>
-        <link rel="stylesheet" href="<?= asset('/css/industries.css?v=1.0.0.1') ?>">
+        <link rel="stylesheet" href="<?= asset('/css/home.css') ?>">
     <?php endif; ?>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/css/intlTelInput.css">
@@ -106,59 +94,59 @@ $jsonLd = $jsonLd ?? null;
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/js/intlTelInput.min.js"></script>
 
     <?php if (isset($pageId) && $pageId === 'home'): ?>
-        <script src="<?= asset('/js/home.js?v=1.0.0.1') ?>" defer></script>
+        <script src="<?= asset('/js/home.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'services'): ?>
-        <script src="<?= asset('/js/services.js?v=1.0.0.1') ?>" defer></script>
+        <script src="<?= asset('/js/services.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'service-detail'): ?>
-        <script src="<?= asset('/js/service-detail.js?v=1.0.0.1') ?>" defer></script>
+        <script src="<?= asset('/js/service-detail.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'technologies'): ?>
-        <script src="<?= asset('/js/technologies.js?v=1.0.0.1') ?>" defer></script>
+        <script src="<?= asset('/js/technologies.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'technology-detail'): ?>
-        <script src="<?= asset('/js/technology-detail.js?v=1.0.0.1') ?>" defer></script>
+        <script src="<?= asset('/js/technology-detail.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'industries'): ?>
-        <script src="<?= asset('/js/industries.js?v=1.0.0.1') ?>" defer></script>
+        <script src="<?= asset('/js/industries.js') ?>" defer></script>
     <?php endif; ?>
     
     <?php if (isset($pageId) && $pageId === 'industry-detail'): ?>
-        <script src="<?= asset('/js/industry-detail.js?v=1.0.0.1') ?>" defer></script>
+        <script src="<?= asset('/js/industry-detail.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'aboutus'): ?>
-        <script src="<?= asset('/js/aboutus.js?v=1.0.0.1') ?>" defer></script>
+        <script src="<?= asset('/js/aboutus.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'contactus'): ?>
-        <script src="<?= asset('/js/contactus.js?v=1.0.0.1') ?>" defer></script>
+        <script src="<?= asset('/js/contactus.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'process-detail'): ?>
-        <script src="<?= asset('/js/process-detail.js?v=1.0.0.1') ?>" defer></script>
+        <script src="<?= asset('/js/process-detail.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'location-detail'): ?>
-        <script src="<?= asset('/js/location-detail.js?v=1.0.0.1') ?>" defer></script>
+        <script src="<?= asset('/js/location-detail.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'hire-developer'): ?>
-        <script src="<?= asset('/js/hire-developer.js?v=1.0.0.1') ?>" defer></script>
+        <script src="<?= asset('/js/hire-developer.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'casestudy-detail'): ?>
-        <script src="<?= asset('/js/casestudy-detail.js?v=1.0.0.1') ?>" defer></script>
+        <script src="<?= asset('/js/casestudy-detail.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'careers'): ?>
-        <script src="<?= asset('/js/careers.js?v=1.0.0.1') ?>" defer></script>
+        <script src="<?= asset('/js/careers.js') ?>" defer></script>
     <?php endif; ?>
 </body>
 </html>
