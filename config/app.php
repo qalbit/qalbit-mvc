@@ -11,4 +11,9 @@ return [
     
     'contact_email' => 'info@qalbit.com',
     'from_email'    => 'no-reply@qalbit.com',
+
+    // Global indexing toggle
+    'indexing' => [
+        'enabled' => false,
+    ],
 ];

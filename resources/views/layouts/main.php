@@ -1,5 +1,7 @@
 <?php
 
+$indexingEnabled = config('app.indexing.enabled', true);
+
 $pageId = $pageId ?? 'home';
 $seo = $seo ?? [];
 
@@ -17,8 +19,17 @@ if (!empty($seo['canonical'])) {
     $canonical = $baseUrl . $requestPath;
 }
 
-$noindex = !empty($seo['noindex']);
-$robots  = $noindex ? 'noindex, nofollow' : 'index, follow';
+// --- GLOBAL + PAGE-WISE INDEXING ------------------------------
+$pageNoindex = !empty($seo['noindex']);
+$globalNoindex = !$indexingEnabled;
+
+$shouldNoindex = $globalNoindex || $pageNoindex;
+
+$robots  = $shouldNoindex ? 'noindex, nofollow' : 'index, follow';
+
+if ($shouldNoindex) {
+    header('X-Robots-Tag: noindex, nofollow', true);
+}
 
 $gtmId   = config('analytics.gtm_container_id', null);
 
