@@ -1,9 +1,14 @@
 RewriteEngine On
 
 ############################################
-# 1) Let WordPress in /blog handle its own routes
+# *) Let WordPress in /blog handle its own routes
 ############################################
-RewriteRule ^blog/ - [L]
+RewriteRule ^blog/(.*)$ public/blog/$1 [L]
+
+############################################
+# *) Let Tools in /tools handle its own routes
+############################################
+RewriteRule ^tools/(.*)$ public/tools/$1 [L]
 
 ############################################
 # 2) Serve /assets/... from /public/assets/...
@@ -16,9 +21,11 @@ RewriteRule ^assets/(.+)$ public/assets/$1 [L]
 #    Conditions:
 #    - NOT under /public
 #    - NOT under /blog (WordPress)
+#    - NOT under /tools (Micro Tools)
 #    - NOT a real file
 ############################################
 RewriteCond %{REQUEST_URI} !^/public/
 RewriteCond %{REQUEST_URI} !^/blog/
+RewriteCond %{REQUEST_URI} !^/tools/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ public/index.php [L]
