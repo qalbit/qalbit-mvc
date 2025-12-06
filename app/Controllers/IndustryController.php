@@ -3,25 +3,31 @@
 namespace App\Controllers;
 
 use App\Support\Faqs;
+use App\Support\PageCache;
 use App\Support\Schema;
 use App\Support\View;
 
 class IndustryController
 {
+    private const CACHE_TTL        = 900; // 15 minutes
+    private const CACHE_KEY_INDEX  = 'page_industries_index';
+    private const CACHE_KEY_PREFIX = 'page_industry_';
+
     /**
-     * Industries index page: /industries/
+     * Core renderer for the Industries index page: /industries/
+     * Used by HTTP entry point and can be used by cron/CLI.
      */
-    public function index(): string
+    private function renderIndexPage(): string
     {
         $all = config('industries', []);
 
         // Filter to only enabled industries
-        $enabled = array_filter($all, function (array $industry): bool {
+        $enabled = array_filter($all, static function (array $industry): bool {
             return !empty($industry['enabled']);
         });
 
         // Sort by 'order' if present
-        usort($enabled, function (array $a, array $b): int {
+        usort($enabled, static function (array $a, array $b): int {
             $orderA = $a['order'] ?? 999;
             $orderB = $b['order'] ?? 999;
             return $orderA <=> $orderB;
@@ -32,17 +38,17 @@ class IndustryController
         $seo = [
             'title'       => 'Industries We Serve – QalbIT',
             'description' => 'QalbIT delivers custom software solutions for e-commerce, fintech, healthcare, education, travel, business operations and more.',
-            'canonical'   => $baseUrl . '/technologies/',
+            'canonical'   => $baseUrl . '/industries/',
         ];
 
-        // FAQs for the technology page (new context)
+        // FAQs for the industries page
         $faqs = Faqs::for('faq_industries');
 
         // Global Schemas
         $orgSchema         = Schema::organization();
         $websiteSchema     = Schema::website();
         $breadcrumbsSchema = Schema::breadcrumbs([
-            ['name' => 'Home', 'url' => '/'],
+            ['name' => 'Home',       'url' => '/'],
             ['name' => 'Industries', 'url' => '/industries/'],
         ]);
         $faqSchema         = Schema::faq($faqs, $seo['canonical'], $seo['title']);
@@ -70,7 +76,19 @@ class IndustryController
     }
 
     /**
-     * Individual industry page: /industries/{slug}/
+     * HTTP entry for Industries index – cached with TTL.
+     */
+    public function index(): string
+    {
+        return PageCache::remember(
+            self::CACHE_KEY_INDEX,
+            self::CACHE_TTL,
+            fn (): string => $this->renderIndexPage()
+        );
+    }
+
+    /**
+     * HTTP entry for individual industry page: /industries/{slug}/
      *
      * Example URL: /industries/fintech/
      * Here $slug = "fintech"
@@ -86,15 +104,35 @@ class IndustryController
             return 'Industry not found';
         }
 
+        // Derive stable slug segment for cache key (prefer config slug).
+        $cacheSlugSegment = $this->deriveCacheSlugSegment($industry, $slug);
+        $cacheKey         = self::CACHE_KEY_PREFIX . $cacheSlugSegment;
+
+        return PageCache::remember(
+            $cacheKey,
+            self::CACHE_TTL,
+            fn (): string => $this->renderIndustryPage($industry, $cacheSlugSegment)
+        );
+    }
+
+    /**
+     * Core renderer for an individual industry page.
+     * Used by HTTP (via show()) and can be used by cron/CLI.
+     *
+     * @param array  $industry     Industry config array
+     * @param string $slugSegment  Last path segment used in the URL
+     */
+    private function renderIndustryPage(array $industry, string $slugSegment): string
+    {
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
 
         // Derive canonical from configured slug or from URL slug
-        $industrySlug   = $industry['slug'] ?? ('/industries/' . $slug . '/');
+        $industrySlug  = $industry['slug'] ?? ('/industries/' . $slugSegment . '/');
         $canonicalPath = '/' . ltrim($industrySlug, '/');
         $canonical     = $baseUrl . rtrim($canonicalPath, '/') . '/';
 
         $seo = [
-            'title'       => $industry['meta_title']       ?? ($industry['name'] . ' – QalbIT'),
+            'title'       => $industry['meta_title']       ?? (($industry['name'] ?? 'Industry') . ' – QalbIT'),
             'description' => $industry['meta_description'] ?? '',
             'canonical'   => $canonical,
         ];
@@ -103,10 +141,10 @@ class IndustryController
         $faqs   = $faqKey ? Faqs::for($faqKey) : [];
 
         // Global Schemas
-        $orgSchema     = Schema::organization();
-        $websiteSchema = Schema::website();
+        $orgSchema         = Schema::organization();
+        $websiteSchema     = Schema::website();
         $breadcrumbsSchema = Schema::breadcrumbs([
-            ['name' => 'Home',     'url' => '/'],
+            ['name' => 'Home',       'url' => '/'],
             ['name' => 'Industries', 'url' => '/industries/'],
             ['name' => $industry['name'] ?? 'Industry', 'url' => $canonicalPath],
         ]);
@@ -138,6 +176,25 @@ class IndustryController
     }
 
     /**
+     * Derive a stable slug segment for cache keys.
+     * Prefer last segment of configured slug, fallback to URL slug.
+     */
+    private function deriveCacheSlugSegment(array $industry, string $urlSlug): string
+    {
+        if (!empty($industry['slug'])) {
+            $normalized = trim((string) $industry['slug'], '/'); // e.g. "industries/fintech"
+            $parts      = explode('/', $normalized);
+            $segment    = end($parts); // e.g. "fintech"
+
+            if (!empty($segment)) {
+                return $segment;
+            }
+        }
+
+        return trim($urlSlug, '/');
+    }
+
+    /**
      * Find industry by last path segment of its slug.
      *
      * config slug: /industries/fintech/
@@ -146,6 +203,8 @@ class IndustryController
      */
     protected function findIndustryBySlugSegment(array $industries, string $slug): ?array
     {
+        $slug = trim($slug, '/');
+
         foreach ($industries as $industry) {
             if (empty($industry['slug'])) {
                 continue;

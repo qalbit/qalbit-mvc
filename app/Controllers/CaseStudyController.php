@@ -3,43 +3,14 @@
 namespace App\Controllers;
 
 use App\Support\Faqs;
+use App\Support\PageCache;
 use App\Support\Schema;
 use App\Support\View;
 
 class CaseStudyController
 {
-    /**
-     * Case studies index: /case-studies/
-     */
-    public function index(): string
-    {
-        $all = config('case_studies', []);
-
-        $enabled = array_filter($all, function (array $cs): bool {
-            return !empty($cs['enabled']);
-        });
-
-        usort($enabled, function (array $a, array $b): int {
-            $orderA = $a['order'] ?? 999;
-            $orderB = $b['order'] ?? 999;
-            return $orderA <=> $orderB;
-        });
-
-        $seo = [
-            'title'       => 'Software Case Studies & Selected Work – QalbIT',
-            'description' => 'Explore selected software projects delivered by QalbIT, including Snappystats, Bloomford and Hellory.',
-        ];
-
-        $content = View::render('pages/case-studies/index', [
-            'seo'         => $seo,
-            'caseStudies' => $enabled,
-        ]);
-
-        return View::render('layouts/main', [
-            'seo'     => $seo,
-            'content' => $content,
-        ]);
-    }
+    private const CACHE_TTL        = 900; // 15 minutes
+    private const CACHE_KEY_PREFIX = 'page_case_study_';
 
     /**
      * Individual case study: /case-studies/{slug}/
@@ -57,28 +28,49 @@ class CaseStudyController
             return 'Case study not found';
         }
 
+        // Derive a stable slug segment for cache key (prefer config slug).
+        $cacheSlugSegment = $this->deriveCacheSlugSegment($caseStudy, $slug);
+        $cacheKey         = self::CACHE_KEY_PREFIX . $cacheSlugSegment;
+
+        return PageCache::remember(
+            $cacheKey,
+            self::CACHE_TTL,
+            fn (): string => $this->renderCaseStudyPage($caseStudy, $cacheSlugSegment)
+        );
+    }
+
+    /**
+     * Core renderer for an individual case study page.
+     * Used by HTTP (via show()) and can be used by cron/CLI.
+     *
+     * @param array  $caseStudy     Case study config array
+     * @param string $slugSegment   Last path segment used in the URL
+     */
+    private function renderCaseStudyPage(array $caseStudy, string $slugSegment): string
+    {
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
 
         // Derive canonical from configured slug or from URL slug
-        $caseStudySlug   = $caseStudy['slug'] ?? ('/case-studies/' . $slug . '/');
-        $canonicalPath = '/' . ltrim($caseStudySlug, '/');
-        $canonical     = $baseUrl . rtrim($canonicalPath, '/') . '/';
+        $caseStudySlug  = $caseStudy['slug'] ?? ('/case-studies/' . $slugSegment . '/');
+        $canonicalPath  = '/' . ltrim($caseStudySlug, '/');
+        $canonical      = $baseUrl . rtrim($canonicalPath, '/') . '/';
 
         $seo = [
-            'title'       => $caseStudy['meta_title']       ?? ($caseStudy['name'] . ' – Case Study | QalbIT'),
+            'title'       => $caseStudy['meta_title']       ?? (($caseStudy['name'] ?? 'Case Study') . ' – Case Study | QalbIT'),
             'description' => $caseStudy['meta_description'] ?? '',
             'canonical'   => $canonical,
         ];
 
-        // Load FAQs for this specific service (if configured)
+        // Load FAQs for this specific case study (if configured)
         $faqKey = $caseStudy['faq_key'] ?? null;
         $faqs   = $faqKey ? Faqs::for($faqKey) : [];
 
         // Global Schemas
-        $orgSchema     = Schema::organization();
-        $websiteSchema = Schema::website();
+        $orgSchema         = Schema::organization();
+        $websiteSchema     = Schema::website();
         $breadcrumbsSchema = Schema::breadcrumbs([
-            ['name' => 'Home',     'url' => '/'],
+            ['name' => 'Home', 'url' => '/'],
+            // If you later add a /case-studies/ index, you can insert that breadcrumb here.
             ['name' => $caseStudy['name'] ?? 'Case Study', 'url' => $canonicalPath],
         ]);
 
@@ -109,6 +101,25 @@ class CaseStudyController
     }
 
     /**
+     * Derive a stable slug segment for cache keys.
+     * Prefer last segment of configured slug, fallback to URL slug.
+     */
+    private function deriveCacheSlugSegment(array $caseStudy, string $urlSlug): string
+    {
+        if (!empty($caseStudy['slug'])) {
+            $normalized = trim((string) $caseStudy['slug'], '/'); // "case-studies/snappystats"
+            $parts      = explode('/', $normalized);
+            $segment    = end($parts);                            // "snappystats"
+
+            if (!empty($segment)) {
+                return $segment;
+            }
+        }
+
+        return trim($urlSlug, '/');
+    }
+
+    /**
      * Find a case study by the last segment of its slug.
      *
      * config slug: /case-studies/snappystats/
@@ -117,6 +128,8 @@ class CaseStudyController
      */
     protected function findBySlugSegment(array $caseStudies, string $slug): ?array
     {
+        $slug = trim($slug, '/');
+
         foreach ($caseStudies as $cs) {
             if (empty($cs['slug'])) {
                 continue;

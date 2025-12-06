@@ -145,14 +145,40 @@
                         Share a few details and we will follow up with questions, ballpark estimates or the next best step.
                     </p>
 
+                    <?php
+                    /** @var array $errors */
+                    /** @var array $old */
+                    /** @var string|null $success */
+                    ?>
+
+                    <!-- Success message -->
+                    <?php if (!empty($success)): ?>
+                        <div class="mt-4 rounded-md border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs sm:text-sm text-emerald-800">
+                            <?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- Global error message (e.g., reCAPTCHA or generic error) -->
+                    <?php if (!empty($errors['global'])): ?>
+                        <div class="mt-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-xs sm:text-sm text-red-800">
+                            <?= htmlspecialchars($errors['global'], ENT_QUOTES, 'UTF-8') ?>
+                        </div>
+                    <?php endif; ?>
+
                     <form
                         data-contact-form
                         method="post"
-                        action="/contact-us"
+                        action="/contact-us/"
                         class="mt-6 space-y-5"
                         novalidate
                         aria-label="Project enquiry form"
                     >
+                        <!-- You may want a CSRF token here if your framework uses it -->
+                        <!-- <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>"> -->
+
+                        <!-- Optional redirect_to, if you use it -->
+                        <input type="hidden" name="redirect_to" value="/contact-us/">
+
                         <!-- Full name -->
                         <div class="space-y-1.5">
                             <label
@@ -167,10 +193,16 @@
                                 name="name"
                                 required
                                 autocomplete="name"
-                                class="block w-full rounded-md border border-slate-300 bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                                class="block w-full rounded-md border <?php echo !empty($errors['name']) ? 'border-red-400' : 'border-slate-300'; ?> bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                                 placeholder="Your full name"
                                 aria-required="true"
+                                value="<?= htmlspecialchars($old['name'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                             >
+                            <?php if (!empty($errors['name'])): ?>
+                                <p class="text-[11px] text-red-600">
+                                    <?= htmlspecialchars($errors['name'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Email -->
@@ -187,13 +219,20 @@
                                 name="email"
                                 required
                                 autocomplete="email"
-                                class="block w-full rounded-md border border-slate-300 bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                                class="block w-full rounded-md border <?php echo !empty($errors['email']) ? 'border-red-400' : 'border-slate-300'; ?> bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                                 placeholder="you@company.com"
                                 aria-required="true"
+                                value="<?= htmlspecialchars($old['email'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                             >
-                            <p class="text-[11px] text-slate-500">
-                                We do not share your email with third parties.
-                            </p>
+                            <?php if (!empty($errors['email'])): ?>
+                                <p class="text-[11px] text-red-600">
+                                    <?= htmlspecialchars($errors['email'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                            <?php else: ?>
+                                <p class="text-[11px] text-slate-500">
+                                    We do not share your email with third parties.
+                                </p>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Project details -->
@@ -209,11 +248,37 @@
                                 name="message"
                                 rows="4"
                                 required
-                                class="block w-full rounded-md border border-slate-300 bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                                class="block w-full rounded-md border <?php echo !empty($errors['message']) ? 'border-red-400' : 'border-slate-300'; ?> bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                                 placeholder="Tell us about your product, current challenges, tech stack and what success would look like for you."
                                 aria-required="true"
-                            ></textarea>
+                            ><?= htmlspecialchars($old['message'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
+                            <?php if (!empty($errors['message'])): ?>
+                                <p class="text-[11px] text-red-600">
+                                    <?= htmlspecialchars($errors['message'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                            <?php endif; ?>
                         </div>
+
+                        <!-- Budget (optional) -->
+                        <div class="space-y-1.5">
+                            <label
+                                for="contact-budget"
+                                class="block text-xs font-medium text-slate-800"
+                            >
+                                Approximate budget (optional)
+                            </label>
+                            <input
+                                type="text"
+                                id="contact-budget"
+                                name="budget"
+                                class="block w-full rounded-md border border-slate-300 bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                                placeholder="e.g. $10k–$30k or ₹8L–₹25L"
+                                value="<?= htmlspecialchars($old['budget'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                            >
+                        </div>
+
+                        <!-- Hidden recaptcha token (your JS should populate this) -->
+                        <input type="hidden" name="recaptcha_token" id="recaptcha_token" value="">
 
                         <!-- Submit -->
                         <div class="space-y-3 pt-1">
@@ -237,6 +302,7 @@
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>

@@ -5,57 +5,12 @@ namespace App\Controllers;
 use App\Support\Faqs;
 use App\Support\Schema;
 use App\Support\View;
+use App\Support\PageCache;
 
 class GeoController
 {
-    /**
-     * Country-specific index: /{country}/
-     *
-     * Example: /usa/ → list all USA locations.
-     */
-    public function indexCountry(string $country): string
-    {
-        $allLocations = config('geo', []);
-
-        // Filter by country_key
-        $countryLocations = array_filter($allLocations, function (array $loc) use ($country): bool {
-            return !empty($loc['enabled']) && ($loc['country_key'] ?? null) === $country;
-        });
-
-        if (empty($countryLocations)) {
-            http_response_code(404);
-            return 'Country not found';
-        }
-
-        // Sort by 'order'
-        usort($countryLocations, function (array $a, array $b): int {
-            $orderA = $a['order'] ?? 999;
-            $orderB = $b['order'] ?? 999;
-            return $orderA <=> $orderB;
-        });
-
-        // Take country_name from first result
-        $first      = reset($countryLocations);
-        $countryKey = $country;
-        $countryName = $first['country_name'] ?? strtoupper($countryKey);
-
-        $seo = [
-            'title'       => 'Custom Software Development in ' . $countryName . ' – QalbIT',
-            'description' => 'Discover QalbIT’s custom software development services for clients in ' . $countryName . '.',
-        ];
-
-        $content = View::render('pages/geo/index', [
-            'seo'          => $seo,
-            'locations'    => $countryLocations,
-            'countryKey'   => $countryKey,
-            'countryName'  => $countryName,
-        ]);
-
-        return View::render('layouts/main', [
-            'seo'     => $seo,
-            'content' => $content,
-        ]);
-    }
+    private const CACHE_TTL        = 900; // 15 minutes
+    private const CACHE_KEY_PREFIX = 'page_geo_';
 
     /**
      * Individual location page: /{country}/{state}/
@@ -66,13 +21,32 @@ class GeoController
     {
         // Load all locations from config/geo.php
         $allLocations = config('geo', []);
-        $location = $this->findLocation($allLocations, $country, $state);
+        $location     = $this->findLocation($allLocations, $country, $state);
 
         if (!$location || empty($location['enabled'])) {
             http_response_code(404);
-            return 'Location not found';
+
+            $errorController = new ErrorController();
+            return $errorController->notFound();
         }
 
+        // Stable cache key segment (based on config slug if present, otherwise country+state)
+        $cacheKeySegment = $this->deriveCacheKeySegment($location, $country, $state);
+        $cacheKey        = self::CACHE_KEY_PREFIX . $cacheKeySegment;
+
+        return PageCache::remember(
+            $cacheKey,
+            self::CACHE_TTL,
+            fn (): string => $this->renderLocationPage($location, $country, $state)
+        );
+    }
+
+    /**
+     * Core renderer for a single geo location page.
+     * Used by HTTP (via show) and can be used by cron/CLI warmers.
+     */
+    private function renderLocationPage(array $location, string $country, string $state): string
+    {
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
 
         // Derive canonical from configured slug or from URL params
@@ -85,12 +59,10 @@ class GeoController
         $defaultName = $location['name'] ?? 'Location';
 
         $seoTitle = $seoConfig['meta_title']
-            ?? $location['meta_title']
-            ?? (($location['headline'] ?? $defaultName) . ' – QalbIT');
+            ?? ($location['meta_title'] ?? (($location['headline'] ?? $defaultName) . ' – QalbIT'));
 
         $seoDescription = $seoConfig['meta_description']
-            ?? $location['meta_description']
-            ?? '';
+            ?? ($location['meta_description'] ?? '');
 
         $seo = [
             'title'       => $seoTitle,
@@ -99,14 +71,12 @@ class GeoController
         ];
 
         // Load FAQs for this specific location (if configured)
-        $faqKey = $location['faq_key']
-            ?? ($seoConfig['faq_key'] ?? null);
-
-        $faqs = $faqKey ? Faqs::for($faqKey) : [];
+        $faqKey = $location['faq_key'] ?? ($seoConfig['faq_key'] ?? null);
+        $faqs   = $faqKey ? Faqs::for($faqKey) : [];
 
         // Global Schemas
-        $orgSchema        = Schema::organization();
-        $websiteSchema    = Schema::website();
+        $orgSchema     = Schema::organization();
+        $websiteSchema = Schema::website();
 
         // Use breadcrumb config from SEO if present, otherwise build a simple fallback
         $breadcrumbsConfig = $seoConfig['breadcrumbs'] ?? null;
@@ -115,9 +85,9 @@ class GeoController
             $breadcrumbsSchema = Schema::breadcrumbsLocation($breadcrumbsConfig);
         } else {
             $breadcrumbsSchema = Schema::breadcrumbsLocation([
-                ['name' => 'Home',                         'url' => '/'],
-                ['name' => ucfirst($country),              'url' => '/' . urlencode($country) . '/'],
-                ['name' => $location['name'] ?? 'Location','url' => $canonicalPath],
+                ['name' => 'Home',                        'url' => '/'],
+                ['name' => ucfirst($country),             'url' => '/' . urlencode($country) . '/'],
+                ['name' => $location['name'] ?? 'Location', 'url' => $canonicalPath],
             ]);
         }
 
@@ -149,6 +119,26 @@ class GeoController
     }
 
     /**
+     * Derive a stable cache-key segment.
+     * Prefer config slug (normalized), fallback to country_state.
+     */
+    private function deriveCacheKeySegment(array $location, string $country, string $state): string
+    {
+        if (!empty($location['slug'])) {
+            // e.g. "/usa/new-jersey/" → "usa-new-jersey"
+            $normalized = trim((string) $location['slug'], '/');
+            $normalized = str_replace('/', '-', $normalized);
+
+            if ($normalized !== '') {
+                return $normalized;
+            }
+        }
+
+        // Fallback: "usa_new-jersey"
+        return trim($country, '/') . '_' . trim($state, '/');
+    }
+
+    /**
      * Find a location by country_key + state_key.
      *
      * @param array  $locations
@@ -170,5 +160,4 @@ class GeoController
 
         return null;
     }
-
 }

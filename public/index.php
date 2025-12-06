@@ -6,7 +6,8 @@ session_start();
 
 $router = require __DIR__ . '/../bootstrap/app.php';
 
-use App\Controllers\CareersController;
+use App\Controllers\AboutController;
+use App\Controllers\CareerController;
 use App\Controllers\ContactController;
 use App\Controllers\ErrorController;
 use App\Controllers\GeoController;
@@ -16,6 +17,9 @@ use App\Controllers\PageController;
 use App\Controllers\ServiceController;
 use App\Controllers\SeoController;
 use App\Controllers\CaseStudyController;
+use App\Controllers\HomeController;
+use App\Controllers\LegalController;
+use App\Controllers\PortfolioController;
 use App\Controllers\ProcessController;
 use App\Controllers\TechnologyController;
 
@@ -24,12 +28,12 @@ $router->setNotFoundHandler([ErrorController::class, 'notFound']);
 $router->setErrorHandler([ErrorController::class, 'serverError']);
 
 // Register routes
-$router->get('/', [PageController::class, 'home']);
+$router->get('/', [HomeController::class, 'index']);
+$router->get('/about-us/', [AboutController::class, 'index']);
+$router->get('/portfolio/', [PortfolioController::class, 'index']);
 
-$router->get('/about-us/', [PageController::class, 'about']);
-$router->get('/portfolio/', [PageController::class, 'portfolio']);
-$router->get('/career/', [PageController::class, 'careers']);
-$router->get('/career/apply/', [CareersController::class, 'apply']);
+$router->get('/career/', [CareerController::class, 'index']);
+$router->get('/career/apply/', [CareerController::class, 'apply']);
 
 // Hire developers
 $router->get('/hire-nodejs-developers/', [HireController::class, 'nodejs']);
@@ -50,7 +54,6 @@ $router->get('/industries/', [IndustryController::class, 'index']);
 $router->get('/industries/{slug}/', [IndustryController::class, 'show']);
 
 // Case studies
-$router->get('/case-studies/', [CaseStudyController::class, 'index']);
 $router->get('/case-studies/{slug}/', [CaseStudyController::class, 'show']);
 
 // Technologies
@@ -58,23 +61,27 @@ $router->get('/technologies/', [TechnologyController::class, 'index']);
 $router->get('/technologies/{slug}/', [TechnologyController::class, 'show']);
 
 // Our Process Pages
-$router->get('/{slug}/', [ProcessController::class, 'show']);
-
-// Policy Pages
-$router->get('/privacy-policy/', [PageController::class, 'privacyPolicy']);
-$router->get('/terms-and-condition/', [PageController::class, 'termsOfService']);
-$router->get('/cookie-policy/', [PageController::class, 'cookiePolicy']);
-$router->get('/sitemap/', [PageController::class, 'sitemap']);
+$router->get('/start-up-mvp/', [ProcessController::class, 'startUpMvp']);
+$router->get('/product-scaling/', [ProcessController::class, 'productScaling']);
+$router->get('/digital-transformation/', [ProcessController::class, 'digitalTransformation']);
+$router->get('/engagement-model/', [ProcessController::class, 'engagementModel']);
 
 // Contact
-$router->get('/contact-us/', [ContactController::class, 'showForm']);
+$router->get('/contact-us/', [ContactController::class, 'index']);
 $router->post('/contact-us/', [ContactController::class, 'submit']);
+
+// Policy Pages
+$router->get('/privacy-policy/', [LegalController::class, 'privacy']);
+$router->get('/terms-and-condition/', [LegalController::class, 'terms']);
+$router->get('/cookie-policy/', [LegalController::class, 'cookies']);
+
+// Sitemap Page
+$router->get('/sitemap/', [PageController::class, 'sitemap']);
 
 // SEO: sitemap
 $router->get('/sitemap.xml', [SeoController::class, 'sitemap']);
 
 // Geolocations 
-$router->get('/{country}/', [GeoController::class, 'indexCountry']);
 $router->get('/{country}/{state}/', [GeoController::class, 'show']);
 
 // Dispatch current request

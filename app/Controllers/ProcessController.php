@@ -3,61 +3,90 @@
 namespace App\Controllers;
 
 use App\Support\Faqs;
+use App\Support\PageCache;
 use App\Support\Schema;
 use App\Support\View;
 
 class ProcessController
 {
+    private const CACHE_TTL        = 900; // 15 minutes
+    private const CACHE_KEY_PREFIX = 'page_process_';
+
     /**
-     * /our-process/ – overview page listing the 4 child pages.
-     * If you truly do not want a base page, you can remove this method + route.
+     * /start-up-mvp/
      */
-    public function index(): string
+    public function startUpMvp(): string
     {
-        $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
-
-        $seo = [
-            'title'       => 'How We Work With You | Our Process | QalbIT',
-            'description' => 'Understand how QalbIT works with founders and teams across Start-up MVPs, product scaling, digital transformation and ongoing engagements.',
-            'canonical'   => $baseUrl . '/our-process/',
-        ];
-
-        $processPages = config('process', []);
-
-        $content = View::render('pages/process/index', [
-            'seo'          => $seo,
-            'processPages' => $processPages,
-        ]);
-
-        return View::render('layouts/main', [
-            'seo'     => $seo,
-            'content' => $content,
-        ]);
+        return $this->cachedProcessPage('start-up-mvp');
     }
 
     /**
-     * /our-process/{slug}/ – detail page for one child.
+     * /product-scaling/
      */
-    public function show(string $slug): string
+    public function productScaling(): string
+    {
+        return $this->cachedProcessPage('product-scaling');
+    }
+
+    /**
+     * /digital-transformation/
+     */
+    public function digitalTransformation(): string
+    {
+        return $this->cachedProcessPage('digital-transformation');
+    }
+
+    /**
+     * /engagement-model/
+     */
+    public function engagementModel(): string
+    {
+        return $this->cachedProcessPage('engagement-model');
+    }
+
+    /**
+     * Shared entry for all process pages – resolves config + wraps in cache.
+     */
+    private function cachedProcessPage(string $slugSegment): string
     {
         $allProcesses = config('process', []);
 
-        $process = $this->findProcessBySlugSegment($allProcesses, $slug);
+        $process = $this->findProcessBySlugSegment($allProcesses, $slugSegment);
 
         if (!$process) {
             http_response_code(404);
             return 'Process page not found';
         }
 
+        // Derive a stable slug segment for cache key (prefer config slug).
+        $cacheSlugSegment = $this->deriveCacheSlugSegment($process, $slugSegment);
+        $cacheKey         = self::CACHE_KEY_PREFIX . $cacheSlugSegment;
+
+        return PageCache::remember(
+            $cacheKey,
+            self::CACHE_TTL,
+            fn (): string => $this->renderProcessPage($process, $cacheSlugSegment)
+        );
+    }
+
+    /**
+     * Core renderer for an individual process page.
+     *
+     * @param array  $process      Process config
+     * @param string $slugSegment  Last path segment used in URL
+     */
+    private function renderProcessPage(array $process, string $slugSegment): string
+    {
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
 
         // Derive canonical from configured slug or from URL slug
-        $processSlug   = $process['slug'] ?? ( $slug . '/');
+        // Example config slug: /start-up-mvp/
+        $processSlug  = $process['slug'] ?? ('/our-process/' . $slugSegment . '/');
         $canonicalPath = '/' . ltrim($processSlug, '/');
         $canonical     = $baseUrl . rtrim($canonicalPath, '/') . '/';
 
         $seo = [
-            'title'       => $process['meta_title'] ?? ($process['name'] . ' - QalbIT'),
+            'title'       => $process['meta_title']       ?? (($process['name'] ?? 'Our Process') . ' - QalbIT'),
             'description' => $process['meta_description'] ?? '',
             'canonical'   => $canonical,
         ];
@@ -67,10 +96,10 @@ class ProcessController
         $faqs   = $faqKey ? Faqs::for($faqKey) : [];
 
         // Global Schemas
-        $orgSchema     = Schema::organization();
-        $websiteSchema = Schema::website();
+        $orgSchema         = Schema::organization();
+        $websiteSchema     = Schema::website();
         $breadcrumbsSchema = Schema::breadcrumbs([
-            ['name' => 'Home',     'url' => '/'],
+            ['name' => 'Home',                     'url' => '/'],
             ['name' => $process['name'] ?? 'Our Process', 'url' => $canonicalPath],
         ]);
 
@@ -87,9 +116,9 @@ class ProcessController
         ]));
 
         $content = View::render('pages/process/show', [
-            'seo'       => $seo,
-            'process'   => $process,
-            'faqs'      => $faqs
+            'seo'     => $seo,
+            'process' => $process,
+            'faqs'    => $faqs,
         ]);
 
         return View::render('layouts/main', [
@@ -101,6 +130,25 @@ class ProcessController
     }
 
     /**
+     * Derive a stable slug segment for cache keys.
+     * Prefer last segment of configured slug, fallback to route slug.
+     */
+    private function deriveCacheSlugSegment(array $process, string $routeSlug): string
+    {
+        if (!empty($process['slug'])) {
+            $normalized = trim((string) $process['slug'], '/'); // e.g. "our-process/start-up-mvp"
+            $parts      = explode('/', $normalized);
+            $segment    = end($parts);                          // e.g. "start-up-mvp"
+
+            if (!empty($segment)) {
+                return $segment;
+            }
+        }
+
+        return trim($routeSlug, '/');
+    }
+
+    /**
      * Find process config by last path segment of its slug.
      *
      * config slug: /our-process/start-up-mvp/
@@ -109,14 +157,16 @@ class ProcessController
      */
     protected function findProcessBySlugSegment(array $processes, string $slug): ?array
     {
+        $slug = trim($slug, '/');
+
         foreach ($processes as $process) {
             if (empty($process['slug'])) {
                 continue;
             }
 
-            $normalized = trim($process['slug'], '/'); // e.g. "our-process/start-up-mvp"
+            $normalized = trim($process['slug'], '/'); // e.g. "start-up-mvp"
             $parts      = explode('/', $normalized);
-            $segment    = end($parts); // e.g. "start-up-mvp"
+            $segment    = end($parts);                 // e.g. "start-up-mvp"
 
             if ($segment === $slug) {
                 return $process;

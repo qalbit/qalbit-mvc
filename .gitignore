@@ -13,3 +13,7 @@ composer.lock
 # Public Directory 
 public/blog
 public/tools
+
+# Storage
+storage/cache/*
+storage/logs/*

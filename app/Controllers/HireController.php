@@ -3,25 +3,31 @@
 namespace App\Controllers;
 
 use App\Support\Faqs;
+use App\Support\PageCache;
 use App\Support\Schema;
 use App\Support\View;
 
 class HireController
 {
+    private const CACHE_TTL           = 900; // 15 minutes
+    private const CACHE_KEY_INDEX     = 'page_hire_index';
+    private const CACHE_KEY_PREFIX    = 'page_hire_role_';
+
     /**
-     * Hire index page: /hire-developers/
-     *
-     * Lists all available "Hire X" roles.
+     * Core renderer for the Hire index page: /hire-developers/
+     * Used by HTTP entry point and can be used by cron/CLI.
      */
-    public function index(): string
+    private function renderIndexPage(): string
     {
+        $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
+
         $allRoles = config('hire', []);
 
-        $enabledRoles = array_filter($allRoles, function (array $role): bool {
+        $enabledRoles = array_filter($allRoles, static function (array $role): bool {
             return !empty($role['enabled']);
         });
 
-        usort($enabledRoles, function (array $a, array $b): int {
+        usort($enabledRoles, static function (array $a, array $b): int {
             $orderA = $a['order'] ?? 999;
             $orderB = $b['order'] ?? 999;
             return $orderA <=> $orderB;
@@ -29,8 +35,23 @@ class HireController
 
         $seo = [
             'title'       => 'Hire Dedicated Developers – QalbIT',
-            'description' => 'Hire dedicated Node.js and Laravel developers from QalbIT to extend your team and ship reliable web, mobile and SaaS products.',
+            'description' => 'Hire dedicated Node.js, Laravel, React, Next.js, Flutter and full-stack developers from QalbIT to extend your team and ship reliable web, mobile and SaaS products.',
+            'canonical'   => $baseUrl . '/hire-developers/',
         ];
+
+        // Global schemas for the index page
+        $orgSchema         = Schema::organization();
+        $websiteSchema     = Schema::website();
+        $breadcrumbsSchema = Schema::breadcrumbs([
+            ['name' => 'Home',            'url' => '/'],
+            ['name' => 'Hire Developers', 'url' => '/hire-developers/'],
+        ]);
+
+        $jsonLd = array_values(array_filter([
+            $orgSchema,
+            $websiteSchema,
+            $breadcrumbsSchema,
+        ]));
 
         $content = View::render('pages/hire/index', [
             'seo'   => $seo,
@@ -40,80 +61,98 @@ class HireController
         return View::render('layouts/main', [
             'seo'     => $seo,
             'content' => $content,
+            'jsonLd'  => $jsonLd,
+            'pageId'  => 'hire-index',
         ]);
     }
 
     /**
-     * Dedicated route: /hire-nodejs-developers/
+     * HTTP entry: /hire-developers/
+     * Cached with TTL.
      */
+    public function index(): string
+    {
+        return PageCache::remember(
+            self::CACHE_KEY_INDEX,
+            self::CACHE_TTL,
+            fn (): string => $this->renderIndexPage()
+        );
+    }
+
+    /**
+     * Dedicated routes – each cached as its own "Hire X" page.
+     */
+
+    // /hire-nodejs-developers/
     public function nodejs(): string
     {
-        return $this->renderRole('nodejs');
+        return $this->cachedRolePage('nodejs');
     }
 
-    /**
-     * Dedicated route: /hire-laravel-developers/
-     */
+    // /hire-laravel-developers/
     public function laravel(): string
     {
-        return $this->renderRole('laravel');
+        return $this->cachedRolePage('laravel');
     }
-    
-    /**
-     * Dedicated route: /hire-php-developers/
-     */
+
+    // /hire-php-developers/
     public function php(): string
     {
-        return $this->renderRole('php');
+        return $this->cachedRolePage('php');
     }
 
-    /**
-     * Dedicated route: /hire-reactjs-developers/
-     */
+    // /hire-reactjs-developers/
     public function reactjs(): string
     {
-        return $this->renderRole('reactjs');
+        return $this->cachedRolePage('reactjs');
     }
 
-    /**
-     * Dedicated route: /hire-nextjs-developers/
-     */
+    // /hire-nextjs-developers/
     public function nextjs(): string
     {
-        return $this->renderRole('nextjs');
+        return $this->cachedRolePage('nextjs');
     }
 
-    /**
-     * Dedicated route: /hire-flutter-developers/
-     */
+    // /hire-flutter-developers/
     public function flutter(): string
     {
-        return $this->renderRole('flutter');
+        return $this->cachedRolePage('flutter');
     }
 
-    /**
-     * Dedicated route: /hire-mvp-developers/
-     */
+    // /hire-mvp-developers/
     public function mvp(): string
     {
-        return $this->renderRole('mvp');
+        return $this->cachedRolePage('mvp');
     }
 
-    /**
-     * Dedicated route: /hire-fullstack-developers/
-     */
+    // /hire-fullstack-developers/
     public function fullstack(): string
     {
-        return $this->renderRole('full-stack-javascript');
+        return $this->cachedRolePage('full-stack-javascript');
     }
 
     /**
-     * Generic renderer based on role_key from config/hire.php.
+     * Shared helper to wrap a role page in PageCache::remember().
+     */
+    private function cachedRolePage(string $roleKey): string
+    {
+        $cacheKey = self::CACHE_KEY_PREFIX . $roleKey;
+
+        return PageCache::remember(
+            $cacheKey,
+            self::CACHE_TTL,
+            fn (): string => $this->renderRole($roleKey)
+        );
+    }
+
+    /**
+     * Core renderer for a single "Hire X" page.
+     * Used by HTTP (via cachedRolePage) and can be used by cron/CLI.
      */
     protected function renderRole(string $roleKey): string
     {
         $allRoles = config('hire', []);
-        $role = $this->findBySlug($allRoles, $roleKey);
+        $role     = $this->findBySlug($allRoles, $roleKey);
 
         if (!$role) {
             http_response_code(404);
@@ -123,12 +162,13 @@ class HireController
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
 
         // Derive canonical from configured slug or from URL slug
-        $roleSlug   = $role['slug'] ?? ('/hire-'. $roleKey .'-developers/');
-        $canonicalPath = '/' . ltrim($roleSlug, '/');
-        $canonical     = $baseUrl . rtrim($canonicalPath, '/') . '/';
+        $roleSlug       = $role['slug'] ?? ('/hire-' . $roleKey . '-developers/');
+        $canonicalPath  = '/' . ltrim($roleSlug, '/');
+        $canonicalPath  = rtrim($canonicalPath, '/') . '/';
+        $canonical      = $baseUrl . $canonicalPath;
 
         $seo = [
-            'title'       => $role['meta_title']       ?? ($role['name'] . ' – QalbIT'),
+            'title'       => $role['meta_title']       ?? (($role['name'] ?? 'Hire Developers') . ' – QalbIT'),
             'description' => $role['meta_description'] ?? '',
             'canonical'   => $canonical,
         ];
@@ -138,10 +178,11 @@ class HireController
         $faqs   = $faqKey ? Faqs::for($faqKey) : [];
 
         // Global Schemas
-        $orgSchema     = Schema::organization();
-        $websiteSchema = Schema::website();
+        $orgSchema         = Schema::organization();
+        $websiteSchema     = Schema::website();
         $breadcrumbsSchema = Schema::breadcrumbs([
-            ['name' => 'Home',     'url' => '/'],
+            ['name' => 'Home',            'url' => '/'],
+            ['name' => 'Hire Developers', 'url' => '/hire-developers/'],
             ['name' => $role['name'] ?? 'Hire Developers', 'url' => $canonicalPath],
         ]);
 
@@ -158,10 +199,10 @@ class HireController
         ]));
 
         $content = View::render('pages/hire/show', [
-            'seo'     => $seo,
-            'role'    => $role,
-            'faqs'    => $faqs,
-            'pageId'  => 'hire-developer',
+            'seo'    => $seo,
+            'role'   => $role,
+            'faqs'   => $faqs,
+            'pageId' => 'hire-developer',
         ]);
 
         return View::render('layouts/main', [
@@ -174,7 +215,7 @@ class HireController
 
     /**
      * Find hire config by path segment of its slug.
-     * 
+     *
      * config slug: /hire-nodejs-development/
      * URL:         /hire-nodejs-development/
      * $slug:       "hire-nodejs-development"
@@ -195,7 +236,7 @@ class HireController
             if ($segment === $slug) {
                 return $service;
             }
-            
+
             if (preg_match('/^hire-([a-z0-9\-]+)-developers$/i', $segment, $matches)) {
                 $techSlug = $matches[1];
 

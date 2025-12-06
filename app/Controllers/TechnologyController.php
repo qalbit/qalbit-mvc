@@ -3,25 +3,30 @@
 namespace App\Controllers;
 
 use App\Support\Faqs;
+use App\Support\PageCache;
 use App\Support\Schema;
 use App\Support\View;
 
 class TechnologyController
 {
+    private const CACHE_TTL        = 900; // 15 minutes
+    private const CACHE_KEY_INDEX  = 'page_technologies_index';
+    private const CACHE_KEY_PREFIX = 'page_technology_';
+
     /**
-     * Technologies index: /technologies/
+     * Core renderer for Technologies index: /technologies/
      */
-    public function index(): string
+    private function renderIndexPage(): string
     {
         $all = config('technologies', []);
 
         // Filter enabled
-        $enabled = array_filter($all, function (array $tech): bool {
+        $enabled = array_filter($all, static function (array $tech): bool {
             return !empty($tech['enabled']);
         });
 
         // Sort by order
-        uasort($enabled, function (array $a, array $b): int {
+        uasort($enabled, static function (array $a, array $b): int {
             $orderA = $a['order'] ?? 999;
             $orderB = $b['order'] ?? 999;
             return $orderA <=> $orderB;
@@ -42,14 +47,14 @@ class TechnologyController
             'canonical'   => $baseUrl . '/technologies/',
         ];
 
-        // FAQs for the technology page (new context)
+        // FAQs for the technology page
         $faqs = Faqs::for('faq_technology');
 
         // Global Schemas
         $orgSchema         = Schema::organization();
         $websiteSchema     = Schema::website();
         $breadcrumbsSchema = Schema::breadcrumbs([
-            ['name' => 'Home', 'url' => '/'],
+            ['name' => 'Home',         'url' => '/'],
             ['name' => 'Technologies', 'url' => '/technologies/'],
         ]);
         $faqSchema         = Schema::faq($faqs, $seo['canonical'], $seo['title']);
@@ -63,10 +68,10 @@ class TechnologyController
         ]));
 
         $content = View::render('pages/technologies/index', [
-            'seo'           => $seo,
-            'technologies'  => $enabled,
-            'faqs'          => $faqs,
-            'grouped'       => $grouped,
+            'seo'          => $seo,
+            'technologies' => $enabled,
+            'faqs'         => $faqs,
+            'grouped'      => $grouped,
         ]);
 
         return View::render('layouts/main', [
@@ -78,7 +83,19 @@ class TechnologyController
     }
 
     /**
-     * Individual technology page: /technologies/{slug}/
+     * HTTP entry: Technologies index – cached with TTL.
+     */
+    public function index(): string
+    {
+        return PageCache::remember(
+            self::CACHE_KEY_INDEX,
+            self::CACHE_TTL,
+            fn (): string => $this->renderIndexPage()
+        );
+    }
+
+    /**
+     * HTTP entry: Individual technology page: /technologies/{slug}/
      *
      * Example: /technologies/reactjs/
      */
@@ -93,28 +110,47 @@ class TechnologyController
             return 'Technology not found';
         }
 
+        // Stable slug segment for cache key (prefer config slug).
+        $cacheSlugSegment = $this->deriveCacheSlugSegment($technology, $slug);
+        $cacheKey         = self::CACHE_KEY_PREFIX . $cacheSlugSegment;
+
+        return PageCache::remember(
+            $cacheKey,
+            self::CACHE_TTL,
+            fn (): string => $this->renderTechnologyPage($technology, $cacheSlugSegment)
+        );
+    }
+
+    /**
+     * Core renderer for individual technology page.
+     *
+     * @param array  $technology    Technology config
+     * @param string $slugSegment   Last path segment used in the URL
+     */
+    private function renderTechnologyPage(array $technology, string $slugSegment): string
+    {
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
 
-        // Derive canonical from condifured slug or from URL slug
-        $technologySlug   = $technology['slug'] ?? ('/technologies/' . $slug . '/');
-        $canonicalPath = '/' . ltrim($technologySlug, '/');
-        $canonical     = $baseUrl . rtrim($canonicalPath, '/') . '/';
+        // Derive canonical from configured slug or from URL slug
+        $technologySlug  = $technology['slug'] ?? ('/technologies/' . $slugSegment . '/');
+        $canonicalPath   = '/' . ltrim($technologySlug, '/');
+        $canonical       = $baseUrl . rtrim($canonicalPath, '/') . '/';
 
         $seo = [
-            'title'       => $technology['meta_title']       ?? ($technology['name'] . ' – QalbIT'),
+            'title'       => $technology['meta_title']       ?? (($technology['name'] ?? 'Technology') . ' – QalbIT'),
             'description' => $technology['meta_description'] ?? '',
             'canonical'   => $canonical,
         ];
 
-        // Load FAQs for this specific service (if configured)
+        // Load FAQs for this specific technology (if configured)
         $faqKey = $technology['faq_key'] ?? null;
         $faqs   = $faqKey ? Faqs::for($faqKey) : [];
-        
+
         // Global Schemas
-        $orgSchema     = Schema::organization();
-        $websiteSchema = Schema::website();
+        $orgSchema         = Schema::organization();
+        $websiteSchema     = Schema::website();
         $breadcrumbsSchema = Schema::breadcrumbs([
-            ['name' => 'Home',     'url' => '/'],
+            ['name' => 'Home',         'url' => '/'],
             ['name' => 'Technologies', 'url' => '/technologies/'],
             ['name' => $technology['name'] ?? 'Technology', 'url' => $canonicalPath],
         ]);
@@ -134,7 +170,7 @@ class TechnologyController
         $content = View::render('pages/technologies/show', [
             'seo'        => $seo,
             'technology' => $technology,
-            'faqs'       => $faqs
+            'faqs'       => $faqs,
         ]);
 
         return View::render('layouts/main', [
@@ -146,14 +182,35 @@ class TechnologyController
     }
 
     /**
-     * Find technology config by path segement of its slug.
-     * 
+     * Derive a stable slug segment for cache keys.
+     * Prefer last segment of configured slug, fallback to URL slug.
+     */
+    private function deriveCacheSlugSegment(array $technology, string $urlSlug): string
+    {
+        if (!empty($technology['slug'])) {
+            $normalized = trim((string) $technology['slug'], '/');
+            $parts      = explode('/', $normalized);
+            $segment    = end($parts);
+
+            if (!empty($segment)) {
+                return $segment;
+            }
+        }
+
+        return trim($urlSlug, '/');
+    }
+
+    /**
+     * Find technology config by path segment of its slug.
+     *
      * config slug: /technologies/reactjs/
      * URL:         /technologies/reactjs/
      * $slug:       "reactjs"
      */
     protected function findTechnologyBySlugSegment(array $technologies, string $slug): ?array
     {
+        $slug = trim($slug, '/');
+
         foreach ($technologies as $technology) {
             if (empty($technology['slug'])) {
                 continue;

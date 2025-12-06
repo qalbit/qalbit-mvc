@@ -1,9 +1,5 @@
 <?php
 
-// config/business.php
-//
-// Central place for QalbIT business details used on Contact page, footer, JSON-LD, etc.
-
 return [
 
     'legal_name'    => 'QalbIT Infotech Pvt Ltd',

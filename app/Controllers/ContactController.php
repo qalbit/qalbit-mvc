@@ -7,34 +7,71 @@ use App\Support\View;
 use App\Support\Session;
 use App\Support\Mailer;
 use App\Support\Schema;
+use App\Support\PageCache;
+use App\Support\Recaptcha;
 
 class ContactController
 {
+    private const CACHE_TTL       = 900; // 15 minutes
+    private const CACHE_KEY_INDEX = 'page_contact_index';
+
     /**
      * Show the Contact Us page with any flashed errors/success.
      */
-    public function showForm(): string
+    public function index(): string
     {
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
-        
+
         $seo = [
-            'title' => 'Contact QalbIT – Start Your Custom Software Project',
+            'title'       => 'Contact QalbIT – Start Your Custom Software Project',
             'description' => 'Get in touch with QalbIT to discuss your custom software, web, mobile, or SaaS project. Share your requirements and we will get back within 24 hours.',
-            'canonical' => $baseUrl . '/contact-us/',
+            'canonical'   => $baseUrl . '/contact-us/',
         ];
 
-        // Flash data
+        // Flash data – consumed exactly once
         $errors  = Session::getFlash('contact_errors', []);
         $old     = Session::getFlash('contact_old', []);
         $success = Session::getFlash('contact_success');
 
+        $hasFlash = !empty($errors) || !empty($old) || !empty($success);
+
+        // If there is any flash (validation errors or success),
+        // NEVER use cache – render a fresh, personalized page.
+        if ($hasFlash) {
+            return $this->renderContactPage($seo, $errors, $old, $success);
+        }
+
+        // No flash = canonical "clean" contact page → safe to cache
+        return PageCache::remember(
+            self::CACHE_KEY_INDEX,
+            self::CACHE_TTL,
+            function (): string {
+                $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
+
+                $seo = [
+                    'title'       => 'Contact QalbIT – Start Your Custom Software Project',
+                    'description' => 'Get in touch with QalbIT to discuss your custom software, web, mobile, or SaaS project. Share your requirements and we will get back within 24 hours.',
+                    'canonical'   => $baseUrl . '/contact-us/',
+                ];
+
+                // Blank state (no errors, no old data, no success message)
+                return $this->renderContactPage($seo, [], [], null);
+            }
+        );
+    }
+
+    /**
+     * Core renderer for Contact page (used by cached + dynamic variants).
+     */
+    private function renderContactPage(array $seo, array $errors, array $old, ?string $success): string
+    {
         // Load FAQs for this specific page
-        $faqs  = Faqs::for('faq_contactus');
+        $faqs      = Faqs::for('faq_contactus');
         $faqSchema = Schema::faq($faqs, $seo['canonical'], $seo['title']);
 
         // Global Schemas
-        $orgSchema = Schema::organization();
-        $websiteSchema = Schema::website();
+        $orgSchema         = Schema::organization();
+        $websiteSchema     = Schema::website();
         $breadcrumbsSchema = Schema::breadcrumbs([
             ['name' => 'Contact Us', 'url' => '/contact-us/'],
         ]);
@@ -48,18 +85,18 @@ class ContactController
         ]));
 
         $content = View::render('pages/contact/index', [
-            'seo'       => $seo,
-            'errors'    => $errors,
-            'old'       => $old,
-            'success'   => $success,
-            'faqs'      => $faqs,
+            'seo'     => $seo,
+            'errors'  => $errors,
+            'old'     => $old,
+            'success' => $success,
+            'faqs'    => $faqs,
         ]);
 
         return View::render('layouts/main', [
             'seo'     => $seo,
             'content' => $content,
             'jsonLd'  => $jsonLd,
-            'pageId'  => 'contactus'
+            'pageId'  => 'contactus',
         ]);
     }
 
@@ -80,39 +117,45 @@ class ContactController
 
         $errors = [];
 
-        // --- reCAPTCHA ---
-        $token = $_POST['recaptcha_token'] ?? null;
-        if (!\App\Support\Recaptcha::verify($token, 'contact')) {
-            $errors['global'] = 'We could not verify that you are a human. Please try again.';
-        }
-
         // --- Field validation ---
+
+        // Name
         if ($data['name'] === '') {
             $errors['name'] = 'Please enter your name.';
         } elseif (mb_strlen($data['name']) < 2) {
             $errors['name'] = 'Name must be at least 2 characters.';
         }
 
+        // Email
         if ($data['email'] === '') {
             $errors['email'] = 'Please enter your email address.';
         } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Please enter a valid email address.';
         }
 
+        // Message
         if ($data['message'] === '') {
             $errors['message'] = 'Please tell us a bit about your project.';
         } elseif (mb_strlen($data['message']) < 10) {
             $errors['message'] = 'Please provide at least a few sentences so we can understand your needs.';
         }
 
+        // --- reCAPTCHA (add its error on top of field errors) ---
+        $token = $_POST['recaptcha_token'] ?? null;
+        if (!\App\Support\Recaptcha::verify($token, 'contact')) {
+            // you can keep this as 'global' so it shows at the top of the form
+            $errors['global'] = 'We could not verify that you are a human. Please try again.';
+        }
+        
         if (!empty($errors)) {
-            \App\Support\Session::flash('contact_errors', $errors);
-            \App\Support\Session::flash('contact_old', $data);
+            Session::flash('contact_errors', $errors);
+            Session::flash('contact_old', $data);
             header('Location: ' . $redirectTo);
             exit;
         }
 
-        // Send Email Directly
+        // --- If here, all validation passed → send email ---
+
         $mailer = new Mailer();
         $sent   = $mailer->sendContact($data);
 
@@ -128,4 +171,5 @@ class ContactController
         header('Location: ' . $redirectTo);
         exit;
     }
+
 }
