@@ -88,7 +88,7 @@ $jsonLd = $jsonLd ?? null;
     <!-- GSAP core (CDN) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-    <script src="<?= asset('/js/main.js?v=1.0.0.1') ?>" defer></script>
+    <script src="<?= asset('/js/main.js') ?>" defer></script>
 
     <!-- Intl. Phone Core (CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/js/intlTelInput.min.js"></script>
