@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'enabled'    => true,
-    'site_key'   => '6Ldv97EZAAAAABA6-veNRQBcHPfzh2f9uhq3lJ2F',
-    'secret_key' => '6Ldv97EZAAAAAFKirCY9kJzyzj-ZMfn8EPv6AzTW',
-    'min_score'  => 0.5,
+    'enabled'    => env('RECAPTCHA_ENABLED', true),
+    'site_key'   => env('RECAPTCHA_SITE_KEY', ''),
+    'secret_key' => env('RECAPTCHA_SECRET_KEY', ''),
+    'min_score'  => env('RECAPTCHA_MIN_SCORE', 0.5),
 ];

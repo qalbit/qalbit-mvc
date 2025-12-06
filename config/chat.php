@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'tawk_enabled'    => true,
-    'tawk_property_id' => '', // e.g. "5a123456789abcdef1234567"
-    'tawk_widget_id'   => 'default',
+    'tawk_enabled'     => env('TAWK_ENABLED', true),
+    'tawk_property_id' => env('TAWK_PROPERTY_ID', ''),
+    'tawk_widget_id'   => env('TAWK_WIDGET_ID', 'default'),
 ];

@@ -2,8 +2,10 @@
 
 session_start();
 
-// FRONT CONTROLLER
+// LOAD ENV FIRST
+require __DIR__ . '/../bootstrap/env.php';
 
+// FRONT CONTROLLER
 $router = require __DIR__ . '/../bootstrap/app.php';
 
 use App\Controllers\AboutController;
