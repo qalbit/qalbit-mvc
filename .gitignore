@@ -15,5 +15,4 @@ public/blog
 public/tools
 
 # Storage
-storage/cache/*
-storage/logs/*
+storage
