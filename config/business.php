@@ -6,12 +6,10 @@ return [
     'short_name'    => 'QalbIT',
     'website'       => 'https://qalbit.com',
     'primary_email' => 'info@qalbit.com',
-    'primary_phone' => '+91-9033870071',
+    'primary_phone' => '+91-8511900440',
 
-    // Brand assets for JSON-LD (adjust logo path if needed)
-    'logo_url' => 'https://qalbit.com/assets/images/brand/qalbit-logo-dark.png',
+    'logo_url' => 'https://staging.qalbit.com/assets/images/brand/logo-primary.png',
 
-    // Address for main Organization schema
     'schema_address' => [
         'streetAddress'   => 'C109, Siddhi Vinayak Towers, Near Kataria Arcade, Opp. S.G. Highway, Makarba',
         'addressLocality' => 'Ahmedabad',
@@ -31,7 +29,6 @@ return [
 
     // Primary locations / offices that we want to show on Contact page
     'locations' => [
-
         'ahmedabad_hq' => [
             'id'        => 'ahmedabad_hq',
             'label'     => 'India – Ahmedabad (Head Office)',
@@ -42,7 +39,7 @@ return [
                 'Makarba, Ahmedabad – 380051',
                 'Gujarat, India',
             ],
-            'phone'     => '+91-9033870071',
+            'phone'     => '+91-8511900440',
             'email'     => 'info@qalbit.com',
             'timezone'  => 'Asia/Kolkata',
             'hours'     => 'Mon–Fri, 10:00 – 19:00 IST',
@@ -58,7 +55,7 @@ return [
             'address'   => [
                 'Serving clients remotely across US, Europe and Middle East',
             ],
-            'phone'     => '+91-9033870071',
+            'phone'     => '+91-8511900440',
             'email'     => 'info@qalbit.com',
             'timezone'  => 'Asia/Kolkata',
             'hours'     => 'Overlap calls typically scheduled between 12:00 – 20:00 IST',
@@ -70,13 +67,12 @@ return [
 
     // Contact “channels” – shown as cards on Contact page and used in contactPoint schema.
     'channels' => [
-
         'sales' => [
             'id'      => 'sales',
             'label'   => 'New projects & sales',
             'summary' => 'For new software projects, MVPs, product extensions and RFPs.',
             'email'   => 'info@qalbit.com',
-            'phone'   => '+91-9033870071',
+            'phone'   => '+91-8511900440',
             'cta'     => 'Share your project brief',
         ],
 
@@ -85,7 +81,7 @@ return [
             'label'   => 'Existing clients & support',
             'summary' => 'For current clients who need help with an ongoing project or maintenance.',
             'email'   => 'support@qalbit.com',
-            'phone'   => '+91-9033870071',
+            'phone'   => '+91-8511900440',
             'cta'     => 'Raise a support request',
         ],
 
@@ -93,8 +89,8 @@ return [
             'id'      => 'careers',
             'label'   => 'Careers & hiring',
             'summary' => 'For candidates and partners who want to explore working with QalbIT.',
-            'email'   => 'careers@qalbit.com',
-            'phone'   => null,
+            'email'   => 'career@qalbit.com',
+            'phone'   => '+91-8511900440',
             'cta'     => 'Share your CV and portfolio',
         ],
 
@@ -102,10 +98,9 @@ return [
             'id'      => 'partnerships',
             'label'   => 'Partnerships & collaboration',
             'summary' => 'For agencies, consultants and product teams exploring collaboration.',
-            'email'   => 'info@qalbit.com',
-            'phone'   => null,
+            'email'   => 'partner@qalbit.com',
+            'phone'   => '+91-8511900440',
             'cta'     => 'Discuss a partnership',
         ],
-
     ],
 ];

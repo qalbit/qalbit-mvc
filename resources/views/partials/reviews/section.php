@@ -75,8 +75,6 @@ $columns      = array_chunk($reviews, $perColumn);
                                     <article
                                         class="review-card"
                                         data-review-card
-                                        itemscope
-                                        itemtype="https://schema.org/Review"
                                     >
                                         <?php if ($isVideo && !empty($videoUrl)): ?>
                                             <!-- Clickable video teaser – real iframe is injected into modal -->
@@ -108,7 +106,6 @@ $columns      = array_chunk($reviews, $perColumn);
                                         <?php if (!empty($review['quote'])): ?>
                                             <p
                                                 class="mb-3 text-sm leading-relaxed text-foreground/90"
-                                                itemprop="reviewBody"
                                             >
                                                 “<?= htmlspecialchars($review['quote']) ?>”
                                             </p>
@@ -116,7 +113,7 @@ $columns      = array_chunk($reviews, $perColumn);
 
                                         <footer class="pt-2 border-t border-slate-200/80 text-[11px] text-muted-foreground">
                                             <?php if (!empty($review['author_name'])): ?>
-                                                <p class="font-semibold text-foreground" itemprop="author">
+                                                <p class="font-semibold text-foreground">
                                                     <?= htmlspecialchars($review['author_name']) ?>
                                                 </p>
                                             <?php endif; ?>
@@ -133,12 +130,11 @@ $columns      = array_chunk($reviews, $perColumn);
                                                             target="_blank"
                                                             rel="noopener noreferrer"
                                                             class="font-medium text-primary-700 hover:underline"
-                                                            itemprop="itemReviewed"
                                                         >
                                                             <?= htmlspecialchars($review['company']) ?>
                                                         </a>
                                                     <?php else: ?>
-                                                        <span itemprop="itemReviewed">
+                                                        <span>
                                                             <?= htmlspecialchars($review['company']) ?>
                                                         </span>
                                                     <?php endif; ?>

@@ -62,6 +62,11 @@ $jsonLd = $jsonLd ?? null;
     <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
 <?php endif; ?>
 <meta property="og:type" content="website">
+<?php if (!empty($ogImage)): ?>
+    <meta property="og:image" content="<?= htmlspecialchars($ogImage) ?>">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+<?php endif; ?>
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
@@ -69,8 +74,49 @@ $jsonLd = $jsonLd ?? null;
 <?php if (!empty($description)): ?>
     <meta name="twitter:description" content="<?= htmlspecialchars($description) ?>">
 <?php endif; ?>
+<?php if (!empty($ogImage)): ?>
+    <meta name="twitter:image" content="<?= htmlspecialchars($ogImage) ?>">
+<?php endif; ?>
+<meta name="twitter:site" content="@qalb_it">
 
 <?php if ($gtmId): ?>
+    <!-- Consent Mode + Google Tag Manager (using GTM container only) -->
+    <script>
+        // Define dataLayer + gtag wrapper BEFORE GTM loads
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+
+        (function () {
+            var defaultConsent = {
+                ad_storage: 'granted',
+                analytics_storage: 'granted',
+                personalization_storage: 'granted',
+                functionality_storage: 'granted',
+                security_storage: 'granted'
+            };
+
+            var storedConsent = null;
+
+            try {
+                storedConsent = localStorage.getItem('cookie-consent');
+            } catch (e) {
+                storedConsent = null;
+            }
+
+            if (storedConsent === null) {
+                // No stored user choice → use default
+                gtag('consent', 'default', defaultConsent);
+            } else {
+                try {
+                    gtag('consent', 'default', JSON.parse(storedConsent));
+                } catch (e) {
+                    // Fallback if invalid JSON
+                    gtag('consent', 'default', defaultConsent);
+                }
+            }
+        })();
+    </script>
+
     <!-- Google Tag Manager -->
     <script>
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

@@ -17,12 +17,13 @@ class SeoController
             '/services/',
             '/industries/',
             '/portfolio/',
-            '/case-studies/',
             '/technologies/',
             '/contact-us/',
+            '/career/',
             '/privacy-policy/',
             '/terms-of-service/',
             '/cookie-policy/',
+            '/sitemap/',
         ];
 
         foreach ($corePaths as $path) {
@@ -40,7 +41,7 @@ class SeoController
         // Our Process child pages
         $processPages = config('process', []);
         foreach ($processPages as $slug => $page) {
-            $paths[] = '/our-process/' . $slug . '/';
+            $paths[] = '/' . $slug . '/';
         }
 
         // Industries
@@ -92,7 +93,7 @@ class SeoController
 
         $xml = [];
         $xml[] = '<?xml version="1.0" encoding="UTF-8"?>';
-        $xml[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        $xml[] = '<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">';
 
         foreach ($urls as $loc) {
             $xml[] = '  <url>';

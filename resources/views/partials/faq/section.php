@@ -96,9 +96,6 @@ $bullets = $bullets ?? [
                         class="faq-item"
                         data-faq-item
                         data-faq-id="<?= htmlspecialchars($faqId) ?>"
-                        itemscope
-                        itemprop="mainEntity"
-                        itemtype="https://schema.org/Question"
                     >
                         <h3 class="sr-only"><?= htmlspecialchars($question) ?></h3>
 
@@ -111,7 +108,7 @@ $bullets = $bullets ?? [
                             data-faq-trigger
                             data-faq-target="<?= htmlspecialchars($faqId) ?>"
                         >
-                            <span class="faq-trigger-label" itemprop="name">
+                            <span class="faq-trigger-label">
                                 <?= htmlspecialchars($question) ?>
                             </span>
                             <span class="faq-trigger-icon" aria-hidden="true"></span>
@@ -125,11 +122,8 @@ $bullets = $bullets ?? [
                             role="region"
                             aria-labelledby="<?= $buttonId ?>"
                             <?= $isFirst ? '' : 'hidden' ?>
-                            itemscope
-                            itemprop="acceptedAnswer"
-                            itemtype="https://schema.org/Answer"
                         >
-                           <div class="faq-panel-inner" itemprop="text">
+                           <div class="faq-panel-inner">
                                 <?php if ($answerHtml !== null): ?>
                                     <?= $answerHtml ?>
                                 <?php else: ?>

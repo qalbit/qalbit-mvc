@@ -19,6 +19,10 @@ if (!empty($seo['canonical'])) {
     $canonical = $baseUrl . $requestPath;
 }
 
+$defaultOgImage = $baseUrl . '/assets/images/og/qalbit-default-og.jpg';
+// Allow page-level override via $seo['image']
+$ogImage        = !empty($seo['image']) ? $seo['image'] : $defaultOgImage;
+
 // --- GLOBAL + PAGE-WISE INDEXING ------------------------------
 $pageNoindex = !empty($seo['noindex']);
 $globalNoindex = !$indexingEnabled;

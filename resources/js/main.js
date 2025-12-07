@@ -989,27 +989,37 @@
     }
 
     // --------------------------------------------------------
-    // 7) Cookie banner – simple localStorage-based consent
+    // 7) Cookie banner – localStorage-based consent + GA4/GTM
     // --------------------------------------------------------
     function initCookieBanner() {
         var banner = document.querySelector("[data-cookie-banner]");
         if (!banner) return;
 
-        var consentKey = "qalbit_cookie_consent_v1";
+        // MUST match the key used in head.php consent snippet
+        var consentKey = "cookie-consent";
 
-        // If already accepted, do nothing
+        var defaultConsent = {
+            ad_storage: "granted",
+            analytics_storage: "granted",
+            personalization_storage: "granted",
+            functionality_storage: "granted",
+            security_storage: "granted"
+        };
+
+        var hasConsent = false;
+
         try {
-            if (
-                window.localStorage &&
-                localStorage.getItem(consentKey) === "accepted"
-            ) {
-                return;
+            if (window.localStorage && localStorage.getItem(consentKey)) {
+                hasConsent = true;
             }
         } catch (e) {
-            // localStorage might be disabled – in that case, just show the banner each time.
+            hasConsent = false;
         }
 
-        // Show banner
+        if (hasConsent) {
+            return;
+        }
+
         banner.classList.remove("hidden");
 
         var acceptBtn = banner.querySelector("[data-cookie-accept]");
@@ -1017,17 +1027,19 @@
         function acceptCookies() {
             try {
                 if (window.localStorage) {
-                    localStorage.setItem(consentKey, "accepted");
+                    localStorage.setItem(consentKey, JSON.stringify(defaultConsent));
                 }
             } catch (e) {
-                // ignore if localStorage is blocked
             }
 
             banner.classList.add("hidden");
 
-            // Optional GTM event
             if (window.dataLayer && Array.isArray(window.dataLayer)) {
                 window.dataLayer.push({ event: "cookie_consent_accepted" });
+            }
+
+            if (typeof gtag === "function") {
+                gtag("consent", "update", defaultConsent);
             }
         }
 

@@ -83,7 +83,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
                                     aria-expanded="false"
                                 >
                                     <?= htmlspecialchars($item['label']) ?>
-                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                    <svg xmlns="https://www.w3.org/2000/svg"
                                          fill="none" viewBox="0 0 24 24" stroke-width="2"
                                          stroke="currentColor"
                                          class="w-4 h-4 text-slate-600 group-hover:text-primary-900 transition-transform group-hover:rotate-180"
@@ -101,7 +101,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
                                     aria-expanded="false"
                                 >
                                     <?= htmlspecialchars($item['label']) ?>
-                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                    <svg xmlns="https://www.w3.org/2000/svg"
                                          fill="none" viewBox="0 0 24 24" stroke-width="2"
                                          stroke="currentColor"
                                          class="w-4 h-4 text-slate-600 group-hover:text-primary-900 transition-transform group-hover:rotate-180"
@@ -185,7 +185,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
             aria-controls="mobile-menu"
             aria-expanded="false"
         >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+            <svg xmlns="https://www.w3.org/2000/svg" fill="none"
                  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                  class="size-6" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -218,7 +218,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
                     class="inline-flex items-center justify-center rounded-xs w-9 h-9 hover:bg-primary-50"
                     aria-label="Close navigation menu"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                    <svg xmlns="https://www.w3.org/2000/svg" fill="none"
                          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                          class="size-5" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -253,7 +253,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
                                 aria-controls="<?= $submenuId ?>"
                             >
                                 <span><?= htmlspecialchars($item['label']) ?></span>
-                                <svg xmlns="http://www.w3.org/2000/svg"
+                                <svg xmlns="https://www.w3.org/2000/svg"
                                      fill="none" viewBox="0 0 24 24" stroke-width="2"
                                      stroke="currentColor"
                                      class="h-4 w-4 text-slate-500 transition-transform"

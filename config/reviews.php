@@ -30,7 +30,7 @@ return [
         'author_name' => 'Wouter Santens',
         'author_role' => 'Executive Search Consultant at Bloomford',
         'company'     => 'Bloomford',
-        'company_url' => 'http://bloomford.be',
+        'company_url' => 'https://bloomford.be',
         'rating'      => 5,
         'industry'    => 'Recruitment / HR Tech',
         'region'      => 'Belgium (remote-first collaboration)',
