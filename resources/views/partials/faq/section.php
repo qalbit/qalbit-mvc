@@ -27,8 +27,6 @@ $bullets = $bullets ?? [
     class="py-16 bg-slate-50 text-foreground"
     aria-labelledby="home-faqs-heading"
     data-faq-section
-    itemscope
-    itemtype="https://schema.org/FAQPage"
 >
     <div class="mx-auto max-w-6xl px-4">
         <div class="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1.6fr)] lg:items-start">
