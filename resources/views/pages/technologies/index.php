@@ -50,5 +50,11 @@
 <?php endif; ?>
 
 <?php
-    include __DIR__ . '/../../partials/technologies/section-cta.php';
+    // CTA block – pass contact flash state into the CTA + small form
+    $errors  = $contactErrors  ?? [];
+    $old     = $contactOld     ?? [];
+    $success = $contactSuccess ?? null;
+    $leadFrom= 'lead_technology_page';
+
+    include __DIR__ . '/../../partials/contact/cta-section.php';
 ?>

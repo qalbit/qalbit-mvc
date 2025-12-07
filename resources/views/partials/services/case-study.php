@@ -13,10 +13,10 @@
                 </p>
             </div>
             <a
-                href="/case-studies/"
+                href="<?= route_url('/portfolio/') ?>"
                 class="text-xs font-semibold text-primary-700 hover:text-primary-800"
             >
-                View all case studies →
+                See our work →
             </a>
         </div>
 

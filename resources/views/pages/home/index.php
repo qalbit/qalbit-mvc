@@ -13,7 +13,7 @@
 <?php
     // Services block
     if (!empty($services)) {
-        $title    = 'Custom <span class="bg-gradient-accent text-white px-2 rounded-xs">Software Development</span> services that power real-world growth.';
+        $title    = 'Custom Software Development services that power real-world growth.';
         $subtitle = 'Partner with our dedicated team of software professionals, mastering 100+ technologies to build scalable solutions that grow with your business.';
         include __DIR__ . '/../../partials/services/section.php';
     }
@@ -22,7 +22,7 @@
 <?php
     // Industries block
     if (!empty($industries)) {
-        $title = 'Tailored <span class="bg-gradient-accent text-white px-2 rounded-xs">software solutions</span> built for your industry’s success.';
+        $title = 'Tailored software solutions built for your industry’s success.';
         $subtitle = 'QalbIT builds custom software, mobile apps and cloud platforms for e-commerce, entertainment, fintech, travel, food delivery, sports, healthcare, education, real estate, social networking and business operations.';
         include __DIR__ . '/../../partials/industries/section.php';
     }
@@ -36,7 +36,7 @@
 <?php
     // Case Studies block
     if (!empty($caseStudies)) {
-        $title = 'Real products, <span class="bg-gradient-accent text-white px-1 rounded-xs">shipped with QalbIT</span>.';
+        $title = 'Real products, shipped with QalbIT.';
         $subtitle = 'Explore how we’ve helped startups and businesses launch reminder apps, club management systems, shooting analytics tools, and hiring platforms with robust UI/UX, web, and mobile development.';
         include __DIR__ . '/../../partials/case-study/section.php';
     }

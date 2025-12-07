@@ -118,8 +118,8 @@
                         </p>
                         <p class="mt-3 text-[11px] text-slate-400">
                             Often paired with a quarterly roadmap and regular demos. See examples in our
-                            <a href="/case-studies/" class="font-medium text-sky-300 hover:text-sky-200 underline underline-offset-4">
-                                case studies
+                            <a href="/portfolio/" class="font-medium text-sky-300 hover:text-sky-200 underline underline-offset-4">
+                                portfolios
                             </a>.
                         </p>
                     </article>

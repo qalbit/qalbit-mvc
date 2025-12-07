@@ -121,9 +121,9 @@ $subtitle  = $config['subtitle'] ?? 'A few representative projects across indust
                         <?php if (!empty($image) && !empty($image['src'])): ?>
                             <div class="overflow-hidden rounded-xl border border-slate-800 bg-slate-900">
                                 <img
-                                    src="<?= htmlspecialchars($image['src'], ENT_QUOTES); ?>"
+                                    src="<?= asset(htmlspecialchars($image['src'], ENT_QUOTES)); ?>"
                                     alt="<?= htmlspecialchars($image['alt'] ?? ($name . ' UI'), ENT_QUOTES); ?>"
-                                    class="h-28 w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
+                                    class="h-36 w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
                                     loading="lazy"
                                 >
                             </div>

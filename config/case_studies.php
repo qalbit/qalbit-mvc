@@ -758,7 +758,7 @@ return [
 
         'banner'    => '/images/case-studies/hellory-reminder-app.png',
         'bannerAlt' => 'Hellory smart reminder mobile app screens for recurring reminders and notifications',
-        'logo'      => '/images/case-studies/clients/hellory.png',
+        'logo'      => '/images/case-studies/clients/hellory-reminder.png',
         'logoAlt'   => 'Hellory reminder app logo',
 
         'services' => [

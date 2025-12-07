@@ -56,13 +56,13 @@ $emptyMessage = $config['empty_message'] ?? 'Try adjusting the industry or tech 
                 </p>
                 <div class="mt-3 flex flex-wrap items-center justify-center gap-2">
                     <a
-                        href="/portfolio/"
+                        href="<?= route_url('/portfolio/') ?>"
                         class="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1.5 text-[11px] font-medium text-slate-700 hover:bg-slate-100"
                     >
                         Reset filters
                     </a>
                     <a
-                        href="/contact-us/?ref=portfolio-empty-state"
+                        href="<?= route_url('/contact-us/') ?>"
                         class="inline-flex items-center rounded-full bg-slate-900 px-3 py-1.5 text-[11px] font-medium text-slate-50 hover:bg-slate-800"
                     >
                         Share your requirements
@@ -87,7 +87,7 @@ $emptyMessage = $config['empty_message'] ?? 'Try adjusting the industry or tech 
                         $caseStudyUrl = $item['case_study_url'] ?? null;
                         $externalUrl  = $item['external_url']   ?? null;
 
-                        $href       = $caseStudyUrl ?: ($externalUrl ?: '#');
+                        $href       = $caseStudyUrl ?: ($externalUrl ?: '');
                         $isExternal = $externalUrl && !$caseStudyUrl;
                         $targetAttr = $isExternal ? ' target="_blank" rel="noreferrer"' : '';
 
@@ -114,9 +114,9 @@ $emptyMessage = $config['empty_message'] ?? 'Try adjusting the industry or tech 
                             <?php if (!empty($image) && !empty($image['src'])): ?>
                                 <div class="overflow-hidden rounded-xl border border-slate-100 bg-slate-100/60">
                                     <img
-                                        src="<?= htmlspecialchars($image['src'], ENT_QUOTES); ?>"
+                                        src="<?= asset(htmlspecialchars($image['src'], ENT_QUOTES)); ?>"
                                         alt="<?= htmlspecialchars($image['alt'] ?? ($name . ' UI'), ENT_QUOTES); ?>"
-                                        class="h-32 w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
+                                        class="h-36 w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
                                         loading="lazy"
                                     >
                                 </div>
@@ -177,6 +177,7 @@ $emptyMessage = $config['empty_message'] ?? 'Try adjusting the industry or tech 
                                 </div>
                             <?php endif; ?>
 
+                            <?php if (!empty($href)): ?>
                             <div class="pt-1">
                                 <a
                                     href="<?= htmlspecialchars($href, ENT_QUOTES); ?>"
@@ -191,6 +192,7 @@ $emptyMessage = $config['empty_message'] ?? 'Try adjusting the industry or tech 
                                     <span aria-hidden="true">↗</span>
                                 </a>
                             </div>
+                            <?php endif; ?>
                         </div>
                     </article>
                 <?php endforeach; ?>

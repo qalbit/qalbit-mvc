@@ -58,7 +58,7 @@ $secondaryCtaHref  = $secondaryCta['href']  ?? '/case-studies/';
                 <?php endif; ?>
 
                 <!-- Title -->
-                <h1 class="text-balance text-xl sm:text-2xl md:text-3xl font-bold leading-snug">
+                <h1 class="text-balance text-xl sm:text-2xl md:text-4xl font-bold leading-snug">
                     <?= $title ?>
                 </h1>
 

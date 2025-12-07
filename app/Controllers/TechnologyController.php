@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Support\Faqs;
 use App\Support\PageCache;
 use App\Support\Schema;
+use App\Support\Session;
 use App\Support\View;
 
 class TechnologyController
@@ -16,8 +17,11 @@ class TechnologyController
     /**
      * Core renderer for Technologies index: /technologies/
      */
-    private function renderIndexPage(): string
-    {
+    private function renderIndexPage(
+        array $contactErrors = [],
+        array $contactOld = [],
+        ?string $contactSuccess = null
+    ): string {
         $all = config('technologies', []);
 
         // Filter enabled
@@ -72,6 +76,9 @@ class TechnologyController
             'technologies' => $enabled,
             'faqs'         => $faqs,
             'grouped'      => $grouped,
+            'contactErrors'  => $contactErrors,
+            'contactOld'     => $contactOld,
+            'contactSuccess' => $contactSuccess,
         ]);
 
         return View::render('layouts/main', [
@@ -87,6 +94,17 @@ class TechnologyController
      */
     public function index(): string
     {
+        // Read contact flashes (from any contact form posting back to /services/)
+        $errors  = Session::getFlash('contact_errors', []);
+        $old     = Session::getFlash('contact_old', []);
+        $success = Session::getFlash('contact_success');
+
+        $hasFlash = !empty($errors) || !empty($old) || !empty($success);
+
+        if ($hasFlash) {
+            return $this->renderIndexPage($errors, $old, $success);
+        }
+
         return PageCache::remember(
             self::CACHE_KEY_INDEX,
             self::CACHE_TTL,

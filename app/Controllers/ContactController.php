@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Support\Client;
 use App\Support\Faqs;
 use App\Support\View;
 use App\Support\Session;
@@ -69,6 +70,18 @@ class ContactController
         $faqs      = Faqs::for('faq_contactus');
         $faqSchema = Schema::faq($faqs, $seo['canonical'], $seo['title']);
 
+        // Load Clients 
+        $contactLogoIds = [
+            'snappystats',
+            'bloomford',
+            'contractor-plus',
+            'plugin',
+            'de-ruwenberg',
+            'lmc',
+        ];
+
+        $clients = Client::logos($contactLogoIds);
+
         // Global Schemas
         $orgSchema         = Schema::organization();
         $websiteSchema     = Schema::website();
@@ -90,6 +103,7 @@ class ContactController
             'old'     => $old,
             'success' => $success,
             'faqs'    => $faqs,
+            'clients' => $clients,
         ]);
 
         return View::render('layouts/main', [

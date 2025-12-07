@@ -42,13 +42,13 @@ return [
                 'CTOs and tech leads who want a small, stable squad of MVP developers.',
             ],
 
-            'primary_cta'    => [
-                'label' => 'Discuss your MVP',
-                'href'  => '#mvp-final-cta',
+            'primary_cta' => [
+                'label' => 'Book a free MVP consultation',
+                'href'  => '/contact-us/',
             ],
-            'secondary_cta'  => [
-                'label' => 'See MVP case studies',
-                'href'  => '#mvp-proof',
+            'secondary_cta' => [
+                'label' => 'Schedule a quick MVP call',
+                'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=startup-mvp-hero',
             ],
 
             'internal_links' => [
@@ -58,7 +58,7 @@ return [
                 ],
                 [
                     'label' => 'View case studies',
-                    'href'  => '/case-studies/',
+                    'href'  => '/portfolio/',
                 ],
                 [
                     'label' => 'Contact our team',
@@ -323,41 +323,52 @@ return [
 
             'cases'   => [
                 [
-                    'key'         => 'urlcrop',
-                    'label'       => 'URLCrop – Link management and analytics',
-                    'badge'       => 'SaaS MVP',
-                    'description' => 'From concept to multi tenant SaaS platform for short links, QR codes and campaign analytics, running on a modern Laravel and React stack.',
-                    'stack'       => 'Laravel, React, Tailwind, PostgreSQL, Redis.',
-                    'outcome'     => 'Deployed to production with subscription billing and team workspaces.',
-                    'impact'      => 'Enabled founders to validate pricing and usage patterns across multiple regions.',
-                    'link_label'  => 'Read the URLCrop story',
-                    'link_href'   => '/case-studies/urlcrop/',
+                    'key'         => 'snappystats',
+                    'label'       => 'Snappy Stats – Scheduling management web app',
+                    'badge'       => 'Sports MVP',
+                    'description' => 'Replaced spreadsheets and manual coordination with a custom Laravel-based scheduling platform tailored for a growing shooting academy.',
+                    'stack'       => 'Laravel, PHP 8, MySQL, REST APIs, Tailwind CSS.',
+                    'outcome'     => 'Launched an MVP for the primary range in around 12 weeks, then iterated with real staff feedback and reporting needs.',
+                    'impact'      => 'Cut scheduling conflicts dramatically and gave the team a single source of truth for classes, lanes and instructors.',
+                    'link_label'  => 'Read the Snappy Stats case study',
+                    'link_href'   => '/case-studies/snappy-stats/',
                 ],
                 [
-                    'key'         => 'netzur',
-                    'label'       => 'Netzur – ISP operations platform',
-                    'badge'       => 'B2B SaaS MVP',
-                    'description' => 'End to end MVP for managing internet service providers: customer onboarding, plans, billing, support tickets and network monitoring.',
-                    'stack'       => 'Laravel, Vue or React, Tailwind, MySQL.',
-                    'outcome'     => 'Deployed to early ISPs with multi tenant architecture and role based access.',
-                    'impact'      => 'Significant reduction in manual work and better visibility into revenue and churn.',
-                    'link_label'  => 'View Netzur case study',
-                    'link_href'   => '/case-studies/netzur/',
+                    'key'         => 'bloomford',
+                    'label'       => 'Bloomford – Hiring portal for HR professionals',
+                    'badge'       => 'HR MVP',
+                    'description' => 'Designed and built a recruitment portal that centralises employers, vacancies and candidates into one structured workspace for HR teams.',
+                    'stack'       => 'PHP (modular MVC), MySQL, REST / JSON APIs, Bootstrap front-end.',
+                    'outcome'     => 'Shipped the first production-ready hiring portal in about 12 weeks, then extended it with deeper search, reporting and multi-language content.',
+                    'impact'      => 'Turned scattered CVs and spreadsheets into a searchable talent pool with clearer visibility for employers and recruiters.',
+                    'link_label'  => 'Read the Bloomford case study',
+                    'link_href'   => '/case-studies/bloomford/',
                 ],
                 [
-                    'key'         => 'limospro',
-                    'label'       => 'LimosPro – Limousine booking platform',
-                    'badge'       => 'Web and mobile MVP',
-                    'description' => 'MVP for a chauffeur and limousine business, covering fleet management, bookings, driver app and customer communication workflows.',
-                    'stack'       => 'Laravel, Flutter, REST APIs, admin dashboards.',
-                    'outcome'     => 'Launched production ready MVP used daily by operations teams.',
-                    'impact'      => 'Faster booking cycles and better utilisation of fleet resources.',
-                    'link_label'  => 'Explore LimosPro details',
-                    'link_href'   => '/case-studies/limospro/',
+                    'key'         => 'hellory',
+                    'label'       => 'Hellory – Smart reminder mobile app',
+                    'badge'       => 'Consumer MVP',
+                    'description' => 'Created a cross-platform reminder app with a custom scheduling engine and secure notification pipeline for busy consumers.',
+                    'stack'       => 'Flutter (Android & iOS), Node.js / Express, MongoDB, Firebase Cloud Messaging.',
+                    'outcome'     => 'Delivered an MVP across mobile apps and backend API, followed by a closed beta, refinement and public launch.',
+                    'impact'      => 'Gave the founders a reliable product to validate positioning, engagement and future monetisation options.',
+                    'link_label'  => 'Read the Hellory case study',
+                    'link_href'   => '/case-studies/hellory/',
+                ],
+                [
+                    'key'         => 'plugin',
+                    'label'       => 'Plugin – Tennis club management web app',
+                    'badge'       => 'Operations MVP',
+                    'description' => 'Digitised court schedules, memberships and payments for a Swiss tennis club with a purpose-built management platform.',
+                    'stack'       => 'PHP / CodeIgniter, MySQL, REST / JSON APIs, Stripe & PayPal integrations.',
+                    'outcome'     => 'Rolled out an MVP that replaced whiteboards and spreadsheets with a live operations dashboard for staff.',
+                    'impact'      => 'Reduced booking errors, simplified membership management and improved visibility into court utilisation and revenue.',
+                    'link_label'  => 'Read the Plugin case study',
+                    'link_href'   => '/case-studies/plugin/',
                 ],
             ],
 
-            'summary_note' => 'Beyond these flagship products, QalbIT has collaborated with founders on fintech, HR, field operations, education and logistics MVPs. Many of these are under NDA and cannot be named publicly, but they follow the same structured approach and clean engineering practices.',
+            'summary_note' => 'These are a few of the MVP and first-product builds we can share publicly. We have also partnered with founders in fintech, logistics, healthcare and other domains under NDA, following the same structured discovery → MVP → iteration approach.',
         ],
 
         // S7 – Tech stack and delivery capabilities
@@ -454,18 +465,19 @@ return [
 
             'testimonials' => [
                 [
-                    'quote'       => 'QalbIT behaved like an internal product team, not an outsourced vendor. They challenged our ideas, simplified scope and shipped the MVP on the timeline we needed.',
-                    'attribution' => 'Founder, SaaS startup in the United Kingdom',
+                    'quote'       => 'QalbIT is a fantastic dev partner. They provide quality work, good communication and go above and beyond. Fantastic work delivered by QalbIT and his team. Can\'t give enough credits with regards to how they work and at which speed they do it. Top team.',
+                    'attribution' => 'Joost Hesselberth, Founder, Ad Lunam Investments (Fintech & Business SaaS)',
                 ],
                 [
-                    'quote'       => 'We moved to QalbIT after a difficult freelancer experience. They stabilised the codebase, rewrote critical parts and got us to a stable launch.',
-                    'attribution' => 'Co founder, operations platform in the Middle East',
+                    'quote'       => 'I would recommend QalbIT to everybody. QalbIT has been developing all my front-end & backend systems complete to my requirements. They have excellent technical knowledge and listen very well to the needs of their customers. And above all, they are great people.',
+                    'attribution' => 'Wouter Santens, Executive Search Consultant, Bloomford (Recruitment & HR Tech)',
                 ],
                 [
-                    'quote'       => 'Their documentation and handover made it easy for our internal team to continue after the MVP phase without surprises.',
-                    'attribution' => 'CTO, product company in Europe',
+                    'quote'       => 'I\'ve worked with this company on many web projects and mobile projects and they were always very helpful and fast to understand what we need. They developed what we asked for in a good delay and price. I recommend this company for any project you have.',
+                    'attribution' => 'François C., Managing Director, SnappyStats (Sports Club & Scheduling Platform)',
                 ],
             ],
+
         ],
 
         // S10 – Final CTA band
@@ -529,11 +541,11 @@ return [
 
             'primary_cta' => [
                 'label' => 'Discuss your product scaling needs',
-                'href'  => '#product-scaling-final-cta',
+                'href'  => '/contact-us/',
             ],
             'secondary_cta' => [
-                'label' => 'See product scaling case studies',
-                'href'  => '#product-scaling-proof',
+                'label' => 'Book a product scaling call',
+                'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=product-scaling-hero',
             ],
 
             'internal_links' => [
@@ -543,7 +555,7 @@ return [
                 ],
                 [
                     'label' => 'View case studies',
-                    'href'  => '/case-studies/',
+                    'href'  => '/portfolio/',
                 ],
                 [
                     'label' => 'Contact our team',
@@ -811,45 +823,45 @@ return [
             'id'      => 'product-scaling-proof',
             'eyebrow' => 'Case studies',
             'title'   => 'Real products, scaled and hardened with QalbIT',
-            'intro'   => 'We are often brought in after an initial launch or a challenging first build. These examples show how our Product Scaling Team helped stabilise, extend and professionalise existing products.',
+            'intro'   => 'We are often brought in after an initial launch or early MVP. These examples show how our Product Scaling Team helped stabilise, extend and professionalise live products across different domains.',
 
             'cases' => [
                 [
-                    'key'         => 'urlcrop',
-                    'label'       => 'URLCrop – Link management and analytics',
-                    'badge'       => 'SaaS product scaling',
-                    'description' => 'Multi tenant link management SaaS covering short links, QR codes and campaign analytics. QalbIT helped move from early MVP to a more robust, scalable platform.',
-                    'stack'       => 'Laravel, React, Tailwind, PostgreSQL, Redis.',
-                    'outcome'     => 'Improved performance, clearer multi tenant architecture and smoother subscription billing flows.',
-                    'impact'      => 'Enabled the founders to grow usage across regions while maintaining a predictable release cadence.',
-                    'link_label'  => 'Read the URLCrop story',
-                    'link_href'   => '/case-studies/urlcrop/',
+                    'key'         => 'snappystats',
+                    'label'       => 'Snappy Stats – Scheduling management web app',
+                    'badge'       => 'Scheduling scaling',
+                    'description' => 'Laravel-based scheduling platform for a shooting academy. After the first launch, QalbIT iterated on the core scheduling engine, added role-based access and prepared the system for multi-location growth.',
+                    'stack'       => 'Laravel, PHP 8, MySQL, REST APIs, Tailwind CSS.',
+                    'outcome'     => 'More reliable scheduling, clearer permissions and a scalable architecture ready for additional ranges, languages and reporting modules.',
+                    'impact'      => 'Reduced double-bookings, gave operations a single source of truth and created a strong foundation for future product evolution.',
+                    'link_label'  => 'View the Snappy Stats case study',
+                    'link_href'   => '/case-studies/snappy-stats/',
                 ],
                 [
-                    'key'         => 'netzur',
-                    'label'       => 'Netzur – ISP operations platform',
-                    'badge'       => 'B2B SaaS scaling',
-                    'description' => 'Operations platform for internet service providers handling onboarding, billing, tickets and network data. QalbIT refined modules and improved reliability as customer count grew.',
-                    'stack'       => 'Laravel, Vue or React, Tailwind, MySQL.',
-                    'outcome'     => 'Stronger role based access, better reporting and a more resilient deployment process for live ISPs.',
-                    'impact'      => 'Reduced manual work and downtime, with clearer visibility into revenue and churn.',
-                    'link_label'  => 'View Netzur case study',
-                    'link_href'   => '/case-studies/netzur/',
+                    'key'         => 'bloomford',
+                    'label'       => 'Bloomford – Hiring portal for HR professionals',
+                    'badge'       => 'HR scaling',
+                    'description' => 'Recruitment and hiring portal connecting employers, vacancies and candidates. QalbIT helped move from concept and early workflows to a structured platform with parsed CVs, role-based dashboards and a roadmap for deeper analytics.',
+                    'stack'       => 'PHP (modular MVC), MySQL, REST / JSON APIs, CV parsing, Bootstrap.',
+                    'outcome'     => 'Centralised employer, vacancy and candidate data with a maintainable codebase that can support more reports, filters and integrations.',
+                    'impact'      => 'Recruiters spend less time on manual data wrangling and more time with candidates, while the platform is ready to grow into a richer HR tech offering.',
+                    'link_label'  => 'View the Bloomford case study',
+                    'link_href'   => '/case-studies/bloomford/',
                 ],
                 [
-                    'key'         => 'limospro',
-                    'label'       => 'LimosPro – Limousine booking platform',
-                    'badge'       => 'Web and mobile product scaling',
-                    'description' => 'Platform for limousine bookings with operations dashboards and driver apps. QalbIT continued development after initial launch to improve stability and add features.',
-                    'stack'       => 'Laravel, Flutter, REST APIs, admin dashboards.',
-                    'outcome'     => 'More reliable booking flows, better driver experience and stronger operational reporting.',
-                    'impact'      => 'Helped operations teams handle more bookings with fewer manual interventions.',
-                    'link_label'  => 'Explore LimosPro details',
-                    'link_href'   => '/case-studies/limospro/',
+                    'key'         => 'plugin',
+                    'label'       => 'Plugin – Tennis club management web app',
+                    'badge'       => 'Sports scaling',
+                    'description' => 'Court booking and membership management platform for a Swiss tennis club. QalbIT extended the original system with smarter pricing rules, online payments and reporting as usage and complexity increased.',
+                    'stack'       => 'PHP (CodeIgniter), MySQL, REST / JSON APIs, Stripe, PayPal.',
+                    'outcome'     => 'Unified view of courts, bookings, memberships and payments with more reliable operations and easier reconciliation.',
+                    'impact'      => 'Staff handle more bookings with fewer errors, and the platform is ready to support additional courts, sports or partner clubs.',
+                    'link_label'  => 'View the Plugin case study',
+                    'link_href'   => '/case-studies/plugin/',
                 ],
             ],
 
-            'summary_note' => 'Alongside these products, our Product Scaling Team has supported fintech, HR, field operations, education and logistics platforms. Many engagements are under NDA, but they follow the same pattern: stabilise, scale and deliver features with clean engineering practices.',
+            'summary_note' => 'Beyond these public case studies, our Product Scaling Team has supported SaaS, fintech, logistics, healthcare and field-operations platforms where we cannot share names publicly. The pattern is the same: stabilise the current product, untangle architecture, then ship new features on a predictable, low-drama release cadence.',
         ],
 
         // S7 – Tech stack and delivery practices
@@ -958,19 +970,18 @@ return [
                     ],
                 ],
             ],
-
             'testimonials' => [
                 [
-                    'quote'       => 'QalbIT helped us move from constant firefighting to a predictable release rhythm. The Product Scaling Team behaves like an extension of our in house engineers.',
-                    'attribution' => 'CTO, B2B SaaS company in Europe',
+                    'quote'       => 'QalbIT is a fantastic dev partner. They provide quality work, good communication and go above and beyond. Fantastic work delivered by QalbIT and his team. Can\'t give enough credits with regards to how they work and at which speed they do it. Top team.',
+                    'attribution' => 'Joost Hesselberth, Founder of Ad Lunam Investments PTY LTD',
                 ],
                 [
-                    'quote'       => 'They joined after our first launch, stabilised the system and then kept delivering new features without breaking what was already working.',
-                    'attribution' => 'Founder, operations platform in the Middle East',
+                    'quote'       => 'QalbIT quickly integrated four platforms – Square, Stripe, PayPal and Coinbase. They maintained timelines on a research-heavy project and also provided post-launch support.',
+                    'attribution' => 'Roshan Sethia, CTO, Contractor Plus, Inc.',
                 ],
                 [
-                    'quote'       => 'Their documentation and handover meant that new engineers could join the project and be productive quickly, which was not the case before.',
-                    'attribution' => 'Head of Product, SaaS company in the United Kingdom',
+                    'quote'       => 'We have been working with the QalbIT team for a long time. They are very fast, reliable and have excellent communication. Highly recommended for development work.',
+                    'attribution' => 'Ivo Kuipers, Solution Architect, Heuvelman Sound & Vision B.V.',
                 ],
             ],
         ],
@@ -1036,11 +1047,11 @@ return [
 
             'primary_cta' => [
                 'label' => 'Discuss your transformation roadmap',
-                'href'  => '#dt-final-cta',
+                'href'  => '/contact-us/',
             ],
             'secondary_cta' => [
-                'label' => 'See transformation case studies',
-                'href'  => '#dt-proof',
+                'label' => 'Book a 30-min discovery call',
+                'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=digital-transformation-hero',
             ],
 
             'internal_links' => [
@@ -1050,7 +1061,7 @@ return [
                 ],
                 [
                     'label' => 'View case studies',
-                    'href'  => '/case-studies/',
+                    'href'  => '/portfolio/',
                 ],
                 [
                     'label' => 'Contact our team',
@@ -1311,45 +1322,45 @@ return [
             'id'      => 'dt-proof',
             'eyebrow' => 'Case studies',
             'title'   => 'Digital transformation case studies and outcomes',
-            'intro'   => 'We have worked with clients in manufacturing, services and technology to modernise their operations and core systems. These examples highlight how we approach digital transformation with measurable outcomes.',
+            'intro'   => 'We have worked with sports clubs, recruitment brands and operations-heavy businesses to replace spreadsheets, whiteboards and ad-hoc tools with modern, browser-based platforms. These examples show how we approach digital transformation with measurable outcomes.',
 
             'cases' => [
                 [
-                    'key'         => 'manufacturing-erp',
-                    'label'       => 'Manufacturing ERP & inventory platform',
-                    'badge'       => 'Digital transformation',
-                    'description' => 'Designed and built a browser-based ERP to replace spreadsheets and on-premise tooling for production planning, inventory and dispatch.',
-                    'stack'       => 'Laravel, React or Blade, Tailwind, MySQL.',
-                    'outcome'     => 'Unified view of orders, stock and production status across departments.',
-                    'impact'      => 'Reduced manual reconciliation, fewer stock-outs and faster month-end closing.',
-                    'link_label'  => 'View manufacturing case highlights',
-                    'link_href'   => '/case-studies/manufacturing-erp/',
+                    'key'         => 'snappystats',
+                    'label'       => 'Snappy Stats – Scheduling platform for a shooting academy',
+                    'badge'       => 'Ops digitalisation',
+                    'description' => 'Replaced spreadsheet-based planning with a browser-based scheduling platform covering classes, lanes, coaches and events for a growing shooting academy.',
+                    'stack'       => 'Laravel, PHP, MySQL, REST APIs, Tailwind CSS.',
+                    'outcome'     => 'Single source of truth for daily schedules, capacity and bookings across ranges and instructors.',
+                    'impact'      => 'Significant drop in double bookings, clearer utilisation and more predictable range operations.',
+                    'link_label'  => 'View Snappy Stats case study',
+                    'link_href'   => '/case-studies/snappy-stats/',
                 ],
                 [
-                    'key'         => 'service-operations',
-                    'label'       => 'Service operations and field management',
-                    'badge'       => 'Operations platform',
-                    'description' => 'Built a web and mobile platform for managing service requests, technician visits, SLAs and billing for a growing services company.',
-                    'stack'       => 'Laravel, Flutter, REST APIs, admin dashboards.',
-                    'outcome'     => 'End-to-end visibility into tickets and field activity with automated notifications and reports.',
-                    'impact'      => 'Improved response times, higher first-time fix rates and better customer satisfaction.',
-                    'link_label'  => 'Explore service operations story',
-                    'link_href'   => '/case-studies/service-operations-platform/',
+                    'key'         => 'plugin',
+                    'label'       => 'Plugin – Tennis club management & court booking',
+                    'badge'       => 'Club transformation',
+                    'description' => 'Digitised whiteboard and phone-based bookings into a unified web platform for courts, memberships, pricing and online payments at a Swiss tennis club.',
+                    'stack'       => 'PHP / CodeIgniter, MySQL, Stripe, PayPal.',
+                    'outcome'     => 'Unified view of courts, bookings, members and payments from a single admin interface.',
+                    'impact'      => 'Reduced booking errors, smoother reconciliation and better insight into court utilisation and revenue.',
+                    'link_label'  => 'View Plugin case study',
+                    'link_href'   => '/case-studies/plugin/',
                 ],
                 [
-                    'key'         => 'finance-automation',
-                    'label'       => 'Finance, billing and approvals automation',
-                    'badge'       => 'Process automation',
-                    'description' => 'Implemented workflows and integrations to streamline invoicing, approvals and collections, replacing manual spreadsheets and email chains.',
-                    'stack'       => 'Laravel, integrations with accounting/ERP systems, reporting dashboards.',
-                    'outcome'     => 'Faster invoicing cycles, clearer ownership and a real-time view of receivables.',
-                    'impact'      => 'Better cash flow predictability and reduced manual workload for finance teams.',
-                    'link_label'  => 'See finance automation details',
-                    'link_href'   => '/case-studies/finance-automation/',
+                    'key'         => 'bloomford',
+                    'label'       => 'Bloomford – Hiring portal for HR professionals',
+                    'badge'       => 'Recruitment',
+                    'description' => 'Moved from inboxes, shared drives and spreadsheets to a structured hiring portal where employers, vacancies and candidates live in one workspace.',
+                    'stack'       => 'PHP, MySQL, HTML5, CSS3, CV parsing integration.',
+                    'outcome'     => 'Centralised overview of vacancies and candidate pipelines for HR teams and employers.',
+                    'impact'      => 'Faster time-to-shortlist, better visibility for employers and a more consistent candidate experience.',
+                    'link_label'  => 'View Bloomford case study',
+                    'link_href'   => '/case-studies/bloomford/',
                 ],
             ],
 
-            'summary_note' => 'Alongside these examples, QalbIT has supported digital transformation initiatives in logistics, HR, education and field operations. Many of these are under NDA but follow the same principles: phased delivery, measurable outcomes and maintainable software.',
+            'summary_note' => 'Alongside these projects, QalbIT has supported digital transformation initiatives in healthcare, logistics, hospitality and field operations. Many engagements are under NDA, but they follow the same pattern: replace scattered tools with a modern platform, deliver in phases and tie each iteration to measurable outcomes.',
         ],
 
         // S7 – Tech stack and delivery capabilities
@@ -1443,19 +1454,18 @@ return [
                     ],
                 ],
             ],
-
             'testimonials' => [
                 [
-                    'quote'       => 'QalbIT helped us move from manual processes and spreadsheets to a system our teams actually use every day. The phased approach meant there were no surprises.',
-                    'attribution' => 'COO, mid-market services company in the Middle East',
+                    'quote'       => 'QalbIT quickly integrated four platforms. Square, Stripe, PayPal and Coinbase were all successfully used. They maintained timely deadlines despite the research-heavy work and also provided solid post-launch support.',
+                    'attribution' => 'Roshan Sethia, CTO, Contractor Plus, Inc.',
                 ],
                 [
-                    'quote'       => 'They understood both our legacy stack and our future goals, and proposed a roadmap that we could execute without overwhelming the organisation.',
-                    'attribution' => 'CIO, manufacturing company in India',
+                    'quote'       => 'They listened to my ideas and came up with a plan for development, then executed that plan to completion. I liked their attention to detail and communication skills. Very responsive.',
+                    'attribution' => 'Osmond Mwanyiky, CTO, Bocsit',
                 ],
                 [
-                    'quote'       => 'Their documentation and handover made it easy for our internal IT team to take ownership after the first phase.',
-                    'attribution' => 'Head of IT, European business unit',
+                    'quote'       => 'QalbIT successfully developed an app in a timely manner. Their team maximised their knowledge and skills to produce strong deliverables. They were hardworking, effective and adaptive in the workflow.',
+                    'attribution' => 'Jonathan Ashby, Head of Communications & ICT, Londonwide LMCs',
                 ],
             ],
         ],
@@ -1521,11 +1531,11 @@ return [
 
             'primary_cta' => [
                 'label' => 'Talk through the right engagement model',
-                'href'  => '#engagement-final-cta',
+                'href'  => '/contact-us/',
             ],
             'secondary_cta' => [
-                'label' => 'See example projects',
-                'href'  => '#engagement-proof',
+                'label' => 'Book a quick discovery call',
+                'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit&utm_medium=website&utm_campaign=engagement-models-hero',
             ],
 
             'internal_links' => [
@@ -1643,7 +1653,7 @@ return [
                     'key'         => 'product-squads',
                     'label'       => 'Ongoing product development',
                     'description' => 'Roadmap execution, iterative feature delivery and technical optimisation for live products.',
-                    'models'      => ['Time &amp; material', 'Product squad retainer'],
+                    'models'      => ['Time &amp; material', 'Product squad'],
                 ],
                 [
                     'key'         => 'support-maintenance',
@@ -1768,39 +1778,39 @@ return [
             'id'      => 'engagement-proof',
             'eyebrow' => 'Case studies',
             'title'   => 'How engagement models play out in real projects',
-            'intro'   => 'These examples show how different engagement models map to real world software initiatives and why we recommended each approach.',
+            'intro'   => 'From clearly defined MVPs to evolving SaaS roadmaps and long-running platforms, we match the engagement model to scope clarity, risk and the maturity of your product.',
 
             'cases' => [
                 [
-                    'key'         => 'fixed-cost-erp',
-                    'label'       => 'ERP module rollout on a fixed cost basis',
+                    'key'         => 'hellory-fixed-mvp',
+                    'label'       => 'Hellory – Smart reminder app MVP',
                     'badge'       => 'Fixed cost project',
-                    'description' => 'A manufacturing client needed a defined set of ERP modules delivered before their financial year end. We scoped a fixed price project with clear milestones and a limited change window.',
-                    'stack'       => 'Laravel, REST APIs, MySQL, Tailwind.',
-                    'outcome'     => 'Modules delivered and accepted on schedule, with a follow up T&amp;M engagement for enhancements.',
-                    'impact'      => 'Improved inventory visibility and faster monthly closing without overshooting the original budget.',
+                    'description' => 'The Hellory team wanted a well-defined MVP: Flutter mobile apps, Node.js / MongoDB API and a marketing site, all aligned to a specific launch date and feature set. We scoped a fixed price engagement with clear deliverables and acceptance criteria.',
+                    'stack'       => 'Flutter, Node.js / Express, MongoDB, REST APIs, Firebase Cloud Messaging, WordPress marketing site.',
+                    'outcome'     => 'Cross-platform mobile apps, backend API and website delivered to scope and timeline, with a structured backlog for post-launch improvements.',
+                    'impact'      => 'Gave the founders a production-ready MVP and predictable budget to validate product–market fit with early users.',
                 ],
                 [
-                    'key'         => 'tm-product-roadmap',
-                    'label'       => 'Evolving SaaS roadmap on time & material',
-                    'badge'       => 'Time &amp; material',
-                    'description' => 'A B2B SaaS company needed help executing a changing roadmap driven by customer feedback and sales. Scope changed frequently as new opportunities emerged.',
-                    'stack'       => 'Laravel or NestJS backend, React or Next.js frontend, PostgreSQL.',
-                    'outcome'     => 'Steady stream of releases every 2–3 weeks, with visibility into hours spent and value delivered per sprint.',
-                    'impact'      => 'Higher feature throughput and better alignment between product, sales and engineering without locking into a rigid scope.',
+                    'key'         => 'seekly-tm-roadmap',
+                    'label'       => 'Seekly – AI-powered quotation SaaS',
+                    'badge'       => 'Time & material',
+                    'description' => 'Seekly’s roadmap evolved quickly as the team experimented with different AI models, data sources and flows for buyers and service providers. Rather than freezing scope, we used a time & material model to support iterative discovery and weekly releases.',
+                    'stack'       => 'Laravel frontend and booking flows, Python services, AI APIs (Gemini, OpenAI and scrapers), REST integrations.',
+                    'outcome'     => 'Stable core SaaS with room to experiment on AI features, priced transparently based on actual engineering effort.',
+                    'impact'      => 'Allowed the founder to test ideas with real customers, prioritise what worked and drop what did not without renegotiating scope each time.',
                 ],
                 [
-                    'key'         => 'dedicated-squad',
-                    'label'       => 'Dedicated product squad for a growing platform',
-                    'badge'       => 'Product squad retainer',
-                    'description' => 'A growing platform engaged a dedicated QalbIT squad (backend, frontend and QA) to work alongside their CTO on a multi quarter roadmap.',
-                    'stack'       => 'Modern PHP or Node.js backend, React or Vue UI, CI/CD pipelines, cloud infrastructure.',
-                    'outcome'     => 'Stable velocity, shared ownership of architecture and a predictable monthly budget.',
-                    'impact'      => 'Faster delivery of strategic features and less reliance on ad hoc hiring or short term freelancers.',
+                    'key'         => 'adlunam-squad-retainer',
+                    'label'       => 'Ad Lunam Investments – Multi-project product squad',
+                    'badge'       => 'Product squad',
+                    'description' => 'Ad Lunam Investments needed a dependable engineering partner across multiple fintech and internal tools. We provided a dedicated QalbIT squad (backend, frontend and lead engineer) under a monthly retainer, working alongside their founder and internal stakeholders.',
+                    'stack'       => 'Laravel, JavaScript frontends, MySQL, reporting dashboards and integrations for investment and operations workflows.',
+                    'outcome'     => 'Stable delivery cadence across several products, shared ownership of architecture and predictable monthly costs for the client.',
+                    'impact'      => 'Enabled the team to ship new features and new tools faster, without building a full in-house engineering department or juggling multiple short-term freelancers.',
                 ],
             ],
 
-            'summary_note' => 'Names and some details are simplified for confidentiality, but the engagement patterns and trade offs are typical of how we work with long term clients.',
+            'summary_note' => 'These are representative examples of how we match engagement models to product stage: fixed cost for well-defined MVPs, time & material when discovery and scope are evolving, and product squad retainers when you need a long-term, embedded team. Many clients move through more than one model as their product and organisation mature.',
         ],
 
         // S7 – Collaboration, tooling & governance
@@ -1909,19 +1919,18 @@ return [
                     ],
                 ],
             ],
-
             'testimonials' => [
                 [
-                    'quote'       => 'QalbIT helped us choose an engagement model that fit our stage and risk tolerance. We always knew what we were paying for and what was coming next.',
-                    'attribution' => 'Founder, SaaS product company in Europe',
+                    'quote'       => 'QalbIT is a fantastic dev partner. They provide quality work, good communication and go above and beyond. Working with them across multiple projects under a long-running engagement has been consistently strong.',
+                    'attribution' => 'Joost Hesselberth, Founder, Ad Lunam Investments PTY LTD (South Africa)',
                 ],
                 [
-                    'quote'       => 'Their clarity on scope and billing made it easy for our finance and procurement teams to approve a multi quarter product squad.',
-                    'attribution' => 'Head of Product, mid market company in the Middle East',
+                    'quote'       => 'We have been working with the QalbIT team for a long time. They are very fast, reliable and have excellent communication – the engagement gives us continuity without needing a large in-house team.',
+                    'attribution' => 'Ivo Kuipers, Solution Architect, Heuvelman Sound & Vision B.V. (Netherlands)',
                 ],
                 [
-                    'quote'       => 'We started with a fixed cost phase and later moved into a retainer. The transition was smooth and the squad treated our roadmap as their own.',
-                    'attribution' => 'CTO, digital platform in the UK',
+                    'quote'       => 'QalbIT quickly integrated multiple payment platforms and kept communication clear throughout the project. Even after launch they remained involved with support, which made it easy to extend the engagement with confidence.',
+                    'attribution' => 'Roshan Sethia, CTO, Contractor Plus, Inc. (USA)',
                 ],
             ],
         ],

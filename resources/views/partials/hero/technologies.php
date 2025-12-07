@@ -60,17 +60,17 @@
                 <div class="flex flex-col items-center md:items-start gap-2">
                     <div class="flex flex-col w-full md:flex-row md:flex-wrap items-stretch md:items-center gap-3">
                         <a
-                            href="/contact-us/"
+                            href="<?= route_url('/contact-us/') ?>"
                             class="btn btn-accent btn-radius-pill"
                         >
                             Discuss your tech stack
                         </a>
 
                         <a
-                            href="#tech-categories"
+                            href="<?= route_url('https://calendly.com/abidhusain-qalbit/discuss-project') ?>"
                             class="btn btn-primary-outline btn-radius-pill"
                         >
-                            View technologies by category
+                            Book a 30-min tech stack call
                         </a>
                     </div>
                     <p class="text-[11px] text-slate-600">

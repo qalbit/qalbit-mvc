@@ -22,7 +22,7 @@
                 id="process-heading"
                 class="text-display-sm sm:text-display-md md:text-display-lg font-bold"
             >
-                Our Proven Process for Seamless <span class="bg-gradient-accent text-white px-2 rounded-xs">Custom Product Development</span>.
+                Our Proven Process for Seamless Custom Product Development.
             </h2>
 
             <!-- Keep old tagline for SEO, but visually subtle -->

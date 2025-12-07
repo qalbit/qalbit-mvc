@@ -55,17 +55,17 @@
                 <div class="flex flex-col items-center md:items-start gap-2">
                     <div class="flex flex-col w-full md:flex-row md:flex-wrap items-stretch md:items-center gap-3">
                         <a
-                            href="/contact-us/"
+                            href="<?= route_url('/contact-us/') ?>"
                             class="btn btn-accent btn-radius-pill"
                         >
                             Book a free consultation
                         </a>
 
                         <a
-                            href="/case-studies/"
+                            href="<?= route_url('https://calendly.com/abidhusain-qalbit/discuss-project') ?>"
                             class="btn btn-primary-outline btn-radius-pill"
                         >
-                            View recent work
+                            Schedule a discovery call
                         </a>
                     </div>
                     <p class="text-[11px] text-slate-600">

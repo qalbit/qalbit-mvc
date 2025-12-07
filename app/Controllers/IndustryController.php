@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Support\Faqs;
 use App\Support\PageCache;
+use App\Support\Reviews;
 use App\Support\Schema;
 use App\Support\Session;
 use App\Support\View;
@@ -48,6 +49,9 @@ class IndustryController
         // FAQs for the industries page
         $faqs = Faqs::for('faq_industries');
 
+        // Testimonial for the industries page
+        $testimonials = Reviews::testimonials('industry_index', null, null, 2);
+
         // Global Schemas
         $orgSchema         = Schema::organization();
         $websiteSchema     = Schema::website();
@@ -66,9 +70,10 @@ class IndustryController
         ]));
 
         $content = View::render('pages/industries/index', [
-            'seo'        => $seo,
-            'industries' => $enabled,
-            'faqs'       => $faqs,
+            'seo'            => $seo,
+            'industries'     => $enabled,
+            'faqs'           => $faqs,
+            'testimonials'   => $testimonials,
             'contactErrors'  => $contactErrors,
             'contactOld'     => $contactOld,
             'contactSuccess' => $contactSuccess,

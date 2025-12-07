@@ -58,7 +58,7 @@ $subtitle = $subtitle
 
                 <div class="mt-6 flex flex-wrap items-center gap-3">
                     <a
-                        href="<?= route_url('contact') ?? 'https://qalbit.com/contact-us/' ?>"
+                        href="<?= route_url('/contact-us/') ?? 'https://qalbit.com/contact-us/' ?>"
                         class="btn btn-primary btn-radius-pill"
                         title="Schedule a discovery call with QalbIT"
                         aria-label="Schedule a discovery call to discuss your custom software project"
@@ -68,7 +68,7 @@ $subtitle = $subtitle
                     </a>
 
                     <a
-                        href="mailto:hello@qalbit.com?subject=Project%20enquiry%20via%20website"
+                        href="mailto:sales@qalbit.com?subject=Project%20enquiry%20via%20website"
                         class="inline-flex items-center text-xs md:text-sm font-medium text-slate-200 hover:text-white/90 underline-offset-2 hover:underline"
                     >
                         Or email your requirements

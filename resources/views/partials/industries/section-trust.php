@@ -55,21 +55,6 @@
             <?php endforeach; ?>
         </div>
 
-        <?php
-            $testimonials = [
-                [
-                    'quote'   => 'QalbIT quickly understood our domain and delivered a stable, scalable web platform. Communication was clear and we always knew what was happening.',
-                    'role'    => 'Founder, BlueCircle',
-                    'region'  => 'Belgium, UK',
-                ],
-                [
-                    'quote'   => 'QalbIT helped us move from idea to a working AI booking prototype faster than expected. The team was hands-on with both tech and product decisions.',
-                    'role'    => 'Founder, Seekly',
-                    'region'  => 'Sydney, AU',
-                ],
-            ];
-        ?>
-
         <!-- Short testimonials -->
         <div class="grid gap-5 sm:gap-6 md:grid-cols-2">
             <?php foreach ($testimonials as $testimonial): ?>
@@ -92,7 +77,7 @@
 
         <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <a
-                href="/case-studies/"
+                href="<?= route_url('/portfolio/') ?>"
                 class="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-700 hover:text-sky-600"
             >
                 View more case studies &amp; examples

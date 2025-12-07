@@ -2,8 +2,9 @@
     /** @var array $industries */
     /** @var array $faqs */
 
-    $industries = $industries ?? [];
-    $faqs     = $faqs ?? [];
+    $industries   = $industries ?? [];
+    $testimonials = $testimonials ?? [];
+    $faqs         = $faqs ?? [];
 ?>
 
 <?php include __DIR__ . '/../../partials/hero/industries.php'; ?>

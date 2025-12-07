@@ -116,16 +116,16 @@
                             <span>Industries</span>
                         </a>
                         <a
+                            href="/technologies/"
+                            class="inline-flex items-center gap-1 rounded-full border border-slate-200 px-3 py-1 hover:border-primary hover:text-primary"
+                        >
+                            <span>Technologies</span>
+                        </a>
+                        <a
                             href="/about-us/"
                             class="inline-flex items-center gap-1 rounded-full border border-slate-200 px-3 py-1 hover:border-primary hover:text-primary"
                         >
                             <span>About QalbIT</span>
-                        </a>
-                        <a
-                            href="/case-studies/"
-                            class="inline-flex items-center gap-1 rounded-full border border-slate-200 px-3 py-1 hover:border-primary hover:text-primary"
-                        >
-                            <span>Case studies</span>
                         </a>
                     </div>
                 </nav>

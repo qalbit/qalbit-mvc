@@ -2,6 +2,7 @@
 $errors    = $errors    ?? [];
 $old       = $old       ?? [];
 $success   = $success   ?? null;
+$clients   = $clients   ?? [];
 ?>
 
 <?php include __DIR__ . '/../../partials/hero/contact.php'; ?>

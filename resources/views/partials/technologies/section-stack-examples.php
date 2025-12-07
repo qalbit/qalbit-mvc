@@ -55,7 +55,7 @@ $examples = [
             'Headless or hybrid CMS powering multiple frontends',
             'Lead capture forms connected to CRM or email tools',
         ],
-        'services_url' => '/services/web-development/',
+        'services_url' => '/services/custom-web-development/',
         'techs_url'    => '/technologies/',
     ],
 ];

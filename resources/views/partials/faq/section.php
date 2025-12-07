@@ -64,7 +64,7 @@ $bullets = $bullets ?? [
                         Share your roadmap or idea and we’ll help you pick the right engagement model, tech stack and starting point.
                     </p>
                     <a
-                        href="https://qalbit.com/contact-us/"
+                        href="<?= route_url('/contact-us/') ?>"
                         class="inline-flex items-center gap-2 text-xs font-semibold text-primary-700 hover:text-primary-900"
                         title="Talk to QalbIT about your custom software requirements"
                         aria-label="Talk to QalbIT about your custom software requirements"

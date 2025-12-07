@@ -28,7 +28,7 @@ $meta = $cta['meta']
 <section
     id="<?= htmlspecialchars($id, ENT_QUOTES, 'UTF-8'); ?>"
     data-mvp-section="s10"
-    class="bg-black"
+    class="bg-slate-950"
 >
     <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary via-primary/90 to-sky-600 px-6 py-10 shadow-lg sm:px-10">

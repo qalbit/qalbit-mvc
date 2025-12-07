@@ -83,4 +83,48 @@ class Reviews
 
         return $filtered;
     }
+
+    public static function testimonials(
+        string $context,
+        ?string $industry = null,
+        ?string $technology = null,
+        ?int $limit = null
+    ): array {
+        // Reuse the existing filter logic
+        $reviews = self::find($context, $industry, $technology, $limit);
+
+        $items = [];
+
+        foreach ($reviews as $review) {
+            $quote = $review['quote'] ?? '';
+
+            if ($quote === '') {
+                continue;
+            }
+
+            $role = '';
+            if (!empty($review['author_role'])) {
+                $role = $review['author_role'];
+            } elseif (!empty($review['author_name']) && !empty($review['company'])) {
+                $role = $review['author_name'] . ', ' . $review['company'];
+            } elseif (!empty($review['author_name'])) {
+                $role = $review['author_name'];
+            } elseif (!empty($review['company'])) {
+                $role = $review['company'];
+            }
+
+            // Region – expect a "region" key in reviews config.
+            // Fallbacks if you decide to store it differently later.
+            $region = $review['region']
+                ?? ($review['location'] ?? '');
+
+            $items[] = [
+                'quote'  => $quote,
+                'role'   => $role,
+                'region' => $region,
+            ];
+        }
+
+        return $items;
+    }
 }

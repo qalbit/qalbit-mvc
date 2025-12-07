@@ -23,9 +23,6 @@ const jsEntryPoints = [
 
 const cssEntryPoints = [
     "resources/css/home.css",
-    "resources/css/industries.css",
-    "resources/css/services.css",
-    "resources/css/technologies.css",
 ];
 
 async function buildJs() {

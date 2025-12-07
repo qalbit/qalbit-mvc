@@ -553,7 +553,13 @@
 
             setActiveBasic(0);
             cards.forEach((card, i) => {
-                card.addEventListener("click", () => setActiveBasic(i));
+                card.addEventListener("click", (event) => {
+                    // Let clicks on the CTA link navigate normally
+                    if (event.target.closest("[data-case-link]")) {
+                        return;
+                    }
+                    setActiveBasic(i);
+                });
             });
             return;
         }
@@ -787,7 +793,12 @@
 
         // Click on card → focus that case and stop autoplay until mouse leaves
         cards.forEach((card, index) => {
-            card.addEventListener("click", () => {
+            card.addEventListener("click", (event) => {
+                // If click is on the CTA link, let the browser follow the href
+                if (event.target.closest("[data-case-link]")) {
+                    return;
+                }
+
                 isInteracting = true;
                 goToIndex(index, { animate: true });
             });
@@ -797,6 +808,11 @@
         let swipeStartX = null;
 
         function beginSwipe(event) {
+            // Ignore swipes that start on the CTA link
+            if (event.target && event.target.closest("[data-case-link]")) {
+                return;
+            }
+
             if (event.pointerType === "mouse" && event.button !== 0) return;
 
             swipeStartX = event.clientX;
@@ -849,6 +865,11 @@
             section.addEventListener(
                 "touchstart",
                 (event) => {
+                    // Ignore touches that start on the CTA link
+                    if (event.target && event.target.closest("[data-case-link]")) {
+                        return;
+                    }
+
                     if (!event.touches || event.touches.length !== 1) return;
                     swipeStartX = event.touches[0].clientX;
                     isInteracting = true;
@@ -888,6 +909,7 @@
             );
         }
     }
+
 
     // --------------------------------------------------------
     // 5) Reviews – 3-column vertical marquee (desktop) + video modal

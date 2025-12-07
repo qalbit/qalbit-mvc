@@ -141,6 +141,7 @@ $sectionSubtitle = $subtitle ?? 'Explore how we’ve helped startups and busines
                                     class="btn btn-primary-outline btn-radius-pill btn-sm whitespace-nowrap"
                                     aria-label="View <?= htmlspecialchars($caseTitle) ?> case study"
                                     title="View <?= htmlspecialchars($caseTitle) ?> case study"
+                                    data-case-link
                                 >
                                     View Case Study
                                 </a>

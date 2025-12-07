@@ -28,42 +28,39 @@
                     data-contact-logo-grid
                     aria-label="Selected client and product logos"
                 >
-                    <div
-                        class="flex items-center justify-center rounded-lg border border-sky-600 bg-sky-100/60 px-3 py-3 text-center text-xs font-semibold text-sky-700 shadow-sm shadow-sky-950/40"
-                        data-contact-logo
-                    >
-                        URLCrop – Link Management SaaS
-                    </div>
-                    <div
-                        class="flex items-center justify-center rounded-lg border border-sky-600 bg-sky-100/60 px-3 py-3 text-center text-xs font-semibold text-sky-700 shadow-sm shadow-sky-950/40"
-                        data-contact-logo
-                    >
-                        Netzur – ISP Management Platform
-                    </div>
-                    <div
-                        class="flex items-center justify-center rounded-lg border border-sky-600 bg-sky-100/60 px-3 py-3 text-center text-xs font-semibold text-sky-700 shadow-sm shadow-sky-950/40"
-                        data-contact-logo
-                    >
-                        Seekly – Booking &amp; Automation
-                    </div>
-                    <div
-                        class="flex items-center justify-center rounded-lg border border-sky-600 bg-sky-100/60 px-3 py-3 text-center text-xs font-semibold text-sky-700 shadow-sm shadow-sky-950/40"
-                        data-contact-logo
-                    >
-                        NauticalNode – Secure File Sharing
-                    </div>
-                    <div
-                        class="flex items-center justify-center rounded-lg border border-sky-600 bg-sky-100/60 px-3 py-3 text-center text-xs font-semibold text-sky-700 shadow-sm shadow-sky-950/40"
-                        data-contact-logo
-                    >
-                        LimosPro – Transportation SaaS
-                    </div>
-                    <div
-                        class="flex items-center justify-center rounded-lg border border-sky-600 bg-sky-100/60 px-3 py-3 text-center text-xs font-semibold text-sky-700 shadow-sm shadow-sky-950/40"
-                        data-contact-logo
-                    >
-                        Cyberfind – Vendor Comparison Platform
-                    </div>
+                    <?php foreach ($clients as $client): ?>
+                        <?php
+                            $name = $client['name'] ?? '';
+                            $logo = $client['logo'] ?? '';
+                            $alt  = $client['alt']  ?? $name;
+                            $url  = $client['url']  ?? null;
+                        ?>
+                        <div
+                            class="flex items-center justify-center rounded-lg border border-slate-200 bg-white/80 px-2 py-2 shadow-sm shadow-slate-950/5"
+                            data-contact-logo
+                        >
+                            <?php if (!empty($url)): ?>
+                                <a
+                                    href="<?= htmlspecialchars($url, ENT_QUOTES); ?>"
+                                    target="_blank"
+                                    rel="noopener"
+                                    class="inline-flex items-center justify-center"
+                                >
+                            <?php endif; ?>
+
+                                <img
+                                    src="<?= asset(htmlspecialchars($logo, ENT_QUOTES)); ?>"
+                                    alt="<?= htmlspecialchars($alt, ENT_QUOTES); ?>"
+                                    loading="lazy"
+                                    class="max-h-8 w-auto object-contain"
+                                />
+                                <span class="sr-only"><?= htmlspecialchars($name, ENT_QUOTES); ?></span>
+
+                            <?php if (!empty($url)): ?>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
 
                 <p class="text-[11px] text-slate-600">
@@ -78,75 +75,144 @@
                     Snapshot outcomes from recent projects
                 </h3>
 
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <!-- Card 1 -->
-                <article
-                    class="group rounded-xl border border-primary-500 bg-slate-50 p-4 shadow-sm shadow-slate-100 transition hover:bg-slate-100"
-                    data-proof-card
-                >
-                    <h4 class="text-sm font-semibold text-slate-950">
-                        URL shortener &amp; link management SaaS – from idea to paying customers
-                    </h4>
-                    <p class="mt-2 text-xs sm:text-sm text-slate-600">
-                        QalbIT helped define the product, architect the multi-tenant backend and build a responsive web app
-                        with analytics, QR codes and link-in-bio pages – deployed on a scalable infrastructure.
-                    </p>
-                    <p class="mt-2 text-[11px] text-slate-600">
-                        Result: faster go-to-market, improved tracking for marketing teams and a foundation for new revenue streams.
-                    </p>
-                    <a
-                        href="/case-studies/url-shortener-saas/"
-                        class="mt-2 inline-flex items-center text-[11px] font-medium text-primary-600 hover:text-primary-800 underline underline-offset-4"
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                    <!-- Card 1 – Snappy Stats -->
+                    <article
+                        class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-100 transition-transform transition-shadow hover:-translate-y-1 hover:border-primary-500/80 hover:shadow-md hover:shadow-primary-100 focus-within:ring-2 focus-within:ring-primary-500/70 focus-within:ring-offset-2 focus-within:ring-offset-slate-50"
+                        data-proof-card
                     >
-                        View SaaS case study
-                    </a>
-                </article>
+                        <div
+                            class="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary-300/80 to-transparent"
+                            aria-hidden="true"
+                        ></div>
 
-                <!-- Card 2 -->
-                <article
-                    class="group rounded-xl border border-primary-500 bg-slate-50 p-4 shadow-sm shadow-slate-100 transition hover:bg-slate-100"
-                    data-proof-card
-                >
-                    <h4 class="text-sm font-semibold text-slate-950">
-                        ISP management platform – operations dashboard &amp; customer portal
-                    </h4>
-                    <p class="mt-2 text-xs sm:text-sm text-slate-600">
-                        We worked with an internet service provider to centralise customer management, billing, support tickets
-                        and reporting into a single web platform with clear roles and permissions.
-                    </p>
-                    <p class="mt-2 text-[11px] text-slate-600">
-                        Result: reduced manual tracking in spreadsheets, better visibility on revenue and fewer missed renewals.
-                    </p>
-                    <a
-                        href="/case-studies/isp-management-platform/"
-                        class="mt-2 inline-flex items-center text-[11px] font-medium text-primary-600 hover:text-primary-800 underline underline-offset-4"
-                    >
-                        View ISP platform case study
-                    </a>
-                </article>
+                        <p class="inline-flex items-center rounded-full bg-primary-50 px-2.5 py-0.5 text-[11px] font-medium text-primary-700">
+                            Sports &amp; Club Management
+                        </p>
 
-                <!-- Card 3 -->
-                <article
-                    class="group rounded-xl border border-primary-500 bg-slate-50 p-4 shadow-sm shadow-slate-100 transition hover:bg-slate-100"
-                    data-proof-card
-                >
-                    <h4 class="text-sm font-semibold text-slate-950">
-                        Booking automation for services – fewer manual follow-ups, faster confirmations
-                    </h4>
-                    <p class="mt-2 text-xs sm:text-sm text-slate-600">
-                        For a services brand, QalbIT implemented a booking engine with automated notifications, payment integration
-                        and an internal admin to manage schedules and exceptions.
-                    </p>
-                    <p class="mt-2 text-[11px] text-slate-600">
-                        Result: higher booking completion rates, better utilisation of staff and clearer insights into demand patterns.
-                    </p>
-                    <a
-                        href="/case-studies/booking-automation-platform/"
-                        class="mt-2 inline-flex items-center text-[11px] font-medium text-primary-600 hover:text-primary-800 underline underline-offset-4"
+                        <h4 class="mt-2 text-sm font-semibold text-slate-950">
+                            Snappy Stats – events, members &amp; club management for shooting ranges
+                        </h4>
+                        <p class="mt-2 text-xs sm:text-sm text-slate-600">
+                            QalbIT built a club management web app that centralises bookings, events, lanes and
+                            instructors for a European shooting academy.
+                        </p>
+                        <p class="mt-1 text-[11px] text-slate-500">
+                            Result: smoother operations, clearer occupancy visibility and a better experience for staff and members.
+                        </p>
+                        <a
+                            href="<?= route_url('/case-studies/snappy-stats/') ?>"
+                            class="mt-3 inline-flex items-center text-[11px] font-medium text-primary-700 underline underline-offset-4 hover:text-primary-900"
+                        >
+                            View Snappy Stats case study
+                            <svg
+                                class="ml-1 h-3 w-3"
+                                viewBox="0 0 16 16"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M5.25 3.5h7.25m0 0v7.25m0-7.25L5 11.25"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.4"
+                                />
+                            </svg>
+                        </a>
+                    </article>
+
+                    <!-- Card 2 – Bloomford -->
+                    <article
+                        class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-100 transition-transform transition-shadow hover:-translate-y-1 hover:border-primary-500/80 hover:shadow-md hover:shadow-primary-100 focus-within:ring-2 focus-within:ring-primary-500/70 focus-within:ring-offset-2 focus-within:ring-offset-slate-50"
+                        data-proof-card
                     >
-                        View booking automation case study
-                    </a>
-                </article>
+                        <div
+                            class="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary-300/80 to-transparent"
+                            aria-hidden="true"
+                        ></div>
+
+                        <p class="inline-flex items-center rounded-full bg-primary-50 px-2.5 py-0.5 text-[11px] font-medium text-primary-700">
+                            HR Tech &amp; Recruitment
+                        </p>
+
+                        <h4 class="mt-2 text-sm font-semibold text-slate-950">
+                            Bloomford – hiring portal &amp; lightweight ATS for executive search
+                        </h4>
+                        <p class="mt-2 text-xs sm:text-sm text-slate-600">
+                            Recruitment portal that centralises vacancies, candidates, video interviews and test
+                            assessments so consultants manage everything in one place.
+                        </p>
+                        <p class="mt-1 text-[11px] text-slate-500">
+                            Result: less time in email and spreadsheets, faster shortlisting and clearer candidate progress.
+                        </p>
+                        <a
+                            href="<?= route_url('/case-studies/bloomford/') ?>"
+                            class="mt-3 inline-flex items-center text-[11px] font-medium text-primary-700 underline underline-offset-4 hover:text-primary-900"
+                        >
+                            View Bloomford case study
+                            <svg
+                                class="ml-1 h-3 w-3"
+                                viewBox="0 0 16 16"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M5.25 3.5h7.25m0 0v7.25m0-7.25L5 11.25"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.4"
+                                />
+                            </svg>
+                        </a>
+                    </article>
+
+                    <!-- Card 3 – Hellory -->
+                    <article
+                        class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-100 transition-transform transition-shadow hover:-translate-y-1 hover:border-primary-500/80 hover:shadow-md hover:shadow-primary-100 focus-within:ring-2 focus-within:ring-primary-500/70 focus-within:ring-offset-2 focus-within:ring-offset-slate-50"
+                        data-proof-card
+                    >
+                        <div
+                            class="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary-300/80 to-transparent"
+                            aria-hidden="true"
+                        ></div>
+
+                        <p class="inline-flex items-center rounded-full bg-primary-50 px-2.5 py-0.5 text-[11px] font-medium text-primary-700">
+                            Productivity &amp; Communication
+                        </p>
+
+                        <h4 class="mt-2 text-sm font-semibold text-slate-950">
+                            Hellory Reminder – multi-channel productivity &amp; communication app
+                        </h4>
+                        <p class="mt-2 text-xs sm:text-sm text-slate-600">
+                            Cross-platform reminder and communication product with Flutter apps and a Node.js/MongoDB
+                            backend to keep users on top of their busy lives.
+                        </p>
+                        <p class="mt-1 text-[11px] text-slate-500">
+                            Result: reliable notifications, stronger engagement and a foundation for future iterations.
+                        </p>
+                        <a
+                            href="<?= route_url('/case-studies/hellory/') ?>"
+                            class="mt-3 inline-flex items-center text-[11px] font-medium text-primary-700 underline underline-offset-4 hover:text-primary-900"
+                        >
+                            View Hellory case study
+                            <svg
+                                class="ml-1 h-3 w-3"
+                                viewBox="0 0 16 16"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M5.25 3.5h7.25m0 0v7.25m0-7.25L5 11.25"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.4"
+                                />
+                            </svg>
+                        </a>
+                    </article>
                 </div>
             </div>
         </div>
