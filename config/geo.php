@@ -350,7 +350,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -762,7 +762,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -1174,7 +1174,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -1579,7 +1579,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -1986,7 +1986,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -2391,7 +2391,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -2793,7 +2793,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -3195,7 +3195,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -3598,7 +3598,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -4001,7 +4001,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -4413,7 +4413,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -4819,7 +4819,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -5226,7 +5226,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -5633,7 +5633,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -6048,7 +6048,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -6456,7 +6456,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -6851,7 +6851,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -7245,7 +7245,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',
@@ -7639,7 +7639,7 @@ return [
                         'region'   => 'Europe (remote delivery)',
                         'headline' => 'Replaced spreadsheets with a custom Laravel scheduling management web application for a growing shooting academy.',
                         'result'   => '80% fewer double bookings and a single source of truth for schedules, lanes and instructors.',
-                        'url'      => '/case-studies/snappy-stats/',
+                        'url'      => '/case-studies/snappystats/',
                     ],
                     [
                         'label'    => 'Bloomford – Hiring portal for HR professionals',

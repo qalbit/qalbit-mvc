@@ -376,7 +376,7 @@ return [
             'industries'    => ['sports', 'club-management', 'saas'],
             'technologies'  => ['laravel', 'php', 'mysql'],
             'type'          => 'case-study',
-            'case_study_url'=> '/case-studies/snappy-stats/',
+            'case_study_url'=> '/case-studies/snappystats/',
             'external_url'  => 'https://snappystats.ch/',
             'thumbnail'     => '/images/portfolio/snappystats-thumb.png',
             'featured'      => true,

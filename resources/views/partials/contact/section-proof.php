@@ -101,7 +101,7 @@
                             Result: smoother operations, clearer occupancy visibility and a better experience for staff and members.
                         </p>
                         <a
-                            href="<?= route_url('/case-studies/snappy-stats/') ?>"
+                            href="<?= route_url('/case-studies/snappystats/') ?>"
                             class="mt-3 inline-flex items-center text-[11px] font-medium text-primary-700 underline underline-offset-4 hover:text-primary-900"
                         >
                             View Snappy Stats case study

@@ -2,7 +2,7 @@
 
 return [
     'snappystats' => [
-        'slug'        => '/case-studies/snappy-stats/',
+        'slug'        => '/case-studies/snappystats/',
         'name'        => 'Snappy Stats – Shooting Academy Scheduling App',
         'h1'          => 'Snappy Stats – Scheduling Management Web Application (Case Study)',
         'enabled'     => true,
@@ -45,7 +45,7 @@ return [
                 'Laravel scheduling web app',
                 'custom class management system case study',
             ],
-            'canonical'         => 'https://www.qalbit.com/case-studies/snappy-stats/',
+            'canonical'         => 'https://www.qalbit.com/case-studies/snappystats/',
         ],
 
         'sections' => [
@@ -691,7 +691,7 @@ return [
                 'subtitle' => 'Explore more custom software case studies and the services we typically combine for recruitment and operations platforms.',
                 'case_studies' => [
                     [
-                        'slug'    => '/case-studies/snappy-stats/',
+                        'slug'    => '/case-studies/snappystats/',
                         'name'    => 'Snappy Stats – Scheduling management web app',
                         'summary' => 'Laravel-based scheduling platform that replaces spreadsheets with a centralised view of classes, lanes and coaches.',
                     ],
@@ -1067,7 +1067,7 @@ return [
                 'subtitle' => 'Explore more custom software and mobile app case studies, plus the services we combined for Hellory.',
                 'case_studies' => [
                     [
-                        'slug'    => '/case-studies/snappy-stats/',
+                        'slug'    => '/case-studies/snappystats/',
                         'name'    => 'Snappy Stats – Scheduling management web app',
                         'summary' => 'Custom scheduling system that gives a shooting academy real-time visibility into events and resources.',
                     ],
@@ -1450,7 +1450,7 @@ return [
                 'subtitle' => 'Explore more custom software case studies and the services we typically combine for booking, membership and operations platforms.',
                 'case_studies' => [
                     [
-                        'slug'    => '/case-studies/snappy-stats/',
+                        'slug'    => '/case-studies/snappystats/',
                         'name'    => 'Snappy Stats – Scheduling management web app',
                         'summary' => 'Scheduling web app that centralises bookings and prevents double bookings for a growing shooting academy.',
                     ],

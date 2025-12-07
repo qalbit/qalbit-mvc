@@ -30,7 +30,7 @@ $primary  = $cta['primary_cta']   ?? [];
 $secondary= $cta['secondary_cta'] ?? [];
 
 $primaryLabel = $primary['label'] ?? 'View current openings';
-$primaryHref  = $primary['href']  ?? '/careers/?ref=careers-cta-openings';
+$primaryHref  = $primary['href']  ?? '/career/?ref=careers-cta-openings';
 $primaryAria  = $primary['aria']
     ?? 'View current job openings at QalbIT';
 

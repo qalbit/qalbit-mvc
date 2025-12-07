@@ -25,7 +25,7 @@ $groups = [
             [
                 ['label' => 'Our Services',       'href' => '/services/'],
                 ['label' => 'Our Process',        'href' => '/our-process/'],
-                ['label' => 'Careers',            'href' => '/careers/'],
+                ['label' => 'Careers',            'href' => '/career/'],
                 ['label' => 'Contact Us',         'href' => '/contact-us/'],
                 ['label' => 'Our Insights / Blog','href' => '/blog/'],
                 ['label' => 'Sitemap',            'href' => '/sitemap/'],
@@ -127,9 +127,9 @@ $groups = [
         'description' => 'Information for engineers, designers and product people exploring roles at QalbIT.',
         'columns' => [
             [
-                ['label' => 'Careers Overview',    'href' => '/careers/'],
-                ['label' => 'Open Positions',      'href' => '/careers/#careers-openings'],
-                ['label' => 'Life at QalbIT',      'href' => '/careers/#life-at-qalbit'],
+                ['label' => 'Careers Overview',    'href' => '/career/'],
+                ['label' => 'Open Positions',      'href' => '/career/#careers-openings'],
+                ['label' => 'Life at QalbIT',      'href' => '/career/#life-at-qalbit'],
             ],
             [
                 ['label' => 'General Application', 'href' => '/apply/'],

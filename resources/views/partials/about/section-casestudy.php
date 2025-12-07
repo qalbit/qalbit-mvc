@@ -64,7 +64,7 @@
                 </dl>
 
                 <a
-                    href="<?= route_url('/case-studies/snappy-stats/') ?>"
+                    href="<?= route_url('/case-studies/snappystats/') ?>"
                     class="mt-3 inline-flex items-center text-[11px] font-medium text-accent-700 hover:text-accent-800"
                 >
                     View case study

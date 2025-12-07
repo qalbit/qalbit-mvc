@@ -32,7 +32,7 @@ class CareerController
         $roles     = config('careers.roles', []);
         $evergreen = config('careers.evergreen_roles', []);
 
-        $slug = $page['slug'] ?? '/careers/';
+        $slug = $page['slug'] ?? '/career/';
 
         $seo = [
             'title'       => $page['meta_title']

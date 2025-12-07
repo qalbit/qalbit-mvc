@@ -331,7 +331,7 @@ return [
                     'outcome'     => 'Launched an MVP for the primary range in around 12 weeks, then iterated with real staff feedback and reporting needs.',
                     'impact'      => 'Cut scheduling conflicts dramatically and gave the team a single source of truth for classes, lanes and instructors.',
                     'link_label'  => 'Read the Snappy Stats case study',
-                    'link_href'   => '/case-studies/snappy-stats/',
+                    'link_href'   => '/case-studies/snappystats/',
                 ],
                 [
                     'key'         => 'bloomford',
@@ -835,7 +835,7 @@ return [
                     'outcome'     => 'More reliable scheduling, clearer permissions and a scalable architecture ready for additional ranges, languages and reporting modules.',
                     'impact'      => 'Reduced double-bookings, gave operations a single source of truth and created a strong foundation for future product evolution.',
                     'link_label'  => 'View the Snappy Stats case study',
-                    'link_href'   => '/case-studies/snappy-stats/',
+                    'link_href'   => '/case-studies/snappystats/',
                 ],
                 [
                     'key'         => 'bloomford',
@@ -1334,7 +1334,7 @@ return [
                     'outcome'     => 'Single source of truth for daily schedules, capacity and bookings across ranges and instructors.',
                     'impact'      => 'Significant drop in double bookings, clearer utilisation and more predictable range operations.',
                     'link_label'  => 'View Snappy Stats case study',
-                    'link_href'   => '/case-studies/snappy-stats/',
+                    'link_href'   => '/case-studies/snappystats/',
                 ],
                 [
                     'key'         => 'plugin',

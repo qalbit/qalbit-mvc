@@ -22,7 +22,7 @@ $caseStudies = [
         'summary'    => 'Laravel-based scheduling management app that replaces spreadsheets with a centralised calendar for classes, coaches and shooting ranges.',
         'stack_line' => 'Laravel · PHP · MySQL · REST APIs · Role-based access control',
         'outcome'    => '80% fewer scheduling conflicts, real-time visibility into sessions and a single source of truth for bookings.',
-        'url'        => '/case-studies/snappy-stats/',
+        'url'        => '/case-studies/snappystats/',
     ],
     [
         'label'      => 'Case 03',

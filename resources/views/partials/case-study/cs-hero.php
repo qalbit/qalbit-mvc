@@ -9,7 +9,7 @@
  *
  * Example structure:
  * [
- *   'slug'     => '/case-studies/snappy-stats/',
+ *   'slug'     => '/case-studies/snappystats/',
  *   'name'     => 'Snappy Stats – Shooting Academy Scheduling App',
  *   'h1'       => 'Snappy Stats – Scheduling Management Web Application (Case Study)',
  *   'summary'  => 'Short summary used in listings…',
@@ -62,7 +62,7 @@ $caseStudyBannerAlt= $caseStudy['bannerAlt'] ?? ($caseStudyName . ' product UI')
 $heroConfig = $caseStudy['sections']['hero'] ?? [];
 
 // Breadcrumb label (from config or slug)
-$slugPath  = trim((string) $caseStudySlug, '/');                   // case-studies/snappy-stats
+$slugPath  = trim((string) $caseStudySlug, '/');                   // case-studies/snappystats/
 $slugLast  = $slugPath ? basename($slugPath) : 'case-study';       // snappy-stats
 $defaultCrumbLabel = ucwords(str_replace(['-', '_'], ' ', $slugLast));
 

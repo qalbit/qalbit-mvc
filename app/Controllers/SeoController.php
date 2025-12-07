@@ -10,6 +10,25 @@ class SeoController
 
         $urls = [];
 
+        $makeUrl = function (string $path) use ($baseUrl): string {
+            $path = trim($path);
+
+            // Root
+            if ($path === '' || $path === '/') {
+                return $baseUrl . '/';
+            }
+
+            // Ensure leading slash, strip any extra leading/trailing slashes in input
+            $path = '/' . trim($path, '/');
+
+            // Ensure trailing slash
+            if (substr($path, -1) !== '/') {
+                $path .= '/';
+            }
+
+            return $baseUrl . $path;
+        };
+
         // Core pages
         $corePaths = [
             '/',
@@ -21,34 +40,40 @@ class SeoController
             '/contact-us/',
             '/career/',
             '/privacy-policy/',
-            '/terms-of-service/',
+            '/terms-and-condition/',
             '/cookie-policy/',
             '/sitemap/',
+            '/tools/json-formatter/',
         ];
 
         foreach ($corePaths as $path) {
-            $urls[] = $baseUrl . $path;
+            $urls[] = $makeUrl($path);
         }
 
         // Services
         $services = config('services', []);
         foreach ($services as $service) {
             if (!empty($service['enabled']) && !empty($service['slug'])) {
-                $urls[] = rtrim($baseUrl, '/') . $service['slug'];
+                // slug can be "services/custom-software-development" or "/services/custom-software-development/"
+                $urls[] = $makeUrl($service['slug']);
             }
         }
 
         // Our Process child pages
         $processPages = config('process', []);
-        foreach ($processPages as $slug => $page) {
-            $paths[] = '/' . $slug . '/';
+        foreach ($processPages as $page) {
+            // Adjust condition if your config doesn't use 'enabled'
+            if (!empty($page['slug'])) {
+                // slug can be "start-up-mvp" or "/start-up-mvp/"
+                $urls[] = $makeUrl($page['slug']);
+            }
         }
 
         // Industries
         $industries = config('industries', []);
         foreach ($industries as $industry) {
             if (!empty($industry['enabled']) && !empty($industry['slug'])) {
-                $urls[] = rtrim($baseUrl, '/') . $industry['slug'];
+                $urls[] = $makeUrl($industry['slug']);
             }
         }
 
@@ -56,16 +81,15 @@ class SeoController
         $technologies = config('technologies', []);
         foreach ($technologies as $tech) {
             if (!empty($tech['enabled']) && !empty($tech['slug'])) {
-                $urls[] = rtrim($baseUrl, '/') . $tech['slug'];
+                $urls[] = $makeUrl($tech['slug']);
             }
         }
-
 
         // Geo (country/state)
         $geo = config('geo', []);
         foreach ($geo as $location) {
             if (!empty($location['enabled']) && !empty($location['slug'])) {
-                $urls[] = rtrim($baseUrl, '/') . $location['slug'];
+                $urls[] = $makeUrl($location['slug']);
             }
         }
 
@@ -73,7 +97,7 @@ class SeoController
         $hire = config('hire', []);
         foreach ($hire as $role) {
             if (!empty($role['enabled']) && !empty($role['slug'])) {
-                $urls[] = rtrim($baseUrl, '/') . $role['slug'];
+                $urls[] = $makeUrl($role['slug']);
             }
         }
 
@@ -81,7 +105,7 @@ class SeoController
         $caseStudies = config('case_studies', []);
         foreach ($caseStudies as $cs) {
             if (!empty($cs['enabled']) && !empty($cs['slug'])) {
-                $urls[] = rtrim($baseUrl, '/') . $cs['slug'];
+                $urls[] = $makeUrl($cs['slug']);
             }
         }
 
