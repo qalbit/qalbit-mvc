@@ -41,12 +41,11 @@ $bullets = $bullets ?? [
                 <h2
                     id="home-faqs-heading"
                     class="text-display-sm sm:text-display-md font-bold tracking-tight"
-                    itemprop="name"
                 >
                     <?= htmlspecialchars($title) ?>
                 </h2>
 
-                <p class="text-sm md:text-base text-muted-foreground" itemprop="description">
+                <p class="text-sm md:text-base text-muted-foreground">
                     <?= htmlspecialchars($subtitle) ?>
                 </p>
 
