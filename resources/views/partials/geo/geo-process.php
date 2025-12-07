@@ -65,7 +65,7 @@ $links = isset($process['links']) && is_array($process['links'])
                     $label       = $step['label'] ?? '';
                     $description = $step['description'] ?? '';
                     $related     = $step['related'] ?? null;
-                    $relatedUrl  = $related ? '/process/' . trim($related, '/') . '/' : null;
+                    $relatedUrl  = $related ? '/' . trim($related, '/') . '/' : null;
 
                     if (!$label && !$description) {
                         continue;

@@ -428,7 +428,7 @@ class CareerController
             exit;
         }
 
-        $data['resume_path']      = $resumePath;
+        $data['file_path']      = $resumePath;
         $data['resume_file_name'] = $_FILES['resume']['name'] ?? '';
 
         // --- Send email ---

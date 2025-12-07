@@ -38,10 +38,10 @@ return [
             'intro' => 'QalbIT provides dedicated Node.js and TypeScript developers who specialise in building API-first, real-time and event-driven applications. We plug in as a remote extension of your product team, focusing on clean architectures, performance and predictable delivery rather than just billable hours.',
 
             'primary_cta_label' => 'Discuss your Node.js project',
-            'primary_cta_href'  => '/contact-us/?service=hire-nodejs-developers',
+            'primary_cta_href'  => '/contact-us/?topic=hire-nodejs-developers',
 
-            'secondary_cta_label' => 'View Node.js-driven case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=nodejs',
+            'secondary_cta_label' => 'Book a free consultation',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
 
             'snapshot_title' => 'Node.js hiring snapshot',
             'snapshot'       => [
@@ -139,7 +139,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your Node.js requirements',
-                'url'   => '/contact-us/?service=hire-nodejs-developers&topic=capabilities',
+                'url'   => '/contact-us/?topic=hire-nodejs-developers',
             ],
         ],
 
@@ -186,7 +186,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this for my Node.js stack',
-                'url'   => '/contact-us/?service=hire-nodejs-developers&topic=process',
+                'url'   => '/contact-us/?topic=hire-nodejs-developers',
             ],
         ],
 
@@ -222,14 +222,14 @@ return [
                     'badge'       => 'Modernisation',
                     'link'        => [
                         'label' => 'Discuss modernising your backend',
-                        'url'   => '/contact-us/?service=hire-nodejs-developers&topic=modernisation',
+                        'url'   => '/contact-us/?topic=hire-nodejs-developers',
                     ],
                 ],
             ],
 
             'cta' => [
                 'label' => 'Ask if your use case is a good fit for Node.js',
-                'url'   => '/contact-us/?service=hire-nodejs-developers&topic=use-cases',
+                'url'   => '/contact-us/?topic=hire-nodejs-developers',
             ],
         ],
 
@@ -337,10 +337,10 @@ return [
             'intro' => 'QalbIT provides dedicated Laravel and PHP developers who specialise in building secure, maintainable business applications, SaaS platforms and internal tools. We plug in as a remote product squad – planning architecture, writing clean Laravel code and keeping your roadmap moving without unpleasant surprises on quality or timelines.',
 
             'primary_cta_label' => 'Discuss your Laravel project',
-            'primary_cta_href'  => '/contact-us/?service=hire-laravel-developers',
+            'primary_cta_href'  => '/contact-us/?topic=hire-laravel-developers',
 
-            'secondary_cta_label' => 'View Laravel-related case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=laravel',
+            'secondary_cta_label' => 'Book a free consultation',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
 
             'snapshot_title' => 'Laravel hiring snapshot',
             'snapshot'       => [
@@ -438,7 +438,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your Laravel requirements',
-                'url'   => '/contact-us/?service=hire-laravel-developers&topic=capabilities',
+                'url'   => '/contact-us/?topic=hire-laravel-developers',
             ],
         ],
 
@@ -493,7 +493,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this for my Laravel app',
-                'url'   => '/contact-us/?service=hire-laravel-developers&topic=process',
+                'url'   => '/contact-us/?topic=hire-laravel-developers',
             ],
         ],
 
@@ -529,14 +529,14 @@ return [
                     'badge'       => 'Modernisation',
                     'link'        => [
                         'label' => 'Discuss modernising your PHP app with Laravel',
-                        'url'   => '/contact-us/?service=hire-laravel-developers&topic=modernisation',
+                        'url'   => '/contact-us/?topic=hire-laravel-developers',
                     ],
                 ],
             ],
 
             'cta' => [
                 'label' => 'Ask if your use case is a good fit for Laravel',
-                'url'   => '/contact-us/?service=hire-laravel-developers&topic=use-cases',
+                'url'   => '/contact-us/?topic=hire-laravel-developers',
             ],
         ],
 
@@ -644,10 +644,10 @@ return [
             'intro' => 'QalbIT provides dedicated PHP developers who can build new applications on PHP 8 and frameworks like Laravel, as well as modernise legacy PHP systems that your business still relies on. We focus on clean code, secure architectures and a delivery process that keeps stakeholders confident at every release.',
 
             'primary_cta_label' => 'Discuss your PHP project',
-            'primary_cta_href'  => '/contact-us/?service=hire-php-developers',
+            'primary_cta_href'  => '/contact-us/?topic=hire-php-developers',
 
-            'secondary_cta_label' => 'View PHP-related case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=php',
+            'secondary_cta_label' => 'Book a free consultation',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
 
             'snapshot_title' => 'PHP hiring snapshot',
             'snapshot'       => [
@@ -745,7 +745,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your PHP requirements',
-                'url'   => '/contact-us/?service=hire-php-developers&topic=capabilities',
+                'url'   => '/contact-us/?topic=hire-php-developers',
             ],
         ],
 
@@ -800,7 +800,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this for my PHP app',
-                'url'   => '/contact-us/?service=hire-php-developers&topic=process',
+                'url'   => '/contact-us/?topic=hire-php-developers',
             ],
         ],
 
@@ -836,14 +836,14 @@ return [
                     'badge'       => 'MVP',
                     'link'        => [
                         'label' => 'Discuss a PHP-based MVP or prototype',
-                        'url'   => '/contact-us/?service=hire-php-developers&topic=mvp',
+                        'url'   => '/contact-us/?topic=hire-php-developers',
                     ],
                 ],
             ],
 
             'cta' => [
                 'label' => 'Ask if your use case is a good fit for PHP',
-                'url'   => '/contact-us/?service=hire-php-developers&topic=use-cases',
+                'url'   => '/contact-us/?topic=hire-php-developers',
             ],
         ],
 
@@ -951,10 +951,10 @@ return [
             'intro' => 'QalbIT provides dedicated React.js developers who specialise in building and evolving dashboards, portals and SaaS frontends. We plug in as a remote extension of your product and backend teams, focusing on component-driven architectures, consistency and performance instead of just stitching together screens.',
 
             'primary_cta_label' => 'Discuss your React frontend needs',
-            'primary_cta_href'  => '/contact-us/?service=hire-reactjs-developers',
+            'primary_cta_href'  => '/contact-us/?topic=hire-reactjs-developers',
 
-            'secondary_cta_label' => 'View React-related work examples',
-            'secondary_cta_href'  => '/case-studies/?tag=react',
+            'secondary_cta_label' => 'Book a free consultation',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
 
             'snapshot_title' => 'React.js hiring snapshot',
             'snapshot'       => [
@@ -1052,7 +1052,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your React frontend requirements',
-                'url'   => '/contact-us/?service=hire-reactjs-developers&topic=capabilities',
+                'url'   => '/contact-us/?topic=hire-reactjs-developers',
             ],
         ],
 
@@ -1107,7 +1107,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this for my React frontend',
-                'url'   => '/contact-us/?service=hire-reactjs-developers&topic=process',
+                'url'   => '/contact-us/?topic=hire-reactjs-developers',
             ],
         ],
 
@@ -1143,14 +1143,14 @@ return [
                     'badge'       => 'Marketing',
                     'link'        => [
                         'label' => 'Discuss React for your marketing & product surfaces',
-                        'url'   => '/contact-us/?service=hire-reactjs-developers&topic=use-cases',
+                        'url'   => '/contact-us/?topic=hire-reactjs-developers',
                     ],
                 ],
             ],
 
             'cta' => [
                 'label' => 'Ask if your use case is a good fit for React.js',
-                'url'   => '/contact-us/?service=hire-reactjs-developers&topic=use-cases',
+                'url'   => '/contact-us/?topic=hire-reactjs-developers',
             ],
         ],
 
@@ -1259,10 +1259,10 @@ return [
             'intro' => 'QalbIT provides dedicated Next.js developers who specialise in building SEO-friendly, high-performance web applications and SaaS frontends. We work across product and marketing surfaces – from app dashboards to content hubs – using modern Next.js capabilities to keep your teams fast and your users happy.',
 
             'primary_cta_label' => 'Discuss your Next.js project',
-            'primary_cta_href'  => '/contact-us/?service=hire-nextjs-developers',
+            'primary_cta_href'  => '/contact-us/?topic=hire-nextjs-developers',
 
-            'secondary_cta_label' => 'View Next.js-related work examples',
-            'secondary_cta_href'  => '/case-studies/?tag=nextjs',
+            'secondary_cta_label' => 'Book a free consultation',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
 
             'snapshot_title' => 'Next.js hiring snapshot',
             'snapshot'       => [
@@ -1362,7 +1362,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your Next.js requirements',
-                'url'   => '/contact-us/?service=hire-nextjs-developers&topic=capabilities',
+                'url'   => '/contact-us/?topic=hire-nextjs-developers',
             ],
         ],
 
@@ -1418,7 +1418,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this for my Next.js setup',
-                'url'   => '/contact-us/?service=hire-nextjs-developers&topic=process',
+                'url'   => '/contact-us/?topic=hire-nextjs-developers',
             ],
         ],
 
@@ -1455,14 +1455,14 @@ return [
                     'badge'       => 'International',
                     'link'        => [
                         'label' => 'Discuss Next.js for your global footprint',
-                        'url'   => '/contact-us/?service=hire-nextjs-developers&topic=use-cases',
+                        'url'   => '/contact-us/?topic=hire-nextjs-developers',
                     ],
                 ],
             ],
 
             'cta' => [
                 'label' => 'Ask if your use case is a good fit for Next.js',
-                'url'   => '/contact-us/?service=hire-nextjs-developers&topic=use-cases',
+                'url'   => '/contact-us/?topic=hire-nextjs-developers',
             ],
         ],
 
@@ -1572,10 +1572,10 @@ return [
             'intro' => 'QalbIT provides Flutter developers who specialise in designing and building cross-platform mobile apps with a single codebase. We focus on solid architecture, smooth user experiences, offline-ready behaviour and release processes that you can trust for the long term.',
 
             'primary_cta_label' => 'Discuss your Flutter app idea',
-            'primary_cta_href'  => '/contact-us/?service=hire-flutter-developers',
+            'primary_cta_href'  => '/contact-us/?topic=hire-flutter-developers',
 
-            'secondary_cta_label' => 'View mobile-related work examples',
-            'secondary_cta_href'  => '/case-studies/?tag=flutter',
+            'secondary_cta_label' => 'Book a free consultation',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
 
             'snapshot_title' => 'Flutter hiring snapshot',
             'snapshot'       => [
@@ -1673,7 +1673,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your Flutter app requirements',
-                'url'   => '/contact-us/?service=hire-flutter-developers&topic=capabilities',
+                'url'   => '/contact-us/?topic=hire-flutter-developers',
             ],
         ],
 
@@ -1728,7 +1728,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this for my Flutter app',
-                'url'   => '/contact-us/?service=hire-flutter-developers&topic=process',
+                'url'   => '/contact-us/?topic=hire-flutter-developers',
             ],
         ],
 
@@ -1764,14 +1764,14 @@ return [
                     'badge'       => 'MVP',
                     'link'        => [
                         'label' => 'Discuss a Flutter-based MVP',
-                        'url'   => '/contact-us/?service=hire-flutter-developers&topic=mvp',
+                        'url'   => '/contact-us/?topic=hire-flutter-developers',
                     ],
                 ],
             ],
 
             'cta' => [
                 'label' => 'Ask if your mobile idea is a good fit for Flutter',
-                'url'   => '/contact-us/?service=hire-flutter-developers&topic=use-cases',
+                'url'   => '/contact-us/?topic=hire-flutter-developers',
             ],
         ],
 
@@ -1878,7 +1878,7 @@ return [
 
             'intro' => 'QalbIT’s MVP developers help you define the smallest version of your product that still delivers real value. We combine product thinking, UX and engineering so you can launch something testable quickly, learn from users and decide where to invest next.',
             'primary_cta_label' => 'Discuss your MVP idea',
-            'primary_cta_href'  => '/contact-us/?service=hire-mvp-developers',
+            'primary_cta_href'  => '/contact-us/?topic=hire-mvp-developers',
 
             'secondary_cta_label' => 'See our MVP development approach',
             'secondary_cta_href'  => '/start-up-mvp/',
@@ -1979,7 +1979,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your MVP idea and constraints',
-                'url'   => '/contact-us/?service=hire-mvp-developers&topic=capabilities',
+                'url'   => '/contact-us/?topic=hire-mvp-developers',
             ],
         ],
 
@@ -2034,7 +2034,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this for my MVP',
-                'url'   => '/contact-us/?service=hire-mvp-developers&topic=process',
+                'url'   => '/contact-us/?topic=hire-mvp-developers',
             ],
         ],
 
@@ -2070,14 +2070,14 @@ return [
                     'badge'       => 'Mobile MVPs',
                     'link'        => [
                         'label' => 'Discuss whether your idea is right for an MVP',
-                        'url'   => '/contact-us/?service=hire-mvp-developers&topic=use-cases',
+                        'url'   => '/contact-us/?topic=hire-mvp-developers',
                     ],
                 ],
             ],
 
             'cta' => [
                 'label' => 'Ask if your idea is suitable for an MVP',
-                'url'   => '/contact-us/?service=hire-mvp-developers&topic=use-cases',
+                'url'   => '/contact-us/?topic=hire-mvp-developers',
             ],
         ],
 
@@ -2183,10 +2183,10 @@ return [
 
             'intro' => 'QalbIT provides full-stack JavaScript developers who can own features from UI through APIs to the database. We balance frontend polish with backend robustness so you can ship quickly without creating tech debt that slows you down later.',
             'primary_cta_label' => 'Discuss your full-stack JavaScript needs',
-            'primary_cta_href'  => '/contact-us/?service=hire-full-stack-javascript-developers',
+            'primary_cta_href'  => '/contact-us/?topic=hire-full-stack-javascript-developers',
 
-            'secondary_cta_label' => 'View related case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=javascript',
+            'secondary_cta_label' => 'Book a free consultation',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
 
             'snapshot_title' => 'Full-stack JavaScript hiring snapshot',
             'snapshot'       => [
@@ -2284,7 +2284,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your full-stack JavaScript requirements',
-                'url'   => '/contact-us/?service=hire-full-stack-javascript-developers&topic=capabilities',
+                'url'   => '/contact-us/?topic=hire-full-stack-javascript-developers',
             ],
         ],
 
@@ -2339,7 +2339,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this for my product',
-                'url'   => '/contact-us/?service=hire-full-stack-javascript-developers&topic=process',
+                'url'   => '/contact-us/?topic=hire-full-stack-javascript-developers',
             ],
         ],
 
@@ -2375,14 +2375,14 @@ return [
                     'badge'       => 'Growth',
                     'link'        => [
                         'label' => 'Discuss a full-stack JS squad for your roadmap',
-                        'url'   => '/contact-us/?service=hire-full-stack-javascript-developers&topic=use-cases',
+                        'url'   => '/contact-us/?topic=hire-full-stack-javascript-developers',
                     ],
                 ],
             ],
 
             'cta' => [
                 'label' => 'Ask if full-stack JavaScript is a good fit for your roadmap',
-                'url'   => '/contact-us/?service=hire-full-stack-javascript-developers&topic=use-cases',
+                'url'   => '/contact-us/?topic=hire-full-stack-javascript-developers',
             ],
         ],
 
