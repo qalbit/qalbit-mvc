@@ -36,6 +36,7 @@ $router->get('/portfolio/', [PortfolioController::class, 'index']);
 
 $router->get('/career/', [CareerController::class, 'index']);
 $router->get('/career/apply/', [CareerController::class, 'apply']);
+$router->post('/career/apply/', [CareerController::class, 'submit']);
 
 // Hire developers
 $router->get('/hire-nodejs-developers/', [HireController::class, 'nodejs']);

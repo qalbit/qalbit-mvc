@@ -34,10 +34,10 @@ return [
             'intro' => 'QalbIT designs and builds entertainment industry IT solutions – from streaming and video-on-demand platforms to interactive mobile entertainment apps and fan community portals. We focus on user experience, performance and monetisation so your audience has a seamless experience across devices.',
 
             'primary_cta_label' => 'Discuss your entertainment app project',
-            'primary_cta_href'  => '/contact-us/?industry=entertainment',
+            'primary_cta_href'  => '/contact-us/?topic=entertainment',
 
-            'secondary_cta_label' => 'See media & entertainment case studies',
-            'secondary_cta_href'  => '/case-studies/?industry=entertainment',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         'overview' => [
@@ -113,7 +113,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk about your entertainment platform requirements',
-                'url'   => '/contact-us/?industry=entertainment&topic=entertainment-platform',
+                'url'   => '/contact-us/?topic=entertainment',
             ],
         ],
 
@@ -160,7 +160,7 @@ return [
 
             'cta' => [
                 'label' => 'Plan a phased rollout for your entertainment platform',
-                'url'   => '/contact-us/?industry=entertainment&topic=roadmap',
+                'url'   => '/contact-us/?topic=entertainment',
             ],
         ],
 
@@ -199,7 +199,7 @@ return [
 
             'cta' => [
                 'label' => 'Check if your entertainment idea is a fit',
-                'url'   => '/contact-us/?industry=entertainment&topic=fit-check',
+                'url'   => '/contact-us/?topic=entertainment',
             ],
         ],
 
@@ -261,7 +261,7 @@ return [
             'body'    => 'Share your idea, current platform (if any) and what success looks like. We will review your requirements, suggest a realistic scope and propose a practical roadmap for your entertainment app or online platform.',
 
             'primary_label' => 'Book an entertainment discovery call',
-            'primary_url'   => '/contact-us/?topic=entertainment-solutions&industry=entertainment',
+            'primary_url'   => '/contact-us/?topic=entertainment-solutions&source=entertainment',
             'primary_aria'  => 'Book a discovery call about entertainment solutions with QalbIT',
 
             'secondary_label' => 'Send us your entertainment requirements',
@@ -305,10 +305,10 @@ return [
             'intro' => 'QalbIT acts as your social networking app development company – from defining your community model and engagement loops to shipping production-ready apps. We design and build social networking app solutions, online community platforms and in-product social layers with a clear focus on safety, moderation and long-term maintainability.',
 
             'primary_cta_label' => 'Discuss your community or social app idea',
-            'primary_cta_href'  => '/contact-us/?industry=social-networking',
+            'primary_cta_href'  => '/contact-us/?topic=social-networking',
 
-            'secondary_cta_label' => 'Review social/community product examples',
-            'secondary_cta_href'  => '/case-studies/?industry=social-networking',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         'overview' => [
@@ -384,7 +384,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your social networking roadmap',
-                'url'   => '/contact-us/?industry=social-networking&topic=roadmap',
+                'url'   => '/contact-us/?topic=social-networking',
             ],
         ],
 
@@ -431,7 +431,7 @@ return [
 
             'cta' => [
                 'label' => 'Plan your social networking MVP',
-                'url'   => '/contact-us/?industry=social-networking&topic=mvp-planning',
+                'url'   => '/contact-us/?topic=social-networking',
             ],
         ],
 
@@ -470,7 +470,7 @@ return [
 
             'cta' => [
                 'label' => 'Check if your community concept is feasible',
-                'url'   => '/contact-us/?industry=social-networking&topic=feasibility',
+                'url'   => '/contact-us/?topic=social-networking',
             ],
         ],
 
@@ -531,7 +531,7 @@ return [
             'body'    => 'Share where your audience is today, what you want them to be able to do and your constraints around budget and timeline. We will suggest a practical MVP and a phased roadmap for your social networking app solution.',
 
             'primary_label' => 'Book a social product discovery call',
-            'primary_url'   => '/contact-us/?topic=social-networking-discovery&industry=social-networking',
+            'primary_url'   => '/contact-us/?topic=social-networking-discovery&source=social-networking',
             'primary_aria'  => 'Book a discovery call about social networking products with QalbIT',
 
             'secondary_label' => 'Send your community product brief',
@@ -575,10 +575,10 @@ return [
             'intro' => 'QalbIT acts as your technology partner to design and build sports and fitness app solutions – from gym and studio management platforms to sports academy portals and wellness mobile apps. We help you deliver a better member experience, reduce manual work and keep your community engaged.',
 
             'primary_cta_label' => 'Discuss your sports & fitness project',
-            'primary_cta_href'  => '/contact-us/?industry=sports-fitness',
+            'primary_cta_href'  => '/contact-us/?topic=sports-fitness',
 
-            'secondary_cta_label' => 'See relevant case studies',
-            'secondary_cta_href'  => '/case-studies/?industry=sports-fitness',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         'overview' => [
@@ -654,7 +654,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your sports & fitness requirements',
-                'url'   => '/contact-us/?industry=sports-fitness&topic=requirements',
+                'url'   => '/contact-us/?topic=sports-fitness',
             ],
         ],
 
@@ -701,7 +701,7 @@ return [
 
             'cta' => [
                 'label' => 'Plan a phased rollout for your sports & fitness platform',
-                'url'   => '/contact-us/?industry=sports-fitness&topic=roadmap',
+                'url'   => '/contact-us/?topic=sports-fitness',
             ],
         ],
 
@@ -740,7 +740,7 @@ return [
 
             'cta' => [
                 'label' => 'Check if your sports & fitness idea is a fit',
-                'url'   => '/contact-us/?industry=sports-fitness&topic=fit-check',
+                'url'   => '/contact-us/?topic=sports-fitness',
             ],
         ],
 
@@ -799,7 +799,7 @@ return [
             'body'    => 'Share how your business runs today, what experience you want to provide and any tools you already use. We will suggest a realistic scope and roadmap for your sports and fitness app solution.',
 
             'primary_label' => 'Book a sports & fitness discovery call',
-            'primary_url'   => '/contact-us/?topic=sports-fitness-discovery&industry=sports-fitness',
+            'primary_url'   => '/contact-us/?topic=sports-fitness-discovery&source=sports-fitness',
             'primary_aria'  => 'Book a discovery call about sports & fitness software with QalbIT',
 
             'secondary_label' => 'Send us your sports & fitness brief',
@@ -843,10 +843,10 @@ return [
             'intro' => 'QalbIT partners with travel and mobility businesses to design and build practical software – from trip planning and booking engines to ride dispatch and fleet management platforms. We focus on journeys, operations and reliability so your team can deliver consistently for travellers and riders.',
 
             'primary_cta_label' => 'Discuss your travel or mobility project',
-            'primary_cta_href'  => '/contact-us/?industry=travel-mobility',
+            'primary_cta_href'  => '/contact-us/?topic=travel-mobility',
 
-            'secondary_cta_label' => 'View relevant examples',
-            'secondary_cta_href'  => '/case-studies/?industry=travel-mobility',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         'overview' => [
@@ -922,7 +922,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your travel or mobility requirements',
-                'url'   => '/contact-us/?industry=travel-mobility&topic=requirements',
+                'url'   => '/contact-us/?topic=travel-mobility',
             ],
         ],
 
@@ -969,7 +969,7 @@ return [
 
             'cta' => [
                 'label' => 'Plan your travel or mobility roadmap',
-                'url'   => '/contact-us/?industry=travel-mobility&topic=roadmap',
+                'url'   => '/contact-us/?topic=travel-mobility',
             ],
         ],
 
@@ -1008,7 +1008,7 @@ return [
 
             'cta' => [
                 'label' => 'Check if your travel or mobility idea is feasible',
-                'url'   => '/contact-us/?industry=travel-mobility&topic=feasibility',
+                'url'   => '/contact-us/?topic=travel-mobility',
             ],
         ],
 
@@ -1067,7 +1067,7 @@ return [
             'body'    => 'Share your current workflows, channels and pain points. We will propose a pragmatic approach to building or improving your travel or mobility software.',
 
             'primary_label' => 'Book a travel & mobility discovery call',
-            'primary_url'   => '/contact-us/?topic=travel-mobility-discovery&industry=travel-mobility',
+            'primary_url'   => '/contact-us/?topic=travel-mobility-discovery&source=travel-mobility',
             'primary_aria'  => 'Book a discovery call about travel and mobility software with QalbIT',
 
             'secondary_label' => 'Send your travel/mobility brief',
@@ -1111,10 +1111,10 @@ return [
             'intro' => 'QalbIT works with restaurants, cloud kitchens and aggregators to build food delivery app solutions that connect customer ordering, kitchen operations and rider workflows. We focus on reliable flows, clear status updates and tools that your team can actually use during busy hours.',
 
             'primary_cta_label' => 'Discuss your food delivery platform',
-            'primary_cta_href'  => '/contact-us/?industry=food-delivery',
+            'primary_cta_href'  => '/contact-us/?topic=food-delivery',
 
-            'secondary_cta_label' => 'Review delivery case studies',
-            'secondary_cta_href'  => '/case-studies/?industry=food-delivery',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         'overview' => [
@@ -1190,7 +1190,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your food delivery requirements',
-                'url'   => '/contact-us/?industry=food-delivery&topic=requirements',
+                'url'   => '/contact-us/?topic=food-delivery',
             ],
         ],
 
@@ -1237,7 +1237,7 @@ return [
 
             'cta' => [
                 'label' => 'Plan a phased rollout for your food delivery platform',
-                'url'   => '/contact-us/?industry=food-delivery&topic=roadmap',
+                'url'   => '/contact-us/?topic=food-delivery',
             ],
         ],
 
@@ -1276,7 +1276,7 @@ return [
 
             'cta' => [
                 'label' => 'Check if your food delivery concept is feasible',
-                'url'   => '/contact-us/?industry=food-delivery&topic=feasibility',
+                'url'   => '/contact-us/?topic=food-delivery',
             ],
         ],
 
@@ -1335,7 +1335,7 @@ return [
             'body'    => 'Share how you currently handle ordering and delivery, and what you want to improve. We will propose a realistic scope and roadmap for your food delivery app solution.',
 
             'primary_label' => 'Book a food delivery discovery call',
-            'primary_url'   => '/contact-us/?topic=food-delivery-discovery&industry=food-delivery',
+            'primary_url'   => '/contact-us/?topic=food-delivery-discovery&source=food-delivery',
             'primary_aria'  => 'Book a discovery call about food delivery software with QalbIT',
 
             'secondary_label' => 'Send your food delivery brief',
@@ -1379,10 +1379,10 @@ return [
             'intro' => 'QalbIT acts as your ecommerce and marketplace development partner for projects that do not fit generic templates. We design and build online stores, B2B ordering portals and multi-vendor marketplaces that align with your catalogue, pricing, customer journeys and internal workflows.',
 
             'primary_cta_label' => 'Discuss your ecommerce or marketplace idea',
-            'primary_cta_href'  => '/contact-us/?industry=ecommerce-marketplace',
+            'primary_cta_href'  => '/contact-us/?topic=ecommerce-marketplace',
 
-            'secondary_cta_label' => 'Review ecommerce case studies',
-            'secondary_cta_href'  => '/case-studies/?industry=ecommerce-marketplace',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         'overview' => [
@@ -1458,7 +1458,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your ecommerce or marketplace requirements',
-                'url'   => '/contact-us/?industry=ecommerce-marketplace&topic=requirements',
+                'url'   => '/contact-us/?topic=ecommerce-marketplace',
             ],
         ],
 
@@ -1505,7 +1505,7 @@ return [
 
             'cta' => [
                 'label' => 'Plan your ecommerce or marketplace roadmap',
-                'url'   => '/contact-us/?industry=ecommerce-marketplace&topic=roadmap',
+                'url'   => '/contact-us/?topic=ecommerce-marketplace',
             ],
         ],
 
@@ -1544,7 +1544,7 @@ return [
 
             'cta' => [
                 'label' => 'Check if your ecommerce concept is feasible',
-                'url'   => '/contact-us/?industry=ecommerce-marketplace&topic=feasibility',
+                'url'   => '/contact-us/?topic=ecommerce-marketplace',
             ],
         ],
 
@@ -1603,7 +1603,7 @@ return [
             'body'    => 'Share your current context, goals and constraints. We will propose a practical approach to building or modernising your ecommerce or marketplace platform.',
 
             'primary_label' => 'Book an ecommerce discovery call',
-            'primary_url'   => '/contact-us/?topic=ecommerce-marketplace-discovery&industry=ecommerce-marketplace',
+            'primary_url'   => '/contact-us/?topic=ecommerce-marketplace-discovery&source=ecommerce-marketplace',
             'primary_aria'  => 'Book a discovery call about ecommerce and marketplace software with QalbIT',
 
             'secondary_label' => 'Send your ecommerce or marketplace brief',
@@ -1647,10 +1647,10 @@ return [
             'intro' => 'QalbIT collaborates with your product, finance and compliance stakeholders to build fintech software solutions including payment integrations, wallets, lending journeys, investment dashboards and finance operations tools. We emphasise clarity, security best practices and auditability.',
 
             'primary_cta_label' => 'Discuss your fintech project',
-            'primary_cta_href'  => '/contact-us/?industry=fintech',
+            'primary_cta_href'  => '/contact-us/?topic=fintech',
 
-            'secondary_cta_label' => 'View relevant fintech examples',
-            'secondary_cta_href'  => '/case-studies/?industry=fintech',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         'overview' => [
@@ -1726,7 +1726,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your fintech requirements',
-                'url'   => '/contact-us/?industry=fintech&topic=requirements',
+                'url'   => '/contact-us/?topic=fintech',
             ],
         ],
 
@@ -1773,7 +1773,7 @@ return [
 
             'cta' => [
                 'label' => 'Plan your fintech roadmap',
-                'url'   => '/contact-us/?industry=fintech&topic=roadmap',
+                'url'   => '/contact-us/?topic=fintech',
             ],
         ],
 
@@ -1812,7 +1812,7 @@ return [
 
             'cta' => [
                 'label' => 'Check if your fintech idea is feasible',
-                'url'   => '/contact-us/?industry=fintech&topic=feasibility',
+                'url'   => '/contact-us/?topic=fintech',
             ],
         ],
 
@@ -1871,7 +1871,7 @@ return [
             'body'    => 'Share your objectives, constraints and current state. We will propose a structured approach to designing and delivering your fintech software.',
 
             'primary_label' => 'Book a fintech discovery call',
-            'primary_url'   => '/contact-us/?topic=fintech-discovery&industry=fintech',
+            'primary_url'   => '/contact-us/?topic=fintech-discovery&source=fintech',
             'primary_aria'  => 'Book a discovery call about fintech software with QalbIT',
 
             'secondary_label' => 'Send your fintech brief',
@@ -1915,10 +1915,10 @@ return [
             'intro' => 'QalbIT helps real estate and proptech teams build software around their inventory, leads, agents and projects. From portals and CRMs to property management tools, we focus on making day-to-day work and reporting easier.',
 
             'primary_cta_label' => 'Discuss your real estate or proptech project',
-            'primary_cta_href'  => '/contact-us/?industry=real-estate',
+            'primary_cta_href'  => '/contact-us/?topic=real-estate',
 
-            'secondary_cta_label' => 'See real estate related examples',
-            'secondary_cta_href'  => '/case-studies/?industry=real-estate',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         'overview' => [
@@ -1994,7 +1994,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your real estate requirements',
-                'url'   => '/contact-us/?industry=real-estate&topic=requirements',
+                'url'   => '/contact-us/?topic=real-estate',
             ],
         ],
 
@@ -2041,7 +2041,7 @@ return [
 
             'cta' => [
                 'label' => 'Plan your real estate or proptech roadmap',
-                'url'   => '/contact-us/?industry=real-estate&topic=roadmap',
+                'url'   => '/contact-us/?topic=real-estate',
             ],
         ],
 
@@ -2080,7 +2080,7 @@ return [
 
             'cta' => [
                 'label' => 'Check if your real estate idea is feasible',
-                'url'   => '/contact-us/?industry=real-estate&topic=feasibility',
+                'url'   => '/contact-us/?topic=real-estate',
             ],
         ],
 
@@ -2139,7 +2139,7 @@ return [
             'body'    => 'Share how your real estate business works today and what you want to improve. We will suggest a practical software roadmap.',
 
             'primary_label' => 'Book a real estate discovery call',
-            'primary_url'   => '/contact-us/?topic=real-estate-discovery&industry=real-estate',
+            'primary_url'   => '/contact-us/?topic=real-estate-discovery&source=real-estate',
             'primary_aria'  => 'Book a discovery call about real estate and proptech software with QalbIT',
 
             'secondary_label' => 'Send your real estate brief',
@@ -2183,10 +2183,10 @@ return [
             'intro' => 'QalbIT helps healthcare and wellness organisations implement appointment systems, patient and member portals, programme management tools and digital health products. We treat data sensitivity and clear communication as central requirements.',
 
             'primary_cta_label' => 'Discuss your healthcare or wellness project',
-            'primary_cta_href'  => '/contact-us/?industry=healthcare',
+            'primary_cta_href'  => '/contact-us/?topic=healthcare',
 
-            'secondary_cta_label' => 'See healthcare or wellness related work',
-            'secondary_cta_href'  => '/case-studies/?industry=healthcare',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         'overview' => [
@@ -2262,7 +2262,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your healthcare or wellness requirements',
-                'url'   => '/contact-us/?industry=healthcare&topic=requirements',
+                'url'   => '/contact-us/?topic=healthcare',
             ],
         ],
 
@@ -2309,7 +2309,7 @@ return [
 
             'cta' => [
                 'label' => 'Plan your healthcare or wellness roadmap',
-                'url'   => '/contact-us/?industry=healthcare&topic=roadmap',
+                'url'   => '/contact-us/?topic=healthcare',
             ],
         ],
 
@@ -2348,7 +2348,7 @@ return [
 
             'cta' => [
                 'label' => 'Check if your healthcare or wellness idea is feasible',
-                'url'   => '/contact-us/?industry=healthcare&topic=feasibility',
+                'url'   => '/contact-us/?topic=healthcare',
             ],
         ],
 
@@ -2407,7 +2407,7 @@ return [
             'body'    => 'Share your services, programmes and constraints. We will propose a realistic path to digital tools that help patients, members and staff.',
 
             'primary_label' => 'Book a healthcare or wellness discovery call',
-            'primary_url'   => '/contact-us/?topic=healthcare-discovery&industry=healthcare',
+            'primary_url'   => '/contact-us/?topic=healthcare-discovery&source=healthcare',
             'primary_aria'  => 'Book a discovery call about healthcare and wellness software with QalbIT',
 
             'secondary_label' => 'Send your healthcare or wellness brief',
@@ -2451,10 +2451,10 @@ return [
             'intro' => 'QalbIT works with educators and training businesses to build education and elearning platforms that support enrolments, learning journeys, engagement and assessment. We combine content, UX and data to support better outcomes.',
 
             'primary_cta_label' => 'Discuss your education or elearning project',
-            'primary_cta_href'  => '/contact-us/?industry=education-elearning',
+            'primary_cta_href'  => '/contact-us/?topic=education-elearning',
 
-            'secondary_cta_label' => 'See learning related examples',
-            'secondary_cta_href'  => '/case-studies/?industry=education-elearning',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         'overview' => [
@@ -2530,7 +2530,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your education or elearning requirements',
-                'url'   => '/contact-us/?industry=education-elearning&topic=requirements',
+                'url'   => '/contact-us/?topic=education-elearning',
             ],
         ],
 
@@ -2577,7 +2577,7 @@ return [
 
             'cta' => [
                 'label' => 'Plan your education or elearning roadmap',
-                'url'   => '/contact-us/?industry=education-elearning&topic=roadmap',
+                'url'   => '/contact-us/?topic=education-elearning',
             ],
         ],
 
@@ -2616,7 +2616,7 @@ return [
 
             'cta' => [
                 'label' => 'Check if your education or elearning idea is feasible',
-                'url'   => '/contact-us/?industry=education-elearning&topic=feasibility',
+                'url'   => '/contact-us/?topic=education-elearning',
             ],
         ],
 
@@ -2675,7 +2675,7 @@ return [
             'body'    => 'Share your current tools, programmes and learner profiles. We will suggest a structured approach to your education or elearning platform.',
 
             'primary_label' => 'Book an education or elearning discovery call',
-            'primary_url'   => '/contact-us/?topic=education-elearning-discovery&industry=education-elearning',
+            'primary_url'   => '/contact-us/?topic=education-elearning-discovery&source=education-elearning',
             'primary_aria'  => 'Book a discovery call about education and elearning software with QalbIT',
 
             'secondary_label' => 'Send your education or elearning brief',
@@ -2719,10 +2719,10 @@ return [
             'intro' => 'QalbIT works with business and corporate teams to create internal tools, workflow systems, ERPs and portals that reduce manual work and improve visibility. We translate scattered spreadsheets and ad-hoc tools into coherent software.',
 
             'primary_cta_label' => 'Discuss your business software needs',
-            'primary_cta_href'  => '/contact-us/?industry=business-corporate',
+            'primary_cta_href'  => '/contact-us/?topic=business-corporate',
 
-            'secondary_cta_label' => 'Review business software examples',
-            'secondary_cta_href'  => '/case-studies/?industry=business-corporate',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         'overview' => [
@@ -2798,7 +2798,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your business or corporate software requirements',
-                'url'   => '/contact-us/?industry=business-corporate&topic=requirements',
+                'url'   => '/contact-us/?topic=business-corporate',
             ],
         ],
 
@@ -2845,7 +2845,7 @@ return [
 
             'cta' => [
                 'label' => 'Plan your business or corporate software roadmap',
-                'url'   => '/contact-us/?industry=business-corporate&topic=roadmap',
+                'url'   => '/contact-us/?topic=business-corporate',
             ],
         ],
 
@@ -2884,7 +2884,7 @@ return [
 
             'cta' => [
                 'label' => 'Check if your business software idea is feasible',
-                'url'   => '/contact-us/?industry=business-corporate&topic=feasibility',
+                'url'   => '/contact-us/?topic=business-corporate',
             ],
         ],
 
@@ -2943,7 +2943,7 @@ return [
             'body'    => 'Share your high-level processes, current tools and goals. We will suggest a structured, realistic plan for business and corporate software.',
 
             'primary_label' => 'Book a business software discovery call',
-            'primary_url'   => '/contact-us/?topic=business-corporate-discovery&industry=business-corporate',
+            'primary_url'   => '/contact-us/?topic=business-corporate-discovery&source=business-corporate',
             'primary_aria'  => 'Book a discovery call about business and corporate software with QalbIT',
 
             'secondary_label' => 'Send your business software brief',

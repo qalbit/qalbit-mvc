@@ -7,20 +7,35 @@
  * - $selectedRole (array|null)
  * - $roleSlug     (string|null)
  * - $allRoles     (array)
+ * - $errors       (array) – optional
+ * - $old          (array) – optional
+ * - $success      (string|null) – optional
  */
 
 $selectedRole = $selectedRole ?? null;
 $roleSlug     = $roleSlug ?? null;
+$errors       = $errors ?? [];
+$old          = $old ?? [];
+$success      = $success ?? null;
 
 $roleTitle = $selectedRole['title']
     ?? $selectedRole['name']
     ?? ($roleSlug ? ucfirst(str_replace('-', ' ', $roleSlug)) : 'Any suitable role');
 
-$roleTeam = $selectedRole['team_label'] ?? ($selectedRole['team'] ?? null);
-$roleLocation = $selectedRole['location_label'] ?? ($selectedRole['location'] ?? null);
+$roleTeam       = $selectedRole['team_label']       ?? ($selectedRole['team'] ?? null);
+$roleLocation   = $selectedRole['location_label']   ?? ($selectedRole['location'] ?? null);
 $roleExperience = $selectedRole['experience_label'] ?? ($selectedRole['experience'] ?? null);
 
-$formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST route
+$formAction = '/career/apply/';
+
+// Redirect URL (preserves role query)
+$redirectTo = '/career/apply/';
+if ($roleSlug) {
+    $redirectTo .= '?role=' . urlencode($roleSlug);
+}
+
+// Base classes for inputs
+$baseInputClasses = 'block w-full rounded-xl border bg-white px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-sm focus:ring-1 ';
 ?>
 
 <section
@@ -105,6 +120,28 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
             <?php endif; ?>
         </header>
 
+        <!-- Global success / error messages -->
+        <?php if (!empty($success)): ?>
+            <div class="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-xs text-emerald-800">
+                <?= htmlspecialchars($success, ENT_QUOTES); ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($errors)): ?>
+            <div class="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-xs text-rose-800">
+                <p class="font-semibold">There were some problems with your application.</p>
+                <?php if (!empty($errors['global'])): ?>
+                    <p class="mt-1">
+                        <?= htmlspecialchars($errors['global'], ENT_QUOTES); ?>
+                    </p>
+                <?php else: ?>
+                    <p class="mt-1">
+                        Please review the highlighted fields below and try again.
+                    </p>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+
         <!-- Form card -->
         <div
             class="rounded-3xl border border-slate-200 bg-white/90 px-4 py-6 sm:px-6 sm:py-7 lg:px-7 lg:py-8 shadow-soft"
@@ -114,6 +151,8 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
                 method="post"
                 enctype="multipart/form-data"
                 class="space-y-6"
+                data-contact-form
+                data-track="contact-form"
             >
                 <!-- Preserve selected role -->
                 <input
@@ -121,6 +160,11 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
                     name="role_slug"
                     value="<?= htmlspecialchars($roleSlug ?? '', ENT_QUOTES); ?>"
                 >
+
+                <!-- Redirect back to the same apply URL (with role param if present) -->
+                <input type="hidden" name="redirect_to" value="<?= htmlspecialchars($redirectTo, ENT_QUOTES); ?>">
+
+                <input type="hidden" name="recaptcha_token" id="recaptcha_token" value="">
 
                 <div class="grid gap-4 sm:grid-cols-2">
                     <!-- Full name -->
@@ -134,9 +178,16 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
                             name="full_name"
                             required
                             autocomplete="name"
-                            class="block w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-sm
-                                   focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                            value="<?= htmlspecialchars($old['full_name'] ?? '', ENT_QUOTES); ?>"
+                            class="<?= $baseInputClasses . (!empty($errors['full_name'])
+                                ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
+                                : 'border-slate-300 focus:border-sky-500 focus:ring-sky-500'); ?>"
                         >
+                        <?php if (!empty($errors['full_name'])): ?>
+                            <p class="mt-1 text-[11px] text-rose-600">
+                                <?= htmlspecialchars($errors['full_name'], ENT_QUOTES); ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Email -->
@@ -150,9 +201,16 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
                             name="email"
                             required
                             autocomplete="email"
-                            class="block w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-sm
-                                   focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                            value="<?= htmlspecialchars($old['email'] ?? '', ENT_QUOTES); ?>"
+                            class="<?= $baseInputClasses . (!empty($errors['email'])
+                                ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
+                                : 'border-slate-300 focus:border-sky-500 focus:ring-sky-500'); ?>"
                         >
+                        <?php if (!empty($errors['email'])): ?>
+                            <p class="mt-1 text-[11px] text-rose-600">
+                                <?= htmlspecialchars($errors['email'], ENT_QUOTES); ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Phone -->
@@ -166,24 +224,38 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
                             name="phone"
                             required
                             autocomplete="tel"
-                            class="block w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-sm
-                                   focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                            value="<?= htmlspecialchars($old['phone'] ?? '', ENT_QUOTES); ?>"
+                            class="<?= $baseInputClasses . (!empty($errors['phone'])
+                                ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
+                                : 'border-slate-300 focus:border-sky-500 focus:ring-sky-500'); ?>"
                         >
+                        <?php if (!empty($errors['phone'])): ?>
+                            <p class="mt-1 text-[11px] text-rose-600">
+                                <?= htmlspecialchars($errors['phone'], ENT_QUOTES); ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Location -->
                     <div class="space-y-1.5">
                         <label for="location" class="block text-xs font-medium text-slate-700">
-                            Current city & country <span class="text-rose-500">*</span>
+                            Current city &amp; country <span class="text-rose-500">*</span>
                         </label>
                         <input
                             type="text"
                             id="location"
                             name="location"
                             required
-                            class="block w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-sm
-                                   focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                            value="<?= htmlspecialchars($old['location'] ?? '', ENT_QUOTES); ?>"
+                            class="<?= $baseInputClasses . (!empty($errors['location'])
+                                ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
+                                : 'border-slate-300 focus:border-sky-500 focus:ring-sky-500'); ?>"
                         >
+                        <?php if (!empty($errors['location'])): ?>
+                            <p class="mt-1 text-[11px] text-rose-600">
+                                <?= htmlspecialchars($errors['location'], ENT_QUOTES); ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -200,9 +272,16 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
                             id="experience"
                             name="experience"
                             required
-                            class="block w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-sm
-                                   focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                            value="<?= htmlspecialchars($old['experience'] ?? '', ENT_QUOTES); ?>"
+                            class="<?= $baseInputClasses . (!empty($errors['experience'])
+                                ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
+                                : 'border-slate-300 focus:border-sky-500 focus:ring-sky-500'); ?>"
                         >
+                        <?php if (!empty($errors['experience'])): ?>
+                            <p class="mt-1 text-[11px] text-rose-600">
+                                <?= htmlspecialchars($errors['experience'], ENT_QUOTES); ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Current / last role -->
@@ -214,9 +293,16 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
                             type="text"
                             id="current_role"
                             name="current_role"
-                            class="block w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-sm
-                                   focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                            value="<?= htmlspecialchars($old['current_role'] ?? '', ENT_QUOTES); ?>"
+                            class="<?= $baseInputClasses . (!empty($errors['current_role'])
+                                ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
+                                : 'border-slate-300 focus:border-sky-500 focus:ring-sky-500'); ?>"
                         >
+                        <?php if (!empty($errors['current_role'])): ?>
+                            <p class="mt-1 text-[11px] text-rose-600">
+                                <?= htmlspecialchars($errors['current_role'], ENT_QUOTES); ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Notice period -->
@@ -229,14 +315,21 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
                             id="notice_period"
                             name="notice_period"
                             placeholder="e.g. Immediate / 30 days"
-                            class="block w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-sm
-                                   focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                            value="<?= htmlspecialchars($old['notice_period'] ?? '', ENT_QUOTES); ?>"
+                            class="<?= $baseInputClasses . (!empty($errors['notice_period'])
+                                ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
+                                : 'border-slate-300 focus:border-sky-500 focus:ring-sky-500'); ?>"
                         >
+                        <?php if (!empty($errors['notice_period'])): ?>
+                            <p class="mt-1 text-[11px] text-rose-600">
+                                <?= htmlspecialchars($errors['notice_period'], ENT_QUOTES); ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
                 </div>
 
                 <div class="grid gap-4 sm:grid-cols-2">
-                    <!-- LinkedIn / GitHub -->
+                    <!-- LinkedIn / portfolio -->
                     <div class="space-y-1.5">
                         <label for="linkedin" class="block text-xs font-medium text-slate-700">
                             LinkedIn or portfolio URL
@@ -246,12 +339,19 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
                             id="linkedin"
                             name="linkedin"
                             placeholder="https://"
-                            class="block w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-sm
-                                   focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                            value="<?= htmlspecialchars($old['linkedin'] ?? '', ENT_QUOTES); ?>"
+                            class="<?= $baseInputClasses . (!empty($errors['linkedin'])
+                                ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
+                                : 'border-slate-300 focus:border-sky-500 focus:ring-sky-500'); ?>"
                         >
+                        <?php if (!empty($errors['linkedin'])): ?>
+                            <p class="mt-1 text-[11px] text-rose-600">
+                                <?= htmlspecialchars($errors['linkedin'], ENT_QUOTES); ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
 
-                    <!-- GitHub / Code samples -->
+                    <!-- GitHub / code samples -->
                     <div class="space-y-1.5">
                         <label for="github" class="block text-xs font-medium text-slate-700">
                             GitHub / code samples
@@ -261,9 +361,16 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
                             id="github"
                             name="github"
                             placeholder="https://"
-                            class="block w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-sm
-                                   focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                            value="<?= htmlspecialchars($old['github'] ?? '', ENT_QUOTES); ?>"
+                            class="<?= $baseInputClasses . (!empty($errors['github'])
+                                ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
+                                : 'border-slate-300 focus:border-sky-500 focus:ring-sky-500'); ?>"
                         >
+                        <?php if (!empty($errors['github'])): ?>
+                            <p class="mt-1 text-[11px] text-rose-600">
+                                <?= htmlspecialchars($errors['github'], ENT_QUOTES); ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -278,9 +385,16 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
                             id="current_ctc"
                             name="current_ctc"
                             placeholder="e.g. 6 LPA"
-                            class="block w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-sm
-                                   focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                            value="<?= htmlspecialchars($old['current_ctc'] ?? '', ENT_QUOTES); ?>"
+                            class="<?= $baseInputClasses . (!empty($errors['current_ctc'])
+                                ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
+                                : 'border-slate-300 focus:border-sky-500 focus:ring-sky-500'); ?>"
                         >
+                        <?php if (!empty($errors['current_ctc'])): ?>
+                            <p class="mt-1 text-[11px] text-rose-600">
+                                <?= htmlspecialchars($errors['current_ctc'], ENT_QUOTES); ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
                     <div class="space-y-1.5">
                         <label for="expected_ctc" class="block text-xs font-medium text-slate-700">
@@ -291,9 +405,16 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
                             id="expected_ctc"
                             name="expected_ctc"
                             placeholder="e.g. 8.5 LPA"
-                            class="block w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-sm
-                                   focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                            value="<?= htmlspecialchars($old['expected_ctc'] ?? '', ENT_QUOTES); ?>"
+                            class="<?= $baseInputClasses . (!empty($errors['expected_ctc'])
+                                ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
+                                : 'border-slate-300 focus:border-sky-500 focus:ring-sky-500'); ?>"
                         >
+                        <?php if (!empty($errors['expected_ctc'])): ?>
+                            <p class="mt-1 text-[11px] text-rose-600">
+                                <?= htmlspecialchars($errors['expected_ctc'], ENT_QUOTES); ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -307,10 +428,16 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
                         name="about"
                         required
                         rows="4"
-                        class="block w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-sm
-                               focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                        class="<?= $baseInputClasses . 'min-h-[6rem] ' . (!empty($errors['about'])
+                            ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
+                            : 'border-slate-300 focus:border-sky-500 focus:ring-sky-500'); ?>"
                         placeholder="A short note about what you are looking for, what you enjoy working on, and why you think QalbIT is a good fit."
-                    ></textarea>
+                    ><?= htmlspecialchars($old['about'] ?? '', ENT_QUOTES); ?></textarea>
+                    <?php if (!empty($errors['about'])): ?>
+                        <p class="mt-1 text-[11px] text-rose-600">
+                            <?= htmlspecialchars($errors['about'], ENT_QUOTES); ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Resume upload -->
@@ -329,6 +456,11 @@ $formAction = '/apply/'; // or '/apply/submit' if you prefer a dedicated POST ro
                     <p class="mt-1 text-[11px] text-slate-500">
                         Upload a PDF or DOC/DOCX file. Keep the filename simple (e.g. <strong>yourname-resume.pdf</strong>).
                     </p>
+                    <?php if (!empty($errors['resume'])): ?>
+                        <p class="mt-1 text-[11px] text-rose-600">
+                            <?= htmlspecialchars($errors['resume'], ENT_QUOTES); ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Consent / submit -->

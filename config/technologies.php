@@ -33,10 +33,10 @@ return [
             'intro' => 'QalbIT uses React.js and Next.js to build fast, maintainable web interfaces – from customer dashboards and admin portals to multi-tenant SaaS products. We focus on clean state management, predictable data flows and performance so your product feels responsive even as it grows.',
 
             'primary_cta_label' => 'Discuss your React.js project',
-            'primary_cta_href'  => '/contact-us/?technology=reactjs',
+            'primary_cta_href'  => '/contact-us/?topic=reactjs',
 
-            'secondary_cta_label' => 'See SaaS/web app case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=react',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         // Overview (same shape as services)
@@ -102,7 +102,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your React.js frontend scope',
-                'url'   => '/contact-us/?technology=reactjs',
+                'url'   => '/contact-us/?topic=reactjs',
             ],
         ],
 
@@ -158,7 +158,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this process for my React.js app',
-                'url'   => '/contact-us/?technology=reactjs&topic=process',
+                'url'   => '/contact-us/?topic=process-reactjs',
             ],
         ],
 
@@ -198,7 +198,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your product fits these React patterns',
-                'url'   => '/contact-us/?technology=reactjs&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-reactjs',
             ],
         ],
 
@@ -263,7 +263,7 @@ return [
             'primary_aria'  => 'Book a React.js discovery call with QalbIT',
 
             'secondary_label' => 'Send us your frontend requirements',
-            'secondary_url'   => '/contact-us/?topic=reactjs-frontend&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your React.js frontend requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
@@ -303,10 +303,10 @@ return [
             'intro' => 'QalbIT uses Next.js to build fast, SEO-friendly web applications – from marketing sites and content hubs to SaaS dashboards and portals. We combine React with modern Next.js features like App Router, server components and hybrid rendering so your product feels fast and ranks well.',
 
             'primary_cta_label' => 'Discuss your Next.js project',
-            'primary_cta_href'  => '/contact-us/?technology=nextjs',
+            'primary_cta_href'  => '/contact-us/?topic=nextjs',
 
-            'secondary_cta_label' => 'See web app & SaaS case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=nextjs',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         // Overview
@@ -372,7 +372,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your Next.js frontend or site',
-                'url'   => '/contact-us/?technology=nextjs',
+                'url'   => '/contact-us/?topic=nextjs',
             ],
         ],
 
@@ -428,7 +428,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this for my Next.js project',
-                'url'   => '/contact-us/?technology=nextjs&topic=process',
+                'url'   => '/contact-us/?topic=process-nextjs',
             ],
         ],
 
@@ -468,7 +468,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if Next.js is right for your use case',
-                'url'   => '/contact-us/?technology=nextjs&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-nextjs',
             ],
         ],
 
@@ -533,7 +533,7 @@ return [
             'primary_aria'  => 'Book a Next.js discovery call with QalbIT',
 
             'secondary_label' => 'Send us your Next.js requirements',
-            'secondary_url'   => '/contact-us/?topic=nextjs-frontend&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your Next.js requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
@@ -573,10 +573,10 @@ return [
             'intro' => 'QalbIT uses Tailwind CSS to build and modernise frontends for SaaS products, dashboards and content-heavy marketing sites. We focus on design tokens, reusable components and clean utilities so your UI stays consistent, fast and easy to extend across new modules and screens.',
 
             'primary_cta_label' => 'Discuss your Tailwind CSS UI',
-            'primary_cta_href'  => '/contact-us/?technology=tailwindcss',
+            'primary_cta_href'  => '/contact-us/?topic=tailwindcss',
 
-            'secondary_cta_label' => 'See UI/UX & frontend case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=tailwindcss',
+            'secondary_cta_label' => 'See Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         // Overview
@@ -642,7 +642,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your Tailwind CSS frontend scope',
-                'url'   => '/contact-us/?technology=tailwindcss',
+                'url'   => '/contact-us/?topic=tailwindcss',
             ],
         ],
 
@@ -698,7 +698,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this Tailwind CSS process for my product',
-                'url'   => '/contact-us/?technology=tailwindcss&topic=process',
+                'url'   => '/contact-us/?topic=tailwindcss',
             ],
         ],
 
@@ -738,7 +738,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your UI is a good fit for Tailwind CSS',
-                'url'   => '/contact-us/?technology=tailwindcss&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-tailwindcss',
             ],
         ],
 
@@ -803,7 +803,7 @@ return [
             'primary_aria'  => 'Book a Tailwind CSS discovery call with QalbIT',
 
             'secondary_label' => 'Send us your UI requirements',
-            'secondary_url'   => '/contact-us/?topic=tailwindcss-ui&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your Tailwind CSS UI requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
@@ -843,10 +843,10 @@ return [
             'intro' => 'QalbIT uses Node.js and NestJS to build API-first backends for SaaS products, mobile applications and internal tools. We focus on clean architecture, predictable performance and robust integrations so your backend stays reliable as your product, traffic and team grow.',
 
             'primary_cta_label' => 'Discuss your Node.js backend',
-            'primary_cta_href'  => '/contact-us/?technology=nodejs',
+            'primary_cta_href'  => '/contact-us/?topic=nodejs',
 
-            'secondary_cta_label' => 'See backend & API case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=nodejs',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         // Overview
@@ -912,7 +912,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your Node.js backend scope',
-                'url'   => '/contact-us/?technology=nodejs',
+                'url'   => '/contact-us/?topic=nodejs',
             ],
         ],
 
@@ -968,7 +968,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this Node.js process for my product',
-                'url'   => '/contact-us/?technology=nodejs&topic=process',
+                'url'   => '/contact-us/?topic=process-nodejs',
             ],
         ],
 
@@ -1008,7 +1008,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your backend is a good fit for Node.js',
-                'url'   => '/contact-us/?technology=nodejs&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-nodejs',
             ],
         ],
 
@@ -1073,7 +1073,7 @@ return [
             'primary_aria'  => 'Book a Node.js backend discovery call with QalbIT',
 
             'secondary_label' => 'Send us your API/backend requirements',
-            'secondary_url'   => '/contact-us/?topic=nodejs-api&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your Node.js backend requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
@@ -1113,10 +1113,10 @@ return [
             'intro' => 'QalbIT uses NestJS on top of Node.js and TypeScript to build modular, maintainable backends. We design clear module boundaries, domain layers and APIs so your SaaS, mobile apps and internal tools have a stable core that can grow without chaos.',
 
             'primary_cta_label' => 'Discuss your NestJS backend',
-            'primary_cta_href'  => '/contact-us/?technology=nestjs',
+            'primary_cta_href'  => '/contact-us/?topic=nestjs',
 
-            'secondary_cta_label' => 'See backend & API case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=nestjs',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         // Overview
@@ -1182,7 +1182,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your NestJS backend scope',
-                'url'   => '/contact-us/?technology=nestjs',
+                'url'   => '/contact-us/?topic=nestjs',
             ],
         ],
 
@@ -1238,7 +1238,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this NestJS process for my backend',
-                'url'   => '/contact-us/?technology=nestjs&topic=process',
+                'url'   => '/contact-us/?topic=process-nestjs',
             ],
         ],
 
@@ -1278,7 +1278,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if NestJS is the right fit for your backend',
-                'url'   => '/contact-us/?technology=nestjs&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-nestjs',
             ],
         ],
 
@@ -1343,7 +1343,7 @@ return [
             'primary_aria'  => 'Book a NestJS backend discovery call with QalbIT',
 
             'secondary_label' => 'Send us your backend/API requirements',
-            'secondary_url'   => '/contact-us/?topic=nestjs-api&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your NestJS backend requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
@@ -1383,10 +1383,10 @@ return [
             'intro' => 'QalbIT uses modern Laravel and PHP to design and build robust backends and full-stack web applications. We focus on clear domain modelling, sensible module boundaries and production-ready infrastructure so your product is easier to evolve, not just launch once.',
 
             'primary_cta_label' => 'Discuss your Laravel project',
-            'primary_cta_href'  => '/contact-us/?technology=laravel',
+            'primary_cta_href'  => '/contact-us/?topic=laravel',
 
-            'secondary_cta_label' => 'See Laravel & PHP case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=laravel',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         // Overview
@@ -1452,7 +1452,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your Laravel application scope',
-                'url'   => '/contact-us/?technology=laravel',
+                'url'   => '/contact-us/?topic=laravel',
             ],
         ],
 
@@ -1508,7 +1508,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this Laravel process for my project',
-                'url'   => '/contact-us/?technology=laravel&topic=process',
+                'url'   => '/contact-us/?topic=process-laravel',
             ],
         ],
 
@@ -1548,7 +1548,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your product fits these Laravel patterns',
-                'url'   => '/contact-us/?technology=laravel&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-laravel',
             ],
         ],
 
@@ -1613,7 +1613,7 @@ return [
             'primary_aria'  => 'Book a Laravel discovery call with QalbIT',
 
             'secondary_label' => 'Send us your Laravel requirements',
-            'secondary_url'   => '/contact-us/?topic=laravel-project&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your Laravel project requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
@@ -1653,10 +1653,10 @@ return [
             'intro' => 'QalbIT uses Flutter to design and build cross-platform mobile apps that feel close to native on both iOS and Android. We focus on clear user journeys, reliable offline behaviour where needed and clean integration with your backend so the app is maintainable long term.',
 
             'primary_cta_label' => 'Discuss your Flutter app idea',
-            'primary_cta_href'  => '/contact-us/?technology=flutter',
+            'primary_cta_href'  => '/contact-us/?topic=flutter',
 
-            'secondary_cta_label' => 'See mobile app case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=flutter',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         // Overview
@@ -1722,7 +1722,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your Flutter app scope',
-                'url'   => '/contact-us/?technology=flutter',
+                'url'   => '/contact-us/?topic=flutter',
             ],
         ],
 
@@ -1778,7 +1778,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this Flutter process for my app',
-                'url'   => '/contact-us/?technology=flutter&topic=process',
+                'url'   => '/contact-us/?topic=process-flutter',
             ],
         ],
 
@@ -1818,7 +1818,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your use case is a good fit for Flutter',
-                'url'   => '/contact-us/?technology=flutter&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-flutter',
             ],
         ],
 
@@ -1883,7 +1883,7 @@ return [
             'primary_aria'  => 'Book a Flutter discovery call with QalbIT',
 
             'secondary_label' => 'Send us your Flutter app requirements',
-            'secondary_url'   => '/contact-us/?topic=flutter-requirements&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your Flutter app requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
@@ -1923,10 +1923,10 @@ return [
             'intro' => 'QalbIT builds native Android apps using Kotlin and the modern Android ecosystem. We focus on stable performance across real devices, robust offline behaviour where needed and tight integration with your backend and internal systems.',
 
             'primary_cta_label' => 'Discuss your Android app project',
-            'primary_cta_href'  => '/contact-us/?technology=android',
+            'primary_cta_href'  => '/contact-us/?topic=android',
 
-            'secondary_cta_label' => 'See mobile app case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=android',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         // Overview
@@ -1992,7 +1992,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your Android app requirements',
-                'url'   => '/contact-us/?technology=android',
+                'url'   => '/contact-us/?topic=android',
             ],
         ],
 
@@ -2048,7 +2048,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this Android process for my app',
-                'url'   => '/contact-us/?technology=android&topic=process',
+                'url'   => '/contact-us/?topic=process-android',
             ],
         ],
 
@@ -2088,7 +2088,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your use case needs native Android',
-                'url'   => '/contact-us/?technology=android&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-android',
             ],
         ],
 
@@ -2153,7 +2153,7 @@ return [
             'primary_aria'  => 'Book an Android app development discovery call with QalbIT',
 
             'secondary_label' => 'Send us your Android requirements',
-            'secondary_url'   => '/contact-us/?topic=android-requirements&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your Android app requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
@@ -2193,10 +2193,10 @@ return [
             'intro' => 'QalbIT uses React Native when you want one shared codebase for iOS and Android without sacrificing too much on UX or performance. We design mobile experiences that work smoothly across platforms and integrate cleanly with your APIs, auth and analytics.',
 
             'primary_cta_label' => 'Discuss your React Native app',
-            'primary_cta_href'  => '/contact-us/?technology=reactnative',
+            'primary_cta_href'  => '/contact-us/?topic=reactnative',
 
-            'secondary_cta_label' => 'See mobile app case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=react-native',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         // Overview
@@ -2262,7 +2262,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss if React Native is right for your app',
-                'url'   => '/contact-us/?technology=reactnative',
+                'url'   => '/contact-us/?topic=reactnative',
             ],
         ],
 
@@ -2318,7 +2318,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this React Native process',
-                'url'   => '/contact-us/?technology=reactnative&topic=process',
+                'url'   => '/contact-us/?topic=process-reactnative',
             ],
         ],
 
@@ -2358,7 +2358,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your use case suits React Native',
-                'url'   => '/contact-us/?technology=reactnative&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-reactnative',
             ],
         ],
 
@@ -2423,7 +2423,7 @@ return [
             'primary_aria'  => 'Book a React Native development discovery call with QalbIT',
 
             'secondary_label' => 'Send us your React Native requirements',
-            'secondary_url'   => '/contact-us/?topic=react-native-requirements&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your React Native app requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
@@ -2463,10 +2463,10 @@ return [
             'intro' => 'QalbIT uses WordPress when you need a dependable CMS with strong editorial workflows and SEO capabilities – not just a quick theme. We design custom themes, build plugins, optimise performance and, where needed, connect WordPress to modern frontends such as Next.js.',
 
             'primary_cta_label' => 'Discuss your WordPress project',
-            'primary_cta_href'  => '/contact-us/?technology=wordpress',
+            'primary_cta_href'  => '/contact-us/?topic=wordpress',
 
-            'secondary_cta_label' => 'See web & WordPress case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=wordpress',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
         ],
 
         // Overview
@@ -2532,7 +2532,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your WordPress use case',
-                'url'   => '/contact-us/?technology=wordpress',
+                'url'   => '/contact-us/?topic=wordpress',
             ],
         ],
 
@@ -2588,7 +2588,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this WordPress process',
-                'url'   => '/contact-us/?technology=wordpress&topic=process',
+                'url'   => '/contact-us/?topic=process-wordpress',
             ],
         ],
 
@@ -2628,7 +2628,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your project is a good fit for WordPress',
-                'url'   => '/contact-us/?technology=wordpress&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-wordpress',
             ],
         ],
 
@@ -2693,7 +2693,7 @@ return [
             'primary_aria'  => 'Book a WordPress development consultation with QalbIT',
 
             'secondary_label' => 'Send us your WordPress requirements',
-            'secondary_url'   => '/contact-us/?topic=wordpress-requirements&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your WordPress requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
@@ -2733,10 +2733,10 @@ return [
             'intro' => 'QalbIT works with teams who still rely on CodeIgniter for core operations. We stabilise existing apps, reduce risk, improve performance and, when appropriate, design a clear path to modern stacks such as Laravel – without risking a big-bang rewrite that breaks everything.',
 
             'primary_cta_label' => 'Discuss your CodeIgniter system',
-            'primary_cta_href'  => '/contact-us/?technology=codeigniter',
+            'primary_cta_href'  => '/contact-us/?topic=codeigniter',
 
             'secondary_cta_label' => 'Request a CodeIgniter audit',
-            'secondary_cta_href'  => '/contact-us/?technology=codeigniter&topic=audit',
+            'secondary_cta_href'  => '/contact-us/?topic=audit-codeigniter',
         ],
 
         // Overview
@@ -2802,7 +2802,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your CodeIgniter challenges',
-                'url'   => '/contact-us/?technology=codeigniter',
+                'url'   => '/contact-us/?topic=codeigniter',
             ],
         ],
 
@@ -2858,7 +2858,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this for my CodeIgniter app',
-                'url'   => '/contact-us/?technology=codeigniter&topic=process',
+                'url'   => '/contact-us/?topic=process-codeigniter',
             ],
         ],
 
@@ -2898,7 +2898,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your CodeIgniter app fits these patterns',
-                'url'   => '/contact-us/?technology=codeigniter&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-codeigniter',
             ],
         ],
 
@@ -2963,7 +2963,7 @@ return [
             'primary_aria'  => 'Book a CodeIgniter modernisation call with QalbIT',
 
             'secondary_label' => 'Send us details of your legacy app',
-            'secondary_url'   => '/contact-us/?topic=codeigniter-legacy&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your CodeIgniter legacy app details to QalbIT',
 
             'meta' => 'Share your current app URL (if applicable), hosting details and main pain points and we will respond with next steps.',
@@ -3003,10 +3003,10 @@ return [
             'intro' => 'QalbIT uses TypeScript as a foundation for Node/NestJS backends, React/Next.js frontends and shared type libraries. Typed contracts between services and UIs make complex products easier to evolve without breaking existing behaviour.',
 
             'primary_cta_label' => 'Discuss your TypeScript project',
-            'primary_cta_href'  => '/contact-us/?technology=typescript',
+            'primary_cta_href'  => '/contact-us/?topic=typescript',
 
             'secondary_cta_label' => 'Review my existing JavaScript codebase',
-            'secondary_cta_href'  => '/contact-us/?technology=typescript&topic=audit',
+            'secondary_cta_href'  => '/contact-us/?topic=audit-typescript',
         ],
 
         // Overview
@@ -3072,7 +3072,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your TypeScript requirements',
-                'url'   => '/contact-us/?technology=typescript',
+                'url'   => '/contact-us/?topic=typescript',
             ],
         ],
 
@@ -3128,7 +3128,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this for my codebase',
-                'url'   => '/contact-us/?technology=typescript&topic=process',
+                'url'   => '/contact-us/?topic=process-typescript',
             ],
         ],
 
@@ -3168,7 +3168,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if TypeScript is a fit for your product',
-                'url'   => '/contact-us/?technology=typescript&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-typescript',
             ],
         ],
 
@@ -3233,7 +3233,7 @@ return [
             'primary_aria'  => 'Book a TypeScript development consultation with QalbIT',
 
             'secondary_label' => 'Send us your current JS/TS repo',
-            'secondary_url'   => '/contact-us/?topic=typescript-audit&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your current JavaScript/TypeScript repository details to QalbIT',
 
             'meta' => 'Share your stack, repositories and main pain points, and we will come back with a practical TypeScript plan.',
@@ -3273,10 +3273,10 @@ return [
             'intro' => 'QalbIT uses PostgreSQL as the core data layer for modern SaaS products, internal tools and transactional systems. We focus on clean schema design, predictable performance and resilience, so your application can grow without database surprises.',
 
             'primary_cta_label' => 'Discuss your PostgreSQL requirements',
-            'primary_cta_href'  => '/contact-us/?technology=postgresql',
+            'primary_cta_href'  => '/contact-us/?topic=postgresql',
 
             'secondary_cta_label' => 'Review my current database setup',
-            'secondary_cta_href'  => '/contact-us/?technology=postgresql&topic=audit',
+            'secondary_cta_href'  => '/contact-us/?topic=audit-postgresql',
         ],
 
         // Overview
@@ -3342,7 +3342,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your PostgreSQL data layer',
-                'url'   => '/contact-us/?technology=postgresql',
+                'url'   => '/contact-us/?topic=postgresql',
             ],
         ],
 
@@ -3398,7 +3398,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this for my database',
-                'url'   => '/contact-us/?technology=postgresql&topic=process',
+                'url'   => '/contact-us/?topic=process-postgresql',
             ],
         ],
 
@@ -3438,7 +3438,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if PostgreSQL is right for your product',
-                'url'   => '/contact-us/?technology=postgresql&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-postgresql',
             ],
         ],
 
@@ -3503,7 +3503,7 @@ return [
             'primary_aria'  => 'Book a PostgreSQL consulting call with QalbIT',
 
             'secondary_label' => 'Send us your database details',
-            'secondary_url'   => '/contact-us/?topic=postgresql-audit&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your PostgreSQL database requirements to QalbIT',
 
             'meta' => 'We usually start with a short assessment and then outline quick wins plus a longer-term roadmap.',
@@ -3543,10 +3543,10 @@ return [
             'intro' => 'QalbIT uses MySQL as a stable data layer for Laravel, PHP and Node.js applications. We pay attention to schema design, indexing, queries and backups so your product can grow without running into database bottlenecks early.',
 
             'primary_cta_label' => 'Discuss your MySQL database',
-            'primary_cta_href'  => '/contact-us/?technology=mysql',
+            'primary_cta_href'  => '/contact-us/?topic=mysql',
 
             'secondary_cta_label' => 'Ask for a MySQL health check',
-            'secondary_cta_href'  => '/contact-us/?technology=mysql&topic=audit',
+            'secondary_cta_href'  => '/contact-us/?topic=audit-mysql',
         ],
 
         // Overview
@@ -3612,7 +3612,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your MySQL challenges',
-                'url'   => '/contact-us/?technology=mysql',
+                'url'   => '/contact-us/?topic=mysql',
             ],
         ],
 
@@ -3668,7 +3668,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this for my MySQL setup',
-                'url'   => '/contact-us/?technology=mysql&topic=process',
+                'url'   => '/contact-us/?topic=process-mysql',
             ],
         ],
 
@@ -3708,7 +3708,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if MySQL is right for your next phase',
-                'url'   => '/contact-us/?technology=mysql&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-mysql',
             ],
         ],
 
@@ -3773,7 +3773,7 @@ return [
             'primary_aria'  => 'Book a MySQL consulting call with QalbIT',
 
             'secondary_label' => 'Send us your database details',
-            'secondary_url'   => '/contact-us/?topic=mysql-audit&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your MySQL database requirements to QalbIT',
 
             'meta' => 'We usually begin with a short audit and highlight both quick wins and longer-term improvements.',
@@ -3813,10 +3813,10 @@ return [
             'intro' => 'QalbIT designs and operates AWS environments for Laravel, Node.js, React/Next.js and mobile backends. We focus on clear architectures, automation, security and cost control, so your cloud setup is understandable and maintainable – not a black box.',
 
             'primary_cta_label' => 'Discuss your AWS environment',
-            'primary_cta_href'  => '/contact-us/?technology=aws',
+            'primary_cta_href'  => '/contact-us/?topic=aws',
 
             'secondary_cta_label' => 'Request an AWS architecture review',
-            'secondary_cta_href'  => '/contact-us/?technology=aws&topic=audit',
+            'secondary_cta_href'  => '/contact-us/?topic=audit-aws',
         ],
 
         // Overview
@@ -3882,7 +3882,7 @@ return [
 
             'cta' => [
                 'label' => 'Talk through your AWS setup',
-                'url'   => '/contact-us/?technology=aws',
+                'url'   => '/contact-us/?topic=aws',
             ],
         ],
 
@@ -3938,7 +3938,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this for my AWS setup',
-                'url'   => '/contact-us/?technology=aws&topic=process',
+                'url'   => '/contact-us/?topic=process-aws',
             ],
         ],
 
@@ -3978,7 +3978,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if AWS is right for your next phase',
-                'url'   => '/contact-us/?technology=aws&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-aws',
             ],
         ],
 
@@ -4043,7 +4043,7 @@ return [
             'primary_aria'  => 'Book an AWS consulting call with QalbIT',
 
             'secondary_label' => 'Send us your AWS details',
-            'secondary_url'   => '/contact-us/?topic=aws-audit&source=requirements',
+            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
             'secondary_aria'  => 'Send your AWS environment details to QalbIT',
 
             'meta' => 'Often we begin with a focused review of your current setup, then phase improvements to reduce risk and downtime.',

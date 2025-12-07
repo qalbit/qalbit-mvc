@@ -246,11 +246,11 @@ return [
             'subtitle' => 'We work with founders and teams across the world to ship SaaS products, core platforms and internal tools. If you enjoy Laravel, Node.js, React, Next.js or Flutter – and want to grow as a product-minded engineer – this is where you can do your best work.',
             'primary_cta' => [
                 'label' => 'View open positions',
-                'href'  => '#cr3-open-positions',
+                'href'  => '#careers-openings',
             ],
             'secondary_cta' => [
                 'label' => 'Share your resume',
-                'href'  => '/apply/?ref=careers-hero',
+                'href'  => '/career/apply/?ref=careers-hero',
             ],
         ],
         'why' => [
@@ -365,7 +365,7 @@ return [
             'id'      => 'cr10-cta',
             'eyebrow' => 'Not seeing the exact role you are looking for?',
             'title'   => 'Send us your profile for future software developer roles at QalbIT.',
-            'body'    => "Tell us about your experience with Laravel, PHP, Node.js, React, Next.js, Flutter or QA – plus the kind of work you would like to do. We will review your profile and reach out when there\'s a strong match.",
+            'body'    => "Tell us about your experience with Laravel, PHP, Node.js, React, Next.js, Flutter or QA – plus the kind of work you would like to do. We will review your profile and reach out when there's a strong match.",
             'primary_label' => 'Share your resume',
             'primary_url'   => '/apply/',
             'secondary_label' => 'View open positions again',

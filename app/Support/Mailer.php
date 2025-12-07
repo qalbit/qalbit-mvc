@@ -44,6 +44,84 @@ class Mailer
         return $sent;
     }
 
+    public function sendCareerApplication(array $data): bool
+    {
+        $body = $this->buildCareerBody($data);
+
+        $sent      = false;
+        $transport = 'none';
+
+        if ($this->isSmtpConfigured()) {
+            $sent      = $this->sendViaSmtp($data, $body);
+            $transport = $sent ? 'smtp' : 'smtp_failed';
+        }
+
+        if (!$sent) {
+            $mailSent = $this->sendViaMail($data, $body);
+            if ($mailSent) {
+                $transport = ($transport === 'smtp_failed') ? 'mail_fallback' : 'mail';
+                $sent      = true;
+            }
+        }
+
+        $this->logCareer($data, $sent, $transport);
+
+        return $sent;
+    }
+
+    protected function buildCareerBody(array $data): string
+    {
+        $lines = [
+            'Type: Career application',
+            'Role slug: ' . ($data['role_slug'] ?? ''),
+            'Full name: ' . ($data['full_name'] ?? $data['name'] ?? ''),
+            'Email: ' . ($data['email'] ?? ''),
+            'Phone: ' . ($data['phone'] ?? ''),
+            'Location: ' . ($data['location'] ?? ''),
+            'Experience (years): ' . ($data['experience'] ?? ''),
+            'Current / last role: ' . ($data['current_role'] ?? ''),
+            'Notice period: ' . ($data['notice_period'] ?? ''),
+            'LinkedIn / Portfolio: ' . ($data['linkedin'] ?? ''),
+            'GitHub / Code samples: ' . ($data['github'] ?? ''),
+            'Current CTC: ' . ($data['current_ctc'] ?? ''),
+            'Expected CTC: ' . ($data['expected_ctc'] ?? ''),
+            '',
+            'Why QalbIT / Cover note:',
+            $data['about'] ?? '',
+            '',
+            'Resume stored at: ' . ($data['file_path'] ?? 'N/A'),
+        ];
+
+        return implode("\n", $lines);
+    }
+
+    protected function logCareer(array $data, bool $sent, string $transport): void
+    {
+        $basePath = dirname(__DIR__, 2);
+        $logDir   = $basePath . '/storage/logs';
+
+        if (!is_dir($logDir)) {
+            @mkdir($logDir, 0775, true);
+        }
+
+        $logFile = $logDir . '/career.log';
+
+        $logLine = sprintf(
+            "[%s] role=%s | name=%s | email=%s | exp=%s | resume=%s | sent=%s | transport=%s\n",
+            date('c'),
+            $data['role_slug']     ?? '',
+            $data['full_name']     ?? $data['name'] ?? '',
+            $data['email']         ?? '',
+            $data['experience']    ?? '',
+            $data['file_path']   ?? '',
+            $sent ? 'yes' : 'no',
+            $transport
+        );
+
+        @file_put_contents($logFile, $logLine, FILE_APPEND);
+    }
+
+
     // ---------------------------------------------------------
     // Internal helpers
     // ---------------------------------------------------------
@@ -87,14 +165,12 @@ class Mailer
             $mail->Host = $config['host'];
             $mail->Port = $config['port'] ?? 587;
 
-            // Auth
             $mail->SMTPAuth = !empty($config['username']) || !empty($config['password']);
             if ($mail->SMTPAuth) {
                 $mail->Username = $config['username'] ?? '';
                 $mail->Password = $config['password'] ?? '';
             }
 
-            // Encryption
             $encryption = $config['encryption'] ?? 'tls';
             if ($encryption === 'tls') {
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
@@ -104,7 +180,6 @@ class Mailer
 
             $mail->CharSet = 'UTF-8';
 
-            // Addresses
             $fromEmail = $config['from_email'] ?? config('app.from_email', 'no-reply@qalbit.com');
             $fromName  = $config['from_name']  ?? config('app.name', 'QalbIT');
             $toEmail   = $config['to_email']   ?? config('app.contact_email', 'info@qalbit.com');
@@ -116,7 +191,17 @@ class Mailer
                 $mail->addReplyTo($data['email'], $data['name'] ?? '');
             }
 
-            $subject = 'New enquiry from ' . ($data['name'] ?? 'Website visitor');
+            // Attach resume if available
+            if (!empty($data['file_path'])) {
+                $basePath       = dirname(__DIR__, 2);
+                $resumeAbsolute = $basePath . $data['file_path'];
+                if (is_readable($resumeAbsolute)) {
+                    $mail->addAttachment($resumeAbsolute, basename($resumeAbsolute));
+                }
+            }
+
+            $subject = $data['mail_subject']
+                ?? ('New enquiry from ' . ($data['name'] ?? 'Website visitor'));
 
             $mail->Subject = $subject;
             $mail->Body    = $body;
@@ -130,14 +215,13 @@ class Mailer
         }
     }
 
-    /**
-     * Fallback to native mail().
-     */
     protected function sendViaMail(array $data, string $body): bool
     {
         $to      = config('app.contact_email', 'info@qalbit.com');
         $from    = config('app.from_email', 'no-reply@qalbit.com');
-        $subject = 'New enquiry from ' . ($data['name'] ?? 'Website visitor');
+
+        $subject = $data['mail_subject']
+            ?? ('New enquiry from ' . ($data['name'] ?? 'Website visitor'));
 
         $headers = [];
         $headers[] = 'From: ' . $from;
@@ -154,6 +238,7 @@ class Mailer
 
         return false;
     }
+
 
     protected function logContact(array $data, bool $sent, string $transport): void
     {

@@ -35,11 +35,11 @@ return [
 
             'intro' => 'QalbIT designs, builds and supports custom software that fits your business instead of forcing you to work around generic tools. From replacing spreadsheets to modernising legacy systems, we help you plan realistic scope, understand custom software development costs and launch stable products your team can rely on.',
 
-            'primary_cta_label' => 'Discuss your custom software project',
-            'primary_cta_href'  => '/contact-us/?service=custom-software',
+            'primary_cta_label'    => 'Discuss your custom software project',
+            'primary_cta_href'     => '/contact-us/?topic=custom-software',
 
-            'secondary_cta_label' => 'View related case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=custom-software',
+            'secondary_cta_label'  => 'Book a quick discovery call',
+            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-custom-software',
 
             'snapshot_title' => 'Custom software snapshot',
             'snapshot'       => [
@@ -139,7 +139,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your custom software scope',
-                'url'   => '/contact-us/?service=custom-software',
+                'url'   => '/contact-us/?topic=custom-software-development-service',
             ],
         ],
 
@@ -195,7 +195,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this process for my project',
-                'url'   => '/contact-us/?service=custom-software&topic=process',
+                'url'   => '/contact-us/?topic=process-custom-software',
             ],
         ],
 
@@ -232,14 +232,14 @@ return [
                     'badge'       => 'MVP',
                     'link'        => [
                         'label' => 'Discuss a custom software MVP',
-                        'url'   => '/contact-us/?service=custom-software&topic=mvp',
+                        'url'   => '/contact-us/?topic=mvp-custom-software',
                     ],
                 ],
             ],
 
             'cta' => [
                 'label' => 'Ask if your idea fits these use cases',
-                'url'   => '/contact-us/?service=custom-software&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-custom-software',
             ],
         ],
 
@@ -346,8 +346,8 @@ return [
             'primary_cta_label' => 'Discuss your AI use cases',
             'primary_cta_href'  => '/contact-us/?topic=ai-solutions',
 
-            'secondary_cta_label' => 'See AI-related case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=ai',
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-ai-software',
 
             'snapshot_title' => 'AI solutions snapshot',
             'snapshot'       => [
@@ -445,7 +445,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your AI solution scope',
-                'url'   => '/contact-us/?service=ai-solutions',
+                'url'   => '/contact-us/?topic=ai-solutions',
             ],
         ],
 
@@ -500,7 +500,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this AI process for my product',
-                'url'   => '/contact-us/?service=ai-solutions&topic=process',
+                'url'   => '/contact-us/?topic=process-ai-solutions',
             ],
         ],
 
@@ -518,7 +518,7 @@ return [
                     'badge'       => 'Support AI',
                     'link'        => [
                         'label' => 'Ask how this can plug into your helpdesk',
-                        'url'   => '/contact-us/?service=ai-solutions&topic=support-ai',
+                        'url'   => '/contact-us/?topic=support-ai-solutions',
                     ],
                 ],
                 [
@@ -528,7 +528,7 @@ return [
                     'badge'       => 'In-product AI',
                     'link'        => [
                         'label' => 'Discuss an AI copilot for your app',
-                        'url'   => '/contact-us/?service=ai-solutions&topic=copilot',
+                        'url'   => '/contact-us/?topic=copilot-ai-solutions',
                     ],
                 ],
                 [
@@ -547,7 +547,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your AI idea fits these use cases',
-                'url'   => '/contact-us/?service=ai-solutions&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-ai-solutions',
             ],
         ],
 
@@ -649,10 +649,13 @@ return [
             'title'                => 'SaaS Application Development Services for <span class="text-gradient-brand-animated">Subscription & B2B Products</span>.',
             'highlight'            => 'Subscription & B2B Products',
             'intro'                => 'QalbIT helps you plan, design, build and scale secure, multi-tenant SaaS products – from first MVP to mature platforms with predictable billing, analytics and integrations.',
+            
             'primary_cta_label'    => 'Discuss your SaaS product',
             'primary_cta_href'     => '/contact-us/?topic=saas-development',
-            'secondary_cta_label'  => 'See SaaS-style case studies',
-            'secondary_cta_href'   => '/case-studies/',
+            
+            'secondary_cta_label'  => 'Book a quick discovery call',
+            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
+
             'snapshot_title'       => 'SaaS snapshot',
             'snapshot' => [
                 ['label' => 'Core focus',        'value' => 'SaaS & subscription platforms'],
@@ -746,7 +749,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your SaaS platform scope',
-                'url'   => '/contact-us/?service=saas',
+                'url'   => '/contact-us/?topic=saas-development',
             ],
         ],
 
@@ -807,7 +810,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this process for my SaaS',
-                'url'   => '/contact-us/?service=saas&topic=process',
+                'url'   => '/contact-us/?topic=process-saas-solutions',
             ],
         ],
 
@@ -836,10 +839,6 @@ return [
                                     logistics, healthcare workflows) where you digitise a very specific process.',
                     'audience'    => 'Domain experts, agencies, operators',
                     'badge'       => 'Vertical SaaS',
-                    'link'        => [
-                        'label' => 'View case studies for niche SaaS',
-                        'url'   => '/case-studies/#vertical-saas',
-                    ],
                 ],
                 [
                     'label'       => 'Internal tools turned into SaaS',
@@ -859,7 +858,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your SaaS fits these use cases',
-                'url'   => '/contact-us/?service=saas&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-saas-solution',
             ],
         ],
 
@@ -925,9 +924,10 @@ return [
             'primary_aria'  => 'Book a SaaS discovery call with QalbIT',
 
             // Secondary CTA (optional)
-            'secondary_label' => 'View SaaS case studies',
-            'secondary_url'   => '/case-studies/?tag=saas',
-            'secondary_aria'  => 'View SaaS case studies delivered by QalbIT',
+            'secondary_label' => 'Send us your requirements',
+            'secondary_url'   => '/contact-us/?topic=custom-software-development&source=requirements',
+            'secondary_aria'  => 'Discuss your custom software development requirements with QalbIT',
+
 
             // Optional small helper text
             'meta' => 'Typically we respond within 24–48 hours with next steps.',
@@ -968,11 +968,11 @@ return [
 
             'intro' => 'QalbIT designs and builds custom web applications that sit at the heart of your business – from customer-facing portals and self-service dashboards to internal tools and workflow automation. We focus on web application development that reduces manual work, centralises data and gives teams faster, more reliable ways to operate.',
 
-            'primary_cta_label' => 'Discuss your web application',
-            'primary_cta_href'  => '/contact-us/?service=web-applications',
-
-            'secondary_cta_label' => 'See relevant case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=web-app',
+            'primary_cta_label'    => 'Discuss your web application',
+            'primary_cta_href'     => '/contact-us/?topic=web-applications',
+            
+            'secondary_cta_label'  => 'Book a quick discovery call',
+            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'Web applications snapshot',
             'snapshot'       => [
@@ -1072,7 +1072,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your web application scope',
-                'url'   => '/contact-us/?service=web-applications',
+                'url'   => '/contact-us/?topic=web-applications',
             ],
         ],
 
@@ -1128,7 +1128,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this process for my web app',
-                'url'   => '/contact-us/?service=web-applications&topic=process',
+                'url'   => '/contact-us/?topic=process-web-applications',
             ],
         ],
 
@@ -1147,7 +1147,7 @@ return [
                     'badge'       => 'Customer portals',
                     'link'        => [
                         'label' => 'Ask how this could work for your customers',
-                        'url'   => '/contact-us/?service=web-applications&topic=customer-portal',
+                        'url'   => '/contact-us/?topic=customer-portal-web-applications',
                     ],
                 ],
                 [
@@ -1172,7 +1172,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your idea fits these web app patterns',
-                'url'   => '/contact-us/?service=web-applications&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-web-applications',
             ],
         ],
 
@@ -1279,8 +1279,8 @@ return [
             'primary_cta_label' => 'Discuss your web project',
             'primary_cta_href'  => '/contact-us/?topic=custom-web-development',
 
-            'secondary_cta_label' => 'See web development case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=web-development',
+            'secondary_cta_label'  => 'Book a quick discovery call',
+            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'Custom web snapshot',
             'snapshot'       => [
@@ -1360,25 +1360,25 @@ return [
                     'label'       => 'Responsive UX, accessibility and performance',
                     'description' => 'Design systems, component libraries, accessibility considerations and performance tuning tuned for real devices and networks.',
                     'badge'       => 'UX & performance',
-                    'icon'        => '/images/icons/qa.svg', // reused
+                    'icon'        => '/images/icons/qa.svg',
                 ],
                 [
                     'label'       => 'Integrations, APIs and third-party services',
                     'description' => 'Connections to CRMs, ERPs, payment gateways, marketing tools and other internal systems via secure, documented APIs.',
                     'badge'       => 'Integrations',
-                    'icon'        => '/images/icons/api.svg', // reused
+                    'icon'        => '/images/icons/api.svg',
                 ],
                 [
                     'label'       => 'Security, SEO and operational foundations',
                     'description' => 'Sensibly secure authentication, roles and content workflows with technical SEO, logging and monitoring as part of the baseline.',
                     'badge'       => 'Foundations',
-                    'icon'        => '/images/icons/compliance.svg', // reused
+                    'icon'        => '/images/icons/compliance.svg',
                 ],
             ],
 
             'cta' => [
                 'label' => 'Discuss your web development scope',
-                'url'   => '/contact-us/?service=custom-web-development',
+                'url'   => '/contact-us/?topic=custom-web-development',
             ],
         ],
 
@@ -1395,7 +1395,7 @@ return [
                     'description' => 'Understand your goals, audience, existing site or systems, content and constraints. Map out key journeys, integrations and technical considerations.',
                     'duration'    => '1–2 weeks',
                     'outcome'     => 'Clear goals, sitemap, key UX flows and a prioritised feature list for the first release.',
-                    'icon'        => '/images/icons/discovery.svg', // reused
+                    'icon'        => '/images/icons/discovery.svg',
                 ],
                 [
                     'step'        => 2,
@@ -1403,7 +1403,7 @@ return [
                     'description' => 'Define information architecture, wireframes, UI components and technical architecture for frontend, backend and integrations.',
                     'duration'    => '1–3 weeks',
                     'outcome'     => 'Approved UX flows, UI directions and an implementation plan your stakeholders understand.',
-                    'icon'        => '/images/icons/architecture-design.svg', // reused
+                    'icon'        => '/images/icons/architecture-design.svg',
                 ],
                 [
                     'step'        => 3,
@@ -1411,7 +1411,7 @@ return [
                     'description' => 'Build templates, components, APIs and integrations in small, reviewable increments with regular demos and check-ins.',
                     'duration'    => '3–8+ weeks (scope-dependent)',
                     'outcome'     => 'Production-ready website, portal or web application running in a staging or pre-production environment.',
-                    'icon'        => '/images/icons/core-modules.svg', // reused
+                    'icon'        => '/images/icons/core-modules.svg',
                 ],
                 [
                     'step'        => 4,
@@ -1419,7 +1419,7 @@ return [
                     'description' => 'Functional testing, cross-browser/device checks, performance tuning and SEO basics before launch – followed by early optimisation based on real traffic.',
                     'duration'    => '2–4 weeks',
                     'outcome'     => 'Live web experience with analytics, logging and a shortlist of post-launch improvements.',
-                    'icon'        => '/images/icons/launch.svg', // reused
+                    'icon'        => '/images/icons/launch.svg',
                 ],
                 [
                     'step'        => 5,
@@ -1427,13 +1427,13 @@ return [
                     'description' => 'Continue iterating on content, UX, features and integrations via a retainer or dedicated squad, depending on your roadmap.',
                     'duration'    => 'Ongoing, month-to-month',
                     'outcome'     => 'A web platform that evolves with your business instead of needing full rebuilds every few years.',
-                    'icon'        => '/images/icons/scale.svg', // reused
+                    'icon'        => '/images/icons/scale.svg',
                 ],
             ],
 
             'cta' => [
                 'label' => 'Walk me through this web development process',
-                'url'   => '/contact-us/?service=custom-web-development&topic=process',
+                'url'   => '/contact-us/?topic=process-custom-web-development',
             ],
         ],
 
@@ -1449,10 +1449,6 @@ return [
                     'description' => 'Brand and trust-focused websites with clear positioning, service pages, landing pages and lead capture forms.',
                     'audience'    => 'Marketing, leadership and sales teams',
                     'badge'       => 'Websites',
-                    'link'        => [
-                        'label' => 'View website and marketing site case studies',
-                        'url'   => '/case-studies/#websites',
-                    ],
                 ],
                 [
                     'label'       => 'Customer and partner portals',
@@ -1461,7 +1457,7 @@ return [
                     'badge'       => 'Portals',
                     'link'        => [
                         'label' => 'Ask how a portal could work for your business',
-                        'url'   => '/contact-us/?service=custom-web-development&topic=portal',
+                        'url'   => '/contact-us/?topic=portal-custom-web-development',
                     ],
                 ],
                 [
@@ -1484,7 +1480,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your project fits these web use cases',
-                'url'   => '/contact-us/?service=custom-web-development&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-custom-web-development',
             ],
         ],
 
@@ -1542,13 +1538,15 @@ return [
             'title'   => 'Let us plan your next website, portal or web application.',
             'body'    => 'Share where your web presence is today and what you want it to achieve. We will review your goals, current site or systems and constraints, then suggest a practical roadmap – whether you are redesigning an existing site or launching a new web application.',
 
+            // Primary CTA
             'primary_label' => 'Book a web development call',
             'primary_url'   => '/contact-us/?topic=custom-web-development',
             'primary_aria'  => 'Book a web development call with QalbIT',
 
-            'secondary_label' => 'View web development case studies',
-            'secondary_url'   => '/case-studies/?tag=web-development',
-            'secondary_aria'  => 'View web development case studies delivered by QalbIT',
+            // Secondary CTA
+            'secondary_label' => 'Send us your requirements',
+            'secondary_url'   => '/contact-us/?topic=custom-web-development&source=requirements',
+            'secondary_aria'  => 'Discuss an Custom Web Development requirement with QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with next steps and one or two suggested approaches.',
         ],
@@ -1589,8 +1587,8 @@ return [
             'primary_cta_label' => 'Discuss your mobile app',
             'primary_cta_href'  => '/contact-us/?service=mobile-development',
 
-            'secondary_cta_label' => 'See mobile app case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=mobile-apps',
+            'secondary_cta_label'  => 'Book a quick discovery call',
+            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'Mobile development snapshot',
             'snapshot'       => [
@@ -1688,7 +1686,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your mobile app roadmap',
-                'url'   => '/contact-us/?service=mobile-development',
+                'url'   => '/contact-us/?topic=mobile-development',
             ],
         ],
 
@@ -1743,7 +1741,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this process for my app',
-                'url'   => '/contact-us/?service=mobile-development&topic=process',
+                'url'   => '/contact-us/?topic=process-mobile-development',
             ],
         ],
 
@@ -1761,7 +1759,7 @@ return [
                     'badge'       => 'Customer apps',
                     'link'        => [
                         'label' => 'Ask about customer-facing apps we have built',
-                        'url'   => '/contact-us/?service=mobile-development&topic=customer-apps',
+                        'url'   => '/contact-us/?topic=customer-apps-mobile-development',
                     ],
                 ],
                 [
@@ -1771,7 +1769,7 @@ return [
                     'badge'       => 'Internal apps',
                     'link'        => [
                         'label' => 'Discuss an operations or field app',
-                        'url'   => '/contact-us/?service=mobile-development&topic=field-apps',
+                        'url'   => '/contact-us/?topic=field-apps-mobile-development',
                     ],
                 ],
                 [
@@ -1781,7 +1779,7 @@ return [
                     'badge'       => 'SaaS companion',
                     'link'        => [
                         'label' => 'See how a mobile companion could work for your SaaS',
-                        'url'   => '/contact-us/?service=mobile-development&topic=saas-companion',
+                        'url'   => '/contact-us/?topic=saas-companion-mobile-development',
                     ],
                 ],
                 [
@@ -1794,7 +1792,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your mobile app idea fits these use cases',
-                'url'   => '/contact-us/?service=mobile-development&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-mobile-development',
             ],
         ],
 
@@ -1899,8 +1897,8 @@ return [
             'primary_cta_label' => 'Discuss your API project',
             'primary_cta_href'  => '/contact-us/?topic=api-development',
 
-            'secondary_cta_label' => 'See integration-style case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=api',
+            'secondary_cta_label'  => 'Book a quick discovery call',
+            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'API development snapshot',
             'snapshot'       => [
@@ -1998,7 +1996,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your API and integration scope',
-                'url'   => '/contact-us/?service=api-development',
+                'url'   => '/contact-us/?topic=api-development',
             ],
         ],
 
@@ -2053,7 +2051,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this API process for my product',
-                'url'   => '/contact-us/?service=api-development&topic=process',
+                'url'   => '/contact-us/?topic=process-api-development',
             ],
         ],
 
@@ -2071,7 +2069,7 @@ return [
                     'badge'       => 'Mobile backends',
                     'link'        => [
                         'label' => 'Ask how we structure mobile app APIs',
-                        'url'   => '/contact-us/?service=api-development&topic=mobile-backend',
+                        'url'   => '/contact-us/?topic=mobile-backend-api-development',
                     ],
                 ],
                 [
@@ -2081,7 +2079,7 @@ return [
                     'badge'       => 'SaaS APIs',
                     'link'        => [
                         'label' => 'Discuss a partner API for your SaaS',
-                        'url'   => '/contact-us/?service=api-development&topic=saas-api',
+                        'url'   => '/contact-us/?topic=saas-api-development',
                     ],
                 ],
                 [
@@ -2100,7 +2098,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your API needs fit these use cases',
-                'url'   => '/contact-us/?service=api-development&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-api-development',
             ],
         ],
 
@@ -2205,8 +2203,8 @@ return [
             'primary_cta_label' => 'Discuss your mobile backend',
             'primary_cta_href'  => '/contact-us/?service=mobile-backend',
 
-            'secondary_cta_label' => 'See backend-related case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=backend',
+            'secondary_cta_label'  => 'Book a quick discovery call',
+            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'Mobile backend snapshot',
             'snapshot'       => [
@@ -2304,7 +2302,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your mobile app backend scope',
-                'url'   => '/contact-us/?service=mobile-backend',
+                'url'   => '/contact-us/?topic=mobile-backend',
             ],
         ],
 
@@ -2359,7 +2357,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this process for my app',
-                'url'   => '/contact-us/?service=mobile-backend&topic=process',
+                'url'   => '/contact-us/?topic=process-mobile-backend',
             ],
         ],
 
@@ -2377,7 +2375,7 @@ return [
                     'badge'       => 'Greenfield',
                     'link'        => [
                         'label' => 'Ask how we would scope your new app',
-                        'url'   => '/contact-us/?service=mobile-backend&topic=new-app',
+                        'url'   => '/contact-us/?topic=new-app-mobile-backend',
                     ],
                 ],
                 [
@@ -2402,7 +2400,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your app fits these mobile backend use cases',
-                'url'   => '/contact-us/?service=mobile-backend&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-mobile-backend',
             ],
         ],
 
@@ -2507,8 +2505,8 @@ return [
             'primary_cta_label' => 'Discuss your cloud roadmap',
             'primary_cta_href'  => '/contact-us/?topic=cloud-solutions',
 
-            'secondary_cta_label' => 'Review cloud & DevOps case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=cloud',
+            'secondary_cta_label'  => 'Book a quick discovery call',
+            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'Cloud solutions snapshot',
             'snapshot'       => [
@@ -2606,7 +2604,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your cloud & DevOps scope',
-                'url'   => '/contact-us/?service=cloud-based-solutions',
+                'url'   => '/contact-us/?topic=cloud-based-solutions',
             ],
         ],
 
@@ -2661,7 +2659,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this cloud process for my setup',
-                'url'   => '/contact-us/?service=cloud-based-solutions&topic=process',
+                'url'   => '/contact-us/?topic=process-cloud-based-solutions',
             ],
         ],
 
@@ -2689,10 +2687,6 @@ return [
                     'description' => 'Provide ongoing DevOps, monitoring and infrastructure changes for SaaS products that need to keep shipping without scaling an in-house ops team.',
                     'audience'    => 'SaaS founders and CTOs',
                     'badge'       => 'Managed cloud',
-                    'link'        => [
-                        'label' => 'See how we support SaaS products in the cloud',
-                        'url'   => '/case-studies/?tag=saas',
-                    ],
                 ],
                 [
                     'label'       => 'Hybrid and multi-cloud environments',
@@ -2704,7 +2698,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your cloud scenario fits these use cases',
-                'url'   => '/contact-us/?service=cloud-based-solutions&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-cloud-based-solutions',
             ],
         ],
 
@@ -2808,8 +2802,8 @@ return [
             'primary_cta_label' => 'Discuss your e-commerce project',
             'primary_cta_href'  => '/contact-us/?service=e-commerce',
 
-            'secondary_cta_label' => 'View e-commerce case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=ecommerce',
+            'secondary_cta_label'  => 'Book a quick discovery call',
+            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'E-commerce snapshot',
             'snapshot'       => [
@@ -2907,7 +2901,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your e-commerce scope',
-                'url'   => '/contact-us/?service=e-commerce',
+                'url'   => '/contact-us/?topic=e-commerce',
             ],
         ],
 
@@ -2962,7 +2956,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this process for my store',
-                'url'   => '/contact-us/?service=e-commerce&topic=process',
+                'url'   => '/contact-us/?topic=process-e-commerce',
             ],
         ],
 
@@ -2980,7 +2974,7 @@ return [
                     'badge'       => 'D2C stores',
                     'link'        => [
                         'label' => 'Ask how we can improve your D2C funnel',
-                        'url'   => '/contact-us/?service=e-commerce&topic=d2c',
+                        'url'   => '/contact-us/?topic=d2c-e-commerce',
                     ],
                 ],
                 [
@@ -2990,7 +2984,7 @@ return [
                     'badge'       => 'B2B commerce',
                     'link'        => [
                         'label' => 'Discuss a B2B portal for your customers',
-                        'url'   => '/contact-us/?service=e-commerce&topic=b2b',
+                        'url'   => '/contact-us/?topic=b2b-e-commerce',
                     ],
                 ],
                 [
@@ -3000,7 +2994,7 @@ return [
                     'badge'       => 'Marketplaces',
                     'link'        => [
                         'label' => 'Explore a marketplace model for your niche',
-                        'url'   => '/contact-us/?service=e-commerce&topic=marketplace',
+                        'url'   => '/contact-us/?topic=marketplace-e-commerce',
                     ],
                 ],
                 [
@@ -3013,7 +3007,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your e-commerce idea fits these use cases',
-                'url'   => '/contact-us/?service=e-commerce&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-e-commerce',
             ],
         ],
 
@@ -3118,8 +3112,8 @@ return [
             'primary_cta_label' => 'Discuss your UX & product design needs',
             'primary_cta_href'  => '/contact-us/?topic=ux-design',
 
-            'secondary_cta_label' => 'View design-focused case studies',
-            'secondary_cta_href'  => '/case-studies/?tag=design',
+            'secondary_cta_label'  => 'Book a quick discovery call',
+            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'UX design snapshot',
             'snapshot'       => [
@@ -3217,7 +3211,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your UX design scope',
-                'url'   => '/contact-us/?service=ux-design',
+                'url'   => '/contact-us/?topic=ux-design',
             ],
         ],
 
@@ -3272,7 +3266,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this UX process for my product',
-                'url'   => '/contact-us/?service=ux-design&topic=process',
+                'url'   => '/contact-us/?topic=process-ux-design',
             ],
         ],
 
@@ -3288,10 +3282,6 @@ return [
                     'description' => 'UX for subscription-based SaaS platforms, admin dashboards and B2B tools where users work with data, settings and workflows every day.',
                     'audience'    => 'SaaS founders and product teams',
                     'badge'       => 'SaaS UX',
-                    'link'        => [
-                        'label' => 'See how we design SaaS dashboards',
-                        'url'   => '/case-studies/?tag=saas',
-                    ],
                 ],
                 [
                     'label'       => 'Web applications & internal tools',
@@ -3315,7 +3305,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your UX needs fit these use cases',
-                'url'   => '/contact-us/?service=ux-design&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-ux-design',
             ],
         ],
 
@@ -3420,8 +3410,8 @@ return [
             'primary_cta_label' => 'Discuss your payment integration',
             'primary_cta_href'  => '/contact-us/?service=payment-gateway',
 
-            'secondary_cta_label' => 'Share your billing requirements',
-            'secondary_cta_href'  => '/contact-us/?topic=billing-payments',
+            'secondary_cta_label'  => 'Book a quick discovery call',
+            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'Payment integration snapshot',
             'snapshot'       => [
@@ -3519,7 +3509,7 @@ return [
 
             'cta' => [
                 'label' => 'Discuss your payment gateway integration scope',
-                'url'   => '/contact-us/?service=payment-gateway',
+                'url'   => '/contact-us/?topic=payment-gateway',
             ],
         ],
 
@@ -3574,7 +3564,7 @@ return [
 
             'cta' => [
                 'label' => 'Walk me through this process for my product',
-                'url'   => '/contact-us/?service=payment-gateway&topic=process',
+                'url'   => '/contact-us/?topic=process-payment-gateway',
             ],
         ],
 
@@ -3592,7 +3582,7 @@ return [
                     'badge'       => 'E-commerce',
                     'link'        => [
                         'label' => 'Ask how this would work with your store stack',
-                        'url'   => '/contact-us/?service=payment-gateway&topic=ecommerce',
+                        'url'   => '/contact-us/?topic=ecommerce-payment-gateway',
                     ],
                 ],
                 [
@@ -3602,7 +3592,7 @@ return [
                     'badge'       => 'SaaS billing',
                     'link'        => [
                         'label' => 'Discuss subscription billing for your SaaS',
-                        'url'   => '/contact-us/?service=payment-gateway&topic=saas-billing',
+                        'url'   => '/contact-us/?topic=saas-billing-payment-gateway',
                     ],
                 ],
                 [
@@ -3621,7 +3611,7 @@ return [
 
             'cta' => [
                 'label' => 'Ask if your payment use case fits these patterns',
-                'url'   => '/contact-us/?service=payment-gateway&topic=use-cases',
+                'url'   => '/contact-us/?topic=use-cases-payment-gateway',
             ],
         ],
 

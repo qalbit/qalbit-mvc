@@ -3,8 +3,12 @@
 namespace App\Controllers;
 
 use App\Support\Faqs;
+use App\Support\File;
+use App\Support\Mailer;
 use App\Support\PageCache;
+use App\Support\Recaptcha;
 use App\Support\Schema;
+use App\Support\Session;
 use App\Support\View;
 
 class CareerController
@@ -153,10 +157,13 @@ class CareerController
 
     /**
      * Core renderer for the Apply page (generic and role-specific).
-     * Used by HTTP and can be called from cron/CLI.
      */
-    private function renderApplyPage(?string $roleSlug = null): string
-    {
+    private function renderApplyPage(
+        ?string $roleSlug = null,
+        array $errors = [],
+        array $old = [],
+        ?string $success = null
+    ): string {
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
 
         $careersConfig = config('careers', []);
@@ -219,7 +226,7 @@ class CareerController
                 . 'Share your experience, projects and resume – we will get back to you if there is a strong fit.';
         }
 
-        $canonical = $baseUrl . '/apply/';
+        $canonical = $baseUrl . '/career/apply/';
         if ($roleSlug) {
             $canonical .= '?role=' . urlencode($roleSlug);
         }
@@ -235,6 +242,10 @@ class CareerController
             'selectedRole' => $selectedRole,
             'roleSlug'     => $roleSlug,
             'allRoles'     => $rolesConfig,
+
+            'errors'       => $errors,
+            'old'          => $old,
+            'success'      => $success,
         ]);
 
         return View::render('layouts/main', [
@@ -243,6 +254,7 @@ class CareerController
             'pageId'  => 'careers-apply',
         ]);
     }
+
 
     /**
      * Careers index – cached with TTL for the canonical /careers/ view.
@@ -266,9 +278,20 @@ class CareerController
     {
         $roleSlug = isset($_GET['role']) ? trim((string) $_GET['role']) : null;
 
-        // No role selected → generic apply page, safe to cache
+        // Flash data from previous POST
+        $errors  = Session::getFlash('apply_errors', []);
+        $old     = Session::getFlash('apply_old', []);
+        $success = Session::getFlash('apply_success');
+
+        $hasFlash = !empty($errors) || !empty($old) || !empty($success);
+
+        // Generic apply page (/career/apply/) – cache if no flash
         if ($roleSlug === null || $roleSlug === '') {
             $cacheKey = self::CACHE_KEY . '_apply';
+
+            if ($hasFlash) {
+                return $this->renderApplyPage(null, $errors, $old, $success);
+            }
 
             return PageCache::remember(
                 $cacheKey,
@@ -277,8 +300,161 @@ class CareerController
             );
         }
 
-        // Role-specific apply page – served fresh (cache is bypassed anyway
-        // by PageCache::shouldBypass() because of query params).
+        // Role-specific apply page – always fresh due to query params
+        if ($hasFlash) {
+            return $this->renderApplyPage($roleSlug, $errors, $old, $success);
+        }
+
         return $this->renderApplyPage($roleSlug);
     }
+
+    /**
+     * Build redirect URL for apply page (keeps selected role).
+     */
+    private function buildApplyRedirectUrl(?string $roleSlug): string
+    {
+        $url = '/career/apply/';
+        if ($roleSlug !== null && $roleSlug !== '') {
+            $url .= '?role=' . urlencode($roleSlug);
+        }
+        return $url;
+    }
+
+    /**
+     * Handle Apply form submission – POST /career/apply/
+     */
+    public function submit(): void
+    {
+        $roleSlug = isset($_POST['role_slug']) ? trim((string) $_POST['role_slug']) : null;
+
+        $fullName = trim($_POST['full_name'] ?? '');
+
+        $data = [
+            'role_slug'     => $roleSlug,
+            'full_name'     => $fullName,
+            'name'          => $fullName, // for Mailer
+            'email'         => trim($_POST['email']         ?? ''),
+            'phone'         => trim($_POST['phone']         ?? ''),
+            'location'      => trim($_POST['location']      ?? ''),
+            'experience'    => trim($_POST['experience']    ?? ''),
+            'current_role'  => trim($_POST['current_role']  ?? ''),
+            'notice_period' => trim($_POST['notice_period'] ?? ''),
+            'linkedin'      => trim($_POST['linkedin']      ?? ''),
+            'github'        => trim($_POST['github']        ?? ''),
+            'current_ctc'   => trim($_POST['current_ctc']   ?? ''),
+            'expected_ctc'  => trim($_POST['expected_ctc']  ?? ''),
+            'about'         => trim($_POST['about']         ?? ''),
+        ];
+
+        $redirectTo = $_POST['redirect_to'] ?? $this->buildApplyRedirectUrl($roleSlug);
+
+        $errors = [];
+
+        // --- Validation ---
+
+        if ($data['full_name'] === '') {
+            $errors['full_name'] = 'Please enter your full name.';
+        } elseif (mb_strlen($data['full_name']) < 2) {
+            $errors['full_name'] = 'Name must be at least 2 characters.';
+        }
+
+        if ($data['email'] === '') {
+            $errors['email'] = 'Please enter your email address.';
+        } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors['email'] = 'Please enter a valid email address.';
+        }
+
+        if ($data['phone'] === '') {
+            $errors['phone'] = 'Please enter your phone or WhatsApp number.';
+        }
+
+        if ($data['location'] === '') {
+            $errors['location'] = 'Please enter your current city and country.';
+        }
+
+        if ($data['experience'] === '') {
+            $errors['experience'] = 'Please enter your total experience in years.';
+        } elseif (!is_numeric($data['experience']) || (float) $data['experience'] < 0) {
+            $errors['experience'] = 'Total experience must be a positive number.';
+        }
+
+        if ($data['about'] === '') {
+            $errors['about'] = 'Please tell us why you want to work at QalbIT.';
+        } elseif (mb_strlen($data['about']) < 30) {
+            $errors['about'] = 'Please write at least a few sentences about your motivation and background.';
+        }
+
+        if ($data['linkedin'] !== '' && !filter_var($data['linkedin'], FILTER_VALIDATE_URL)) {
+            $errors['linkedin'] = 'Please enter a valid LinkedIn/portfolio URL or leave this field blank.';
+        }
+
+        if ($data['github'] !== '' && !filter_var($data['github'], FILTER_VALIDATE_URL)) {
+            $errors['github'] = 'Please enter a valid GitHub/code samples URL or leave this field blank.';
+        }
+
+        // Basic resume presence check – detailed handling is in File helper
+        if (!isset($_FILES['resume']) || ($_FILES['resume']['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+            $errors['resume'] = 'Please upload your resume (PDF, DOC, or DOCX).';
+        }
+
+        // reCAPTCHA
+        $token = $_POST['recaptcha_token'] ?? null;
+        if (!Recaptcha::verify($token, 'careers_apply')) {
+            $errors['global'] = 'We could not verify that you are a human. Please try again.';
+        }
+
+        if (!empty($errors)) {
+            Session::flash('apply_errors', $errors);
+            Session::flash('apply_old', $data);
+            header('Location: ' . $redirectTo);
+            exit;
+        }
+
+        // --- Store resume via File helper ---
+
+        $resumePath = File::storeCandidateResume(
+            $_FILES['resume'],
+            $roleSlug,
+            $data['full_name'],
+            $data['experience'],
+            $errors,
+            'resume'
+        );
+
+        if ($resumePath === null) {
+            Session::flash('apply_errors', $errors);
+            Session::flash('apply_old', $data);
+            header('Location: ' . $redirectTo);
+            exit;
+        }
+
+        $data['resume_path']      = $resumePath;
+        $data['resume_file_name'] = $_FILES['resume']['name'] ?? '';
+
+        // --- Send email ---
+
+        $mailer = new Mailer();
+        $data['mail_subject'] = 'New career application from ' . ($data['full_name'] ?: 'Candidate');
+
+        $sent = $mailer->sendCareerApplication($data);
+
+        if (!$sent) {
+            $errors['global'] = 'We could not submit your application right now. Please try again later or email us directly at '
+                . config('app.contact_email', 'info@qalbit.com') . '.';
+
+            Session::flash('apply_errors', $errors);
+            Session::flash('apply_old', $data);
+            header('Location: ' . $redirectTo);
+            exit;
+        }
+
+        Session::flash(
+            'apply_success',
+            'Thank you. We have received your application and will reach out if there is a strong match with current or upcoming roles.'
+        );
+
+        header('Location: ' . $redirectTo);
+        exit;
+    }
+
 }

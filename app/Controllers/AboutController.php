@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Support\Client;
 use App\Support\Faqs;
 use App\Support\PageCache;
 use App\Support\Schema;
@@ -15,8 +16,11 @@ class AboutController
     /**
      * Core renderer used by both HTTP and cron.
      */
-    private function renderPage(): string
-    {
+    private function renderPage(
+        array $contactErrors = [],
+        array $contactOld = [],
+        ?string $contactSuccess = null
+    ): string {
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
 
         $seo = [
@@ -28,6 +32,22 @@ class AboutController
         // FAQs for the home context
         $faqs = Faqs::for('faq_aboutus');
         $faqSchema = Schema::faq($faqs, $seo['canonical'], $seo['title']);
+
+        $clients = Client::logos(
+            [
+                'writesonic',
+                'plugin',
+                'credifana',
+                'utapy',
+                'snappystats',
+                'heuvelman',
+                'flickstur',
+                'bloomford',
+                'de-ruwenberg',
+                'lmc',
+            ],
+            10
+        );
 
         // Global Schemas
         $orgSchema = Schema::organization();
@@ -45,8 +65,12 @@ class AboutController
         ]));
 
         $content = View::render('pages/about/index', [
-            'seo'  => $seo,
-            'faqs' => $faqs
+            'seo'     => $seo,
+            'faqs'    => $faqs,
+            'clients' => $clients,
+            'contactErrors'  => $contactErrors,
+            'contactOld'     => $contactOld,
+            'contactSuccess' => $contactSuccess,
         ]);
 
         return View::render('layouts/main', [

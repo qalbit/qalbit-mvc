@@ -36,47 +36,52 @@
                 aria-label="Client logo grid"
                 data-logo-grid
             >
-                <li class="flex items-center justify-center max-h-16 w-auto bg-white rounded-xl border border-slate-200" data-logo>
-                    <img
-                        src="<?= asset('/images/clients/writesonic-logo.png') ?>"
-                        alt="Client from UAE – SaaS platform"
-                        class="w-auto h-full grayscale transition hover:opacity-100 hover:grayscale-0"
-                        loading="lazy"
-                    />
-                </li>
-                <li class="flex items-center justify-center max-h-16 w-auto bg-white rounded-xl border border-slate-200" data-logo>
-                    <img
-                        src="<?= asset('/images/clients/writesonic-logo.png') ?>"
-                        alt="Client from UAE – SaaS platform"
-                        class="w-auto h-full grayscale transition hover:opacity-100 hover:grayscale-0"
-                        loading="lazy"
-                    />
-                </li>
-                <li class="flex items-center justify-center max-h-16 w-auto bg-white rounded-xl border border-slate-200" data-logo>
-                    <img
-                        src="<?= asset('/images/clients/writesonic-logo.png') ?>"
-                        alt="Client from UAE – SaaS platform"
-                        class="w-auto h-full grayscale transition hover:opacity-100 hover:grayscale-0"
-                        loading="lazy"
-                    />
-                </li>
-                <li class="flex items-center justify-center max-h-16 w-auto bg-white rounded-xl border border-slate-200" data-logo>
-                    <img
-                        src="<?= asset('/images/clients/writesonic-logo.png') ?>"
-                        alt="Client from UAE – SaaS platform"
-                        class="w-auto h-full grayscale transition hover:opacity-100 hover:grayscale-0"
-                        loading="lazy"
-                    />
-                </li>
-                <li class="flex items-center justify-center max-h-16 w-auto bg-white rounded-xl border border-slate-200" data-logo>
-                    <img
-                        src="<?= asset('/images/clients/writesonic-logo.png') ?>"
-                        alt="Client from UAE – SaaS platform"
-                        class="w-auto h-full grayscale transition hover:opacity-100 hover:grayscale-0"
-                        loading="lazy"
-                    />
-                </li>
+                <?php if (!empty($clients)): ?>
+                    <?php foreach ($clients as $client): ?>
+                        <?php
+                            $src      = $client['logo'] ?? '';
+                            $alt      = $client['alt'] ?? $client['name'] ?? '';
+                            $url      = $client['url'] ?? null;
+                            $industry = $client['industry'] ?? null;
+                        ?>
+                        <li
+                            class="flex items-center justify-center h-20 w-auto rounded-2xl bg-white border border-slate-200 px-6"
+                            data-logo
+                        >
+                            <?php if (!empty($url)): ?>
+                                <a
+                                    href="<?= htmlspecialchars($url, ENT_QUOTES, 'UTF-8') ?>"
+                                    target="_blank"
+                                    rel="noreferrer noopener"
+                                    class="flex h-full w-full items-center justify-center"
+                                    title="<?= htmlspecialchars($industry ?: $alt, ENT_QUOTES, 'UTF-8') ?>"
+                                >
+                            <?php else: ?>
+                                <div
+                                    class="flex h-full w-full items-center justify-center"
+                                    <?php if ($industry): ?>
+                                        title="<?= htmlspecialchars($industry, ENT_QUOTES, 'UTF-8') ?>"
+                                    <?php endif; ?>
+                                >
+                            <?php endif; ?>
+
+                                <img
+                                    src="<?= asset($src) ?>"
+                                    alt="<?= htmlspecialchars($alt, ENT_QUOTES, 'UTF-8') ?>"
+                                    class="block max-h-10 w-auto max-w-full object-contain grayscale transition hover:opacity-100 hover:grayscale-0"
+                                    loading="lazy"
+                                />
+
+                            <?php if (!empty($url)): ?>
+                                </a>
+                            <?php else: ?>
+                                </div>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </ul>
+
 
             <p class="text-xs text-slate-500 sm:text-sm">
                 Logos are indicative; a more detailed list of case studies and references can be shared during discovery calls.

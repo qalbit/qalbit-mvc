@@ -59,10 +59,10 @@
                     </a>
 
                     <a
-                        href="/case-studies/"
+                        href="/portfolio/"
                         class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-900 transition hover:border-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-600 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50"
                     >
-                        View case studies
+                        View our recent work
                     </a>
                 </div>
             </div>

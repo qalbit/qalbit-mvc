@@ -29,42 +29,42 @@
             class="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 lg:grid-cols-3"
             data-case-grid-about
         >
-            <!-- Case 1 – URL shortener SaaS -->
+            <!-- Case 1 – Snappy Stats -->
             <article
                 class="flex flex-col rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm sm:p-5"
                 data-case-card-about
             >
                 <div class="mb-2 flex items-center justify-between gap-2">
                     <p class="text-[11px] font-medium uppercase tracking-wide text-accent-700">
-                        Case Study · SaaS
+                        Case Study · Sports & Training
                     </p>
-                    <span class="rounded-full bg-accent-50 px-2 py-0.5 text-[11px] font-medium text-accent-700">
-                        URL management
+                    <span class="rounded-full flex-shrink-0 bg-accent-50 px-2 py-0.5 text-[11px] font-medium text-accent-700">
+                        Scheduling platform
                     </span>
                 </div>
 
                 <h3 class="text-sm font-semibold text-slate-900">
-                    Turning a simple short-link tool into a full SaaS product.
+                    Snappy Stats – scheduling management web app for a growing shooting academy.
                 </h3>
 
                 <p class="mt-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
-                    We helped evolve a basic URL shortener into a subscription-based SaaS: analytics, branded domains,
-                    QR codes, and self-serve onboarding – ready for global users.
+                    We replaced spreadsheets and manual coordination with a Laravel-based scheduling platform that
+                    centralises bookings, coaches and lanes – dramatically reducing double bookings and admin fire-fighting.
                 </p>
 
                 <dl class="mt-3 space-y-1.5 text-[11px] text-slate-500">
                     <div class="flex justify-between gap-2">
                         <dt>Type</dt>
-                        <dd class="font-medium text-slate-800">End-to-end product build</dd>
+                        <dd class="font-medium text-end text-slate-800">Custom scheduling web application</dd>
                     </div>
                     <div class="flex justify-between gap-2">
-                        <dt>Focus</dt>
-                        <dd class="font-medium text-slate-800">Clean UX, stable billing, extensible architecture</dd>
+                        <dt>Outcome</dt>
+                        <dd class="font-medium text-end text-slate-800">Single source of truth for classes & lanes</dd>
                     </div>
                 </dl>
 
                 <a
-                    href="/case-studies/url-shortener-saas"
+                    href="<?= route_url('/case-studies/snappy-stats/') ?>"
                     class="mt-3 inline-flex items-center text-[11px] font-medium text-accent-700 hover:text-accent-800"
                 >
                     View case study
@@ -83,42 +83,42 @@
                 </a>
             </article>
 
-            <!-- Case 2 – ISP / operations platform -->
+            <!-- Case 2 – Bloomford -->
             <article
                 class="flex flex-col rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm sm:p-5"
                 data-case-card-about
             >
                 <div class="mb-2 flex items-center justify-between gap-2">
-                    <p class="text-[11px] font-medium uppercase tracking-wide text-accent-700">
-                        Case Study · B2B platform
+                    <p class="text-[11px] flex-shrink-0 font-medium uppercase tracking-wide text-accent-700">
+                        Case Study · Recruitment & HR Tech
                     </p>
-                    <span class="rounded-full bg-accent-50 px-2 py-0.5 text-[11px] font-medium text-accent-700">
-                        ISP operations
+                    <span class="rounded-full flex-shrink-0 bg-accent-50 px-2 py-0.5 text-[11px] font-medium text-accent-700">
+                        Hiring portal
                     </span>
                 </div>
 
                 <h3 class="text-sm font-semibold text-slate-900">
-                    Centralising complex ISP operations into one dashboard.
+                    Bloomford – hiring portal and candidate management platform for HR professionals.
                 </h3>
 
                 <p class="mt-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
-                    For an internet service provider, we built a multi-module web app to manage customers,
-                    billing, tickets, and network data in a single place.
+                    We designed and built a PHP/MySQL recruitment portal that centralises employers, vacancies and candidates,
+                    turning scattered CVs and inboxes into one searchable talent pipeline for HR teams in Belgium.
                 </p>
 
                 <dl class="mt-3 space-y-1.5 text-[11px] text-slate-500">
                     <div class="flex justify-between gap-2">
                         <dt>Scope</dt>
-                        <dd class="font-medium text-slate-800">Customer, billing &amp; support modules</dd>
+                        <dd class="font-medium text-end text-slate-800">Recruitment portal & ATS-style workflows</dd>
                     </div>
                     <div class="flex justify-between gap-2">
                         <dt>Outcome</dt>
-                        <dd class="font-medium text-slate-800">Less manual work &amp; better visibility</dd>
+                        <dd class="font-medium text-end text-slate-800">Structured, searchable candidate pool & pipelines</dd>
                     </div>
                 </dl>
 
                 <a
-                    href="/case-studies/isp-operations-platform"
+                    href="<?= route_url('/case-studies/bloomford/') ?>"
                     class="mt-3 inline-flex items-center text-[11px] font-medium text-accent-700 hover:text-accent-800"
                 >
                     View case study
@@ -137,42 +137,42 @@
                 </a>
             </article>
 
-            <!-- Case 3 – Services / booking & automation -->
+            <!-- Case 3 – Hellory -->
             <article
                 class="flex flex-col rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm sm:p-5"
                 data-case-card-about
             >
                 <div class="mb-2 flex items-center justify-between gap-2">
                     <p class="text-[11px] font-medium uppercase tracking-wide text-accent-700">
-                        Case Study · Services
+                        Case Study · Mobile & Consumer Apps
                     </p>
-                    <span class="rounded-full bg-accent-50 px-2 py-0.5 text-[11px] font-medium text-accent-700">
-                        Bookings &amp; leads
+                    <span class="rounded-full flex-shrink-0 bg-accent-50 px-2 py-0.5 text-[11px] font-medium text-accent-700">
+                        Reminder app
                     </span>
                 </div>
 
                 <h3 class="text-sm font-semibold text-slate-900">
-                    Automating lead capture and bookings for a services brand.
+                    Hellory – smart reminder app for busy lives on Android &amp; iOS.
                 </h3>
 
                 <p class="mt-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
-                    We designed and implemented a lead and booking flow across web, WhatsApp, and internal
-                    dashboards so the team could respond faster and track outcomes.
+                    We partnered with the Hellory team to build a cross-platform Flutter app and Node.js API that power recurring
+                    reminders, templates and reliable notifications for users managing bills, events and daily routines.
                 </p>
 
                 <dl class="mt-3 space-y-1.5 text-[11px] text-slate-500">
                     <div class="flex justify-between gap-2">
                         <dt>Focus</dt>
-                        <dd class="font-medium text-slate-800">Less manual coordination, faster responses</dd>
+                        <dd class="font-medium text-end text-slate-800">Recurring reminders, templates & push notifications</dd>
                     </div>
                     <div class="flex justify-between gap-2">
                         <dt>Engagement</dt>
-                        <dd class="font-medium text-slate-800">Discovery → MVP → iterations</dd>
+                        <dd class="font-medium text-end text-slate-800">Concept → UX → Mobile app + API</dd>
                     </div>
                 </dl>
 
                 <a
-                    href="/case-studies/services-booking-automation"
+                    href="<?= route_url('/case-studies/hellory/') ?>"
                     class="mt-3 inline-flex items-center text-[11px] font-medium text-accent-700 hover:text-accent-800"
                 >
                     View case study
@@ -191,6 +191,7 @@
                 </a>
             </article>
         </div>
+
 
         <div class="mt-6 text-xs text-slate-500 sm:text-sm">
             We can share more detailed case studies, metrics, and references once we understand your product and requirements.
