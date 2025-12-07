@@ -5,7 +5,7 @@
 // - $action    : form action URL (default /contact-us/)
 // - $redirectTo: where to go after submit (default current URL)
 
-$variant    = $variant    ?? 'page';
+$variant    = $variant    ?? 'popup';
 $action     = $action     ?? '/contact-us/';
 $redirectTo = $redirectTo ?? ($_SERVER['REQUEST_URI'] ?? '/');
 
@@ -49,11 +49,14 @@ $recaptchaSiteKey  = $recaptchaConfig['site_key'] ?? '';
         class="space-y-3"
         data-track="contact-form"
         data-variant="<?= htmlspecialchars($variant) ?>"
+        data-contact-form
         novalidate
     >
         <input type="hidden" name="redirect_to" value="<?= htmlspecialchars($redirectTo) ?>">
-        <input type="hidden" name="source" value="<?= htmlspecialchars($variant) ?>">
-        <input type="hidden" name="recaptcha_token" value="">
+        <input type="hidden" name="recaptcha_token" id="recaptcha_token" value="">
+        <input type="hidden" name="lead_from" id="lead_from" value="lead_contact_page">
+        <input type="hidden" name="lead_source" id="lead_source" value="<?= htmlspecialchars($variant) ?>">
+        <input type="hidden" name="lead_topic" id="lead_topic" value="exit_popup">
 
         <div class="space-y-1">
             <label class="text-xs font-medium text-slate-700">Name</label>

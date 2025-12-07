@@ -41,10 +41,11 @@
         initFaqSection({ gsap, hasGsap, prefersReducedMotion });
         initBlogTeaserSection({ gsap, hasGsap, prefersReducedMotion });
         initContactCtaSection({ gsap, hasGsap, prefersReducedMotion });
-        initExitIntentPopup({ isDesktop });
+        // initExitIntentPopup({ isDesktop });
         initContactForms();
         initCookieBanner();
         initContactInputSection();
+        initScrollToTop();
     });
 
     // --------------------------------------------------------
@@ -453,6 +454,7 @@
     //       - Desktop exit intent (mouse leaves top of viewport)
     //       - OR after N seconds on page
     //       - OR after 50% scroll
+    //     Popup form is submitted via AJAX → JSON
     // --------------------------------------------------------
     function initExitIntentPopup(ctx) {
         const { isDesktop } = ctx;
@@ -549,13 +551,256 @@
             }
         });
 
-        // Mark dismissed on form submit (no need to wait for response)
+        // ----------------------------------------------------
+        // AJAX submit for popup form (uses /contact-us/ JSON)
+        // ----------------------------------------------------
         if (form) {
-            form.addEventListener("submit", function () {
-                markDismissed();
-                cleanupListeners();
+            const submitButton = form.querySelector('button[type="submit"]');
+
+            function setSubmitting(isSubmitting) {
+                if (!submitButton) return;
+                if (isSubmitting) {
+                    if (!submitButton.dataset.originalLabel) {
+                        submitButton.dataset.originalLabel =
+                            submitButton.textContent || "Send message";
+                    }
+                    submitButton.disabled = true;
+                    submitButton.textContent = "Sending...";
+                } else {
+                    submitButton.disabled = false;
+                    if (submitButton.dataset.originalLabel) {
+                        submitButton.textContent =
+                            submitButton.dataset.originalLabel;
+                    }
+                }
+            }
+
+            function ensureErrorPlaceholders() {
+                // Global error (created once)
+                let globalError = form.querySelector("[data-js-global-error]");
+                if (!globalError) {
+                    globalError = document.createElement("div");
+                    globalError.setAttribute("data-js-global-error", "true");
+                    globalError.className =
+                        "mb-3 hidden rounded-md border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-800";
+                    form.prepend(globalError);
+                }
+
+                // Global success (created once)
+                let globalSuccess = form.querySelector(
+                    "[data-js-global-success]"
+                );
+                if (!globalSuccess) {
+                    globalSuccess = document.createElement("div");
+                    globalSuccess.setAttribute("data-js-global-success", "true");
+                    globalSuccess.className =
+                        "mb-3 hidden rounded-md border border-green-200 bg-green-50 px-4 py-3 text-xs text-green-800";
+                    form.prepend(globalSuccess);
+                }
+
+                // Field-level errors
+                ["name", "email", "message"].forEach(function (fieldName) {
+                    const input = form.querySelector(
+                        `[name="${fieldName}"]`
+                    );
+                    if (!input) return;
+
+                    let errorEl = form.querySelector(
+                        `[data-js-error-for="${fieldName}"]`
+                    );
+                    if (!errorEl) {
+                        errorEl = document.createElement("p");
+                        errorEl.setAttribute(
+                            "data-js-error-for",
+                            fieldName
+                        );
+                        errorEl.className =
+                            "mt-1 hidden text-[11px] text-red-600";
+                        input.insertAdjacentElement("afterend", errorEl);
+                    }
+                });
+            }
+
+            function clearErrors() {
+                const globalError = form.querySelector(
+                    "[data-js-global-error]"
+                );
+                if (globalError) {
+                    globalError.textContent = "";
+                    globalError.classList.add("hidden");
+                }
+
+                const globalSuccess = form.querySelector(
+                    "[data-js-global-success]"
+                );
+                if (globalSuccess) {
+                    globalSuccess.textContent = "";
+                    globalSuccess.classList.add("hidden");
+                }
+
+                ["name", "email", "message"].forEach(function (fieldName) {
+                    const input = form.querySelector(
+                        `[name="${fieldName}"]`
+                    );
+                    if (input) {
+                        input.classList.remove("border-red-400");
+                        input.classList.add("border-slate-300");
+                    }
+
+                    const errorEl = form.querySelector(
+                        `[data-js-error-for="${fieldName}"]`
+                    );
+                    if (errorEl) {
+                        errorEl.textContent = "";
+                        errorEl.classList.add("hidden");
+                    }
+                });
+            }
+
+            function showErrors(errors) {
+                ensureErrorPlaceholders();
+                clearErrors();
+
+                if (!errors) return;
+
+                const globalError = form.querySelector(
+                    "[data-js-global-error]"
+                );
+                if (errors.global && globalError) {
+                    globalError.textContent = errors.global;
+                    globalError.classList.remove("hidden");
+                }
+
+                ["name", "email", "message"].forEach(function (fieldName) {
+                    const message = errors[fieldName];
+                    if (!message) return;
+
+                    const input = form.querySelector(
+                        `[name="${fieldName}"]`
+                    );
+                    if (input) {
+                        input.classList.remove("border-slate-300");
+                        input.classList.add("border-red-400");
+                    }
+
+                    const errorEl = form.querySelector(
+                        `[data-js-error-for="${fieldName}"]`
+                    );
+                    if (errorEl) {
+                        errorEl.textContent = message;
+                        errorEl.classList.remove("hidden");
+                    }
+                });
+            }
+
+            function showSuccess(message) {
+                ensureErrorPlaceholders();
+                clearErrors();
+
+                const globalSuccess = form.querySelector(
+                    "[data-js-global-success]"
+                );
+                if (globalSuccess) {
+                    globalSuccess.textContent =
+                        message ||
+                        "Thank you. We have received your enquiry and will respond within 24 hours (business days).";
+                    globalSuccess.classList.remove("hidden");
+                }
+            }
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                ensureErrorPlaceholders();
+                clearErrors();
+                setSubmitting(true);
+
+                const formData = new FormData(form);
+
+                formData.set("ajax", "1");
+
+                // reCAPTCHA v3 (same as /contact-us/)
+                const siteKeyMeta = document.querySelector(
+                    'meta[name="recaptcha-site-key"]'
+                );
+                const siteKey = siteKeyMeta
+                    ? siteKeyMeta.getAttribute("content")
+                    : "";
+                const hasRecaptcha =
+                    typeof window.grecaptcha !== "undefined" && siteKey;
+
+                const doRequest = function (token) {
+                    if (token) {
+                        formData.set("recaptcha_token", token);
+                    }
+
+                    fetch(form.action, {
+                        method: "POST",
+                        headers: {
+                            "X-Requested-With": "XMLHttpRequest",
+                            Accept: "application/json",
+                        },
+                        body: formData,
+                    })
+                        .then(function (response) {
+                            return response
+                                .json()
+                                .catch(function () {
+                                    return null;
+                                });
+                        })
+                        .then(function (json) {
+                            setSubmitting(false);
+
+                            if (!json) {
+                                showErrors({
+                                    global:
+                                        "Something went wrong. Please try again later.",
+                                });
+                                return;
+                            }
+
+                            if (json.success) {
+                                // Only on SUCCESS we mark dismissed and stop triggers
+                                showSuccess(json.message);
+                                form.reset();
+
+                                markDismissed();
+                                cleanupListeners();
+                            } else {
+                                showErrors(json.errors || {});
+                            }
+                        })
+                        .catch(function () {
+                            setSubmitting(false);
+                            showErrors({
+                                global:
+                                    "We could not send your message right now. Please try again later.",
+                            });
+                        });
+                };
+
+                if (hasRecaptcha) {
+                    window.grecaptcha.ready(function () {
+                        window.grecaptcha
+                            .execute(siteKey, { action: "contact" })
+                            .then(function (token) {
+                                doRequest(token);
+                            })
+                            .catch(function () {
+                                setSubmitting(false);
+                                showErrors({
+                                    global:
+                                        "We could not verify that you are a human. Please try again.",
+                                });
+                            });
+                    });
+                } else {
+                    doRequest(null);
+                }
             });
         }
+
 
         // ------- Trigger 1: Time-based (all devices) -------
         window.setTimeout(function () {
@@ -578,13 +823,16 @@
             }
 
             const doc = document.documentElement;
-            const scrollTop = window.scrollY || doc.scrollTop || 0;
-            const viewportHeight = window.innerHeight || doc.clientHeight || 0;
+            const scrollTop =
+                window.scrollY || doc.scrollTop || 0;
+            const viewportHeight =
+                window.innerHeight || doc.clientHeight || 0;
             const totalHeight = doc.scrollHeight || 0;
 
             if (!totalHeight) return;
 
-            const scrollRatio = (scrollTop + viewportHeight) / totalHeight;
+            const scrollRatio =
+                (scrollTop + viewportHeight) / totalHeight;
 
             if (scrollRatio >= scrollTriggerRatio) {
                 tryOpenPopup("scroll");
@@ -598,13 +846,14 @@
             typeof isDesktop === "function"
                 ? isDesktop
                 : function () {
-                      return window.innerWidth >= 1024;
-                  };
+                    return window.innerWidth >= 1024;
+                };
 
         function handleMouseOut(event) {
             if (!isDesktopFn() || hasShown) return;
 
-            const toElement = event.relatedTarget || event.toElement;
+            const toElement =
+                event.relatedTarget || event.toElement;
             // Only when leaving the window, not hovering other elements
             if (toElement) return;
 
@@ -842,4 +1091,81 @@
             });
         });
     }
+
+    // ----------------------------------------------------------
+    // Scroll-to-top button (bottom-left stack)
+    // ----------------------------------------------------------
+    function initScrollToTop() {
+        var stack = document.querySelector('[data-floating-stack="bottom-left"]');
+        if (!stack) return;
+
+        var button = stack.querySelector("[data-scroll-top-trigger]");
+        if (!button) return;
+
+        var showOffset = 400; // px from top after which button appears
+        var hideOffset = 80;  // px from top where button hides again
+        var isVisible = false;
+
+        function showButton() {
+            if (isVisible) return;
+            isVisible = true;
+            button.classList.remove(
+                "opacity-0",
+                "pointer-events-none",
+                "translate-y-2"
+            );
+            button.classList.add(
+                "opacity-100",
+                "pointer-events-auto",
+                "translate-y-0"
+            );
+        }
+
+        function hideButton() {
+            if (!isVisible) return;
+            isVisible = false;
+            button.classList.add(
+                "opacity-0",
+                "pointer-events-none",
+                "translate-y-2"
+            );
+            button.classList.remove(
+                "opacity-100",
+                "pointer-events-auto",
+                "translate-y-0"
+            );
+        }
+
+        // Show/hide on scroll
+        window.addEventListener(
+            "scroll",
+            function () {
+                var y =
+                    window.pageYOffset ||
+                    document.documentElement.scrollTop ||
+                    0;
+
+                if (y > showOffset) {
+                    showButton();
+                } else if (y < hideOffset) {
+                    hideButton();
+                }
+            },
+            { passive: true }
+        );
+
+        // Scroll smoothly to top on click
+        button.addEventListener("click", function () {
+            try {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                });
+            } catch (err) {
+                // Fallback for very old browsers
+                window.scrollTo(0, 0);
+            }
+        });
+    }
+
 })();

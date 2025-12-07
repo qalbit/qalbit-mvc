@@ -148,5 +148,7 @@ $jsonLd = $jsonLd ?? null;
     <?php if (isset($pageId) && $pageId === 'careers'): ?>
         <script src="<?= asset('/js/careers.js') ?>" defer></script>
     <?php endif; ?>
+
+    <?php include __DIR__ . '/../common/floating-stack.php'; ?>
 </body>
 </html>

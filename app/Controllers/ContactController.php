@@ -17,6 +17,47 @@ class ContactController
     private const CACHE_KEY_INDEX = 'page_contact_index';
 
     /**
+     * Detect if the current request is an AJAX / JSON request.
+     */
+    private function isAjaxRequest(): bool
+    {
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+            return true;
+        }
+
+        if (!empty($_SERVER['HTTP_ACCEPT'])) {
+            $accept = strtolower($_SERVER['HTTP_ACCEPT']);
+            if (strpos($accept, 'application/json') !== false ||
+                strpos($accept, 'text/json') !== false) {
+                return true;
+            }
+        }
+
+        if (!empty($_POST['ajax']) && $_POST['ajax'] === '1') {
+            return true;
+        }
+
+        if (!empty($_GET['ajax']) && $_GET['ajax'] === '1') {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Send a JSON response and terminate.
+     */
+    private function jsonResponse(array $payload, int $statusCode = 200): void
+    {
+        http_response_code($statusCode);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($payload);
+        exit;
+    }
+
+
+    /**
      * Show the Contact Us page with any flashed errors/success.
      */
     public function index(): string
@@ -132,6 +173,14 @@ class ContactController
 
         $redirectTo = $_POST['redirect_to'] ?? '/contact-us/';
         $errors = [];
+
+        $isAjax = $this->isAjaxRequest();
+        error_log('AJAX DEBUG: ' . json_encode([
+            'HTTP_X_REQUESTED_WITH' => $_SERVER['HTTP_X_REQUESTED_WITH'] ?? null,
+            'HTTP_ACCEPT'           => $_SERVER['HTTP_ACCEPT']           ?? null,
+            'POST_ajax'             => $_POST['ajax']                    ?? null,
+        ]));
+
         // --- Field validation ---
         if ($data['name'] === '') {
             $errors['name'] = 'Please enter your name.';
@@ -157,6 +206,14 @@ class ContactController
         }
         
         if (!empty($errors)) {
+            if ($isAjax) {
+                $this->jsonResponse([
+                    'success' => false,
+                    'errors'  => $errors,
+                    'old'     => $data,
+                ], 422);
+            }
+
             Session::flash('contact_errors', $errors);
             Session::flash('contact_old', $data);
             header('Location: ' . $redirectTo);
@@ -168,13 +225,31 @@ class ContactController
 
         if (!$sent) {
             $errors['global'] = 'We could not send your message right now. Please try again later or email us directly at ' . config('app.contact_email', 'info@qalbit.com') . '.';
+
+            if ($isAjax) {
+                $this->jsonResponse([
+                    'success' => false,
+                    'errors'  => $errors,
+                    'old'     => $data,
+                ], 500);
+            }
+
             Session::flash('contact_errors', $errors);
             Session::flash('contact_old', $data);
             header('Location: ' . $redirectTo);
             exit;
         }
 
-        Session::flash('contact_success', 'Thank you. We have received your enquiry and will respond within 24 hours (business days).');
+        $successMessage = 'Thank you. We have received your enquiry and will respond within 24 hours (business days).';
+
+        if ($isAjax) {
+            $this->jsonResponse([
+                'success' => true,
+                'message' => $successMessage,
+            ]);
+        }
+
+        Session::flash('contact_success', $successMessage);
         header('Location: ' . $redirectTo);
         exit;
     }

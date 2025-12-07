@@ -56,11 +56,11 @@ return [
                 'subtitle' => 'Replacing spreadsheets and manual coordination with a centralised, real-time scheduling platform that keeps classes, coaches and ranges perfectly in sync.',
                 'primary_cta' => [
                     'label' => 'Discuss a similar project',
-                    'href'  => '/contact-us/?ref=cs-snappy-stats',
+                    'href'  => '/contact-us/?topic=cs-snappy-stats',
                 ],
                 'secondary_cta' => [
-                    'label' => 'View all case studies',
-                    'href'  => '/case-studies/',
+                    'label' => 'Book a quick discovery call',
+                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
                 ],
                 'snapshot_cards' => [
                     [
@@ -305,7 +305,7 @@ return [
                 'inline_cta' => [
                     'text' => 'Planning to modernise scheduling for your academy or training business?',
                     'link_label' => 'Talk to QalbIT about a custom solution',
-                    'href' => '/contact-us/?ref=cs-snappy-stats-results',
+                    'href' => '/contact-us/?topic=cs-snappy-stats-results',
                 ],
             ],
             'related' => [
@@ -352,11 +352,11 @@ return [
                 'text'    => 'Whether you run a sports academy, training centre or operations-heavy business, QalbIT can help you turn manual coordination into a reliable, scalable scheduling platform. We combine product thinking, Laravel expertise and UX design to ship production-ready software, not just prototypes.',
                 'primary_cta' => [
                     'label' => 'Book a free consultation',
-                    'href'  => '/contact-us/?ref=cta-snappy-stats',
+                    'href'  => '/contact-us/?topic=cta-snappy-stats',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Browse more case studies',
-                    'href'  => '/case-studies/',
+                    'label' => 'Book a quick discovery call',
+                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
                 ],
             ],
         ],
@@ -422,11 +422,11 @@ return [
                 'subtitle' => 'A custom-built recruitment platform that centralises employers, vacancies and candidates, makes CVs searchable and gives HR professionals a single source of truth for every hiring process.',
                 'primary_cta' => [
                     'label' => 'Discuss a similar HR tech project',
-                    'href'  => '/contact-us/?ref=cs-bloomford',
+                    'href'  => '/contact-us/?topic=cs-bloomford',
                 ],
                 'secondary_cta' => [
-                    'label' => 'View all case studies',
-                    'href'  => '/case-studies/',
+                    'label' => 'Book a quick discovery call',
+                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
                 ],
                 'snapshot_cards' => [
                     [
@@ -681,7 +681,7 @@ return [
                 'inline_cta' => [
                     'text'       => 'Planning to launch or modernise a hiring portal, ATS or HR tech product?',
                     'link_label' => 'Talk to QalbIT about building your recruitment platform',
-                    'href'       => '/contact-us/?ref=cs-bloomford-results',
+                    'href'       => '/contact-us/?topic=cs-bloomford-results',
                 ],
             ],
 
@@ -730,11 +730,11 @@ return [
                 'text'    => 'Whether you are an agency, in-house HR team or a founder building a new HR tech product, QalbIT can help you move from scattered tools to a focused recruitment platform. We combine product thinking, UX and engineering to ship production-ready software that supports your hiring process from day one.',
                 'primary_cta' => [
                     'label' => 'Book a free consultation',
-                    'href'  => '/contact-us/?ref=cta-bloomford',
+                    'href'  => '/contact-us/?topic=cta-bloomford',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Browse more case studies',
-                    'href'  => '/case-studies/',
+                    'label' => 'Book a quick discovery call',
+                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
                 ],
             ],
         ],
@@ -798,11 +798,11 @@ return [
                 'subtitle' => 'A cross-platform reminder and notification app that helps users stay on top of bills, tasks, events and life moments – with recurring reminders, templates and secure, reliable delivery.',
                 'primary_cta' => [
                     'label' => 'Discuss a similar mobile app project',
-                    'href'  => '/contact-us/?ref=cs-hellory',
+                    'href'  => '/contact-us/?topic=cs-hellory',
                 ],
                 'secondary_cta' => [
-                    'label' => 'View all case studies',
-                    'href'  => '/case-studies/',
+                    'label' => 'Book a quick discovery call',
+                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
                 ],
                 'snapshot_cards' => [
                     [
@@ -1057,7 +1057,7 @@ return [
                 'inline_cta' => [
                     'text'       => 'Planning to build a reminder app, habit tracker or notification-heavy mobile product?',
                     'link_label' => 'Talk to QalbIT about your mobile app idea',
-                    'href'       => '/contact-us/?ref=cs-hellory-results',
+                    'href'       => '/contact-us/?topic=cs-hellory-results',
                 ],
             ],
 
@@ -1111,11 +1111,11 @@ return [
                 'text'    => 'Whether you are building a smart reminder app, digital planner or notification-heavy SaaS companion, QalbIT can help you move from idea to production-ready product. We bring together product thinking, UX, Flutter development and backend engineering so you ship something your users can rely on every day.',
                 'primary_cta' => [
                     'label' => 'Book a free consultation',
-                    'href'  => '/contact-us/?ref=cta-hellory',
+                    'href'  => '/contact-us/?topic=cta-hellory',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Browse more case studies',
-                    'href'  => '/case-studies/',
+                    'label' => 'Book a quick discovery call',
+                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
                 ],
             ],
         ],
@@ -1181,11 +1181,11 @@ return [
                 'subtitle' => 'A custom-built web application that gives club staff a live view of all courts, lessons and memberships – replacing whiteboards and spreadsheets with a single source of truth for tennis operations.',
                 'primary_cta' => [
                     'label' => 'Discuss a similar club management project',
-                    'href'  => '/contact-us/?ref=cs-plugin',
+                    'href'  => '/contact-us/?topic=cs-plugin',
                 ],
                 'secondary_cta' => [
-                    'label' => 'View all case studies',
-                    'href'  => '/case-studies/',
+                    'label' => 'Book a quick discovery call',
+                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
                 ],
                 'snapshot_cards' => [
                     [
@@ -1440,7 +1440,7 @@ return [
                 'inline_cta' => [
                     'text'       => 'Running a tennis club or sports facility and still relying on manual schedules?',
                     'link_label' => 'Talk to QalbIT about a custom club management platform',
-                    'href'       => '/contact-us/?ref=cs-plugin-results',
+                    'href'       => '/contact-us/?topic=cs-plugin-results',
                 ],
             ],
 
@@ -1494,11 +1494,11 @@ return [
                 'text'    => 'Whether you run a tennis club, padel centre or multi-sport facility, QalbIT can help you move from manual schedules to a custom web application that keeps bookings, memberships and payments in sync. We combine product thinking, UX and engineering to ship production-ready platforms – not just prototypes.',
                 'primary_cta' => [
                     'label' => 'Book a free consultation',
-                    'href'  => '/contact-us/?ref=cta-plugin',
+                    'href'  => '/contact-us/?topic=cta-plugin',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Browse more case studies',
-                    'href'  => '/case-studies/',
+                    'label' => 'Book a quick discovery call',
+                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
                 ],
             ],
         ],

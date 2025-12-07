@@ -116,8 +116,8 @@ $finalCtaText    = $finalCtaConfig['text']
 $finalPrimaryCtaLabel = $finalCtaConfig['primary_cta']['label'] ?? 'Book a free consultation';
 $finalPrimaryCtaHref  = $finalCtaConfig['primary_cta']['href']  ?? '/contact-us/';
 
-$finalSecondaryCtaLabel = $finalCtaConfig['secondary_cta']['label'] ?? 'Browse more case studies';
-$finalSecondaryCtaHref  = $finalCtaConfig['secondary_cta']['href']  ?? '/case-studies/';
+$finalSecondaryCtaLabel = $finalCtaConfig['secondary_cta']['label'] ?? 'Book a quick discovery call';
+$finalSecondaryCtaHref  = $finalCtaConfig['secondary_cta']['href']  ?? 'https://calendly.com/abidhusain-qalbit/discuss-project';
 ?>
 
 <section
