@@ -151,8 +151,8 @@ class ProcessController
     /**
      * Find process config by last path segment of its slug.
      *
-     * config slug: /our-process/start-up-mvp/
-     * URL:         /our-process/start-up-mvp/
+     * config slug: /start-up-mvp/
+     * URL:         /start-up-mvp/
      * $slug:       "start-up-mvp"
      */
     protected function findProcessBySlugSegment(array $processes, string $slug): ?array

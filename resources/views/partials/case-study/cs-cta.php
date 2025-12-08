@@ -191,7 +191,7 @@ $finalSecondaryCtaHref  = $finalCtaConfig['secondary_cta']['href']  ?? 'https://
                         <div class="rounded-3xl border border-slate-800 bg-slate-900/70 p-4 sm:p-5">
                             <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
                                 We&apos;ll showcase related case studies here. For now, you can browse all projects in our
-                                <a href="/case-studies/" class="text-sky-400 hover:text-sky-300 underline underline-offset-2">
+                                <a href="/portfolio/" class="text-sky-400 hover:text-sky-300 underline underline-offset-2">
                                     case studies gallery
                                 </a>.
                             </p>

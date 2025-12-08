@@ -21,7 +21,7 @@
                     realistically apply to your business, stage and industry.
                 </p>
                 <a
-                    href="/case-studies/"
+                    href="/portfolio/"
                     class="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-300 hover:text-sky-200"
                 >
                     Browse selected case studies
@@ -42,7 +42,7 @@
                         'Field team app for job status, photos and customer signatures.',
                     ],
                     'cta_label'   => 'See home services example',
-                    'cta_href'    => '/case-studies/?industry=home-services',
+                    'cta_href'    => '/portfolio/?industry=home-services',
                 ],
                 [
                     'label'       => 'Travel & mobility',
@@ -53,7 +53,7 @@
                         'Driver, dispatcher and customer views from the same platform.',
                     ],
                     'cta_label'   => 'See travel example',
-                    'cta_href'    => '/case-studies/?industry=travel',
+                    'cta_href'    => '/portfolio/?industry=travel',
                 ],
                 [
                     'label'       => 'Sports, fitness & education',
@@ -64,7 +64,7 @@
                         'Mobile-friendly views for coaches, players and guardians.',
                     ],
                     'cta_label'   => 'See sports & education example',
-                    'cta_href'    => '/case-studies/?industry=sports-fitness',
+                    'cta_href'    => '/portfolio/?industry=sports-fitness',
                 ],
             ];
         ?>

@@ -82,7 +82,7 @@ $primaryCtaLabel = $heroConfig['primary_cta']['label'] ?? 'Discuss your project'
 $primaryCtaHref  = $heroConfig['primary_cta']['href']  ?? '/contact-us/';
 
 $secondaryCtaLabel = $heroConfig['secondary_cta']['label'] ?? 'View all case studies';
-$secondaryCtaHref  = $heroConfig['secondary_cta']['href']  ?? '/case-studies/';
+$secondaryCtaHref  = $heroConfig['secondary_cta']['href']  ?? '/portfolio/';
 
 // Hero media (fallback to banner)
 $heroMediaConfig = $heroConfig['hero_media'] ?? [];

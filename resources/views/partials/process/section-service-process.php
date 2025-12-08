@@ -31,7 +31,7 @@ $defaultItems = [
         'label'       => 'Mobile app MVP (Flutter)',
         'description' => 'Cross-platform mobile MVPs using Flutter with shared codebase, backend APIs and analytics so you can iterate quickly on iOS and Android.',
         'link_label'  => 'View mobile app development services',
-        'link_href'   => '/services/mobile-app-development/',
+        'link_href'   => '/services/mobile-development/',
     ],
     [
         'key'         => 'internal-tools',

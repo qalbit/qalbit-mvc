@@ -411,7 +411,7 @@ return [
                 'Laravel / PHP recruitment web app',
                 'employer and candidate management software',
             ],
-            'canonical'          => 'https://www.qalbit.com/case-studies/bloomford/',
+            'canonical'          => 'https://qalbit.com/case-studies/bloomford/',
         ],
 
         'sections' => [
@@ -787,7 +787,7 @@ return [
                 'Flutter reminder app case study',
                 'custom reminder application for Android and iOS',
             ],
-            'canonical'          => 'https://www.qalbit.com/case-studies/hellory-reminder-app/',
+            'canonical'          => 'https://qalbit.com/case-studies/hellory/',
         ],
 
         'sections' => [
@@ -1086,7 +1086,7 @@ return [
                 'services_used' => [
                     [
                         'label' => 'Mobile App Development',
-                        'href'  => '/services/mobile-app-development/',
+                        'href'  => '/services/mobile-development/',
                     ],
                     [
                         'label' => 'Custom Software Development',
@@ -1170,7 +1170,7 @@ return [
                 'CodeIgniter tennis club management system',
                 'online booking system for tennis clubs',
             ],
-            'canonical'          => 'https://www.qalbIT.com/case-studies/plugin/',
+            'canonical'          => 'https://qalbit.com/case-studies/plugin/',
         ],
 
         'sections' => [

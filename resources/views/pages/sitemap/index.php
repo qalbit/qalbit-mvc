@@ -54,14 +54,14 @@ $groups = [
         'columns' => [
             [
                 ['label' => 'Custom Web Development',      'href' => '/services/custom-web-development/'],
-                ['label' => 'Mobile App Development',      'href' => '/services/mobile-app-development/'],
+                ['label' => 'Mobile App Development',      'href' => '/services/mobile-development/'],
                 ['label' => 'E-Commerce Solutions',        'href' => '/services/ecommerce-development/'],
                 ['label' => 'Cloud-based Solutions',       'href' => '/services/cloud-solutions/'],
             ],
             [
                 ['label' => 'Custom Software Development', 'href' => '/services/custom-software-development/'],
                 ['label' => 'API Development',             'href' => '/services/api-development/'],
-                ['label' => 'SaaS Application Development','href' => '/services/saas-development/'],
+                ['label' => 'SaaS Application Development','href' => '/services/saas/'],
                 ['label' => 'UX & Product Design',         'href' => '/services/ux-design/'],
             ],
         ],
@@ -116,8 +116,6 @@ $groups = [
             ],
             [
                 ['label' => 'Hellory',            'href' => '/case-studies/hellory/'],
-                ['label' => 'Netzur ISP',         'href' => '/case-studies/netzur-isp/'],
-                ['label' => 'URLCrop',            'href' => '/case-studies/urlcrop/'],
             ],
         ],
     ],

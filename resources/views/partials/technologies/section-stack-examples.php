@@ -16,7 +16,7 @@ $examples = [
             'Subscription billing, invoicing and reporting',
             'Admin portal + customer-facing app + APIs',
         ],
-        'services_url' => '/services/saas-development/',   // adjust if needed
+        'services_url' => '/services/saas/',
         'techs_url'    => '/technologies/',
     ],
     [

@@ -153,7 +153,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps that integrate with your existing systems and analytics.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -564,7 +564,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps that integrate with your existing systems and analytics.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -976,7 +976,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps that integrate with existing systems and analytics.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -1381,7 +1381,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps integrated with existing systems and analytics.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -1788,7 +1788,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps that integrate with existing systems and analytics.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -2193,7 +2193,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps integrated with existing systems and analytics.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -2595,7 +2595,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps integrated with existing systems and analytics.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -2997,7 +2997,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps integrated with existing systems and analytics.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -3400,7 +3400,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps integrated with existing systems and analytics.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -3803,7 +3803,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps integrated with existing systems and analytics.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -4215,7 +4215,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps that integrate with your existing systems and analytics.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -4621,7 +4621,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps integrated with existing systems and analytics.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -5028,7 +5028,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps integrated with your existing systems and analytics.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -5435,7 +5435,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps integrated with your existing systems and analytics.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -5850,7 +5850,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross platform mobile apps that work well for customers and internal teams in Riyadh and the wider region.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -6258,7 +6258,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Flutter and cross-platform mobile apps for customers, field staff and internal teams.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -6658,7 +6658,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Customer apps, partner apps and internal field apps built with Flutter and cross-platform stacks.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -7052,7 +7052,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Android and iOS apps for customers, partners and internal teams.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
@@ -7446,7 +7446,7 @@ return [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
                         'description' => 'Product-aligned mobile apps for iOS and Android built with Flutter and modern tooling.',
-                        'url'         => '/services/mobile-app-development/',
+                        'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',

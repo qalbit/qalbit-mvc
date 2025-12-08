@@ -22,6 +22,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 // Bootstrap application (same as public/index.php does)
 session_start();
+require __DIR__ . '/../bootstrap/env.php';
 $router = require __DIR__ . '/../bootstrap/app.php';
 
 // Ensure cache rules treat this like a normal GET page view
