@@ -55,7 +55,9 @@ class ProcessController
 
         if (!$process) {
             http_response_code(404);
-            return 'Process page not found';
+
+            $errorController = new ErrorController();
+            return $errorController->notFound();
         }
 
         // Derive a stable slug segment for cache key (prefer config slug).

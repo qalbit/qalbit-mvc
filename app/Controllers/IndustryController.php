@@ -124,7 +124,9 @@ class IndustryController
 
         if (!$industry) {
             http_response_code(404);
-            return 'Industry not found';
+
+            $errorController = new ErrorController();
+            return $errorController->notFound();
         }
 
         // Derive stable slug segment for cache key (prefer config slug).

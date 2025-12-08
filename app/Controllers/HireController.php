@@ -156,7 +156,9 @@ class HireController
 
         if (!$role) {
             http_response_code(404);
-            return 'Role not found';
+
+            $errorController = new ErrorController();
+            return $errorController->notFound();
         }
 
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');

@@ -125,7 +125,9 @@ class TechnologyController
 
         if (!$technology) {
             http_response_code(404);
-            return 'Technology not found';
+
+            $errorController = new ErrorController();
+            return $errorController->notFound();
         }
 
         // Stable slug segment for cache key (prefer config slug).

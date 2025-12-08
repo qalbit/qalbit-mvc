@@ -25,7 +25,9 @@ class CaseStudyController
 
         if (!$caseStudy) {
             http_response_code(404);
-            return 'Case study not found';
+
+            $errorController = new ErrorController();
+            return $errorController->notFound();
         }
 
         // Derive a stable slug segment for cache key (prefer config slug).
