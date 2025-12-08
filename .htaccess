@@ -1,31 +1,64 @@
 RewriteEngine On
 
 ############################################
-# *) Let WordPress in /blog handle its own routes
+# Security & hardening headers
 ############################################
-RewriteRule ^blog/(.*)$ public/blog/$1 [L]
+<IfModule mod_headers.c>
+    # -------------------------------------
+    # HSTS – force HTTPS for future visits
+    # Start with ~4 months; increase later
+    # -------------------------------------
+    Header always set Strict-Transport-Security "max-age=10886400; includeSubDomains"
+
+    # -------------------------------------
+    # Referrer Policy – limit what is sent
+    # -------------------------------------
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # -------------------------------------
+    # MIME sniffing protection
+    # -------------------------------------
+    Header always set X-Content-Type-Options "nosniff"
+
+    # -------------------------------------
+    # Clickjacking protection
+    # -------------------------------------
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # -------------------------------------
+    # Baseline Content Security Policy
+    # NOTE:
+    #  - Allows inline JS for now ('unsafe-inline') to avoid breaking existing code.
+    #  - Restricts JS loading to your domain + GTM/GA.
+    #  - Blocks plugins (object-src 'none'), locks base-uri, form-action, frame-ancestors.
+    #  - Still upgrades insecure HTTP resources to HTTPS.
+    # -------------------------------------
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+</IfModule>
 
 ############################################
-# *) Let Tools in /tools handle its own routes
+# 1) Let /blog and /tools handle themselves
+#    (WordPress in /blog, mini-site in /tools)
 ############################################
-RewriteRule ^tools/(.*)$ public/tools/$1 [L]
+RewriteRule ^blog(/.*)?$ blog$1 [L]
+RewriteRule ^tools(/.*)?$ tools$1 [L]
 
 ############################################
-# 2) Serve /assets/... from /public/assets/...
+# 2) Serve any existing *file* at document root as-is
+#    (css, js, images, favicon.ico, etc.)
+############################################
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+############################################
+# 3) New MVP static assets from /public/assets
 #    /assets/css/app.css -> /public/assets/css/app.css
 ############################################
 RewriteRule ^assets/(.+)$ public/assets/$1 [L]
 
 ############################################
-# 3) Front controller: route everything else through public/index.php
-#    Conditions:
-#    - NOT under /public
-#    - NOT under /blog (WordPress)
-#    - NOT under /tools (Micro Tools)
-#    - NOT a real file
+# 4) Front controller for the custom MVP in /public
+#    Everything else (not /public/, not /blog/, not /tools/, not a real file)
 ############################################
 RewriteCond %{REQUEST_URI} !^/public/
-RewriteCond %{REQUEST_URI} !^/blog/
-RewriteCond %{REQUEST_URI} !^/tools/
-RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ public/index.php [L]
