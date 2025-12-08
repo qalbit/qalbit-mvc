@@ -34,7 +34,7 @@
                 <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
                     <button
                         type="button"
-                        onclick="window.location.reload()"
+                        data-js="reload-page"
                         class="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50"
                     >
                         Try reloading the page

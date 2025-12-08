@@ -81,90 +81,14 @@ $jsonLd = $jsonLd ?? null;
 
 <?php if ($gtmId): ?>
     <!-- Consent Mode + Google Tag Manager (using GTM container only) -->
-    <script>
-        // Define dataLayer + gtag wrapper BEFORE GTM loads
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){ dataLayer.push(arguments); }
-
-        (function () {
-            var defaultConsent = {
-                ad_storage: 'granted',
-                analytics_storage: 'granted',
-                personalization_storage: 'granted',
-                functionality_storage: 'granted',
-                security_storage: 'granted'
-            };
-
-            var storedConsent = null;
-
-            try {
-                storedConsent = localStorage.getItem('cookie-consent');
-            } catch (e) {
-                storedConsent = null;
-            }
-
-            if (storedConsent === null) {
-                // No stored user choice → use default
-                gtag('consent', 'default', defaultConsent);
-            } else {
-                try {
-                    gtag('consent', 'default', JSON.parse(storedConsent));
-                } catch (e) {
-                    // Fallback if invalid JSON
-                    gtag('consent', 'default', defaultConsent);
-                }
-            }
-        })();
-    </script>
-
-    <!-- Google Tag Manager -->
-    <script>
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','<?= htmlspecialchars($gtmId) ?>');
-    </script>
+    <script src="<?= asset('/js/gtag-layer.js') ?>" data-gtm-id="<?= htmlspecialchars($gtmId) ?>"></script>
 <?php endif; ?>
 
 <?php if ($recaptchaEnabled): ?>
-    <script src="https://www.google.com/recaptcha/api.js?render=<?= htmlspecialchars($recaptchaSiteKey) ?>"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=<?= htmlspecialchars($recaptchaSiteKey) ?>" async defer></script>
+    <script src="<?= asset('/js/recaptcha-layer.js') ?>" 
+        data-recaptcha-site-key="<?= htmlspecialchars($recaptchaSiteKey) ?>" defer></script>
 <?php endif; ?>
-
-<!-- Shared JS: reCAPTCHA + contact form GTM events + cookie popup hooks -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    // reCAPTCHA v3 for all contact forms
-    <?php if ($recaptchaEnabled): ?>
-    var forms = document.querySelectorAll('form[data-track="contact-form"]');
-    forms.forEach(function (form) {
-        form.addEventListener('submit', function (e) {
-            var tokenInput = form.querySelector('input[name="recaptcha_token"]');
-            if (!tokenInput) return;
-
-            e.preventDefault();
-
-            grecaptcha.ready(function () {
-                grecaptcha.execute('<?= htmlspecialchars($recaptchaSiteKey) ?>', {action: 'contact'}).then(function (token) {
-                    tokenInput.value = token;
-
-                    // GTM event
-                    if (window.dataLayer && typeof window.dataLayer.push === 'function') {
-                        window.dataLayer.push({
-                            event: 'contact_form_submit',
-                            form_variant: form.getAttribute('data-variant') || 'unknown',
-                            form_location: window.location.pathname
-                        });
-                    }
-
-                    form.submit();
-                });
-            });
-        });
-    });
-    <?php endif; ?>
-});
-</script>
 
 <?php if (!empty($jsonLd)): ?>
     <?php

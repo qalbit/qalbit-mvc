@@ -4,6 +4,9 @@ const isProd = process.env.NODE_ENV === "production";
 
 // Adjust these lists to match the actual files you have
 const jsEntryPoints = [
+    "resources/js/gtag-layer.js",
+    "resources/js/recaptcha-layer.js",
+    "resources/js/tawk-layer.js",
     "resources/js/aboutus.js",
     "resources/js/careers.js",
     "resources/js/casestudy-detail.js",
