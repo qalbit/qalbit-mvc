@@ -54,7 +54,7 @@ $groups = [
             [
                 ['label' => 'Custom Web Development',      'href' => '/services/custom-web-development/'],
                 ['label' => 'Mobile App Development',      'href' => '/services/mobile-development/'],
-                ['label' => 'E-Commerce Solutions',        'href' => '/services/ecommerce/'],
+                ['label' => 'E-Commerce Solutions',        'href' => '/services/e-commerce/'],
                 ['label' => 'Cloud-based Solutions',       'href' => '/services/cloud-based-solutions/'],
             ],
             [
@@ -71,7 +71,7 @@ $groups = [
         'description' => 'Industries and domains where we have shipped production-ready software.',
         'columns' => [
             [
-                ['label' => 'E-commerce & Retail', 'href' => '/industries/ecommerce/'],
+                ['label' => 'E-commerce & Retail', 'href' => '/industries/e-commerce/'],
                 ['label' => 'Fintech',             'href' => '/industries/fintech/'],
                 ['label' => 'Healthcare',          'href' => '/industries/healthcare/'],
                 ['label' => 'Education',           'href' => '/industries/education/'],
