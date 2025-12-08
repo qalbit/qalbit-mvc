@@ -64,7 +64,7 @@ $intro = $heroConfig['intro']
 $primaryCtaLabel   = $heroConfig['primary_cta_label']   ?? 'Book a free consultation';
 $primaryCtaHref    = $heroConfig['primary_cta_href']    ?? '/contact-us/';
 $secondaryCtaLabel = $heroConfig['secondary_cta_label'] ?? 'View recent work';
-$secondaryCtaHref  = $heroConfig['secondary_cta_href']  ?? '/case-studies/';
+$secondaryCtaHref  = $heroConfig['secondary_cta_href']  ?? '/portfolio/';
 
 // Snapshot
 $snapshotTitle = $heroConfig['snapshot_title'] ?? $serviceName . ' snapshot';

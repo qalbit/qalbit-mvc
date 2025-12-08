@@ -1481,7 +1481,7 @@ return [
                     ],
                     [
                         'label' => 'Payment Gateway Integration',
-                        'href'  => '/services/payment-gateway-integration/',
+                        'href'  => '/services/payment-gateway-services/',
                     ],
                 ],
             ],

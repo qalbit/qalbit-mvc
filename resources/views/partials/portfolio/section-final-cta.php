@@ -36,8 +36,8 @@ $primaryAria  = $cta['primary_aria']
     ?? 'Book a consultation about your software project with QalbIT';
 
 // Secondary CTA (optional)
-$secondaryLabel = $cta['secondary_label'] ?? 'Browse more case studies';
-$secondaryUrl   = $cta['secondary_url']   ?? '/case-studies/';
+$secondaryLabel = $cta['secondary_label'] ?? 'Browse our recent work';
+$secondaryUrl   = $cta['secondary_url']   ?? '/portfolio/';
 $secondaryAria  = $cta['secondary_aria']
     ?? 'Browse QalbIT software case studies';
 

@@ -24,7 +24,6 @@ $groups = [
             ],
             [
                 ['label' => 'Our Services',       'href' => '/services/'],
-                ['label' => 'Our Process',        'href' => '/our-process/'],
                 ['label' => 'Careers',            'href' => '/career/'],
                 ['label' => 'Contact Us',         'href' => '/contact-us/'],
                 ['label' => 'Our Insights / Blog','href' => '/blog/'],
@@ -38,12 +37,12 @@ $groups = [
         'description' => 'How we approach discovery, MVP, scaling and long-term product partnerships.',
         'columns' => [
             [
-                ['label' => 'Start-Up MVP',            'href' => '/our-process/start-up-mvp/'],
-                ['label' => 'Product Scaling',         'href' => '/our-process/product-scaling/'],
+                ['label' => 'Start-Up MVP',            'href' => '/start-up-mvp/'],
+                ['label' => 'Product Scaling',         'href' => '/product-scaling/'],
             ],
             [
-                ['label' => 'Digital Transformation',  'href' => '/our-process/digital-transformation/'],
-                ['label' => 'Engagement Models',       'href' => '/our-process/engagement-model/'],
+                ['label' => 'Digital Transformation',  'href' => '/digital-transformation/'],
+                ['label' => 'Engagement Models',       'href' => '/engagement-model/'],
             ],
         ],
     ],
@@ -55,14 +54,14 @@ $groups = [
             [
                 ['label' => 'Custom Web Development',      'href' => '/services/custom-web-development/'],
                 ['label' => 'Mobile App Development',      'href' => '/services/mobile-development/'],
-                ['label' => 'E-Commerce Solutions',        'href' => '/services/ecommerce-development/'],
-                ['label' => 'Cloud-based Solutions',       'href' => '/services/cloud-solutions/'],
+                ['label' => 'E-Commerce Solutions',        'href' => '/services/ecommerce/'],
+                ['label' => 'Cloud-based Solutions',       'href' => '/services/cloud-based-solutions/'],
             ],
             [
                 ['label' => 'Custom Software Development', 'href' => '/services/custom-software-development/'],
                 ['label' => 'API Development',             'href' => '/services/api-development/'],
                 ['label' => 'SaaS Application Development','href' => '/services/saas/'],
-                ['label' => 'UX & Product Design',         'href' => '/services/ux-design/'],
+                ['label' => 'UX & Product Design',         'href' => '/services/ui-ux-design-service/'],
             ],
         ],
     ],
@@ -80,7 +79,6 @@ $groups = [
             [
                 ['label' => 'Entertainment & Media', 'href' => '/industries/entertainment/'],
                 ['label' => 'Travel & Hospitality',  'href' => '/industries/travel/'],
-                ['label' => 'ISP / Telecom',         'href' => '/industries/telecom/'],
                 ['label' => 'Real Estate & Local',   'href' => '/industries/real-estate/'],
             ],
         ],
@@ -92,15 +90,22 @@ $groups = [
         'columns' => [
             [
                 ['label' => 'Laravel / PHP',        'href' => '/technologies/laravel/'],
-                ['label' => 'Core PHP',             'href' => '/technologies/php/'],
                 ['label' => 'Node.js',              'href' => '/technologies/nodejs/'],
                 ['label' => 'NestJS',               'href' => '/technologies/nestjs/'],
-            ],
-            [
                 ['label' => 'React',                'href' => '/technologies/reactjs/'],
                 ['label' => 'Next.js',              'href' => '/technologies/nextjs/'],
+                ['label' => 'Tailwind CSS',         'href' => '/technologies/tailwindcss/'],
+                ['label' => 'WordPress',            'href' => '/technologies/wordpress/'],
+                ['label' => 'CodeIgniter',          'href' => '/technologies/codeigniter/'],
+            ],
+            [
                 ['label' => 'Flutter',              'href' => '/technologies/flutter/'],
-                ['label' => 'MySQL & PostgreSQL',   'href' => '/technologies/databases/'],
+                ['label' => 'Native Android',       'href' => '/technologies/android/'],
+                ['label' => 'React Native',         'href' => '/technologies/react-native/'],
+                ['label' => 'TypeScript',           'href' => '/technologies/typescript/'],
+                ['label' => 'PostgreSQL',           'href' => '/technologies/postgresql/'],
+                ['label' => 'MySQL',                'href' => '/technologies/mysql/'],
+                ['label' => 'AWS Cloud Solutions',  'href' => '/technologies/aws/'],
             ],
         ],
     ],
@@ -130,8 +135,8 @@ $groups = [
                 ['label' => 'Life at QalbIT',      'href' => '/career/#life-at-qalbit'],
             ],
             [
-                ['label' => 'General Application', 'href' => '/apply/'],
-                ['label' => 'Apply for Laravel Roles', 'href' => '/apply/?role=laravel-developer'],
+                ['label' => 'General Application', 'href' => '/career/apply/'],
+                ['label' => 'Apply for Laravel Roles', 'href' => '/career/apply/?role=laravel-developer'],
             ],
         ],
     ],
@@ -141,11 +146,10 @@ $groups = [
         'description' => 'Content, updates and learning resources related to custom software development.',
         'columns' => [
             [
-                ['label' => 'Our Insights',        'href' => '/our-insights/'],
                 ['label' => 'Blog',                'href' => '/blog/'],
             ],
             [
-                ['label' => 'Contact for Speaking / Workshops', 'href' => '/contact-us/?ref=speaking'],
+                ['label' => 'Contact for Speaking / Workshops', 'href' => '/contact-us/?topic=speaking'],
             ],
         ],
     ],
@@ -156,7 +160,7 @@ $groups = [
         'columns' => [
             [
                 ['label' => 'Privacy Policy',       'href' => '/privacy-policy/'],
-                ['label' => 'Terms & Conditions',   'href' => '/terms-and-conditions/'],
+                ['label' => 'Terms & Conditions',   'href' => '/terms-and-condition/'],
                 ['label' => 'Cookie Policy',        'href' => '/cookie-policy/'],
             ],
         ],

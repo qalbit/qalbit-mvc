@@ -20,8 +20,8 @@ $secondaryCta = $heroConfig['secondary_cta'] ?? [];
 
 $primaryCtaLabel   = $primaryCta['label'] ?? 'Discuss your project';
 $primaryCtaHref    = $primaryCta['href']  ?? '/contact-us/?ref=portfolio-hero';
-$secondaryCtaLabel = $secondaryCta['label'] ?? 'Browse case studies';
-$secondaryCtaHref  = $secondaryCta['href']  ?? '/case-studies/';
+$secondaryCtaLabel = $secondaryCta['label'] ?? 'Browse our recent work';
+$secondaryCtaHref  = $secondaryCta['href']  ?? '/portfolio/';
 ?>
 
 <section

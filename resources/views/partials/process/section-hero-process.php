@@ -30,7 +30,7 @@ $secondaryCtaLabel = $hero['secondary_cta']['label'] ?? 'See MVP case studies';
 // Internal links
 $internalLinks = $hero['internal_links'] ?? [
     ['label' => 'Explore our services',  'href' => '/services/'],
-    ['label' => 'View case studies',     'href' => '/case-studies/'],
+    ['label' => 'View our work',     'href' => '/portfolio/'],
     ['label' => 'Contact our team',      'href' => '/contact-us/'],
 ];
 

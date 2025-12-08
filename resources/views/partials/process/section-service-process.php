@@ -24,7 +24,7 @@ $defaultItems = [
         'label'       => 'Web app MVPs',
         'description' => 'Browser-based products and internal tools with responsive UI, authentication, reporting and integrations into CRMs, ERPs or third-party APIs.',
         'link_label'  => 'Explore web application development',
-        'link_href'   => '/services/web-application-development/',
+        'link_href'   => '/services/web-applications/',
     ],
     [
         'key'         => 'mobile-app-mvp',
@@ -45,7 +45,7 @@ $defaultItems = [
         'label'       => 'Prototyping & clickable UX flows',
         'description' => 'Low-fidelity and high-fidelity prototypes, user journeys and interface designs to validate ideas with users and investors before writing full production code.',
         'link_label'  => 'Learn more about our UX design',
-        'link_href'   => '/services/ux-design-services/',
+        'link_href'   => '/services/ui-ux-design-service/',
     ],
     [
         'key'         => 'api-backend',
