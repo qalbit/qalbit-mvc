@@ -34,7 +34,7 @@ $currentYear = date('Y');
                         <a
                             href="https://www.linkedin.com/company/qalbit/"
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             aria-label="Follow us on LinkedIn"
                             class="inline-flex items-center justify-center rounded-full bg-slate-900/60 p-2 hover:bg-slate-800 transition"
                         >
@@ -48,9 +48,9 @@ $currentYear = date('Y');
                     </li>
                     <li>
                         <a
-                            href="https://twitter.com/qalb_it"
+                            href="https://x.com/qalb_it"
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             aria-label="Follow us on Twitter"
                             class="inline-flex items-center justify-center rounded-full bg-slate-900/60 p-2 hover:bg-slate-800 transition"
                         >
@@ -66,7 +66,7 @@ $currentYear = date('Y');
                         <a
                             href="https://www.facebook.com/qalbitinfotech/"
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             aria-label="Follow us on Facebook"
                             class="inline-flex items-center justify-center rounded-full bg-slate-900/60 p-2 hover:bg-slate-800 transition"
                         >
@@ -82,7 +82,7 @@ $currentYear = date('Y');
                         <a
                             href="https://www.instagram.com/qalbitinfotech/"
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             aria-label="Follow us on Instagram"
                             class="inline-flex items-center justify-center rounded-full bg-slate-900/60 p-2 hover:bg-slate-800 transition"
                         >
@@ -98,7 +98,7 @@ $currentYear = date('Y');
                         <a
                             href="https://github.com/qalbit/"
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                             aria-label="Follow us on Github"
                             class="inline-flex items-center justify-center rounded-full bg-slate-900/60 p-2 hover:bg-slate-800 transition"
                         >
@@ -192,17 +192,17 @@ $currentYear = date('Y');
                 </div>
                 <ul class="space-y-1 text-sm text-slate-200">
                     <li>
-                        <a href="mailto:info@qalbit.com" target="_blank" class="hover:text-sky-400">
+                        <a href="mailto:info@qalbit.com" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400">
                             info@qalbit.com
                         </a>
                     </li>
                     <li>
-                        <a href="mailto:sales@qalbit.com" target="_blank" class="hover:text-sky-400">
+                        <a href="mailto:sales@qalbit.com" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400">
                             sales@qalbit.com
                         </a>
                     </li>
                     <li>
-                        <a href="tel:+918511900440" target="_blank" class="hover:text-sky-400">
+                        <a href="tel:+918511900440" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400">
                             +91 85119 00440
                         </a>
                     </li>
@@ -215,12 +215,12 @@ $currentYear = date('Y');
                 </div>
                 <ul class="space-y-1 text-sm text-slate-200">
                     <li>
-                        <a href="mailto:hr@qalbit.com" target="_blank" class="hover:text-sky-400">
+                        <a href="mailto:hr@qalbit.com" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400">
                             hr@qalbit.com
                         </a>
                     </li>
                     <li>
-                        <a href="tel:+918511900440" target="_blank" class="hover:text-sky-400">
+                        <a href="tel:+918511900440" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400">
                             +91 85119 00440
                         </a>
                     </li>
@@ -234,8 +234,9 @@ $currentYear = date('Y');
                 <ul class="space-y-1 text-sm text-slate-200">
                     <li class="location">
                         <a
-                            href="https://maps.app.goo.gl/t5QYvLDb1gEo2crx9"
+                            href="https://www.google.com/maps/place/QalbIT+Infotech+Pvt+Ltd/@22.9939346,72.4962177,999m/data=!3m2!1e3!4b1!4m6!3m5!1s0x395e9b4dcb551825:0xd2ca8b0aa98f5d41!8m2!3d22.9939346!4d72.4987926!16s%2Fg%2F11h4030jl3?entry=tts&g_ep=EgoyMDI1MDMwMi4wIPu8ASoASAFQAw%3D%3D"
                             target="_blank"
+                            rel="noopener noreferrer"
                             class="hover:text-sky-400"
                         >
                             C-109, Siddhi Vinayak Towers, Near Kataria Arcade, Opp. S.G. Highway,
@@ -545,6 +546,7 @@ $currentYear = date('Y');
                 <li>
                     <a
                         target="_blank"
+                        rel="noopener noreferrer"
                         href="//www.dmca.com/Protection/Status.aspx?ID=1369625d-1306-472c-afec-8d78bdacae4c"
                         title="DMCA.com Protection Status"
                         class="dmca-badge"

@@ -89,7 +89,7 @@ $emptyMessage = $config['empty_message'] ?? 'Try adjusting the industry or tech 
 
                         $href       = $caseStudyUrl ?: ($externalUrl ?: '');
                         $isExternal = $externalUrl && !$caseStudyUrl;
-                        $targetAttr = $isExternal ? ' target="_blank" rel="noreferrer"' : '';
+                        $targetAttr = $isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
 
                         $image = $item['image'] ?? null;
                         if (!$image && !empty($item['thumbnail'])) {

@@ -221,7 +221,7 @@ return [
         'author_name' => 'Ivo Kuipers',
         'author_role' => 'Solution Architect at Heuvelman Sound & Vision B.V.',
         'company'     => 'Heuvelman Sound & Vision B.V.',
-        'company_url' => 'https://www.heuvelman.nl/',
+        'company_url' => 'https://www.heuvelman.nl/nl/',
         'rating'      => 5,
         'industry'    => 'Audiovisual / Events & Installations',
         'region'      => 'The Netherlands',

@@ -65,7 +65,7 @@ $subtitle  = $config['subtitle'] ?? 'A few representative projects across indust
                     $href = $caseStudyUrl ?: ($externalUrl ?: '#');
                     $isExternal = $externalUrl && !$caseStudyUrl;
 
-                    $targetAttr = $isExternal ? ' target="_blank" rel="noreferrer"' : '';
+                    $targetAttr = $isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
 
                     // Image support: either 'image' => ['src','alt'] or legacy 'thumbnail'
                     $image = $item['image'] ?? null;
