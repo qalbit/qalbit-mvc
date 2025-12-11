@@ -206,8 +206,9 @@ class Mailer
      * @param string $body     Main body (HTML or plain text)
      * @param string|null $altBody Plain-text fallback (for HTML mails)
      * @param bool   $isHtml   Whether $body is HTML
+     * @param string $type     lead | career
      */
-    protected function sendViaSmtp(array $data, string $body, ?string $altBody = null, bool $isHtml = false): bool
+    protected function sendViaSmtp(array $data, string $body, ?string $altBody = null, bool $isHtml = false, $type = 'lead'): bool
     {
         $config = config('mail', []);
         if (empty($config['host'])) {
@@ -238,8 +239,13 @@ class Mailer
 
             $fromEmail = $config['from_email'] ?? config('app.from_email', 'no-reply@qalbit.com');
             $fromName  = $config['from_name']  ?? config('app.name', 'QalbIT');
-            $toEmail   = $config['to_career']   ?? config('app.contact_email', 'info@qalbit.com');
-            $ccEmail   = $config['to_email']   ?? config('app.contact_email', 'info@qalbit.com');
+            if ($type == 'lead') {
+                $toEmail   = $config['to_sales']   ?? config('app.contact_email', 'info@qalbit.com');
+                $ccEmail   = $config['to_email']   ?? config('app.contact_email', 'info@qalbit.com');
+            } else {
+                $toEmail   = $config['to_career']   ?? config('app.contact_email', 'info@qalbit.com');
+                $ccEmail   = $config['to_email']   ?? config('app.contact_email', 'info@qalbit.com');
+            }
 
             $mail->setFrom($fromEmail, $fromName);
             $mail->addAddress($toEmail);

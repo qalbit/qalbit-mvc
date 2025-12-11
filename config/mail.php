@@ -18,9 +18,12 @@ return [
     'from_email' => env('APP_CONTACT_FROM_EMAIL', ''),
     'from_name'  => env('APP_CONTACT_FROM_NAME', 'QalbIT'),
 
-    // Where contact form enquiries should arrive
+    // Where general form enquiries should arrive
     'to_email'   => env('APP_CONTACT_TO_EMAIL', 'info@qalbit.com'),
 
     // Where career form enquiries should arrive
     'to_career' => env('CAREER_CONTACT_TO_EMAIL', 'hr@qalbit.com'),
+
+    // Where lead from enquiries should arrive
+    'to_sales'  => env('LEAD_CONTACT_TO_EMAIL', 'sales@qalbit.com'),
 ];
