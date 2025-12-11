@@ -11,30 +11,34 @@ class Mailer
      * Send contact enquiry.
      *
      * Flow:
-     *  1) Build email body.
+     *  1) Build email bodies (HTML + text).
      *  2) Try SMTP (if configured).
      *  3) If SMTP fails or not configured → fallback to mail().
      *  4) Log all attempts, including which transport was used.
      */
     public function sendContact(array $data): bool
     {
-        $body = $this->buildBody($data);
+        $bodies   = $this->buildContactBodies($data);
+        $htmlBody = $bodies['html'];
+        $textBody = $bodies['text'];
 
         $sent      = false;
         $transport = 'none';
 
         // 1) Try SMTP if configured
         if ($this->isSmtpConfigured()) {
-            $sent = $this->sendViaSmtp($data, $body);
+            // true = HTML mail
+            $sent      = $this->sendViaSmtp($data, $htmlBody, $textBody, true);
             $transport = $sent ? 'smtp' : 'smtp_failed';
         }
 
         // 2) Fallback to mail() if SMTP not configured or failed
         if (!$sent) {
-            $mailSent = $this->sendViaMail($data, $body);
+            // true = HTML mail
+            $mailSent = $this->sendViaMail($data, $htmlBody, true);
             if ($mailSent) {
                 $transport = ($transport === 'smtp_failed') ? 'mail_fallback' : 'mail';
-                $sent = true;
+                $sent      = true;
             }
         }
 
@@ -43,6 +47,7 @@ class Mailer
 
         return $sent;
     }
+
 
     public function sendCareerApplication(array $data): bool
     {
@@ -147,7 +152,6 @@ class Mailer
     // ---------------------------------------------------------
     // Internal helpers
     // ---------------------------------------------------------
-
     protected function buildBody(array $data): string
     {
         $lines = [
@@ -163,6 +167,31 @@ class Mailer
 
         return implode("\n", $lines);
     }
+
+
+        /**
+     * Build both HTML + plain-text bodies for contact enquiries.
+     */
+    protected function buildContactBodies(array $data): array
+    {
+        // Re-use your current plain-text builder for AltBody/logging
+        $textBody = $this->buildBody($data);
+
+        $siteUrl  = config('app.url', 'https://qalbit.com');
+        $siteName = config('app.name', 'QalbIT');
+
+        $htmlBody = $this->renderEmailTemplate('contact-enquiry', [
+            'data'     => $data,
+            'siteUrl'  => $siteUrl,
+            'siteName' => $siteName,
+        ]);
+
+        return [
+            'html' => $htmlBody,
+            'text' => $textBody,
+        ];
+    }
+
 
     protected function isSmtpConfigured(): bool
     {

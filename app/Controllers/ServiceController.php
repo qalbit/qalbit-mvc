@@ -72,7 +72,6 @@ class ServiceController
             'seo'      => $seo,
             'services' => $enabledServices,
             'faqs'     => $faqs,
-
             'contactErrors'  => $contactErrors,
             'contactOld'     => $contactOld,
             'contactSuccess' => $contactSuccess,
