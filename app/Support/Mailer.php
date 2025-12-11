@@ -209,10 +209,12 @@ class Mailer
 
             $fromEmail = $config['from_email'] ?? config('app.from_email', 'no-reply@qalbit.com');
             $fromName  = $config['from_name']  ?? config('app.name', 'QalbIT');
-            $toEmail   = $config['to_email']   ?? config('app.contact_email', 'info@qalbit.com');
+            $toEmail   = $config['to_career']   ?? config('app.contact_email', 'info@qalbit.com');
+            $ccEmail   = $config['to_email']   ?? config('app.contact_email', 'info@qalbit.com');
 
             $mail->setFrom($fromEmail, $fromName);
             $mail->addAddress($toEmail);
+            $mail->addBCC($ccEmail);
 
             if (!empty($data['email'])) {
                 $mail->addReplyTo($data['email'], $data['name'] ?? '');

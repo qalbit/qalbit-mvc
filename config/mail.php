@@ -20,4 +20,7 @@ return [
 
     // Where contact form enquiries should arrive
     'to_email'   => env('APP_CONTACT_TO_EMAIL', 'info@qalbit.com'),
+
+    // Where career form enquiries should arrive
+    'to_career' => env('CAREER_CONTACT_TO_EMAIL', 'hr@qalbit.com'),
 ];
