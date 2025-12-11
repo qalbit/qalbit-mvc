@@ -46,18 +46,20 @@ class Mailer
 
     public function sendCareerApplication(array $data): bool
     {
-        $body = $this->buildCareerBody($data);
+        $bodies = $this->buildCareerBodies($data);
+        $htmlBody = $bodies['html'];
+        $textBody = $bodies['text'];
 
         $sent      = false;
         $transport = 'none';
 
         if ($this->isSmtpConfigured()) {
-            $sent      = $this->sendViaSmtp($data, $body);
+            $sent      = $this->sendViaSmtp($data, $htmlBody, $textBody, true);
             $transport = $sent ? 'smtp' : 'smtp_failed';
         }
 
         if (!$sent) {
-            $mailSent = $this->sendViaMail($data, $body);
+            $mailSent = $this->sendViaMail($data, $htmlBody, true);
             if ($mailSent) {
                 $transport = ($transport === 'smtp_failed') ? 'mail_fallback' : 'mail';
                 $sent      = true;
@@ -69,8 +71,13 @@ class Mailer
         return $sent;
     }
 
-    protected function buildCareerBody(array $data): string
+
+        /**
+     * Build both HTML + plain-text bodies for career applications.
+     */
+    protected function buildCareerBodies(array $data): array
     {
+        // Plain-text version (fallback, logs, AltBody)
         $lines = [
             'Type: Career application',
             'Role slug: ' . ($data['role_slug'] ?? ''),
@@ -92,7 +99,22 @@ class Mailer
             'Resume stored at: ' . ($data['file_path'] ?? 'N/A'),
         ];
 
-        return implode("\n", $lines);
+        $textBody = implode("\n", $lines);
+
+        // HTML body via template
+        $siteUrl  = config('app.url', 'https://qalbit.com');
+        $siteName = config('app.name', 'QalbIT');
+
+        $htmlBody = $this->renderEmailTemplate('career-application', [
+            'data'     => $data,
+            'siteUrl'  => $siteUrl,
+            'siteName' => $siteName,
+        ]);
+
+        return [
+            'html' => $htmlBody,
+            'text' => $textBody,
+        ];
     }
 
     protected function logCareer(array $data, bool $sent, string $transport): void
@@ -150,8 +172,13 @@ class Mailer
 
     /**
      * SMTP via PHPMailer.
+     *
+     * @param array  $data
+     * @param string $body     Main body (HTML or plain text)
+     * @param string|null $altBody Plain-text fallback (for HTML mails)
+     * @param bool   $isHtml   Whether $body is HTML
      */
-    protected function sendViaSmtp(array $data, string $body): bool
+    protected function sendViaSmtp(array $data, string $body, ?string $altBody = null, bool $isHtml = false): bool
     {
         $config = config('mail', []);
         if (empty($config['host'])) {
@@ -204,8 +231,16 @@ class Mailer
                 ?? ('New enquiry from ' . ($data['name'] ?? 'Website visitor'));
 
             $mail->Subject = $subject;
-            $mail->Body    = $body;
-            $mail->AltBody = $body;
+
+            if ($isHtml) {
+                $mail->isHTML(true);
+                $mail->Body    = $body;
+                $mail->AltBody = $altBody ?: strip_tags($body);
+            } else {
+                $mail->isHTML(false);
+                $mail->Body    = $body;
+                $mail->AltBody = $body;
+            }
 
             $mail->send();
             return true;
@@ -215,7 +250,7 @@ class Mailer
         }
     }
 
-    protected function sendViaMail(array $data, string $body): bool
+    protected function sendViaMail(array $data, string $body, bool $isHtml = false): bool
     {
         $to      = config('app.contact_email', 'info@qalbit.com');
         $from    = config('app.from_email', 'no-reply@qalbit.com');
@@ -223,12 +258,18 @@ class Mailer
         $subject = $data['mail_subject']
             ?? ('New enquiry from ' . ($data['name'] ?? 'Website visitor'));
 
-        $headers = [];
+        $headers   = [];
         $headers[] = 'From: ' . $from;
         if (!empty($data['email'])) {
             $headers[] = 'Reply-To: ' . $data['email'];
         }
-        $headers[] = 'Content-Type: text/plain; charset=UTF-8';
+
+        if ($isHtml) {
+            $headers[] = 'MIME-Version: 1.0';
+            $headers[] = 'Content-Type: text/html; charset=UTF-8';
+        } else {
+            $headers[] = 'Content-Type: text/plain; charset=UTF-8';
+        }
 
         $headersString = implode("\r\n", $headers);
 
@@ -238,7 +279,6 @@ class Mailer
 
         return false;
     }
-
 
     protected function logContact(array $data, bool $sent, string $transport): void
     {
@@ -279,4 +319,25 @@ class Mailer
 
         @file_put_contents($logFile, $logLine, FILE_APPEND);
     }
+
+    /**
+     * Render a simple PHP email template from resources/views/emails.
+     */
+    protected function renderEmailTemplate(string $view, array $vars = []): string
+    {
+        $basePath = dirname(__DIR__, 2);
+        $file     = $basePath . '/resources/views/emails/' . $view . '.php';
+
+        if (!is_file($file)) {
+            // If template is missing, fail loudly so we notice in logs
+            throw new \RuntimeException('Email template not found: ' . $file);
+        }
+
+        extract($vars, EXTR_SKIP);
+
+        ob_start();
+        include $file;
+        return (string) ob_get_clean();
+    }
+
 }
