@@ -10,6 +10,12 @@ session_set_cookie_params([
 
 session_start();
 
+$originalMethod = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
+if ($originalMethod === 'HEAD') {
+    $_SERVER['REQUEST_METHOD'] = 'GET';
+}
+
+
 // LOAD ENV FIRST
 require __DIR__ . '/../bootstrap/env.php';
 

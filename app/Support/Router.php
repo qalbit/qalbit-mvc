@@ -66,19 +66,18 @@ class Router
 
     public function dispatch(): void
     {
-        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
-        $uri    = $_SERVER['REQUEST_URI'] ?? '/';
+        $originalMethod = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
+        $method         = $originalMethod;
 
+        // Treat HEAD like GET for routing (your router only has GET/POST)
+        if ($method === 'HEAD') {
+            $method = 'GET';
+        }
+
+        $uri = $_SERVER['REQUEST_URI'] ?? '/';
         $uri = parse_url($uri, PHP_URL_PATH) ?: '/';
 
-        // --- Normalize trailing slash for "pretty" URLs ---
-        // - Keep "/" as is
-        // - If no trailing slash AND last segment has no dot (no extension) → add "/"
-        //   Examples:
-        //   /services      -> /services/
-        //   /technologies  -> /technologies/
-        //   /contact-us    -> /contact-us/
-        //   /sitemap.xml   -> /sitemap.xml (unchanged)
+        // Normalize trailing slash for pretty URLs
         if ($uri !== '/' && substr($uri, -1) !== '/') {
             $basename = basename($uri);
             if (strpos($basename, '.') === false) {
@@ -86,12 +85,26 @@ class Router
             }
         }
 
+        // Buffer output so we can suppress body for HEAD without touching controllers
+        ob_start();
+
         try {
             // 1) Static routes
             $handler = $this->routes[$method][$uri] ?? null;
 
             if ($handler) {
                 $this->invokeHandler($handler, []);
+                $body = ob_get_clean();
+
+                if ($originalMethod === 'HEAD') {
+                    // No body for HEAD; headers already set by controller
+                    if (!headers_sent()) {
+                        header('Content-Length: ' . strlen($body));
+                    }
+                    return;
+                }
+
+                echo $body;
                 return;
             }
 
@@ -106,6 +119,16 @@ class Router
                     }
 
                     $this->invokeHandler($route['handler'], $params);
+                    $body = ob_get_clean();
+
+                    if ($originalMethod === 'HEAD') {
+                        if (!headers_sent()) {
+                            header('Content-Length: ' . strlen($body));
+                        }
+                        return;
+                    }
+
+                    echo $body;
                     return;
                 }
             }
@@ -115,22 +138,56 @@ class Router
 
             if ($this->notFoundHandler) {
                 $this->invokeHandler($this->notFoundHandler, []);
+                $body = ob_get_clean();
+
+                if ($originalMethod === 'HEAD') {
+                    if (!headers_sent()) {
+                        header('Content-Length: ' . strlen($body));
+                    }
+                    return;
+                }
+
+                echo $body;
                 return;
             }
 
+            $body = ob_get_clean();
+            if ($originalMethod === 'HEAD') {
+                if (!headers_sent()) {
+                    header('Content-Length: ' . strlen('404 Not Found'));
+                }
+                return;
+            }
             echo '404 Not Found';
         } catch (\Throwable $e) {
-            // 500 error
             http_response_code(500);
 
             if ($this->errorHandler) {
                 $this->invokeHandler($this->errorHandler, [$e]);
+                $body = ob_get_clean();
+
+                if ($originalMethod === 'HEAD') {
+                    if (!headers_sent()) {
+                        header('Content-Length: ' . strlen($body));
+                    }
+                    return;
+                }
+
+                echo $body;
                 return;
             }
 
+            $body = ob_get_clean();
+            if ($originalMethod === 'HEAD') {
+                if (!headers_sent()) {
+                    header('Content-Length: ' . strlen('Internal Server Error'));
+                }
+                return;
+            }
             echo 'Internal Server Error';
         }
     }
+
 
     protected function invokeHandler($handler, array $params): void
     {
