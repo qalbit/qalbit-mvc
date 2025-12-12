@@ -98,6 +98,9 @@ $router->get('/sitemap/', [PageController::class, 'sitemap']);
 // SEO: sitemap
 $router->get('/sitemap.xml', [SeoController::class, 'sitemap']);
 
+// SEO: robots
+$router->get('/robots.txt', [SeoController::class, 'robots']);
+
 // Geolocations 
 $router->get('/{country}/{state}/', [GeoController::class, 'show']);
 

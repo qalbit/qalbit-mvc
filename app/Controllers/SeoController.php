@@ -136,4 +136,26 @@ class SeoController
 
         return $content;
     }
+
+    public function robots(): string
+    {
+        header('Content-Type: text/plain; charset=UTF-8');
+        http_response_code(200);
+
+        return <<<TXT
+    User-agent: *
+    Allow: /
+
+    Disallow: /blog/wp-admin/
+    Disallow: /blog/wp-includes/
+    Disallow: /blog/wp-content/plugins/
+    Disallow: /blog/wp-json/
+
+    # Main Website
+    Sitemap: https://qalbit.com/sitemap.xml
+
+    # Blog Website
+    Sitemap: https://qalbit.com/blog/sitemap_index.xml
+    TXT;
+    }
 }
