@@ -10,7 +10,6 @@ $pageTitle   = 'Our Sitemap';
 $pageSummary = 'Quick overview of all key pages on QalbIT – services, industries, technologies, portfolio, careers, insights and legal information.';
 
 $groups = [
-
     'discover' => [
         'title' => 'Discover QalbIT',
         'description' => 'High-level pages people usually visit first when evaluating us as a software partner.',
@@ -31,7 +30,6 @@ $groups = [
             ],
         ],
     ],
-
     'process' => [
         'title' => 'Our Process',
         'description' => 'How we approach discovery, MVP, scaling and long-term product partnerships.',
@@ -46,7 +44,6 @@ $groups = [
             ],
         ],
     ],
-
     'services' => [
         'title' => 'Our Services',
         'description' => 'Custom software development services we provide for founders, product teams and enterprises.',
@@ -65,7 +62,6 @@ $groups = [
             ],
         ],
     ],
-
     'industries' => [
         'title' => 'Industries We Serve',
         'description' => 'Industries and domains where we have shipped production-ready software.',
@@ -83,7 +79,6 @@ $groups = [
             ],
         ],
     ],
-
     'technologies' => [
         'title' => 'Technologies & Stacks',
         'description' => 'Core technologies and platforms we use across backend, frontend and mobile.',
@@ -109,7 +104,6 @@ $groups = [
             ],
         ],
     ],
-
     'portfolio' => [
         'title' => 'Portfolio & Case Studies',
         'description' => 'Selected projects, internal products and platforms we have shipped with clients.',
@@ -124,7 +118,6 @@ $groups = [
             ],
         ],
     ],
-
     'careers' => [
         'title' => 'Careers & Hiring',
         'description' => 'Information for engineers, designers and product people exploring roles at QalbIT.',
@@ -140,7 +133,6 @@ $groups = [
             ],
         ],
     ],
-
     'resources' => [
         'title' => 'Resources & Insights',
         'description' => 'Content, updates and learning resources related to custom software development.',
@@ -153,7 +145,6 @@ $groups = [
             ],
         ],
     ],
-
     'legal' => [
         'title' => 'Legal & Policies',
         'description' => 'Documents that describe how we handle data, security and website usage.',
@@ -166,6 +157,9 @@ $groups = [
         ],
     ],
 ];
+
+$currentPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+$currentPath = $currentPath === '/' ? '/' : rtrim($currentPath, '/') . '/';
 
 ?>
 
@@ -216,13 +210,26 @@ $groups = [
                             <ul class="space-y-1.5">
                                 <?php foreach ($column as $link): ?>
                                     <li>
-                                        <a
-                                            href="<?= htmlspecialchars($link['href'], ENT_QUOTES); ?>"
-                                            class="inline-flex items-center text-[13px] text-slate-700 hover:text-sky-600"
-                                        >
-                                            <span class="mr-2 h-[3px] w-[3px] rounded-full bg-slate-300"></span>
-                                            <span><?= htmlspecialchars($link['label'], ENT_QUOTES); ?></span>
-                                        </a>
+                                        <?php
+                                        $href = $link['href'] ?? '/';
+                                        $normHref = ($href === '/') ? '/' : rtrim($href, '/') . '/';
+                                        $isCurrent = ($normHref === $currentPath);
+                                        ?>
+
+                                        <?php if ($isCurrent): ?>
+                                            <span class="inline-flex items-center text-[13px] font-semibold text-slate-900" aria-current="page">
+                                                <span class="mr-2 h-[3px] w-[3px] rounded-full bg-sky-600"></span>
+                                                <span><?= htmlspecialchars($link['label'], ENT_QUOTES); ?></span>
+                                            </span>
+                                        <?php else: ?>
+                                            <a
+                                                href="<?= htmlspecialchars($href, ENT_QUOTES); ?>"
+                                                class="inline-flex items-center text-[13px] text-slate-700 hover:text-sky-600 transition-colors"
+                                            >
+                                                <span class="mr-2 h-[3px] w-[3px] rounded-full bg-slate-300"></span>
+                                                <span><?= htmlspecialchars($link['label'], ENT_QUOTES); ?></span>
+                                            </a>
+                                        <?php endif; ?>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
@@ -231,5 +238,39 @@ $groups = [
                 </section>
             <?php endforeach; ?>
         </div>
+
+        <!-- CTA band -->
+        <section class="mt-10 sm:mt-12 rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 sm:p-8">
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.16em] text-sky-700">
+                        Ready to discuss your project?
+                    </p>
+                    <h2 class="mt-2 text-lg sm:text-xl font-semibold tracking-tight text-slate-900">
+                        Get a project estimate in 24–48 hours
+                    </h2>
+                    <p class="mt-1 text-sm text-slate-600 max-w-2xl">
+                        Share your requirements and we’ll respond with a realistic plan, timeline, and cost range.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
+                    <a
+                        href="/contact-us/"
+                        class="inline-flex items-center justify-center rounded-full bg-sky-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-sky-700 transition-colors"
+                    >
+                        Get a project estimate
+                    </a>
+                    <a
+                        href="/portfolio/"
+                        class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 hover:border-slate-400 transition-colors"
+                    >
+                        View case studies
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        
     </div>
 </section>

@@ -8,6 +8,8 @@
 
 <?php include __DIR__ . '/../../partials/hero/technologies.php'; ?>
 
+<?php include __DIR__ . '/../../partials/technologies/section-featured-links.php'; ?>
+
 <?php include __DIR__ . '/../../partials/technologies/section-techstack.php'; ?>
 
 <?php
@@ -48,6 +50,10 @@
         include __DIR__ . '/../../partials/faq/section.php';
     ?>
 <?php endif; ?>
+
+<section class="sr-only" aria-hidden="false">
+    <a href="/contact-us/">Get a project estimate</a>
+</section>
 
 <?php
     // CTA block – pass contact flash state into the CTA + small form

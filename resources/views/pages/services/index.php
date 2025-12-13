@@ -8,6 +8,8 @@
 
 <?php include __DIR__ . '/../../partials/hero/service.php'; ?>
 
+<?php include __DIR__ . '/../../partials/services/section-featured-links.php'; ?>
+
 <?php include __DIR__ . '/../../partials/services/services.php'; ?>
 
 <?php include __DIR__ . '/../../partials/services/models.php'; ?>
