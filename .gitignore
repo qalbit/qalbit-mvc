@@ -1,21 +1,33 @@
-# Node Modules and Config
-node_modules
-package-lock.json
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
 
-# Composer and Config
-vendor
-composer.lock
+# testing
+/coverage
 
-# Env Variables
+# next.js
+/.next/
+/out/
+
+# production
+/build
+/storage
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env files
 .env
-.env*
+.env*.local
+.env.production
 
-# Public Directory 
-public/blog
-public/tools
-
-# Storage
-storage
-
-# .htaccess
-.htaccess
+# typescript
+next-env.d.ts
+*.tsbuildinfo

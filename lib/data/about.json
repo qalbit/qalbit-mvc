@@ -1,0 +1,478 @@
+{
+  "hero": {
+    "id": "about-hero",
+    "headingId": "about-hero-heading",
+    "eyebrow": "About QalbIT",
+    "title": "QalbIT – your <span class=\"text-gradient-brand-animated\">SaaS & custom software development</span> partner.",
+    "intro": "We are an Ahmedabad-based product engineering company helping founders and businesses build dependable SaaS, web, and mobile applications for global markets.",
+    "bullets": [
+      "End-to-end product teams for new builds and long-term support.",
+      "Strong focus on clean architecture, performance, and maintainability."
+    ],
+    "primaryCta": {
+      "label": "Discuss your project",
+      "href": "/contact-us/"
+    },
+    "secondaryCta": {
+      "label": "View our recent work",
+      "href": "/portfolio/"
+    },
+    "snapshot": {
+      "title": "Quick snapshot",
+      "items": [
+        {
+          "label": "Founded",
+          "value": "2018 · Ahmedabad, India"
+        },
+        {
+          "label": "Clients",
+          "value": "India, Middle East, Europe & North America"
+        },
+        {
+          "label": "Core work",
+          "value": "SaaS products, web apps, integrations"
+        },
+        {
+          "label": "Engagements",
+          "value": "Fixed scope & dedicated teams"
+        }
+      ]
+    }
+  },
+  "who": {
+    "id": "about-who-we-are",
+    "headingId": "about-who-we-are-heading",
+    "eyebrow": "Who we are",
+    "title": "A compact, product-focused engineering team behind modern SaaS & custom software.",
+    "intro": "QalbIT is a tightly-knit team of designers and engineers based in Ahmedabad, India. We work with founders, SaaS companies, and businesses that need a dependable partner to own the full product lifecycle – from idea and UX all the way to launch and support.",
+    "cards": [
+      {
+        "key": "product-first",
+        "label": "Product-first mindset",
+        "description": "We ask why before what. Every feature is tied back to business goals, user journeys, and long-term maintainability instead of just “shipping code”."
+      },
+      {
+        "key": "embedded-team",
+        "label": "Embedded as your team",
+        "description": "We work as an extension of your in-house team with clear ownership, async-friendly communication, and direct access to the people building your product."
+      },
+      {
+        "key": "long-term",
+        "label": "Built for long-term partnerships",
+        "description": "Most clients stay with QalbIT for multiple releases – from first MVP to new modules, refactors, and ongoing support as their products grow."
+      }
+    ],
+    "snapshot": [
+      {
+        "label": "Founded as a product studio",
+        "value": "Since 2018, focused on SaaS and custom software – not one-off websites."
+      },
+      {
+        "label": "How clients usually engage us",
+        "value": "Greenfield SaaS builds, modernising legacy apps, and dedicated product squads."
+      },
+      {
+        "label": "Where we add most value",
+        "value": "When you need a small, accountable team that can think, design, and ship."
+      }
+    ]
+  },
+  "whatwedo": {
+    "id": "about-what-we-do",
+    "headingId": "about-what-we-do-heading",
+    "eyebrow": "What we do",
+    "title": "End-to-end product development for modern web, mobile & SaaS.",
+    "intro": "QalbIT helps you design, build, and scale digital products with stable engineering, clear communication, and a team that understands business outcomes.",
+    "items": [
+      {
+        "key": "web",
+        "label": "Web applications & platforms",
+        "description": "Design and development of custom web apps, portals, and dashboards with clean UX, strong backends, and maintainable architectures.",
+        "bullets": [
+          "Custom business applications & internal tools",
+          "Multi-tenant & role-based access control"
+        ]
+      },
+      {
+        "key": "mobile",
+        "label": "Mobile apps & backends",
+        "description": "Backend-first mobile development with stable APIs, authentication, and integrations tailored for iOS and Android products.",
+        "bullets": [
+          "API design, performance & security",
+          "Real-time features & third-party services"
+        ]
+      },
+      {
+        "key": "saas",
+        "label": "SaaS product engineering",
+        "description": "From first MVP to mature SaaS, we handle subscriptions, multi-tenant logic, billing, and ongoing product iterations.",
+        "bullets": [
+          "Subscription plans, payments & invoicing",
+          "Tenant management & onboarding flows"
+        ]
+      },
+      {
+        "key": "ai",
+        "label": "AI solutions & workflow automation",
+        "description": "Practical AI features integrated into your product – chatbots, assistants, recommendations, and process automation.",
+        "bullets": [
+          "AI-assisted support & lead qualification",
+          "Internal automations & integrations"
+        ]
+      },
+      {
+        "key": "dedicated-teams",
+        "label": "Dedicated remote teams",
+        "description": "Long-term squads with the right mix of frontend, backend, QA, and design, aligned to your roadmap and delivery rhythm.",
+        "bullets": [
+          "Flexible capacity, stable core team",
+          "Hybrid of project & retainer models"
+        ]
+      },
+      {
+        "key": "consulting",
+        "label": "Architecture & technical consulting",
+        "description": "Audits, refactors, and technical direction for teams that need guidance on scaling, performance, and code quality.",
+        "bullets": [
+          "Architecture reviews & roadmaps",
+          "Support for in-house engineering teams"
+        ]
+      }
+    ]
+  },
+  "impact": {
+    "id": "about-impact",
+    "headingId": "about-impact-heading",
+    "eyebrow": "Impact in numbers",
+    "title": "Product outcomes you can measure, not just lines of code.",
+    "intro": "These numbers are a quick view of how QalbIT supports SaaS founders and businesses with reliable delivery, long-term partnerships, and stable engineering.",
+    "metrics": [
+      {
+        "value": "7+",
+        "target": 7,
+        "label": "Years in product engineering",
+        "description": "Experience across SaaS, B2B platforms, and custom business software."
+      },
+      {
+        "value": "40+",
+        "target": 40,
+        "label": "Products & projects delivered",
+        "description": "From first MVPs to large, multi-module applications in production."
+      },
+      {
+        "value": "6+",
+        "target": 6,
+        "label": "Countries served",
+        "description": "Working with teams across India, the Middle East, Europe, and North America."
+      },
+      {
+        "value": "80%",
+        "target": 80,
+        "label": "Work from repeat clients",
+        "description": "Long-term relationships built on predictable delivery and support."
+      }
+    ],
+    "footnote": "Figures are indicative and can be adapted as we publish more detailed case studies and reports."
+  },
+  "clients": {
+    "id": "about-clients-industries",
+    "headingId": "about-clients-industries-heading",
+    "eyebrow": "Global clients & industries",
+    "title": "Partnering with teams across regions and industries.",
+    "intro": "QalbIT works with SaaS founders, SMEs, and enterprises across India, the Middle East, Europe, and North America – building and scaling products used by their customers every day.",
+    "logos": {
+      "label": "Selected clients (representative)",
+      "clientIds": [
+        "writesonic",
+        "plugin",
+        "credifana",
+        "utapy",
+        "snappystats",
+        "heuvelman",
+        "flickstur",
+        "bloomford",
+        "de-ruwenberg",
+        "lmc"
+      ],
+      "limit": 10,
+      "footnote": "Logos are indicative; a more detailed list of case studies and references can be shared during discovery calls."
+    },
+    "industries": {
+      "label": "Industries we often work with",
+      "items": [
+        "SaaS & B2B software",
+        "IT services & agencies",
+        "Finance & investment tools",
+        "Healthcare & wellness",
+        "Logistics & transportation",
+        "Retail, eCommerce & local services"
+      ],
+      "footnote": "Even if your industry is not listed here, we can usually adapt quickly if the problem is product and workflow driven."
+    }
+  },
+  "leader": {
+    "id": "about-leadership",
+    "headingId": "about-leadership-heading",
+    "eyebrow": "Leadership",
+    "title": "Led by a hands-on founder and a focused engineering team.",
+    "intro": "QalbIT is intentionally small and senior-led. You work directly with the founder and core team, not a rotating layer of project managers.",
+    "founder": {
+      "key": "founder",
+      "name": "Abidhusain Chidi",
+      "role": "Founder & CEO, QalbIT Infotech Pvt Ltd",
+      "image": "/images/team/abidhusain-chidi.png",
+      "imageAlt": "Portrait of Abidhusain Chidi, Founder & CEO of QalbIT",
+      "bio": "With 12+ years in software engineering and product delivery, Abidhusain leads strategy, architecture, and key client relationships – ensuring every engagement stays aligned with outcomes, not just scope.",
+      "bullets": [
+        "Direct involvement in discovery, estimations, and critical technical decisions.",
+        "Experience across SaaS, B2B platforms, marketplaces, and custom business apps."
+      ]
+    },
+    "howWeLead": {
+      "label": "How we lead projects",
+      "bullets": [
+        "Founder-led discovery and architecture for new engagements.",
+        "Weekly check-ins with clear priorities, risks, and next steps.",
+        "Transparent collaboration with direct access to core engineers."
+      ]
+    }
+  },
+  "culture": {
+    "id": "about-culture-values",
+    "headingId": "about-culture-values-heading",
+    "eyebrow": "Culture & core values",
+    "title": "A product engineering culture built on ownership and clarity.",
+    "intro": "QalbIT is small by design. We stay close to the code and the business problem, so decisions are faster, communication is clearer, and products ship with less noise.",
+    "dayToDay": {
+      "label": "How we work day-to-day",
+      "bullets": [
+        "Clear scope, small batches of work, and transparent status on what's done and pending.",
+        "Direct access to the people building your product – not multiple layers of management.",
+        "Respect for your time zones, with async-friendly updates and structured calls.",
+        "Continuous improvement from each release: what worked, what didn't, and what we'll change."
+      ]
+    },
+    "values": {
+      "label": "Core values that guide our work",
+      "items": [
+        {
+          "label": "Ownership, not outsourcing",
+          "description": "We treat your product as if it were ours – taking responsibility for decisions, not just tickets."
+        },
+        {
+          "label": "Clarity over complexity",
+          "description": "Simple, well-structured solutions, readable code, and documentation that future teams can follow."
+        },
+        {
+          "label": "Long-term thinking",
+          "description": "Choices around stack, architecture, and releases are made with the next 3–5 years in mind."
+        },
+        {
+          "label": "Honest communication",
+          "description": "We surface risks early, give realistic estimates, and prefer honest updates over surprises."
+        }
+      ]
+    }
+  },
+  "howwework": {
+    "id": "about-process",
+    "headingId": "about-process-heading",
+    "eyebrow": "How we work with you",
+    "title": "A simple, transparent process from first call to long-term support.",
+    "intro": "We keep the steps clear so you always know what we are doing, why, and what's next. No heavy bureaucracy – just a structured way of working that fits busy product teams.",
+    "steps": [
+      {
+        "step": 1,
+        "label": "Discovery & fit",
+        "description": "Short calls to understand your product, constraints, and priorities. We confirm if QalbIT is the right partner and suggest a practical starting point."
+      },
+      {
+        "step": 2,
+        "label": "Scope, plan & proposal",
+        "description": "We outline scope, tech choices, milestones, and timelines – with clear estimates for either fixed-scope delivery or a dedicated team model."
+      },
+      {
+        "step": 3,
+        "label": "Build in focused sprints",
+        "description": "Design, development, and QA move in small, reviewable increments. You get regular demos, changelogs, and a clear view of progress."
+      },
+      {
+        "step": 4,
+        "label": "Launch, handover & support",
+        "description": "We help with go-live, monitoring, and documentation. After launch, we can continue as your product team for new features and maintenance."
+      }
+    ],
+    "reassurance": "Typical engagements run from a few weeks (MVPs) to multi-quarter roadmaps for growing SaaS products.",
+    "cta": {
+      "label": "See if QalbIT is a fit",
+      "href": "/contact-us/"
+    }
+  },
+  "casestudy": {
+    "id": "about-case-studies",
+    "headingId": "about-case-studies-heading",
+    "eyebrow": "Case studies",
+    "title": "Selected case studies & product outcomes.",
+    "intro": "A few examples of how QalbIT helps teams ship and scale SaaS and custom software products.",
+    "items": [
+      {
+        "key": "snappystats",
+        "category": "Case Study · Sports & Training",
+        "badge": "Scheduling platform",
+        "title": "Snappy Stats – scheduling management web app for a growing shooting academy.",
+        "description": "We replaced spreadsheets and manual coordination with a Laravel-based scheduling platform that centralises bookings, coaches and lanes – dramatically reducing double bookings and admin fire-fighting.",
+        "details": [
+          {
+            "label": "Type",
+            "value": "Custom scheduling web application"
+          },
+          {
+            "label": "Outcome",
+            "value": "Single source of truth for classes & lanes"
+          }
+        ],
+        "link": {
+          "label": "View case study",
+          "href": "/case-studies/snappystats/"
+        }
+      },
+      {
+        "key": "bloomford",
+        "category": "Case Study · Recruitment & HR Tech",
+        "badge": "Hiring portal",
+        "title": "Bloomford – hiring portal and candidate management platform for HR professionals.",
+        "description": "We designed and built a PHP/MySQL recruitment portal that centralises employers, vacancies and candidates, turning scattered CVs and inboxes into one searchable talent pipeline for HR teams in Belgium.",
+        "details": [
+          {
+            "label": "Scope",
+            "value": "Recruitment portal & ATS-style workflows"
+          },
+          {
+            "label": "Outcome",
+            "value": "Structured, searchable candidate pool & pipelines"
+          }
+        ],
+        "link": {
+          "label": "View case study",
+          "href": "/case-studies/bloomford/"
+        }
+      },
+      {
+        "key": "hellory",
+        "category": "Case Study · Mobile & Consumer Apps",
+        "badge": "Reminder app",
+        "title": "Hellory – smart reminder app for busy lives on Android & iOS.",
+        "description": "We partnered with the Hellory team to build a cross-platform Flutter app and Node.js API that power recurring reminders, templates and reliable notifications for users managing bills, events and daily routines.",
+        "details": [
+          {
+            "label": "Focus",
+            "value": "Recurring reminders, templates & push notifications"
+          },
+          {
+            "label": "Engagement",
+            "value": "Concept → UX → Mobile app + API"
+          }
+        ],
+        "link": {
+          "label": "View case study",
+          "href": "/case-studies/hellory/"
+        }
+      }
+    ],
+    "footnote": "We can share more detailed case studies, metrics, and references once we understand your product and requirements."
+  },
+  "techstack": {
+    "id": "about-tech-stack",
+    "headingId": "about-tech-stack-heading",
+    "eyebrow": "Tech stack & practices",
+    "title": "Modern, pragmatic engineering – not shiny-stack experimenting.",
+    "intro": "We pick tools that are stable, well-supported, and a good fit for your product, not just trends.",
+    "stack": {
+      "label": "Core stack we work with",
+      "tags": [
+        "PHP & Laravel",
+        "Node.js & Express/Nest",
+        "REST & JSON APIs",
+        "MySQL & PostgreSQL",
+        "Redis & queues",
+        "Tailwind CSS",
+        "Blade & server-rendered UI",
+        "React & Next.js (where relevant)",
+        "Flutter frontends",
+        "AI APIs & NLP integrations",
+        "Linux servers & cloud hosting",
+        "CI/CD & Git-based workflows"
+      ]
+    },
+    "practices": {
+      "label": "How we approach engineering",
+      "bullets": [
+        "Clear separation of concerns in backend architecture to make future changes safer.",
+        "Reusable UI components and consistent design tokens for faster, cleaner frontends.",
+        "Git-based workflows with feature branches, code reviews, and basic CI checks.",
+        "Attention to performance, error handling, and logging from early in the project."
+      ]
+    }
+  },
+  "trust": {
+    "id": "about-certifications",
+    "headingId": "about-certifications-heading",
+    "eyebrow": "Quality, security & trust",
+    "title": "Built on reliable processes, NDAs, and long-term relationships.",
+    "intro": "We work with sensitive business data and long-running products, so process and trust matter as much as clean code.",
+    "items": [
+      {
+        "label": "Process & standards",
+        "description": "Our work follows clear coding guidelines, reviews, and documented workflows inspired by industry standards and best practices.",
+        "bullets": [
+          "Version-controlled code and structured release notes",
+          "Environment separation for dev, staging & production"
+        ]
+      },
+      {
+        "label": "Security & data handling",
+        "description": "We respect confidentiality by default and sign NDAs when required. Access and credentials are handled carefully and shared only with relevant team members.",
+        "bullets": [
+          "Role-based access for environments & tools",
+          "Secure sharing of credentials via password managers"
+        ]
+      },
+      {
+        "label": "Client reviews & references",
+        "description": "Many of our projects come through repeat work and referrals. On request, we can share anonymised case studies or arrange reference calls where appropriate.",
+        "bullets": [
+          "Written feedback from ongoing and past engagements",
+          "References shared after mutual NDA and fit checks"
+        ]
+      }
+    ]
+  },
+  "career": {
+    "id": "about-careers",
+    "headingId": "about-careers-heading",
+    "eyebrow": "Careers at QalbIT",
+    "title": "A place for engineers and designers who care about products.",
+    "intro": "We stay intentionally lean and look for people who enjoy understanding the business problem as much as writing code or designing interfaces.",
+    "team": {
+      "label": "How we think about our team",
+      "bullets": [
+        "Small, focused teams working closely with clients and real products.",
+        "Opportunities to work across the stack – from architecture to UX details.",
+        "Space for learning, experimenting, and growing with guidance from the founder."
+      ]
+    },
+    "cta": {
+      "title": "Interested in joining QalbIT?",
+      "description": "We occasionally open roles for backend, frontend, full-stack, and QA profiles. If you care about product quality and collaboration, we'd like to hear from you.",
+      "primaryCta": {
+        "label": "View open roles",
+        "href": "/career/"
+      },
+      "secondaryCta": {
+        "label": "Share your profile",
+        "href": "mailto:hr@qalbit.com"
+      },
+      "footnote": "We welcome applications from across India. Remote or hybrid options can be discussed based on role and project needs."
+    }
+  }
+}
