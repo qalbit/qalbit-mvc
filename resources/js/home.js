@@ -40,7 +40,8 @@
         }
 
         initServicesSection({ gsap, hasGsap, prefersReducedMotion });
-        initIndustriesHorizontal({ isDesktop });
+        initIndustriesReveal({ gsap, hasGsap, prefersReducedMotion });
+        initIndustriesMarquee({ gsap, hasGsap, prefersReducedMotion });
         initProcessSection({
             gsap,
             hasGsap,
@@ -83,33 +84,55 @@
                 if (hasAnimated) return;
                 hasAnimated = true;
 
+                const icons = cards
+                    .map((card) => card.querySelector("[data-service-icon]"))
+                    .filter(Boolean);
+
                 const tl = gsap.timeline({
                     defaults: { ease: "power3.out" },
                 });
 
                 if (headerEls.length) {
                     tl.from(headerEls, {
-                        y: 30,
+                        y: 24,
                         autoAlpha: 0,
-                        duration: 0.7,
-                        stagger: 0.08,
+                        duration: 0.6,
+                        stagger: 0.1,
                     });
                 }
 
+                // Cards cascade in with a soft blur + rise for a premium,
+                // restrained "enterprise" reveal (reading order, not center-out).
                 tl.from(
                     cards,
                     {
-                        y: 60,
+                        y: 40,
                         autoAlpha: 0,
-                        rotateX: 10,
-                        scale: 0.96,
-                        transformOrigin: "center bottom",
-                        duration: 0.7,
-                        stagger: { each: 0.08, from: "center" },
-                        clearProps: "transform,opacity",
+                        scale: 0.985,
+                        filter: "blur(10px)",
+                        duration: 0.8,
+                        ease: "power3.out",
+                        stagger: { each: 0.06, from: "start", grid: "auto" },
+                        clearProps: "filter,transform,opacity",
                     },
-                    headerEls.length ? "-=0.25" : 0
+                    headerEls.length ? "-=0.3" : 0
                 );
+
+                // Icons settle in just behind their cards with a subtle pop.
+                if (icons.length) {
+                    tl.from(
+                        icons,
+                        {
+                            scale: 0.5,
+                            autoAlpha: 0,
+                            duration: 0.5,
+                            ease: "back.out(1.7)",
+                            stagger: { each: 0.06, from: "start" },
+                            clearProps: "transform,opacity",
+                        },
+                        "<0.15"
+                    );
+                }
             }
 
             if ("IntersectionObserver" in window) {
@@ -138,185 +161,224 @@
         }
 
         // -----------------------------------------
-        // B) 3D hover / parallax interaction
+        // B) Clean, enterprise-level hover
+        //    Smooth lift + icon highlight, no 3D tilt. Keyboard-accessible.
         // -----------------------------------------
+        const REST_SHADOW = "0 4px 14px rgba(15,23,42,0.06)";
+        const HOVER_SHADOW = "0 22px 45px -14px rgba(15,23,42,0.22)";
+
         cards.forEach((card) => {
+            if (!hasGsap) return;
+
             const icon = card.querySelector("[data-service-icon]");
 
-            // Reduced motion – only soft shadow change
-            if (!hasGsap || prefersReducedMotion) {
-                card.addEventListener("mouseenter", () => {
-                    if (!hasGsap) return;
-                    gsap.to(card, {
-                        boxShadow: "0 18px 35px rgba(15,23,42,0.12)",
-                        duration: 0.25,
-                        ease: "power2.out",
-                    });
-                });
-
-                card.addEventListener("mouseleave", () => {
-                    if (!hasGsap) return;
-                    gsap.to(card, {
-                        boxShadow: "0 4px 12px rgba(15,23,42,0.06)",
-                        duration: 0.25,
-                        ease: "power2.out",
-                    });
-                });
-
-                return;
-            }
-
-            card.style.transformStyle = "preserve-3d";
-
-            card.addEventListener("mouseenter", function () {
+            const enter = () => {
                 gsap.to(card, {
-                    y: -10,
-                    scale: 1.02,
-                    boxShadow: "0 24px 50px rgba(15,23,42,0.18)",
+                    y: prefersReducedMotion ? 0 : -8,
+                    boxShadow: HOVER_SHADOW,
                     duration: 0.35,
                     ease: "power3.out",
                 });
-
-                if (icon) {
+                if (icon && !prefersReducedMotion) {
                     gsap.to(icon, {
-                        y: -4,
+                        scale: 1.08,
+                        y: -2,
                         duration: 0.35,
                         ease: "power3.out",
                     });
                 }
-            });
+            };
 
-            // Throttled mousemove using rAF per card
-            let moveFrame = null;
-            let lastEvent = null;
-
-            card.addEventListener("mousemove", function (event) {
-                lastEvent = event;
-                if (moveFrame !== null) return;
-
-                moveFrame = window.requestAnimationFrame(function () {
-                    moveFrame = null;
-                    const e = lastEvent;
-                    if (!e) return;
-
-                    const bounds = card.getBoundingClientRect();
-                    const relX = (e.clientX - bounds.left) / bounds.width - 0.5;
-                    const relY = (e.clientY - bounds.top) / bounds.height - 0.5;
-
-                    gsap.to(card, {
-                        rotationY: relX * -10,
-                        rotationX: relY * 10,
-                        transformPerspective: 800,
-                        duration: 0.25,
-                        ease: "power2.out",
-                    });
-                });
-            });
-
-            card.addEventListener("mouseleave", function () {
+            const leave = () => {
                 gsap.to(card, {
                     y: 0,
-                    scale: 1,
-                    rotationX: 0,
-                    rotationY: 0,
-                    boxShadow: "0 4px 12px rgba(15,23,42,0.06)",
-                    duration: 0.4,
+                    boxShadow: REST_SHADOW,
+                    duration: 0.45,
                     ease: "power3.out",
                 });
-
                 if (icon) {
                     gsap.to(icon, {
+                        scale: 1,
                         y: 0,
-                        duration: 0.4,
+                        duration: 0.45,
                         ease: "power3.out",
                     });
                 }
-            });
+            };
+
+            card.addEventListener("mouseenter", enter);
+            card.addEventListener("mouseleave", leave);
+            // Mirror the hover on keyboard focus for accessibility.
+            card.addEventListener("focusin", enter);
+            card.addEventListener("focusout", leave);
         });
     }
 
 
     // --------------------------------------------------------
-    // 2) Industries – smooth horizontal scroll on desktop
+    // 2) Industries – self-running marquee (never hijacks page scroll)
     // --------------------------------------------------------
-    function initIndustriesHorizontal({ isDesktop }) {
+    function initIndustriesMarquee(ctx) {
+        const { gsap, hasGsap, prefersReducedMotion } = ctx;
         const section = document.querySelector("[data-horizontal-industries]");
-        if (!section) return;
+        if (!section || !hasGsap || prefersReducedMotion) return;
 
         const wrapper = section.querySelector("[data-horizontal-wrapper]");
         const track = section.querySelector("[data-horizontal-track]");
         if (!wrapper || !track) return;
 
-        function getMaxScrollLeft() {
-            return Math.max(0, track.scrollWidth - wrapper.clientWidth);
+        const mqDesktop = window.matchMedia
+            ? window.matchMedia("(min-width: 1024px)")
+            : null;
+        const isDesktop = () =>
+            mqDesktop ? mqDesktop.matches : window.innerWidth >= 1024;
+
+        let tween = null;
+        let clones = [];
+        let inViewport = true;
+
+        function build() {
+            // Only on desktop (below lg the cards are a normal, wrapping grid).
+            if (tween || !isDesktop()) return;
+
+            const items = Array.from(track.children);
+            if (!items.length) return;
+
+            // Clone the set once so the loop is seamless.
+            items.forEach((item) => {
+                const clone = item.cloneNode(true);
+                clone.setAttribute("aria-hidden", "true");
+                clone.dataset.industryClone = "true";
+                clone
+                    .querySelectorAll("a")
+                    .forEach((a) => a.setAttribute("tabindex", "-1"));
+                track.appendChild(clone);
+                clones.push(clone);
+            });
+
+            // Exact distance from track start to the first clone = one full set
+            // plus its trailing gap → a jump-free repeat.
+            const loopDistance = clones.length
+                ? clones[0].offsetLeft
+                : track.scrollWidth / 2;
+
+            const duration = Math.max(24, loopDistance / 50); // ~50px/sec, calm
+
+            tween = gsap.fromTo(
+                track,
+                { x: 0 },
+                {
+                    x: -loopDistance,
+                    ease: "none",
+                    duration,
+                    repeat: -1,
+                    onRepeat: () => gsap.set(track, { x: 0 }),
+                }
+            );
+
+            if (!inViewport) tween.pause();
         }
 
-        let maxScrollLeft = getMaxScrollLeft();
-        window.addEventListener("resize", function () {
-            maxScrollLeft = getMaxScrollLeft();
+        function teardown() {
+            if (tween) {
+                tween.kill();
+                tween = null;
+            }
+            clones.forEach((clone) => clone.remove());
+            clones = [];
+            gsap.set(track, { x: 0 });
+        }
+
+        build();
+
+        // Pause on hover / keyboard focus so cards stay readable and clickable.
+        wrapper.addEventListener("mouseenter", () => tween && tween.pause());
+        wrapper.addEventListener("mouseleave", () => {
+            if (tween && inViewport) tween.resume();
+        });
+        wrapper.addEventListener("focusin", () => tween && tween.pause());
+        wrapper.addEventListener("focusout", () => {
+            if (tween && inViewport) tween.resume();
         });
 
-        let activeAnimationId = null;
-
-        function smoothScrollToX(target) {
-            if (activeAnimationId !== null) {
-                cancelAnimationFrame(activeAnimationId);
-                activeAnimationId = null;
-            }
-
-            const start = wrapper.scrollLeft;
-            const distance = target - start;
-            const duration = 350;
-            let startTime = null;
-
-            function step(timestamp) {
-                if (!startTime) startTime = timestamp;
-                const elapsed = timestamp - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-
-                wrapper.scrollLeft = start + distance * eased;
-
-                if (progress < 1) {
-                    activeAnimationId = requestAnimationFrame(step);
-                } else {
-                    activeAnimationId = null;
-                }
-            }
-
-            activeAnimationId = requestAnimationFrame(step);
+        // Pause while the section is off-screen (perf + battery).
+        if ("IntersectionObserver" in window) {
+            const io = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.target !== section) return;
+                        inViewport = entry.isIntersecting;
+                        if (tween) {
+                            if (inViewport) tween.resume();
+                            else tween.pause();
+                        }
+                    });
+                },
+                { threshold: 0.1 }
+            );
+            io.observe(section);
         }
 
-        section.addEventListener(
-            "wheel",
-            function (event) {
-                if (!isDesktop()) return;
+        // Build / tear down cleanly across the desktop breakpoint.
+        function handleBreakpoint() {
+            if (isDesktop()) build();
+            else teardown();
+        }
+        if (mqDesktop) {
+            if (mqDesktop.addEventListener) {
+                mqDesktop.addEventListener("change", handleBreakpoint);
+            } else if (mqDesktop.addListener) {
+                mqDesktop.addListener(handleBreakpoint);
+            }
+        }
+        window.addEventListener("resize", () => {
+            if (!isDesktop()) teardown();
+        });
+    }
 
-                maxScrollLeft = getMaxScrollLeft();
-                if (maxScrollLeft <= 0) return;
+    // --------------------------------------------------------
+    // 2b) Industries – header entrance reveal
+    //     (Cards animate via the marquee; the CSS border/ring handles hover,
+    //      so per-card JS transforms are intentionally avoided here.)
+    // --------------------------------------------------------
+    function initIndustriesReveal(ctx) {
+        const { gsap, hasGsap, prefersReducedMotion } = ctx;
+        if (!hasGsap || prefersReducedMotion) return;
 
-                const deltaY = event.deltaY;
-                const atStart = wrapper.scrollLeft <= 0;
-                const atEnd = wrapper.scrollLeft >= maxScrollLeft - 1;
+        const section = document.querySelector("[data-horizontal-industries]");
+        if (!section) return;
 
-                const wantsForward = deltaY > 0;
-                const wantsBack = deltaY < 0;
-
-                if ((wantsForward && !atEnd) || (wantsBack && !atStart)) {
-                    event.preventDefault();
-
-                    const speedMultiplier = 1.8;
-                    const scrollAmount = deltaY * speedMultiplier;
-
-                    let target = wrapper.scrollLeft + scrollAmount;
-                    if (target < 0) target = 0;
-                    if (target > maxScrollLeft) target = maxScrollLeft;
-
-                    smoothScrollToX(target);
-                }
-            },
-            { passive: false }
+        const headerEls = section.querySelectorAll(
+            "header span, header h2, header p, header a"
         );
+        if (!headerEls.length) return;
+
+        function animateIn() {
+            gsap.from(headerEls, {
+                y: 24,
+                autoAlpha: 0,
+                duration: 0.6,
+                ease: "power3.out",
+                stagger: 0.08,
+                clearProps: "transform,opacity",
+            });
+        }
+
+        if ("IntersectionObserver" in window) {
+            const observer = new IntersectionObserver(
+                (entries, obs) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) return;
+                        animateIn();
+                        obs.unobserve(entry.target);
+                    });
+                },
+                { threshold: 0.2 }
+            );
+            observer.observe(section);
+        } else {
+            animateIn();
+        }
     }
 
     // --------------------------------------------------------

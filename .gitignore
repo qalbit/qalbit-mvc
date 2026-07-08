@@ -19,3 +19,5 @@ storage
 
 # .htaccess
 .htaccess
+
+public/router.php

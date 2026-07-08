@@ -56,7 +56,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
         <?php if (!empty($mainNav)): ?>
             <!-- Desktop navigation (only from lg and up) -->
             <nav
-                class="hidden lg:flex h-full items-center text-sm"
+                class="relative hidden lg:flex h-full items-center text-sm"
                 aria-label="Primary navigation"
             >
                 <?php foreach ($mainNav as $item): ?>
@@ -72,77 +72,137 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
                     ?>
 
                     <?php if ($hasChildren): ?>
-                        <!-- Parent with dropdown -->
-                        <div class="relative flex h-full items-stretch group">
+                        <!-- Parent with mega menu (panel anchors to the <nav>) -->
+                        <div class="flex h-full items-stretch group">
                             <?php if ($hasLink): ?>
                                 <a
                                     href="<?= htmlspecialchars($itemUrl) ?>"
-                                    class="flex h-full items-center justify-center gap-1 px-3 font-medium <?= $textColorClass ?> hover:text-primary-900 transition-colors"
+                                    class="flex h-full items-center justify-center px-3 font-medium <?= $textColorClass ?> hover:text-primary-900 transition-colors"
                                     title="<?= htmlspecialchars($itemTitle) ?>"
                                     aria-haspopup="true"
                                     aria-expanded="false"
                                 >
                                     <?= htmlspecialchars($item['label']) ?>
-                                    <svg xmlns="https://www.w3.org/2000/svg"
-                                         fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                         stroke="currentColor"
-                                         class="w-4 h-4 text-slate-600 group-hover:text-primary-900 transition-transform group-hover:rotate-180"
-                                         aria-hidden="true"
-                                    >
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                              d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                    </svg>
                                 </a>
                             <?php else: ?>
                                 <button
                                     type="button"
-                                    class="cursor-pointer flex h-full items-center gap-1 px-3 font-medium <?= $textColorClass ?> hover:text-primary-900 transition-colors"
+                                    class="cursor-pointer flex h-full items-center px-3 font-medium <?= $textColorClass ?> hover:text-primary-900 transition-colors"
                                     aria-haspopup="true"
                                     aria-expanded="false"
                                 >
                                     <?= htmlspecialchars($item['label']) ?>
-                                    <svg xmlns="https://www.w3.org/2000/svg"
-                                         fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                         stroke="currentColor"
-                                         class="w-4 h-4 text-slate-600 group-hover:text-primary-900 transition-transform group-hover:rotate-180"
-                                         aria-hidden="true"
-                                    >
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                              d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                    </svg>
                                 </button>
                             <?php endif; ?>
 
-                            <!-- Desktop dropdown panel -->
-                            <div
-                                class="pointer-events-none absolute left-1/2 top-full z-40 w-60 -translate-x-1/2
-                                       bg-white shadow-soft
-                                       opacity-0 transition-all duration-150 ease-out
-                                       group-hover:pointer-events-auto group-hover:opacity-100"
-                                role="menu"
-                                aria-label="<?= htmlspecialchars($item['label']) ?> sub menu"
-                            >
-                                <div class="h-1 w-full bg-gradient-to-r from-primary-300 via-primary-700 to-accent-500"></div>
+                            <!-- Full-width mega-menu (full-bleed panel flush under the sticky header) -->
+                            <?php
+                                $featured  = $item['featured'] ?? null;
+                                $bareIcons = !empty($item['bare_icons']);
+                            ?>
 
-                                <ul>
-                                    <?php foreach ($childNavItems as $child): ?>
-                                        <?php
-                                            $childUrl   = $child['url'] ?? '#';
-                                            $childLabel = $child['label'] ?? '';
-                                            $childTitle = $child['title'] ?? $childLabel;
-                                        ?>
-                                        <li>
-                                            <a
-                                                href="<?= htmlspecialchars($childUrl) ?>"
-                                                class="block px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-primary-50 hover:text-primary-950 transition-colors"
-                                                title="<?= htmlspecialchars($childTitle) ?>"
-                                                role="menuitem"
-                                            >
-                                                <?= htmlspecialchars($childLabel) ?>
-                                            </a>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
+                            <!-- Dimming backdrop -->
+                            <div
+                                class="pointer-events-none fixed inset-x-0 bottom-0 top-16 z-30 bg-slate-950/30 opacity-0 backdrop-blur-[1px] transition-opacity duration-200 ease-out group-hover:opacity-100"
+                                aria-hidden="true"
+                            ></div>
+
+                            <!-- Panel -->
+                            <div
+                                class="invisible pointer-events-none fixed inset-x-0 top-16 z-30 -translate-y-3 opacity-0 transition-[opacity,transform] duration-200 ease-out
+                                       group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100"
+                                role="menu"
+                                aria-label="<?= htmlspecialchars($item['label']) ?> mega menu"
+                            >
+                                <div class="border-t border-slate-200 bg-white shadow-2xl">
+                                    <!-- Brand accent line -->
+                                    <div class="h-0.5 w-full bg-gradient-to-r from-primary-400 via-primary-700 to-accent-500"></div>
+
+                                    <div class="mx-auto max-w-7xl px-6 py-8 lg:px-10 lg:py-10">
+                                        <!-- Header row -->
+                                        <div class="mb-4 flex items-center justify-between border-b border-slate-100 pb-3">
+                                            <span class="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">
+                                                Explore <?= htmlspecialchars($item['label']) ?>
+                                            </span>
+                                            <?php if ($hasLink): ?>
+                                                <a href="<?= htmlspecialchars($itemUrl) ?>" class="inline-flex items-center gap-1 text-xs font-semibold text-primary-700 transition-colors hover:text-primary-900">
+                                                    View all <?= htmlspecialchars($item['label']) ?>
+                                                    <span aria-hidden="true">→</span>
+                                                </a>
+                                            <?php endif; ?>
+                                        </div>
+
+                                        <!-- Items grid (full width) -->
+                                        <ul class="grid grid-cols-1 gap-x-6 gap-y-0.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                                            <?php foreach ($childNavItems as $child): ?>
+                                                <?php
+                                                    $childUrl   = $child['url'] ?? '#';
+                                                    $childLabel = $child['label'] ?? '';
+                                                    $childTitle = $child['title'] ?? $childLabel;
+                                                    $meta       = nav_meta($childUrl);
+                                                    $childIcon  = $child['icon'] ?? $meta['icon'];
+                                                    $childDesc  = $child['desc'] ?? $meta['desc'];
+                                                ?>
+                                                <li>
+                                                    <a
+                                                        href="<?= htmlspecialchars($childUrl) ?>"
+                                                        class="group/item flex items-start gap-4 rounded-xl p-3 transition-colors hover:bg-slate-50"
+                                                        title="<?= htmlspecialchars($childTitle) ?>"
+                                                        role="menuitem"
+                                                    >
+                                                        <?php if (!empty($childIcon)): ?>
+                                                            <?php if ($bareIcons): ?>
+                                                                <span class="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center">
+                                                                    <img src="<?= asset(ltrim($childIcon, '/')) ?>" alt="" class="h-9 w-9" loading="lazy" />
+                                                                </span>
+                                                            <?php else: ?>
+                                                                <span class="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-50 ring-1 ring-slate-100 transition-all group-hover/item:bg-white group-hover/item:shadow-sm group-hover/item:ring-primary-200">
+                                                                    <img src="<?= asset(ltrim($childIcon, '/')) ?>" alt="" class="h-6 w-6" loading="lazy" />
+                                                                </span>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                        <span class="min-w-0">
+                                                            <span class="block text-[15px] font-semibold text-slate-900 transition-colors group-hover/item:text-primary-800">
+                                                                <?= htmlspecialchars($childLabel) ?>
+                                                            </span>
+                                                            <?php if (!empty($childDesc)): ?>
+                                                                <span class="mt-0.5 text-[13px] leading-snug text-slate-500 line-clamp-2">
+                                                                    <?= htmlspecialchars($childDesc) ?>
+                                                                </span>
+                                                            <?php endif; ?>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+
+                                        <!-- Bottom CTA stripe -->
+                                        <?php if (!empty($featured)): ?>
+                                            <div class="relative mt-6 flex flex-col gap-3 overflow-hidden rounded-2xl bg-gradient-to-r from-primary-800 via-primary-900 to-slate-950 px-6 py-4 text-white sm:flex-row sm:items-center sm:justify-between">
+                                                <div class="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary-500/30 blur-3xl"></div>
+                                                <div class="relative min-w-0">
+                                                    <?php if (!empty($featured['eyebrow'])): ?>
+                                                        <span class="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary-200">
+                                                            <?= htmlspecialchars($featured['eyebrow']) ?>
+                                                        </span>
+                                                    <?php endif; ?>
+                                                    <p class="mt-0.5 text-sm font-bold sm:text-base">
+                                                        <?= htmlspecialchars($featured['title'] ?? '') ?><?php if (!empty($featured['text'])): ?><span class="font-normal text-slate-300"> — <?= htmlspecialchars($featured['text']) ?></span><?php endif; ?>
+                                                    </p>
+                                                </div>
+                                                <?php if (!empty($featured['cta_label'])): ?>
+                                                    <a
+                                                        href="<?= htmlspecialchars($featured['cta_href'] ?? '/contact-us/') ?>"
+                                                        class="relative inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-semibold text-primary-900 transition-colors hover:bg-primary-50"
+                                                    >
+                                                        <?= htmlspecialchars($featured['cta_label']) ?>
+                                                        <span aria-hidden="true">→</span>
+                                                    </a>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     <?php else: ?>

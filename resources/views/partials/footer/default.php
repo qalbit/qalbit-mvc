@@ -285,6 +285,11 @@ $currentYear = date('Y');
                         </a>
                     </li>
                     <li>
+                        <a title="SaaS products we built and operate" href="<?= route_url('/products/') ?>" class="hover:text-sky-400">
+                            Our Products
+                        </a>
+                    </li>
+                    <li>
                         <a title="Contact us for more information" href="<?= route_url('/contact-us/') ?>" class="hover:text-sky-400">
                             Contact Us
                         </a>

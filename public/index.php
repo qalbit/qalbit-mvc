@@ -37,6 +37,7 @@ use App\Controllers\HomeController;
 use App\Controllers\LegalController;
 use App\Controllers\PortfolioController;
 use App\Controllers\ProcessController;
+use App\Controllers\ProductController;
 use App\Controllers\TechnologyController;
 
 // Error handlers
@@ -72,6 +73,10 @@ $router->get('/industries/{slug}/', [IndustryController::class, 'show']);
 
 // Case studies
 $router->get('/case-studies/{slug}/', [CaseStudyController::class, 'show']);
+
+// Products (owned SaaS)
+$router->get('/products/', [ProductController::class, 'index']);
+$router->get('/products/{slug}/', [ProductController::class, 'show']);
 
 // Technologies
 $router->get('/technologies/', [TechnologyController::class, 'index']);
