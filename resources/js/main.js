@@ -870,123 +870,385 @@
     }
 
     // --------------------------------------------------------
-    // 6) Contact forms – lightweight client-side validation
+    // 6) Contact forms – full validation + AJAX submit
+    //
+    // Forms posting to /contact-us/ are submitted via fetch with
+    // inline errors/success (works on every page, no reload).
+    // Other forms (careers apply) get validation only and keep
+    // their native submit through recaptcha-layer.js.
     // --------------------------------------------------------
     function initContactForms() {
         var forms = document.querySelectorAll(
-            'form[data-track="contact-form"]'
+            'form[data-contact-form], form[data-track="contact-form"]'
         );
         if (!forms.length) return;
 
         forms.forEach(function (form) {
-            var nameInput = form.querySelector('input[name="name"]');
-            var emailInput = form.querySelector('input[name="email"]');
-            var messageInput = form.querySelector('textarea[name="message"]');
+            if (form.dataset.jsValidated === "1") return;
+            form.dataset.jsValidated = "1";
 
-            if (!nameInput || !emailInput || !messageInput) return;
+            var action = form.getAttribute("action") || "";
+            var isContactEndpoint = /\/contact-us\/?(?:[?#]|$)/.test(action);
 
-            function isValidEmail(value) {
-                var trimmed = value.trim();
-                if (!trimmed) return false;
-                // Simple, good-enough pattern
-                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+            bindContactForm(form, isContactEndpoint);
+        });
+    }
+
+    function bindContactForm(form, useAjax) {
+        var nameInput = form.querySelector('input[name="name"]');
+        var emailInput = form.querySelector('input[name="email"]');
+        var phoneInput = form.querySelector('input[name="phone"]');
+        var messageInput = form.querySelector('textarea[name="message"]');
+        var submitButton = form.querySelector('button[type="submit"]');
+
+        if (!nameInput || !emailInput) return;
+
+        if (useAjax) {
+            // recaptcha-layer.js checks this and leaves the form to us
+            form.setAttribute("data-js-ajax", "1");
+        }
+
+        // ---------- field error UI ----------
+        function fieldAnchor(input) {
+            // intl-tel-input wraps the phone field; anchor errors to the wrapper
+            var iti = input.closest(".iti");
+            return iti || input;
+        }
+
+        function errorElFor(input, create) {
+            var el = form.querySelector(
+                '[data-js-error-for="' + input.name + '"]'
+            );
+            if (!el && create) {
+                el = document.createElement("p");
+                el.setAttribute("data-js-error-for", input.name);
+                el.className = "mt-1 hidden text-[11px] text-red-600";
+                fieldAnchor(input).insertAdjacentElement("afterend", el);
+            }
+            return el;
+        }
+
+        function showFieldError(input, message) {
+            input.classList.remove("border-slate-300");
+            input.classList.add("border-red-400");
+
+            var el = errorElFor(input, true);
+            el.textContent = message;
+            el.classList.remove("hidden");
+        }
+
+        function clearFieldError(input) {
+            input.classList.remove("border-red-400");
+            if (!input.classList.contains("border-slate-300")) {
+                input.classList.add("border-slate-300");
             }
 
-            function clearFieldError(inputEl) {
-                if (!inputEl) return;
+            var el = errorElFor(input, false);
+            if (el) {
+                el.textContent = "";
+                el.classList.add("hidden");
+            }
+        }
 
-                inputEl.classList.remove("border-red-400");
-                if (!inputEl.classList.contains("border-slate-300")) {
-                    inputEl.classList.add("border-slate-300");
+        function globalBox(kind) {
+            var attr = "data-js-global-" + kind;
+            var el = form.querySelector("[" + attr + "]");
+            if (!el) {
+                el = document.createElement("div");
+                el.setAttribute(attr, "true");
+                el.className =
+                    kind === "error"
+                        ? "mb-3 hidden rounded-md border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-800"
+                        : "mb-3 hidden rounded-md border border-green-200 bg-green-50 px-4 py-3 text-xs text-green-800";
+                form.prepend(el);
+            }
+            return el;
+        }
+
+        function hideGlobalBoxes() {
+            ["error", "success"].forEach(function (kind) {
+                var el = form.querySelector("[data-js-global-" + kind + "]");
+                if (el) {
+                    el.textContent = "";
+                    el.classList.add("hidden");
                 }
+            });
+        }
 
-                var wrapper =
-                    inputEl.closest(".space-y-1") || inputEl.parentElement;
-                if (!wrapper) return;
+        function showGlobal(kind, message) {
+            var el = globalBox(kind);
+            el.textContent = message;
+            el.classList.remove("hidden");
+            if (typeof el.scrollIntoView === "function") {
+                el.scrollIntoView({ block: "nearest", behavior: "smooth" });
+            }
+        }
 
-                var err = wrapper.querySelector("[data-field-error]");
-                if (err) {
-                    err.remove();
+        // ---------- validators ----------
+        function validateName() {
+            var v = nameInput.value.trim();
+            if (!v) return "Please enter your name.";
+            if (v.length < 2) return "Name must be at least 2 characters.";
+            if (v.length > 100) return "Name must be 100 characters or fewer.";
+            if (!/[A-Za-z\u00C0-\uFFFF]/.test(v))
+                return "Please enter a valid name.";
+            return "";
+        }
+
+        function validateEmail() {
+            var v = emailInput.value.trim();
+            if (!v) return "Please enter your email address.";
+            if (v.length > 200)
+                return "Email must be 200 characters or fewer.";
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))
+                return "Please enter a valid email address.";
+            return "";
+        }
+
+        function validatePhone() {
+            if (!phoneInput) return "";
+            var v = phoneInput.value.trim();
+            if (!v) return "Please enter your phone number.";
+
+            // Prefer intl-tel-input's country-aware validation when loaded
+            var iti = phoneInput.__itiInstance;
+            if (iti && typeof iti.isValidNumber === "function") {
+                try {
+                    var valid = iti.isValidNumber();
+                    if (valid === true) return "";
+                    if (valid === false)
+                        return "Please enter a valid phone number for the selected country.";
+                } catch (e) {
+                    /* utils not ready – fall through to pattern check */
                 }
             }
 
-            function showFieldError(inputEl, message) {
-                if (!inputEl) return;
+            var digits = v.replace(/[\s().-]/g, "");
+            if (!/^\+?\d{7,15}$/.test(digits))
+                return "Please enter a valid phone number (7–15 digits).";
+            return "";
+        }
 
-                inputEl.classList.remove("border-slate-300");
-                inputEl.classList.add("border-red-400");
+        function validateMessage() {
+            if (!messageInput) return "";
+            var v = messageInput.value.trim();
+            if (!v) return "Please tell us a bit about your project.";
+            if (v.length < 10)
+                return "Please add a few more details (at least 10 characters).";
+            if (v.length > 5000)
+                return "Message must be 5000 characters or fewer.";
+            return "";
+        }
 
-                var wrapper =
-                    inputEl.closest(".space-y-1") || inputEl.parentElement;
-                if (!wrapper) return;
+        var validators = [
+            [nameInput, validateName],
+            [emailInput, validateEmail],
+            [phoneInput, validatePhone],
+            [messageInput, validateMessage],
+        ].filter(function (pair) {
+            return !!pair[0];
+        });
 
-                var err = wrapper.querySelector("[data-field-error]");
-                if (!err) {
-                    err = document.createElement("p");
-                    err.setAttribute("data-field-error", "true");
-                    err.className = "mt-1 text-[11px] text-red-600";
-                    wrapper.appendChild(err);
+        function validateField(pair) {
+            var message = pair[1]();
+            if (message) {
+                showFieldError(pair[0], message);
+            } else {
+                clearFieldError(pair[0]);
+            }
+            return !message;
+        }
+
+        function validateAll() {
+            var firstInvalid = null;
+            validators.forEach(function (pair) {
+                if (!validateField(pair) && !firstInvalid) {
+                    firstInvalid = pair[0];
                 }
-                err.textContent = message;
+            });
+            return firstInvalid;
+        }
+
+        // Validate on blur, clear while typing
+        validators.forEach(function (pair) {
+            pair[0].addEventListener("blur", function () {
+                if (pair[0].value.trim() !== "") validateField(pair);
+            });
+            pair[0].addEventListener("input", function () {
+                clearFieldError(pair[0]);
+            });
+        });
+
+        // ---------- submit ----------
+        function setSubmitting(isSubmitting) {
+            if (!submitButton) return;
+            if (isSubmitting) {
+                if (!submitButton.dataset.originalLabel) {
+                    submitButton.dataset.originalLabel =
+                        submitButton.textContent || "Send message";
+                }
+                submitButton.disabled = true;
+                submitButton.textContent = "Sending...";
+            } else {
+                submitButton.disabled = false;
+                if (submitButton.dataset.originalLabel) {
+                    submitButton.textContent =
+                        submitButton.dataset.originalLabel;
+                }
+            }
+        }
+
+        function recaptchaSiteKey() {
+            var el = document.querySelector("script[data-recaptcha-site-key]");
+            return el ? el.getAttribute("data-recaptcha-site-key") : "";
+        }
+
+        function showServerErrors(errors) {
+            if (!errors) return;
+
+            if (errors.global) {
+                showGlobal("error", errors.global);
             }
 
-            function validateForm() {
-                var hasError = false;
-                clearFieldError(nameInput);
-                clearFieldError(emailInput);
-                clearFieldError(messageInput);
+            validators.forEach(function (pair) {
+                var message = errors[pair[0].name];
+                if (message) showFieldError(pair[0], message);
+            });
+        }
 
-                var nameVal = nameInput.value.trim();
-                var emailVal = emailInput.value.trim();
-                var msgVal = messageInput.value.trim();
+        form.addEventListener("submit", function (event) {
+            hideGlobalBoxes();
 
-                if (!nameVal) {
-                    showFieldError(nameInput, "Please enter your name.");
-                    hasError = true;
+            var firstInvalid = validateAll();
+
+            // recaptcha-layer.js consults this before its native re-submit
+            form.dataset.jsInvalid = firstInvalid ? "1" : "";
+
+            if (firstInvalid) {
+                event.preventDefault();
+                firstInvalid.focus({ preventScroll: true });
+                var anchor = fieldAnchor(firstInvalid);
+                if (typeof anchor.scrollIntoView === "function") {
+                    anchor.scrollIntoView({
+                        block: "center",
+                        behavior: "smooth",
+                    });
                 }
-
-                if (!emailVal) {
-                    showFieldError(emailInput, "Please enter your email.");
-                    hasError = true;
-                } else if (!isValidEmail(emailVal)) {
-                    showFieldError(
-                        emailInput,
-                        "Please enter a valid email address."
-                    );
-                    hasError = true;
-                }
-
-                if (!msgVal || msgVal.length < 20) {
-                    showFieldError(
-                        messageInput,
-                        "Please add a few more details (at least 20 characters)."
-                    );
-                    hasError = true;
-                }
-
-                return !hasError;
+                return;
             }
 
-            form.addEventListener("submit", function (event) {
-                if (!validateForm()) {
-                    event.preventDefault();
-                    // Scroll first error into view (useful inside popup)
-                    var firstError = form.querySelector("[data-field-error]");
-                    if (
-                        firstError &&
-                        typeof firstError.scrollIntoView === "function"
-                    ) {
-                        firstError.scrollIntoView({ block: "nearest" });
+            if (!useAjax) {
+                // Valid: let recaptcha-layer.js token + native submit proceed
+                return;
+            }
+
+            event.preventDefault();
+
+            // Normalize phone to full international format for the payload
+            if (phoneInput && phoneInput.__itiInstance) {
+                try {
+                    if (phoneInput.__itiInstance.isValidNumber()) {
+                        phoneInput.value = phoneInput.__itiInstance.getNumber();
                     }
+                } catch (e) {
+                    /* keep typed value */
                 }
-            });
+            }
 
-            // Live clear errors when typing
-            [nameInput, emailInput, messageInput].forEach(function (field) {
-                field.addEventListener("input", function () {
-                    clearFieldError(field);
+            setSubmitting(true);
+
+            var formData = new FormData(form);
+            formData.set("ajax", "1");
+
+            if (phoneInput && phoneInput.__itiInstance) {
+                try {
+                    var full = phoneInput.__itiInstance.getNumber();
+                    if (full) formData.set("phone_full", full);
+                } catch (e) {
+                    /* hidden input from the widget already covers it */
+                }
+            }
+
+            var sendRequest = function (token) {
+                if (token) formData.set("recaptcha_token", token);
+
+                // GTM event (parity with the native recaptcha-layer flow)
+                if (
+                    window.dataLayer &&
+                    typeof window.dataLayer.push === "function"
+                ) {
+                    window.dataLayer.push({
+                        event: "contact_form_submit",
+                        form_variant:
+                            form.getAttribute("data-variant") || "unknown",
+                        form_location: window.location.pathname,
+                    });
+                }
+
+                fetch(form.action, {
+                    method: "POST",
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest",
+                        Accept: "application/json",
+                    },
+                    body: formData,
+                })
+                    .then(function (response) {
+                        return response.json().catch(function () {
+                            return null;
+                        });
+                    })
+                    .then(function (json) {
+                        setSubmitting(false);
+
+                        if (!json) {
+                            showGlobal(
+                                "error",
+                                "Something went wrong. Please try again later."
+                            );
+                            return;
+                        }
+
+                        if (json.success) {
+                            showGlobal(
+                                "success",
+                                json.message ||
+                                    "Thank you. We have received your enquiry and will respond within 24 hours (business days)."
+                            );
+                            form.reset();
+                            validators.forEach(function (pair) {
+                                clearFieldError(pair[0]);
+                            });
+                        } else {
+                            showServerErrors(json.errors || {});
+                        }
+                    })
+                    .catch(function () {
+                        setSubmitting(false);
+                        showGlobal(
+                            "error",
+                            "We could not send your message right now. Please try again later."
+                        );
+                    });
+            };
+
+            var siteKey = recaptchaSiteKey();
+            if (
+                siteKey &&
+                window.grecaptcha &&
+                typeof window.grecaptcha.ready === "function"
+            ) {
+                window.grecaptcha.ready(function () {
+                    window.grecaptcha
+                        .execute(siteKey, { action: "contact" })
+                        .then(sendRequest)
+                        .catch(function () {
+                            sendRequest(null); // server fails closed
+                        });
                 });
-            });
+            } else {
+                sendRequest(null);
+            }
         });
     }
 

@@ -65,6 +65,7 @@ $success = $success ?? \App\Support\Session::getFlash('contact_success');
                 id="contact-name"
                 name="name"
                 required
+                maxlength="100"
                 autocomplete="name"
                 class="block w-full rounded-md border <?php echo !empty($errors['name']) ? 'border-red-400' : 'border-slate-300'; ?> bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 placeholder="Your full name"
@@ -91,6 +92,7 @@ $success = $success ?? \App\Support\Session::getFlash('contact_success');
                 id="contact-phone-inline"
                 name="phone"
                 inputmode="tel"
+                maxlength="20"
                 autocomplete="tel"
                 data-intl-tel-input
                 class="block w-full rounded-md border <?php echo !empty($errors['phone']) ? 'border-red-400' : 'border-slate-300'; ?> bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
@@ -118,6 +120,7 @@ $success = $success ?? \App\Support\Session::getFlash('contact_success');
                 id="contact-email"
                 name="email"
                 required
+                maxlength="200"
                 autocomplete="email"
                 class="block w-full rounded-md border <?php echo !empty($errors['email']) ? 'border-red-400' : 'border-slate-300'; ?> bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 placeholder="you@company.com"
@@ -144,6 +147,7 @@ $success = $success ?? \App\Support\Session::getFlash('contact_success');
                 name="message"
                 rows="4"
                 required
+                maxlength="5000"
                 class="block w-full rounded-md border <?php echo !empty($errors['message']) ? 'border-red-400' : 'border-slate-300'; ?> bg-white px-3 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 placeholder="Tell us about your product, current challenges, tech stack and what success would look like for you."
                 aria-required="true"

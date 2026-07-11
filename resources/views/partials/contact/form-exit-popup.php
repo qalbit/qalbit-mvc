@@ -65,6 +65,7 @@ $recaptchaSiteKey  = $recaptchaConfig['site_key'] ?? '';
             <input
                 name="name"
                 type="text"
+                maxlength="100"
                 class="block w-full rounded border <?= !empty($errors['name']) ? 'border-red-400' : 'border-slate-300' ?> px-3 py-2 text-xs text-slate-900 focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500"
                 placeholder="Your name"
                 value="<?= htmlspecialchars($old['name'] ?? '') ?>"
@@ -79,6 +80,7 @@ $recaptchaSiteKey  = $recaptchaConfig['site_key'] ?? '';
             <input
                 name="email"
                 type="email"
+                maxlength="200"
                 class="block w-full rounded border <?= !empty($errors['email']) ? 'border-red-400' : 'border-slate-300' ?> px-3 py-2 text-xs text-slate-900 focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500"
                 placeholder="you@example.com"
                 value="<?= htmlspecialchars($old['email'] ?? '') ?>"
@@ -93,6 +95,7 @@ $recaptchaSiteKey  = $recaptchaConfig['site_key'] ?? '';
             <textarea
                 name="message"
                 rows="3"
+                maxlength="5000"
                 class="block w-full rounded border <?= !empty($errors['message']) ? 'border-red-400' : 'border-slate-300' ?> px-3 py-2 text-xs text-slate-900 focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500"
                 placeholder="Timeline, budget range or main challenge"
             ><?= htmlspecialchars($old['message'] ?? '') ?></textarea>

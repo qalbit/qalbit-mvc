@@ -201,18 +201,39 @@ class ContactController
             $errors['name'] = 'Please enter your name.';
         } elseif (mb_strlen($data['name']) < 2) {
             $errors['name'] = 'Name must be at least 2 characters.';
+        } elseif (mb_strlen($data['name']) > 100) {
+            $errors['name'] = 'Name must be 100 characters or fewer.';
+        } elseif (!preg_match('/\p{L}/u', $data['name'])) {
+            $errors['name'] = 'Please enter a valid name.';
         }
 
         if ($data['email'] === '') {
             $errors['email'] = 'Please enter your email address.';
+        } elseif (mb_strlen($data['email']) > 200) {
+            $errors['email'] = 'Email must be 200 characters or fewer.';
         } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Please enter a valid email address.';
+        }
+
+        // Phone is required on forms that show the field (all of them mark
+        // it *), but some variants (exit popup) have no phone input at all.
+        if (array_key_exists('phone', $_POST)) {
+            $phoneRaw = $data['phone_full'] !== '' ? $data['phone_full'] : $data['phone'];
+            $phoneDigits = preg_replace('/[\s().-]/', '', $phoneRaw);
+
+            if ($phoneDigits === '') {
+                $errors['phone'] = 'Please enter your phone number.';
+            } elseif (!preg_match('/^\+?\d{7,15}$/', $phoneDigits)) {
+                $errors['phone'] = 'Please enter a valid phone number (7–15 digits, country code welcome).';
+            }
         }
 
         if ($data['message'] === '') {
             $errors['message'] = 'Please tell us a bit about your project.';
         } elseif (mb_strlen($data['message']) < 10) {
             $errors['message'] = 'Please provide at least a few sentences so we can understand your needs.';
+        } elseif (mb_strlen($data['message']) > 5000) {
+            $errors['message'] = 'Message must be 5000 characters or fewer.';
         }
 
         $token = $_POST['recaptcha_token'] ?? null;
@@ -243,14 +264,14 @@ class ContactController
         ]);
 
         $crmCaptured = LiftUpCrm::pushLead(array_filter([
-            'name'        => $data['name'],
-            'email'       => $data['email'],
-            'phone'       => $data['phone_full'] !== '' ? $data['phone_full'] : $data['phone'],
-            'message'     => $data['message'],
-            'lead_from'   => $data['lead_from'],
-            'lead_source' => $data['lead_source'],
-            'lead_topic'  => $data['lead_topic'],
-            'source_page' => $_SERVER['HTTP_REFERER'] ?? null,
+            'name'        => mb_substr($data['name'], 0, 200),
+            'email'       => mb_substr($data['email'], 0, 200),
+            'phone'       => mb_substr($data['phone_full'] !== '' ? $data['phone_full'] : $data['phone'], 0, 50),
+            'message'     => mb_substr($data['message'], 0, 5000),
+            'lead_from'   => mb_substr($data['lead_from'], 0, 100),
+            'lead_source' => mb_substr($data['lead_source'], 0, 200),
+            'lead_topic'  => mb_substr($data['lead_topic'], 0, 200),
+            'source_page' => mb_substr($_SERVER['HTTP_REFERER'] ?? '', 0, 500),
             'metadata'    => $metadata,
         ], fn ($value) => $value !== '' && $value !== null && $value !== []));
 

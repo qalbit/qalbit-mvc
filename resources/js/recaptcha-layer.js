@@ -8,6 +8,11 @@
 
         forms.forEach(function (form) {
             form.addEventListener('submit', function (e) {
+                // main.js owns this form (AJAX submit + own token) — stay out
+                if (form.hasAttribute('data-js-ajax')) {
+                    return;
+                }
+
                 var tokenInput = form.querySelector('input[name="recaptcha_token"]');
                 if (!tokenInput) {
                     // If no token field, fall back to normal submit
@@ -16,9 +21,16 @@
 
                 e.preventDefault();
 
+                // form.submit() bypasses validation handlers, so never re-submit
+                // a form main.js flagged as invalid.
+                function submitIfValid() {
+                    if (form.dataset.jsInvalid === '1') return;
+                    form.submit();
+                }
+
                 if (!window.grecaptcha || typeof window.grecaptcha.ready !== 'function') {
                     // If grecaptcha is not ready, just submit without token (fails closed server-side)
-                    form.submit();
+                    submitIfValid();
                     return;
                 }
 
@@ -37,11 +49,11 @@
                                 });
                             }
 
-                            form.submit();
+                            submitIfValid();
                         })
                         .catch(function () {
-                            // On error, you can decide to submit anyway or block
-                            form.submit();
+                            // On error, submit anyway — the server fails closed
+                            submitIfValid();
                         });
                 });
             });
