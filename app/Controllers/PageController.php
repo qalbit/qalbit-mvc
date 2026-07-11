@@ -9,6 +9,17 @@ class PageController
 
     public function sitemap(): string
     {
+        // Cached so the WordPress API call for recent posts runs at most
+        // once per TTL, not on every request.
+        return \App\Support\PageCache::remember(
+            'page_sitemap',
+            900,
+            fn (): string => $this->renderSitemapPage()
+        );
+    }
+
+    private function renderSitemapPage(): string
+    {
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
 
         $seo = [
@@ -19,8 +30,12 @@ class PageController
             'noindex'     => false,
         ];
 
+        // Recent blog posts from WordPress (fails silently to [])
+        $blogPosts = (new \App\Support\WordPressClient())->fetchRecentPosts(10);
+
         $content = View::render('pages/sitemap/index', [
-            'seo' => $seo,
+            'seo'       => $seo,
+            'blogPosts' => $blogPosts,
         ]);
 
         return View::render('layouts/main', [
