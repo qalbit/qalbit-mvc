@@ -153,6 +153,7 @@ $baseInputClasses = 'block w-full rounded-xl border bg-white px-3 py-2 text-xs s
                 class="space-y-6"
                 data-contact-form
                 data-track="contact-form"
+                novalidate
             >
                 <!-- Preserve selected role -->
                 <input
@@ -164,6 +165,8 @@ $baseInputClasses = 'block w-full rounded-xl border bg-white px-3 py-2 text-xs s
                 <!-- Redirect back to the same apply URL (with role param if present) -->
                 <input type="hidden" name="redirect_to" value="<?= htmlspecialchars($redirectTo, ENT_QUOTES); ?>">
 
+                <!-- Honeypot: bots fill this, humans never see it -->
+                <input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
                 <input type="hidden" name="recaptcha_token" id="recaptcha_token" value="">
 
                 <div class="grid gap-4 sm:grid-cols-2">
@@ -177,6 +180,7 @@ $baseInputClasses = 'block w-full rounded-xl border bg-white px-3 py-2 text-xs s
                             id="full_name"
                             name="full_name"
                             required
+                            maxlength="200"
                             autocomplete="name"
                             value="<?= htmlspecialchars($old['full_name'] ?? '', ENT_QUOTES); ?>"
                             class="<?= $baseInputClasses . (!empty($errors['full_name'])
@@ -200,6 +204,7 @@ $baseInputClasses = 'block w-full rounded-xl border bg-white px-3 py-2 text-xs s
                             id="email"
                             name="email"
                             required
+                            maxlength="200"
                             autocomplete="email"
                             value="<?= htmlspecialchars($old['email'] ?? '', ENT_QUOTES); ?>"
                             class="<?= $baseInputClasses . (!empty($errors['email'])
@@ -223,7 +228,10 @@ $baseInputClasses = 'block w-full rounded-xl border bg-white px-3 py-2 text-xs s
                             id="phone"
                             name="phone"
                             required
+                            inputmode="tel"
+                            maxlength="20"
                             autocomplete="tel"
+                            data-intl-tel-input
                             value="<?= htmlspecialchars($old['phone'] ?? '', ENT_QUOTES); ?>"
                             class="<?= $baseInputClasses . (!empty($errors['phone'])
                                 ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
@@ -246,6 +254,7 @@ $baseInputClasses = 'block w-full rounded-xl border bg-white px-3 py-2 text-xs s
                             id="location"
                             name="location"
                             required
+                            maxlength="200"
                             value="<?= htmlspecialchars($old['location'] ?? '', ENT_QUOTES); ?>"
                             class="<?= $baseInputClasses . (!empty($errors['location'])
                                 ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
@@ -293,6 +302,7 @@ $baseInputClasses = 'block w-full rounded-xl border bg-white px-3 py-2 text-xs s
                             type="text"
                             id="current_role"
                             name="current_role"
+                            maxlength="200"
                             value="<?= htmlspecialchars($old['current_role'] ?? '', ENT_QUOTES); ?>"
                             class="<?= $baseInputClasses . (!empty($errors['current_role'])
                                 ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'
@@ -314,6 +324,7 @@ $baseInputClasses = 'block w-full rounded-xl border bg-white px-3 py-2 text-xs s
                             type="text"
                             id="notice_period"
                             name="notice_period"
+                            maxlength="120"
                             placeholder="e.g. Immediate / 30 days"
                             value="<?= htmlspecialchars($old['notice_period'] ?? '', ENT_QUOTES); ?>"
                             class="<?= $baseInputClasses . (!empty($errors['notice_period'])
@@ -338,6 +349,7 @@ $baseInputClasses = 'block w-full rounded-xl border bg-white px-3 py-2 text-xs s
                             type="url"
                             id="linkedin"
                             name="linkedin"
+                            maxlength="300"
                             placeholder="https://"
                             value="<?= htmlspecialchars($old['linkedin'] ?? '', ENT_QUOTES); ?>"
                             class="<?= $baseInputClasses . (!empty($errors['linkedin'])
@@ -360,6 +372,7 @@ $baseInputClasses = 'block w-full rounded-xl border bg-white px-3 py-2 text-xs s
                             type="url"
                             id="github"
                             name="github"
+                            maxlength="300"
                             placeholder="https://"
                             value="<?= htmlspecialchars($old['github'] ?? '', ENT_QUOTES); ?>"
                             class="<?= $baseInputClasses . (!empty($errors['github'])
@@ -384,6 +397,7 @@ $baseInputClasses = 'block w-full rounded-xl border bg-white px-3 py-2 text-xs s
                             type="text"
                             id="current_ctc"
                             name="current_ctc"
+                            maxlength="120"
                             placeholder="e.g. 6 LPA"
                             value="<?= htmlspecialchars($old['current_ctc'] ?? '', ENT_QUOTES); ?>"
                             class="<?= $baseInputClasses . (!empty($errors['current_ctc'])
@@ -404,6 +418,7 @@ $baseInputClasses = 'block w-full rounded-xl border bg-white px-3 py-2 text-xs s
                             type="text"
                             id="expected_ctc"
                             name="expected_ctc"
+                            maxlength="120"
                             placeholder="e.g. 8.5 LPA"
                             value="<?= htmlspecialchars($old['expected_ctc'] ?? '', ENT_QUOTES); ?>"
                             class="<?= $baseInputClasses . (!empty($errors['expected_ctc'])
@@ -427,6 +442,7 @@ $baseInputClasses = 'block w-full rounded-xl border bg-white px-3 py-2 text-xs s
                         id="about"
                         name="about"
                         required
+                        maxlength="5000"
                         rows="4"
                         class="<?= $baseInputClasses . 'min-h-[6rem] ' . (!empty($errors['about'])
                             ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500'

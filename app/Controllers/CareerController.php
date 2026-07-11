@@ -17,6 +17,35 @@ class CareerController
     private const CACHE_TTL = 900; // 15 Minutes
 
     /**
+     * Detect if the current request is an AJAX / JSON request.
+     */
+    private function isAjaxRequest(): bool
+    {
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+            return true;
+        }
+
+        if (!empty($_SERVER['HTTP_ACCEPT']) &&
+            strpos(strtolower($_SERVER['HTTP_ACCEPT']), 'application/json') !== false) {
+            return true;
+        }
+
+        return !empty($_POST['ajax']) && $_POST['ajax'] === '1';
+    }
+
+    /**
+     * Send a JSON response and terminate.
+     */
+    private function jsonResponse(array $payload, int $statusCode = 200): void
+    {
+        http_response_code($statusCode);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($payload);
+        exit;
+    }
+
+    /**
      * Core renderer used by both HTTP and cron for the careers index page.
      */
     private function renderPage(): string
@@ -335,6 +364,7 @@ class CareerController
             'name'          => $fullName, // for Mailer
             'email'         => trim($_POST['email']         ?? ''),
             'phone'         => trim($_POST['phone']         ?? ''),
+            'phone_full'    => trim($_POST['phone_full']    ?? ''),
             'location'      => trim($_POST['location']      ?? ''),
             'experience'    => trim($_POST['experience']    ?? ''),
             'current_role'  => trim($_POST['current_role']  ?? ''),
@@ -349,6 +379,21 @@ class CareerController
         $redirectTo = $_POST['redirect_to'] ?? $this->buildApplyRedirectUrl($roleSlug);
 
         $errors = [];
+        $isAjax = $this->isAjaxRequest();
+
+        $successMessage = 'Thank you. We have received your application and will reach out if there is a strong match with current or upcoming roles.';
+
+        // Honeypot: real applicants never see or fill this field. Pretend
+        // success so bots do not learn they were filtered.
+        if (trim($_POST['website'] ?? '') !== '') {
+            if ($isAjax) {
+                $this->jsonResponse(['success' => true, 'message' => $successMessage]);
+            }
+
+            Session::flash('apply_success', $successMessage);
+            header('Location: ' . $redirectTo);
+            exit;
+        }
 
         // --- Validation ---
 
@@ -366,6 +411,11 @@ class CareerController
 
         if ($data['phone'] === '') {
             $errors['phone'] = 'Please enter your phone or WhatsApp number.';
+        } else {
+            $phoneDigits = preg_replace('/[\s().-]/', '', $data['phone_full'] !== '' ? $data['phone_full'] : $data['phone']);
+            if (!preg_match('/^\+?\d{7,15}$/', $phoneDigits)) {
+                $errors['phone'] = 'Please enter a valid phone number (7–15 digits, country code welcome).';
+            }
         }
 
         if ($data['location'] === '') {
@@ -404,6 +454,14 @@ class CareerController
         }
 
         if (!empty($errors)) {
+            if ($isAjax) {
+                $this->jsonResponse([
+                    'success' => false,
+                    'errors'  => $errors,
+                    'old'     => $data,
+                ], 422);
+            }
+
             Session::flash('apply_errors', $errors);
             Session::flash('apply_old', $data);
             header('Location: ' . $redirectTo);
@@ -422,6 +480,14 @@ class CareerController
         );
 
         if ($resumePath === null) {
+            if ($isAjax) {
+                $this->jsonResponse([
+                    'success' => false,
+                    'errors'  => $errors,
+                    'old'     => $data,
+                ], 422);
+            }
+
             Session::flash('apply_errors', $errors);
             Session::flash('apply_old', $data);
             header('Location: ' . $redirectTo);
@@ -431,6 +497,29 @@ class CareerController
         $data['file_path']      = $resumePath;
         $data['resume_file_name'] = $_FILES['resume']['name'] ?? '';
 
+        // --- Capture in LiftUp CRM (career form, résumé attached) ---
+
+        $crmCaptured = \App\Support\LiftUpCrm::pushCareerLead(
+            array_filter([
+                'full_name'     => mb_substr($data['full_name'], 0, 200),
+                'email'         => mb_substr($data['email'], 0, 200),
+                'phone'         => mb_substr($data['phone_full'] !== '' ? $data['phone_full'] : $data['phone'], 0, 50),
+                'about'         => mb_substr($data['about'], 0, 5000),
+                'role_slug'     => mb_substr((string) $data['role_slug'], 0, 120),
+                'location'      => mb_substr($data['location'], 0, 200),
+                'experience'    => mb_substr($data['experience'], 0, 200),
+                'current_role'  => mb_substr($data['current_role'], 0, 200),
+                'notice_period' => mb_substr($data['notice_period'], 0, 120),
+                'linkedin'      => mb_substr($data['linkedin'], 0, 300),
+                'github'        => mb_substr($data['github'], 0, 300),
+                'current_ctc'   => mb_substr($data['current_ctc'], 0, 120),
+                'expected_ctc'  => mb_substr($data['expected_ctc'], 0, 120),
+                'source_page'   => mb_substr($_SERVER['HTTP_REFERER'] ?? '', 0, 500),
+            ], fn ($value) => $value !== '' && $value !== null),
+            dirname(__DIR__, 2) . $resumePath,
+            $data['resume_file_name'] ?: null
+        );
+
         // --- Send email ---
 
         $mailer = new Mailer();
@@ -438,9 +527,18 @@ class CareerController
 
         $sent = $mailer->sendCareerApplication($data);
 
-        if (!$sent) {
+        // The application is safe if either channel took it.
+        if (!$sent && !$crmCaptured) {
             $errors['global'] = 'We could not submit your application right now. Please try again later or email us directly at '
                 . config('app.contact_email', 'info@qalbit.com') . '.';
+
+            if ($isAjax) {
+                $this->jsonResponse([
+                    'success' => false,
+                    'errors'  => $errors,
+                    'old'     => $data,
+                ], 500);
+            }
 
             Session::flash('apply_errors', $errors);
             Session::flash('apply_old', $data);
@@ -448,10 +546,14 @@ class CareerController
             exit;
         }
 
-        Session::flash(
-            'apply_success',
-            'Thank you. We have received your application and will reach out if there is a strong match with current or upcoming roles.'
-        );
+        if ($isAjax) {
+            $this->jsonResponse([
+                'success' => true,
+                'message' => $successMessage,
+            ]);
+        }
+
+        Session::flash('apply_success', $successMessage);
 
         header('Location: ' . $redirectTo);
         exit;

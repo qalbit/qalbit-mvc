@@ -263,7 +263,18 @@ class ContactController
             'user_agent'   => substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 500),
         ]);
 
+        // Route into the CRM form matching the lead's origin.
+        $formKey = 'contact';
+        if ($data['lead_from'] === 'lead_cost_calculator') {
+            $formKey = 'calculator';
+        } elseif ($data['lead_from'] === 'lead_exit_popup') {
+            $formKey = 'exit_popup';
+        } elseif (strpos($data['lead_from'], 'lead_hire') === 0) {
+            $formKey = 'hire';
+        }
+
         $crmCaptured = LiftUpCrm::pushLead(array_filter([
+            'type'        => $formKey === 'hire' ? 'hire' : null,
             'name'        => mb_substr($data['name'], 0, 200),
             'email'       => mb_substr($data['email'], 0, 200),
             'phone'       => mb_substr($data['phone_full'] !== '' ? $data['phone_full'] : $data['phone'], 0, 50),
@@ -273,7 +284,7 @@ class ContactController
             'lead_topic'  => mb_substr($data['lead_topic'], 0, 200),
             'source_page' => mb_substr($_SERVER['HTTP_REFERER'] ?? '', 0, 500),
             'metadata'    => $metadata,
-        ], fn ($value) => $value !== '' && $value !== null && $value !== []));
+        ], fn ($value) => $value !== '' && $value !== null && $value !== []), $formKey);
 
         $mailer = new Mailer();
         $sent   = $mailer->sendContact($data);

@@ -870,12 +870,11 @@
     }
 
     // --------------------------------------------------------
-    // 6) Contact forms – full validation + AJAX submit
+    // 6) Lead forms – full validation + AJAX submit
     //
-    // Forms posting to /contact-us/ are submitted via fetch with
-    // inline errors/success (works on every page, no reload).
-    // Other forms (careers apply) get validation only and keep
-    // their native submit through recaptcha-layer.js.
+    // Contact forms post to /contact-us/ and the career form to
+    // its apply endpoint, both via fetch with inline errors and
+    // success message (works on every page, no reload).
     // --------------------------------------------------------
     function initContactForms() {
         var forms = document.querySelectorAll(
@@ -886,6 +885,12 @@
         forms.forEach(function (form) {
             if (form.dataset.jsValidated === "1") return;
             form.dataset.jsValidated = "1";
+
+            // Career application form (full_name + résumé upload)
+            if (form.querySelector('input[name="full_name"]')) {
+                bindCareerForm(form);
+                return;
+            }
 
             var action = form.getAttribute("action") || "";
             var isContactEndpoint = /\/contact-us\/?(?:[?#]|$)/.test(action);
@@ -1241,6 +1246,396 @@
                 window.grecaptcha.ready(function () {
                     window.grecaptcha
                         .execute(siteKey, { action: "contact" })
+                        .then(sendRequest)
+                        .catch(function () {
+                            sendRequest(null); // server fails closed
+                        });
+                });
+            } else {
+                sendRequest(null);
+            }
+        });
+    }
+
+    // Career application form: same UX as the contact forms (inline
+    // errors, AJAX submit) but with the careers field set + résumé file.
+    function bindCareerForm(form) {
+        var fullNameInput = form.querySelector('input[name="full_name"]');
+        var emailInput = form.querySelector('input[name="email"]');
+        var phoneInput = form.querySelector('input[name="phone"]');
+        var locationInput = form.querySelector('input[name="location"]');
+        var experienceInput = form.querySelector('input[name="experience"]');
+        var aboutInput = form.querySelector('textarea[name="about"]');
+        var linkedinInput = form.querySelector('input[name="linkedin"]');
+        var githubInput = form.querySelector('input[name="github"]');
+        var resumeInput = form.querySelector('input[name="resume"]');
+        var submitButton = form.querySelector('button[type="submit"]');
+
+        if (!fullNameInput || !emailInput) return;
+
+        // recaptcha-layer.js checks this and leaves the form to us
+        form.setAttribute("data-js-ajax", "1");
+
+        function fieldAnchor(input) {
+            var iti = input.closest(".iti");
+            return iti || input;
+        }
+
+        function errorElFor(input, create) {
+            var el = form.querySelector(
+                '[data-js-error-for="' + input.name + '"]'
+            );
+            if (!el && create) {
+                el = document.createElement("p");
+                el.setAttribute("data-js-error-for", input.name);
+                el.className = "mt-1 hidden text-[11px] text-rose-600";
+                fieldAnchor(input).insertAdjacentElement("afterend", el);
+            }
+            return el;
+        }
+
+        function showFieldError(input, message) {
+            input.classList.remove("border-slate-300");
+            input.classList.add("border-rose-400");
+
+            var el = errorElFor(input, true);
+            el.textContent = message;
+            el.classList.remove("hidden");
+        }
+
+        function clearFieldError(input) {
+            input.classList.remove("border-rose-400");
+            if (
+                input.type !== "file" &&
+                !input.classList.contains("border-slate-300")
+            ) {
+                input.classList.add("border-slate-300");
+            }
+
+            var el = errorElFor(input, false);
+            if (el) {
+                el.textContent = "";
+                el.classList.add("hidden");
+            }
+        }
+
+        function globalBox(kind) {
+            var attr = "data-js-global-" + kind;
+            var el = form.querySelector("[" + attr + "]");
+            if (!el) {
+                el = document.createElement("div");
+                el.setAttribute(attr, "true");
+                el.className =
+                    kind === "error"
+                        ? "mb-3 hidden rounded-md border border-rose-200 bg-rose-50 px-4 py-3 text-xs text-rose-800"
+                        : "mb-3 hidden rounded-md border border-green-200 bg-green-50 px-4 py-3 text-xs text-green-800";
+                form.prepend(el);
+            }
+            return el;
+        }
+
+        function hideGlobalBoxes() {
+            ["error", "success"].forEach(function (kind) {
+                var el = form.querySelector("[data-js-global-" + kind + "]");
+                if (el) {
+                    el.textContent = "";
+                    el.classList.add("hidden");
+                }
+            });
+        }
+
+        function showGlobal(kind, message) {
+            var el = globalBox(kind);
+            el.textContent = message;
+            el.classList.remove("hidden");
+            if (typeof el.scrollIntoView === "function") {
+                el.scrollIntoView({ block: "center", behavior: "smooth" });
+            }
+        }
+
+        // ---------- validators (mirror CareerController) ----------
+        function validateFullName() {
+            var v = fullNameInput.value.trim();
+            if (!v) return "Please enter your full name.";
+            if (v.length < 2) return "Name must be at least 2 characters.";
+            if (v.length > 200)
+                return "Name must be 200 characters or fewer.";
+            return "";
+        }
+
+        function validateEmail() {
+            var v = emailInput.value.trim();
+            if (!v) return "Please enter your email address.";
+            if (v.length > 200)
+                return "Email must be 200 characters or fewer.";
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))
+                return "Please enter a valid email address.";
+            return "";
+        }
+
+        function validatePhone() {
+            if (!phoneInput) return "";
+            var v = phoneInput.value.trim();
+            if (!v) return "Please enter your phone or WhatsApp number.";
+
+            var iti = phoneInput.__itiInstance;
+            if (iti && typeof iti.isValidNumber === "function") {
+                try {
+                    var valid = iti.isValidNumber();
+                    if (valid === true) return "";
+                    if (valid === false)
+                        return "Please enter a valid phone number for the selected country.";
+                } catch (e) {
+                    /* utils not ready – fall through */
+                }
+            }
+
+            var digits = v.replace(/[\s().-]/g, "");
+            if (!/^\+?\d{7,15}$/.test(digits))
+                return "Please enter a valid phone number (7–15 digits).";
+            return "";
+        }
+
+        function validateLocation() {
+            if (!locationInput) return "";
+            if (!locationInput.value.trim())
+                return "Please enter your current city and country.";
+            return "";
+        }
+
+        function validateExperience() {
+            if (!experienceInput) return "";
+            var v = experienceInput.value.trim();
+            if (!v) return "Please enter your total experience in years.";
+            if (isNaN(parseFloat(v)) || parseFloat(v) < 0)
+                return "Total experience must be a positive number.";
+            return "";
+        }
+
+        function validateAbout() {
+            if (!aboutInput) return "";
+            var v = aboutInput.value.trim();
+            if (!v) return "Please tell us why you want to work at QalbIT.";
+            if (v.length < 30)
+                return "Please write at least a few sentences about your motivation and background.";
+            if (v.length > 5000)
+                return "Please keep this under 5000 characters.";
+            return "";
+        }
+
+        function urlValidator(input, label) {
+            return function () {
+                if (!input) return "";
+                var v = input.value.trim();
+                if (v === "") return "";
+                if (!/^https?:\/\/.+\..+/i.test(v))
+                    return (
+                        "Please enter a valid " +
+                        label +
+                        " URL or leave this field blank."
+                    );
+                return "";
+            };
+        }
+
+        function validateResume() {
+            if (!resumeInput) return "";
+            var file = resumeInput.files && resumeInput.files[0];
+            if (!file) return "Please upload your resume (PDF, DOC, or DOCX).";
+            if (!/\.(pdf|docx?)$/i.test(file.name))
+                return "Resume must be a PDF, DOC, or DOCX file.";
+            if (file.size > 5 * 1024 * 1024)
+                return "Resume must be 5 MB or smaller.";
+            return "";
+        }
+
+        var validators = [
+            [fullNameInput, validateFullName],
+            [emailInput, validateEmail],
+            [phoneInput, validatePhone],
+            [locationInput, validateLocation],
+            [experienceInput, validateExperience],
+            [aboutInput, validateAbout],
+            [linkedinInput, urlValidator(linkedinInput, "LinkedIn/portfolio")],
+            [githubInput, urlValidator(githubInput, "GitHub/code samples")],
+            [resumeInput, validateResume],
+        ].filter(function (pair) {
+            return !!pair[0];
+        });
+
+        function validateField(pair) {
+            var message = pair[1]();
+            if (message) {
+                showFieldError(pair[0], message);
+            } else {
+                clearFieldError(pair[0]);
+            }
+            return !message;
+        }
+
+        function validateAll() {
+            var firstInvalid = null;
+            validators.forEach(function (pair) {
+                if (!validateField(pair) && !firstInvalid) {
+                    firstInvalid = pair[0];
+                }
+            });
+            return firstInvalid;
+        }
+
+        validators.forEach(function (pair) {
+            pair[0].addEventListener("blur", function () {
+                if (pair[0].value.trim() !== "" || pair[0].type === "file") {
+                    validateField(pair);
+                }
+            });
+            pair[0].addEventListener(
+                pair[0].type === "file" ? "change" : "input",
+                function () {
+                    clearFieldError(pair[0]);
+                }
+            );
+        });
+
+        function setSubmitting(isSubmitting) {
+            if (!submitButton) return;
+            if (isSubmitting) {
+                if (!submitButton.dataset.originalLabel) {
+                    submitButton.dataset.originalLabel =
+                        submitButton.textContent || "Submit application";
+                }
+                submitButton.disabled = true;
+                submitButton.textContent = "Submitting...";
+            } else {
+                submitButton.disabled = false;
+                if (submitButton.dataset.originalLabel) {
+                    submitButton.textContent =
+                        submitButton.dataset.originalLabel;
+                }
+            }
+        }
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            hideGlobalBoxes();
+
+            var firstInvalid = validateAll();
+            form.dataset.jsInvalid = firstInvalid ? "1" : "";
+
+            if (firstInvalid) {
+                firstInvalid.focus({ preventScroll: true });
+                var anchor = fieldAnchor(firstInvalid);
+                if (typeof anchor.scrollIntoView === "function") {
+                    anchor.scrollIntoView({
+                        block: "center",
+                        behavior: "smooth",
+                    });
+                }
+                return;
+            }
+
+            if (phoneInput && phoneInput.__itiInstance) {
+                try {
+                    if (phoneInput.__itiInstance.isValidNumber()) {
+                        phoneInput.value =
+                            phoneInput.__itiInstance.getNumber();
+                    }
+                } catch (e) {
+                    /* keep typed value */
+                }
+            }
+
+            setSubmitting(true);
+
+            var formData = new FormData(form);
+            formData.set("ajax", "1");
+
+            var sendRequest = function (token) {
+                if (token) formData.set("recaptcha_token", token);
+
+                if (
+                    window.dataLayer &&
+                    typeof window.dataLayer.push === "function"
+                ) {
+                    window.dataLayer.push({
+                        event: "career_form_submit",
+                        form_location: window.location.pathname,
+                    });
+                }
+
+                fetch(form.action, {
+                    method: "POST",
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest",
+                        Accept: "application/json",
+                    },
+                    body: formData,
+                })
+                    .then(function (response) {
+                        return response.json().catch(function () {
+                            return null;
+                        });
+                    })
+                    .then(function (json) {
+                        setSubmitting(false);
+
+                        if (!json) {
+                            showGlobal(
+                                "error",
+                                "Something went wrong. Please try again later."
+                            );
+                            return;
+                        }
+
+                        if (json.success) {
+                            showGlobal(
+                                "success",
+                                json.message ||
+                                    "Thank you. We have received your application."
+                            );
+                            form.reset();
+                            validators.forEach(function (pair) {
+                                clearFieldError(pair[0]);
+                            });
+                        } else {
+                            var errors = json.errors || {};
+                            if (errors.global) {
+                                showGlobal("error", errors.global);
+                            }
+                            validators.forEach(function (pair) {
+                                if (errors[pair[0].name]) {
+                                    showFieldError(
+                                        pair[0],
+                                        errors[pair[0].name]
+                                    );
+                                }
+                            });
+                        }
+                    })
+                    .catch(function () {
+                        setSubmitting(false);
+                        showGlobal(
+                            "error",
+                            "We could not submit your application right now. Please try again later."
+                        );
+                    });
+            };
+
+            var siteKeyEl = document.querySelector(
+                "script[data-recaptcha-site-key]"
+            );
+            var siteKey = siteKeyEl
+                ? siteKeyEl.getAttribute("data-recaptcha-site-key")
+                : "";
+
+            if (
+                siteKey &&
+                window.grecaptcha &&
+                typeof window.grecaptcha.ready === "function"
+            ) {
+                window.grecaptcha.ready(function () {
+                    window.grecaptcha
+                        .execute(siteKey, { action: "careers_apply" })
                         .then(sendRequest)
                         .catch(function () {
                             sendRequest(null); // server fails closed
