@@ -58,8 +58,18 @@ if (is_file($envFile) && is_readable($envFile)) {
         $name  = trim($name);
         $value = trim($value);
 
-        // Strip optional surrounding quotes
-        $value = trim($value, "\"'");
+        if (preg_match('/^(["\'])(.*?)\1/', $value, $m)) {
+            // Quoted value: take exactly what's inside the quotes and ignore
+            // anything after the closing quote (e.g. inline comments).
+            $value = $m[2];
+        } else {
+            // Unquoted value: strip inline comments, then trim.
+            $hashPos = strpos($value, ' #');
+            if ($hashPos !== false) {
+                $value = substr($value, 0, $hashPos);
+            }
+            $value = trim($value);
+        }
 
         if ($name === '') {
             continue;
