@@ -43,6 +43,11 @@
 ?>
 
 <?php
+    // Own products strip
+    include __DIR__ . '/../../partials/home/products-strip.php';
+?>
+
+<?php
     // Reviews block
     if (!empty($reviews)) {
         $title    = 'Teams who trusted QalbIT';
@@ -70,7 +75,9 @@
 ?>
 
 <?php
-    // CTA block
+    // CTA block – reset shared section vars so the clients block's
+    // title/subtitle don't leak into this include
+    unset($title, $subtitle);
     include __DIR__ . '/../../partials/cta/team-cta.php';
 ?>
 

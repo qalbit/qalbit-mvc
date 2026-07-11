@@ -1090,7 +1090,7 @@ return [
         'order'      => 50,
 
         'meta_title'       => 'Food Delivery App Development Company | QalbIT',
-        'meta_description' => 'QalbIT builds food delivery app solutions and on-demand ordering platforms for restaurants, cloud kitchens and aggregators – including customer, rider and restaurant apps.',
+        'meta_description' => 'QalbIT builds food delivery apps and on-demand ordering platforms for restaurants, cloud kitchens and aggregators – customer, rider and restaurant apps.',
 
         'tagline' => 'Food delivery app solutions and on-demand ordering platforms for restaurants, cloud kitchens and aggregators.',
         'summary' => 'We design and build food delivery app solutions covering the full journey – customer ordering, restaurant operations, rider assignment and tracking, and real-time communication – so you can run delivery operations with more control.',

@@ -18,8 +18,8 @@ return [
         'order'      => 20,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development in Washington, USA – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to startups and enterprises across Washington, USA. Partner with a dedicated remote team to design, build and scale your digital products.',
+        'meta_title' => 'Custom Software Development Company in Washington – QalbIT',
+        'meta_description' => 'Custom software, SaaS and mobile app development for Washington businesses – from Seattle and Bellevue tech startups to retailers and logistics firms statewide.',
         'headline' => 'Custom Software Development in Washington, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Washington startups, scale-ups and enterprises.',
 
@@ -43,9 +43,9 @@ return [
         ],
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company for Washington Businesses',
-            'meta_title'       => 'Custom Software Development in Washington, USA – QalbIT',
-            'meta_description' => 'QalbIT is a remote-first custom software development company helping Washington businesses build SaaS products, web applications and mobile apps with predictable delivery and product thinking.',
+            'h1'               => 'Custom Software Development Company for Washington – Seattle, Bellevue & Beyond',
+            'meta_title'       => 'Custom Software Development Company in Washington – QalbIT',
+            'meta_description' => 'Custom software, SaaS and mobile app development for Washington businesses – from Seattle and Bellevue tech startups to retailers and logistics firms statewide.',
             'canonical'        => '/usa/washington/',
             'faq_key'          => 'location_usa_washington',
             'breadcrumbs'      => [
@@ -72,7 +72,7 @@ return [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in Washington, USA',
-                'title'    => 'Custom Software Development Company for Washington Businesses',
+                'title'    => 'Custom Software Development Company for Washington – Seattle, Bellevue & Beyond',
                 'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that understands the pace and expectations of Washington\'s tech ecosystem.',
                 'body'     => 'From early-stage MVPs in Seattle to enterprise modernization across the wider state, QalbIT partners with Washington founders and product leaders to design, build and iterate software that moves the needle for your customers and stakeholders.',
 
@@ -159,7 +159,7 @@ return [
                         'key'         => 'api-backend',
                         'label'       => 'API & Backend Engineering',
                         'description' => 'Secure APIs, integrations and background jobs running on modern PHP/Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -171,7 +171,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'Scale with a stable remote squad that works like an extension of your Washington product and engineering team.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -289,7 +289,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team (PM, designers, engineers) that works as an extension of your Washington product organisation.',
                         'best_for'    => 'Scale-ups and enterprises with a continuous roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -429,8 +429,8 @@ return [
         'order'      => 30,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development in Virginia, USA – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to startups and enterprises across Virginia, USA – from Northern Virginia and the DC metro area to Richmond and Virginia Beach. Partner with a dedicated remote team to design, build and scale your digital products.',
+        'meta_title' => 'Custom Software Development Company in Virginia – QalbIT',
+        'meta_description' => 'QalbIT builds custom software, web portals and mobile apps for Virginia companies in Northern Virginia, Richmond and Virginia Beach – with senior engineers.',
         'headline' => 'Custom Software Development in Virginia, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Virginia startups, scale-ups and enterprises.',
 
@@ -454,9 +454,9 @@ return [
         ],
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company for Virginia Businesses',
-            'meta_title'       => 'Custom Software Development in Virginia, USA – QalbIT',
-            'meta_description' => 'QalbIT is a remote-first custom software development company helping Virginia businesses build SaaS products, web applications and mobile apps with predictable delivery and product thinking.',
+            'h1'               => 'Custom Software Development for Virginia – Northern Virginia to Richmond',
+            'meta_title'       => 'Custom Software Development Company in Virginia – QalbIT',
+            'meta_description' => 'QalbIT builds custom software, web portals and mobile apps for Virginia companies in Northern Virginia, Richmond and Virginia Beach – with senior engineers.',
             'canonical'        => '/usa/virginia/',
             'faq_key'          => 'location_usa_virginia',
             'breadcrumbs'      => [
@@ -483,7 +483,7 @@ return [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in Virginia, USA',
-                'title'    => 'Custom Software Development Company for Virginia Businesses',
+                'title'    => 'Custom Software Development for Virginia – Northern Virginia to Richmond',
                 'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that understands the needs of Virginia technology, public sector and services businesses.',
                 'body'     => 'From early-stage MVPs in Northern Virginia and the DC metro area to internal tools for Richmond and Virginia Beach based teams, QalbIT partners with Virginia founders and product leaders to design, build and iterate software that moves the needle for customers and stakeholders.',
 
@@ -570,7 +570,7 @@ return [
                         'key'         => 'api-backend',
                         'label'       => 'API and Backend Engineering',
                         'description' => 'Secure APIs, integrations and background jobs running on modern PHP and Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -582,7 +582,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'Scale with a stable remote squad that works like an extension of your Virginia product and engineering team.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -700,7 +700,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team (PM, designers, engineers) that works as an extension of your Virginia product organisation.',
                         'best_for'    => 'Scale-ups and enterprises with a continuous roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -841,8 +841,8 @@ return [
         'order'      => 40,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development in Texas, USA – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to startups and enterprises across Texas, USA – from Austin and Dallas to Houston and San Antonio. Partner with a dedicated remote team to design, build and scale your digital products.',
+        'meta_title' => 'Custom Software Development Company in Texas – QalbIT',
+        'meta_description' => 'From Austin startups to Houston energy and Dallas logistics firms – QalbIT builds custom software, SaaS platforms and mobile apps for Texas businesses.',
         'headline' => 'Custom Software Development in Texas, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Texas startups, scale-ups and enterprises.',
 
@@ -866,9 +866,9 @@ return [
         ],
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company for Texas Businesses',
-            'meta_title'       => 'Custom Software Development in Texas, USA – QalbIT',
-            'meta_description' => 'QalbIT is a remote-first custom software development company helping Texas businesses build SaaS products, web applications and mobile apps with predictable delivery and product thinking.',
+            'h1'               => 'Custom Software Development Company in Texas – Austin, Dallas & Houston',
+            'meta_title'       => 'Custom Software Development Company in Texas – QalbIT',
+            'meta_description' => 'From Austin startups to Houston energy and Dallas logistics firms – QalbIT builds custom software, SaaS platforms and mobile apps for Texas businesses.',
             'canonical'        => '/usa/texas/',
             'faq_key'          => 'location_usa_texas',
             'breadcrumbs'      => [
@@ -895,7 +895,7 @@ return [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in Texas, USA',
-                'title'    => 'Custom Software Development Company for Texas Businesses',
+                'title'    => 'Custom Software Development Company in Texas – Austin, Dallas & Houston',
                 'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that understands the expectations of Texas technology, energy, logistics and services businesses.',
                 'body'     => 'From early-stage MVPs in Austin to internal tools for Dallas, Houston and San Antonio based teams, QalbIT partners with Texas founders and product leaders to design, build and iterate software that moves the needle for customers and stakeholders.',
 
@@ -982,7 +982,7 @@ return [
                         'key'         => 'api-backend',
                         'label'       => 'API and Backend Engineering',
                         'description' => 'Secure APIs, integrations and background jobs running on modern PHP and Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -994,7 +994,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'Scale with a stable remote squad that works like an extension of the Texas product and engineering team.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -1112,7 +1112,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team (PM, designers, engineers) that works as an extension of the Texas product organisation.',
                         'best_for'    => 'Scale-ups and enterprises with a continuous roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -1253,8 +1253,8 @@ return [
         'order'      => 50,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development in Pennsylvania, USA – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to startups and enterprises across Pennsylvania, USA – from Philadelphia and Pittsburgh to Harrisburg and beyond. Partner with a dedicated remote team to design, build and scale digital products.',
+        'meta_title' => 'Custom Software Development Company in Pennsylvania – QalbIT',
+        'meta_description' => 'Custom software development for Pennsylvania businesses – manufacturers, healthcare and services firms in Philadelphia, Pittsburgh, Lancaster and York.',
         'headline' => 'Custom Software Development in Pennsylvania, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Pennsylvania startups, scale-ups and enterprises.',
 
@@ -1276,9 +1276,9 @@ return [
         ],
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company for Pennsylvania Businesses',
-            'meta_title'       => 'Custom Software Development in Pennsylvania, USA – QalbIT',
-            'meta_description' => 'QalbIT is a remote-first custom software development company helping Pennsylvania businesses build SaaS products, web applications and mobile apps with predictable delivery and product thinking.',
+            'h1'               => 'Custom Software Development Company in Pennsylvania – Philadelphia to Pittsburgh',
+            'meta_title'       => 'Custom Software Development Company in Pennsylvania – QalbIT',
+            'meta_description' => 'Custom software development for Pennsylvania businesses – manufacturers, healthcare and services firms in Philadelphia, Pittsburgh, Lancaster and York.',
             'canonical'        => '/usa/pennsylvania/',
             'faq_key'          => 'location_usa_pennsylvania',
             'breadcrumbs'      => [
@@ -1300,9 +1300,9 @@ return [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in Pennsylvania, USA',
-                'title'    => 'Custom Software Development Company for Pennsylvania Businesses',
+                'title'    => 'Custom Software Development Company in Pennsylvania – Philadelphia to Pittsburgh',
                 'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that understands the needs of Pennsylvania technology, healthcare, manufacturing and services organisations.',
-                'body'     => 'From early-stage MVPs in Philadelphia to internal tools for Pittsburgh and Harrisburg based teams, QalbIT partners with Pennsylvania founders and product leaders to design, build and iterate software that supports customers and internal operations.',
+                'body'     => 'From early-stage MVPs in Philadelphia to internal tools for manufacturers and services firms in Pittsburgh, Lancaster, York and West Chester, QalbIT partners with Pennsylvania founders and operations leaders to design, build and iterate software that supports customers and day-to-day operations.',
 
                 'primary_cta' => [
                     'label' => 'Schedule a discovery call',
@@ -1333,25 +1333,25 @@ return [
                 'id'      => 'location-about',
                 'section' => 'about',
                 'eyebrow' => 'About QalbIT',
-                'title'   => 'A remote custom software partner for Pennsylvania startups and enterprises',
-                'intro'   => 'QalbIT is a product-driven engineering studio working with Pennsylvania founders, CTOs and business leaders to plan, build and maintain digital products. The engagement is structured as a long-term partnership instead of short, transactional projects.',
+                'title'   => 'A software partner built for how Pennsylvania companies actually work',
+                'intro'   => 'Pennsylvania’s economy runs on manufacturers, healthcare systems, logistics operators and family-owned services firms – businesses that need dependable software more than Silicon Valley theatre. QalbIT works with founders and operations leaders across the Commonwealth as a long-term engineering partner, at rates well below what Philadelphia or Pittsburgh agencies quote for comparable scope.',
 
                 'highlights' => [
                     [
-                        'label'       => '12+ years building products',
-                        'description' => 'Experience shipping complex SaaS, marketplaces, internal tools and ERP-style systems across multiple industries.',
+                        'label'       => 'Fits Pennsylvania budgets',
+                        'description' => 'Senior engineering at 50–70% below typical Philadelphia and Pittsburgh agency rates – with fixed-scope phases so budgets stay predictable.',
                     ],
                     [
-                        'label'       => 'US East Coast friendly collaboration',
-                        'description' => 'Overlap with Eastern time for planning, reviews and critical releases, with structured rituals and clear written communication.',
+                        'label'       => 'Eastern Time collaboration',
+                        'description' => 'Daily overlap with ET for stand-ups, reviews and go-lives; asynchronous updates cover the rest of the day.',
                     ],
                     [
-                        'label'       => 'Full-stack product teams',
-                        'description' => 'Design, frontend, backend, mobile and QA aligned to the roadmap rather than isolated freelancers.',
+                        'label'       => 'Experience with PA-style businesses',
+                        'description' => 'Manufacturers, healthcare providers, logistics and professional services – operations-heavy companies replacing spreadsheets and ageing systems.',
                     ],
                     [
-                        'label'       => 'Security and compliance aware',
-                        'description' => 'Secure architectures, role-based access and stable deployment pipelines from day one.',
+                        'label'       => 'Compliance-conscious builds',
+                        'description' => 'HIPAA-aware architectures, role-based access and audit trails for healthcare and other regulated Pennsylvania work.',
                     ],
                 ],
             ],
@@ -1362,32 +1362,44 @@ return [
                 'section' => 'services',
                 'eyebrow' => 'Services',
                 'title'   => 'Custom software development services for Pennsylvania businesses',
-                'intro'   => 'Whether validating a new product, modernising legacy systems or scaling an existing platform, QalbIT brings architecture, engineering and product thinking tailored for Pennsylvania teams.',
+                'intro'   => 'Whether you are replacing spreadsheets in a Lancaster manufacturing plant, launching a startup in Philadelphia or modernising systems for a Pittsburgh services firm, QalbIT brings architecture, engineering and product thinking tailored to Pennsylvania teams.',
 
                 'items' => [
                     [
                         'key'         => 'custom-software',
                         'label'       => 'Custom Software Development',
-                        'description' => 'End-to-end web application development tailored to specific workflows, roles and security requirements.',
+                        'description' => 'Replace spreadsheets and ageing on-premise systems with web applications built around your workflows – the most common ask from PA manufacturers and services firms.',
                         'url'         => '/services/custom-software-development/',
                     ],
                     [
+                        'key'         => 'crm-development',
+                        'label'       => 'CRM Development',
+                        'description' => 'Custom CRMs for Pennsylvania sales and service teams – pipelines, quoting and customer 360 views without per-seat licence creep.',
+                        'url'         => '/services/crm-development/',
+                    ],
+                    [
+                        'key'         => 'erp-development',
+                        'label'       => 'ERP Development',
+                        'description' => 'Modular ERPs covering inventory, production and finance – a natural fit for the manufacturers and distributors that anchor Pennsylvania’s economy.',
+                        'url'         => '/services/erp-development/',
+                    ],
+                    [
                         'key'         => 'saas-mvp',
-                        'label'       => 'SaaS and MVP Development',
-                        'description' => 'Design and deliver investor-ready MVPs and SaaS platforms, with a focus on validating ideas quickly.',
-                        'url'         => '/start-up-mvp/',
+                        'label'       => 'MVP and SaaS Development',
+                        'description' => 'Investor-ready MVPs for Philadelphia and Pittsburgh startups – scoped, designed and launched in 6–10 weeks.',
+                        'url'         => '/services/mvp-development/',
                     ],
                     [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
-                        'description' => 'Flutter and cross-platform mobile apps integrated with existing systems and analytics.',
+                        'description' => 'Flutter apps for field crews, drivers and customers – integrated with the systems your Pennsylvania operation already runs on.',
                         'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
-                        'label'       => 'API and Backend Engineering',
-                        'description' => 'Secure APIs, integrations and background jobs running on modern PHP and Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'label'       => 'Backend and API Engineering',
+                        'description' => 'Secure APIs, integrations and background jobs on modern PHP and Node stacks – connecting ERPs, e-commerce and legacy systems.',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -1398,8 +1410,8 @@ return [
                     [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
-                        'description' => 'A stable remote squad that works like an extension of the Pennsylvania product and engineering team.',
-                        'url'         => '/engagement-models/',
+                        'description' => 'A stable remote squad working Eastern-friendly hours as an extension of your Pennsylvania product and engineering team.',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -1410,7 +1422,7 @@ return [
                 'section' => 'why',
                 'eyebrow' => 'Why QalbIT',
                 'title'   => 'Why Pennsylvania teams choose QalbIT as their custom software partner',
-                'intro'   => 'Pennsylvania organisations span healthcare, education, manufacturing, logistics and professional services. QalbIT is structured to support this range with clear delivery practices and senior oversight.',
+                'intro'   => 'From eds-and-meds in Philadelphia to manufacturing around Pittsburgh, Lancaster and York, Pennsylvania businesses want dependable delivery without big-agency overhead. QalbIT is structured for exactly that.',
 
                 'reasons' => [
                     [
@@ -1422,11 +1434,11 @@ return [
                         ],
                     ],
                     [
-                        'label'       => 'Product mindset, not just billable hours',
-                        'description' => 'Focus on outcomes, activation metrics and technical debt instead of only closing tickets.',
+                        'label'       => 'Senior quality at 50–70% less',
+                        'description' => 'Comparable scope from a Philadelphia or Pittsburgh agency typically costs 2–3× more. Our senior India-based team delivers the same outcome without recruitment overhead.',
                         'bullets'     => [
-                            'Support for scoping, sequencing and launch strategy.',
-                            'Balance speed with long-term maintainability.',
+                            'Fixed-scope phases with budgets agreed before work starts.',
+                            'No competing for scarce local engineering talent.',
                         ],
                     ],
                     [
@@ -1517,7 +1529,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team (PM, designers, engineers) acting as an extension of the Pennsylvania product organisation.',
                         'best_for'    => 'Scale-ups and enterprises with a continuous roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -1660,8 +1672,8 @@ return [
         'order'      => 60,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development in Ohio, USA – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to startups and enterprises across Ohio, USA – from Columbus and Cincinnati to Cleveland and beyond. Partner with a dedicated remote team to design, build and scale digital products.',
+        'meta_title' => 'Custom Software Development Company in Ohio – QalbIT',
+        'meta_description' => 'QalbIT helps Ohio manufacturers, insurers and logistics companies in Columbus, Cleveland and Cincinnati replace spreadsheets with custom software and portals.',
         'headline' => 'Custom Software Development in Ohio, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Ohio startups, scale-ups and enterprises.',
 
@@ -1683,9 +1695,9 @@ return [
         ],
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company for Ohio Businesses',
-            'meta_title'       => 'Custom Software Development in Ohio, USA – QalbIT',
-            'meta_description' => 'QalbIT is a remote-first custom software development company helping Ohio businesses build SaaS products, web applications and mobile apps with predictable delivery and product thinking.',
+            'h1'               => 'Custom Software Development for Ohio – Columbus, Cleveland & Cincinnati',
+            'meta_title'       => 'Custom Software Development Company in Ohio – QalbIT',
+            'meta_description' => 'QalbIT helps Ohio manufacturers, insurers and logistics companies in Columbus, Cleveland and Cincinnati replace spreadsheets with custom software and portals.',
             'canonical'        => '/usa/ohio/',
             'faq_key'          => 'location_usa_ohio',
             'breadcrumbs'      => [
@@ -1707,7 +1719,7 @@ return [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in Ohio, USA',
-                'title'    => 'Custom Software Development Company for Ohio Businesses',
+                'title'    => 'Custom Software Development for Ohio – Columbus, Cleveland & Cincinnati',
                 'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that supports Ohio technology, manufacturing, logistics and services organisations.',
                 'body'     => 'From early-stage MVPs in Columbus to internal platforms for Cincinnati and Cleveland based teams, QalbIT partners with Ohio founders and product leaders to design, build and iterate software that supports customers and operations.',
 
@@ -1794,7 +1806,7 @@ return [
                         'key'         => 'api-backend',
                         'label'       => 'API and Backend Engineering',
                         'description' => 'Secure APIs, integrations and background jobs running on modern PHP and Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -1806,7 +1818,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'A stable remote squad that works like an extension of the Ohio product and engineering team.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -1924,7 +1936,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team (PM, designers, engineers) acting as an extension of the Ohio product organisation.',
                         'best_for'    => 'Scale-ups and enterprises with a continuous roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -2065,8 +2077,8 @@ return [
         'order'      => 70,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development in North Carolina, USA – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to startups and enterprises across North Carolina, USA – from the Research Triangle to Charlotte and beyond. Partner with a dedicated remote team to design, build and scale your digital products.',
+        'meta_title' => 'Custom Software Development Company in North Carolina – QalbIT',
+        'meta_description' => 'Custom software and SaaS development for North Carolina – Charlotte fintech, Research Triangle startups and growing businesses across the state.',
         'headline' => 'Custom Software Development in North Carolina, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for North Carolina startups, scale-ups and enterprises.',
 
@@ -2089,9 +2101,9 @@ return [
         ],
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company for North Carolina Businesses',
-            'meta_title'       => 'Custom Software Development in North Carolina, USA – QalbIT',
-            'meta_description' => 'QalbIT is a remote-first custom software development company helping North Carolina businesses build SaaS products, web applications and mobile apps with predictable delivery and product thinking.',
+            'h1'               => 'Custom Software Development in North Carolina – Charlotte & the Research Triangle',
+            'meta_title'       => 'Custom Software Development Company in North Carolina – QalbIT',
+            'meta_description' => 'Custom software and SaaS development for North Carolina – Charlotte fintech, Research Triangle startups and growing businesses across the state.',
             'canonical'        => '/usa/north-carolina/',
             'faq_key'          => 'location_usa_north_carolina',
             'breadcrumbs'      => [
@@ -2112,7 +2124,7 @@ return [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in North Carolina, USA',
-                'title'    => 'Custom Software Development Company for North Carolina Businesses',
+                'title'    => 'Custom Software Development in North Carolina – Charlotte & the Research Triangle',
                 'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that understands the expectations of North Carolina’s research, healthcare and technology ecosystem.',
                 'body'     => 'From early-stage MVPs in the Research Triangle to internal platforms for Charlotte-based teams, QalbIT partners with North Carolina founders and product leaders to design, build and iterate software that supports customers and operations.',
 
@@ -2199,7 +2211,7 @@ return [
                         'key'         => 'api-backend',
                         'label'       => 'API and Backend Engineering',
                         'description' => 'Secure APIs, integrations and background jobs running on modern PHP and Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -2211,7 +2223,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'A stable remote squad that works like an extension of your North Carolina product and engineering team.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -2329,7 +2341,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team (PM, designers, engineers) acting as an extension of your North Carolina product organisation.',
                         'best_for'    => 'Scale-ups and enterprises with a continuous roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -2468,8 +2480,8 @@ return [
         'enabled'    => true,
         'order'      => 80,
 
-        'meta_title' => 'Custom Software Development in New Jersey, USA – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to startups and enterprises across New Jersey, USA – from Newark and Jersey City to Princeton. Partner with a dedicated remote team to design, build and scale digital products.',
+        'meta_title' => 'Custom Software Development Company in New Jersey – QalbIT',
+        'meta_description' => 'QalbIT builds custom software, portals and mobile apps for New Jersey pharma, finance and logistics companies – Newark, Jersey City, Princeton and beyond.',
         'headline' => 'Custom Software Development in New Jersey, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for New Jersey startups, scale-ups and enterprises.',
 
@@ -2491,9 +2503,9 @@ return [
         ],
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company for New Jersey Businesses',
-            'meta_title'       => 'Custom Software Development in New Jersey, USA – QalbIT',
-            'meta_description' => 'QalbIT is a remote-first custom software development company helping New Jersey businesses build SaaS products, web applications and mobile apps with predictable delivery and product thinking.',
+            'h1'               => 'Custom Software Development Company in New Jersey – Newark to Princeton',
+            'meta_title'       => 'Custom Software Development Company in New Jersey – QalbIT',
+            'meta_description' => 'QalbIT builds custom software, portals and mobile apps for New Jersey pharma, finance and logistics companies – Newark, Jersey City, Princeton and beyond.',
             'canonical'        => '/usa/new-jersey/',
             'faq_key'          => 'location_usa_new_jersey',
             'breadcrumbs'      => [
@@ -2514,7 +2526,7 @@ return [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in New Jersey, USA',
-                'title'    => 'Custom Software Development Company for New Jersey Businesses',
+                'title'    => 'Custom Software Development Company in New Jersey – Newark to Princeton',
                 'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that understands the expectations of New Jersey’s research, healthcare and technology ecosystem.',
                 'body'     => 'From early-stage MVPs in the Research Triangle to internal platforms for Charlotte-based teams, QalbIT partners with New Jersey founders and product leaders to design, build and iterate software that supports customers and operations.',
 
@@ -2601,7 +2613,7 @@ return [
                         'key'         => 'api-backend',
                         'label'       => 'API and Backend Engineering',
                         'description' => 'Secure APIs, integrations and background jobs running on modern PHP and Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -2613,7 +2625,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'A stable remote squad that works like an extension of your New Jersey product and engineering team.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -2731,7 +2743,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team (PM, designers, engineers) acting as an extension of your New Jersey product organisation.',
                         'best_for'    => 'Scale-ups and enterprises with a continuous roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -2870,8 +2882,8 @@ return [
         'enabled'    => true,
         'order'      => 90,
 
-        'meta_title' => 'Custom Software Development in Michigan, USA – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to startups and enterprises across Michigan, USA – from Detroit and Ann Arbor to Grand Rapids. Partner with a dedicated remote team to design, build and scale digital products.',
+        'meta_title' => 'Custom Software Development Company in Michigan – QalbIT',
+        'meta_description' => 'Custom software for Michigan’s automotive suppliers, manufacturers and startups in Detroit, Grand Rapids and Ann Arbor – built by a dedicated remote team.',
         'headline' => 'Custom Software Development in Michigan, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Michigan startups, scale-ups and enterprises.',
 
@@ -2893,9 +2905,9 @@ return [
         ],
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company for Michigan Businesses',
-            'meta_title'       => 'Custom Software Development in Michigan, USA – QalbIT',
-            'meta_description' => 'QalbIT is a remote-first custom software development company helping Michigan businesses build SaaS products, web applications and mobile apps with predictable delivery and product thinking.',
+            'h1'               => 'Custom Software Development for Michigan – Detroit, Grand Rapids & Ann Arbor',
+            'meta_title'       => 'Custom Software Development Company in Michigan – QalbIT',
+            'meta_description' => 'Custom software for Michigan’s automotive suppliers, manufacturers and startups in Detroit, Grand Rapids and Ann Arbor – built by a dedicated remote team.',
             'canonical'        => '/usa/michigan/',
             'faq_key'          => 'location_usa_michigan',
             'breadcrumbs'      => [
@@ -2916,7 +2928,7 @@ return [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in Michigan, USA',
-                'title'    => 'Custom Software Development Company for Michigan Businesses',
+                'title'    => 'Custom Software Development for Michigan – Detroit, Grand Rapids & Ann Arbor',
                 'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that understands the expectations of Michigan’s research, healthcare and technology ecosystem.',
                 'body'     => 'From early-stage MVPs in the Research Triangle to internal platforms for Charlotte-based teams, QalbIT partners with Michigan founders and product leaders to design, build and iterate software that supports customers and operations.',
 
@@ -3003,7 +3015,7 @@ return [
                         'key'         => 'api-backend',
                         'label'       => 'API and Backend Engineering',
                         'description' => 'Secure APIs, integrations and background jobs running on modern PHP and Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -3015,7 +3027,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'A stable remote squad that works like an extension of your Michigan product and engineering team.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -3133,7 +3145,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team (PM, designers, engineers) acting as an extension of your Michigan product organisation.',
                         'best_for'    => 'Scale-ups and enterprises with a continuous roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -3272,8 +3284,8 @@ return [
         'enabled'    => true,
         'order'      => 100,
 
-        'meta_title' => 'Custom Software Development in Illinois, USA – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to startups and enterprises across Illinois, USA – with a focus on Chicago and surrounding regions. Partner with a dedicated remote team to design, build and scale digital products.',
+        'meta_title' => 'Custom Software Development Company in Illinois – QalbIT',
+        'meta_description' => 'From Chicago finance and logistics to downstate manufacturers – QalbIT designs and builds custom software, SaaS and mobile apps for Illinois businesses.',
         'headline' => 'Custom Software Development in Illinois, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Illinois startups, scale-ups and enterprises.',
 
@@ -3296,9 +3308,9 @@ return [
 
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company for Illinois Businesses',
-            'meta_title'       => 'Custom Software Development in Illinois, USA – QalbIT',
-            'meta_description' => 'QalbIT is a remote-first custom software development company helping Illinois businesses build SaaS products, web applications and mobile apps with predictable delivery and product thinking.',
+            'h1'               => 'Custom Software Development Company in Illinois – Chicago & Beyond',
+            'meta_title'       => 'Custom Software Development Company in Illinois – QalbIT',
+            'meta_description' => 'From Chicago finance and logistics to downstate manufacturers – QalbIT designs and builds custom software, SaaS and mobile apps for Illinois businesses.',
             'canonical'        => '/usa/illinois/',
             'faq_key'          => 'location_usa_illinois',
             'breadcrumbs'      => [
@@ -3319,9 +3331,9 @@ return [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in Illinois, USA',
-                'title'    => 'Custom Software Development Company for Illinois Businesses',
-                'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that understands the expectations of Illinois’s research, healthcare and technology ecosystem.',
-                'body'     => 'From early-stage MVPs in the Research Triangle to internal platforms for Charlotte-based teams, QalbIT partners with Illinois founders and product leaders to design, build and iterate software that supports customers and operations.',
+                'title'    => 'Custom Software Development Company in Illinois – Chicago & Beyond',
+                'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that understands the pace of Chicago finance, logistics and technology businesses.',
+                'body'     => 'From early-stage MVPs in Chicago’s startup scene to internal platforms for logistics operators and downstate manufacturers, QalbIT partners with Illinois founders and product leaders to design, build and iterate software that supports customers and operations.',
 
                 'primary_cta' => [
                     'label' => 'Schedule a discovery call',
@@ -3352,25 +3364,25 @@ return [
                 'id'      => 'location-about',
                 'section' => 'about',
                 'eyebrow' => 'About QalbIT',
-                'title'   => 'A remote custom software partner for Illinois startups and enterprises',
-                'intro'   => 'QalbIT is a product-driven engineering studio working with Illinois founders, CTOs and business leaders to plan, build and maintain digital products. The focus is on long-term partnership instead of short, transactional projects.',
+                'title'   => 'A software partner that keeps pace with Chicago business',
+                'intro'   => 'Illinois runs on freight, finance, food and manufacturing – industries where software failures cost real money by the hour. QalbIT works with Chicago and downstate companies as a long-term engineering partner, delivering the reliability those operations demand at rates far below Loop-agency quotes.',
 
                 'highlights' => [
                     [
-                        'label'       => '12+ years building products',
-                        'description' => 'Experience shipping complex SaaS, marketplaces, internal tools and ERP-style systems across multiple industries.',
+                        'label'       => 'Operations-critical experience',
+                        'description' => 'Scheduling, dispatch, inventory and booking systems – the kind of always-on software Illinois logistics and services firms depend on.',
                     ],
                     [
-                        'label'       => 'US East Coast friendly collaboration',
-                        'description' => 'Overlap with Eastern time for planning, reviews and critical releases, supported by structured rituals and clear written communication.',
+                        'label'       => 'Central Time collaboration',
+                        'description' => 'Working hours overlap with CT for stand-ups, reviews and go-lives; structured async updates cover the rest of the day.',
                     ],
                     [
-                        'label'       => 'Full-stack product teams',
-                        'description' => 'Design, frontend, backend, mobile and QA aligned to your roadmap rather than isolated freelancers.',
+                        'label'       => 'Fits Midwest budgets',
+                        'description' => 'Senior engineering at 50–70% below typical Chicago agency rates, with fixed-scope phases so budgets stay predictable.',
                     ],
                     [
                         'label'       => 'Security and compliance aware',
-                        'description' => 'Secure architectures, role-based access and stable deployment pipelines from day one.',
+                        'description' => 'Secure architectures, role-based access and audit trails ready for finance-adjacent and regulated Illinois work.',
                     ],
                 ],
             ],
@@ -3381,32 +3393,44 @@ return [
                 'section' => 'services',
                 'eyebrow' => 'Services',
                 'title'   => 'Custom software development services for Illinois businesses',
-                'intro'   => 'Whether launching a new product, modernising a legacy system or scaling an existing platform, QalbIT brings architecture, engineering and product thinking tailored for Illinois teams.',
+                'intro'   => 'Whether you move freight through Chicagoland, run a professional services firm in the Loop or manufacture downstate, QalbIT brings architecture, engineering and product thinking tailored to Illinois teams.',
 
                 'items' => [
                     [
                         'key'         => 'custom-software',
                         'label'       => 'Custom Software Development',
-                        'description' => 'End-to-end web application development tailored to specific workflows, roles and security requirements.',
+                        'description' => 'Dispatch boards, scheduling, client portals and back-office systems built around how your Illinois operation actually works.',
                         'url'         => '/services/custom-software-development/',
                     ],
                     [
+                        'key'         => 'crm-development',
+                        'label'       => 'CRM Development',
+                        'description' => 'Custom CRMs for Illinois sales and account teams – pipelines, quoting and renewals without Salesforce-scale licence bills.',
+                        'url'         => '/services/crm-development/',
+                    ],
+                    [
+                        'key'         => 'erp-development',
+                        'label'       => 'ERP Development',
+                        'description' => 'Modular ERPs for manufacturers and distributors – inventory, purchasing, production and finance reconciled in one system.',
+                        'url'         => '/services/erp-development/',
+                    ],
+                    [
                         'key'         => 'saas-mvp',
-                        'label'       => 'SaaS and MVP Development',
-                        'description' => 'Design and deliver investor-ready MVPs and SaaS platforms, with a focus on validating ideas quickly.',
-                        'url'         => '/start-up-mvp/',
+                        'label'       => 'MVP and SaaS Development',
+                        'description' => 'Investor-ready MVPs for Chicago startups – scoped, designed and launched in 6–10 weeks.',
+                        'url'         => '/services/mvp-development/',
                     ],
                     [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
-                        'description' => 'Flutter and cross-platform mobile apps integrated with existing systems and analytics.',
+                        'description' => 'Flutter apps for drivers, field teams and customers – integrated with dispatch, tracking and payment systems.',
                         'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
-                        'label'       => 'API and Backend Engineering',
-                        'description' => 'Secure APIs, integrations and background jobs running on modern PHP and Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'label'       => 'Backend and API Engineering',
+                        'description' => 'Secure APIs, EDI-style integrations and background jobs connecting carriers, warehouses and accounting tools.',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -3417,8 +3441,8 @@ return [
                     [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
-                        'description' => 'A stable remote squad that works like an extension of your Illinois product and engineering team.',
-                        'url'         => '/engagement-models/',
+                        'description' => 'A stable remote squad working Central-friendly hours as an extension of your Illinois team.',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -3429,23 +3453,23 @@ return [
                 'section' => 'why',
                 'eyebrow' => 'Why QalbIT',
                 'title'   => 'Why Illinois teams choose QalbIT as their custom software partner',
-                'intro'   => 'Illinois organisations span technology, healthcare, education, logistics and professional services. QalbIT is designed to support this mix with structured delivery and senior oversight.',
+                'intro'   => 'From Chicago logistics and finance to downstate manufacturing and food processing, Illinois businesses need dependable delivery without Loop-agency overhead. QalbIT is structured for exactly that.',
 
                 'reasons' => [
                     [
-                        'label'       => 'Remote, but in sync with Eastern time',
-                        'description' => 'Overlap with ET working hours for planning, reviews and critical releases, while using an offshore team to maintain throughput.',
+                        'label'       => 'Remote, but in sync with Central time',
+                        'description' => 'Overlap with CT working hours for planning, reviews and critical releases, while using an offshore team to maintain throughput.',
                         'bullets'     => [
                             'Regular stand-ups and demos in Illinois friendly hours.',
                             'Asynchronous updates, Loom walkthroughs and clear documentation.',
                         ],
                     ],
                     [
-                        'label'       => 'Product mindset, not just billable hours',
-                        'description' => 'Focus on outcomes, activation metrics and technical debt instead of only closing tickets.',
+                        'label'       => 'Senior quality at 50–70% less',
+                        'description' => 'Comparable scope from a Chicago agency typically costs 2–3× more. Our senior India-based team delivers the same outcome without recruitment overhead.',
                         'bullets'     => [
-                            'Support for scoping, sequencing and launch strategy.',
-                            'Balance speed with long-term maintainability.',
+                            'Fixed-scope phases with budgets agreed before work starts.',
+                            'No competing for scarce Chicago engineering talent.',
                         ],
                     ],
                     [
@@ -3536,7 +3560,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team (PM, designers, engineers) acting as an extension of your Illinois product organisation.',
                         'best_for'    => 'Scale-ups and enterprises with a continuous roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -3675,8 +3699,8 @@ return [
         'enabled'    => true,
         'order'      => 110,
 
-        'meta_title' => 'Custom Software Development in Georgia, USA – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to startups and enterprises across Georgia, USA – with a focus on Atlanta and key logistics and fintech hubs. Partner with a dedicated remote team to design, build and scale digital products.',
+        'meta_title' => 'Custom Software Development Company in Georgia – QalbIT',
+        'meta_description' => 'Custom software development for Georgia companies – Atlanta fintech and SaaS, Savannah logistics and growing businesses statewide – with senior engineers.',
         'headline' => 'Custom Software Development in Georgia, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Georgia startups, scale-ups and enterprises.',
 
@@ -3699,9 +3723,9 @@ return [
 
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company for Georgia Businesses',
-            'meta_title'       => 'Custom Software Development in Georgia, USA – QalbIT',
-            'meta_description' => 'QalbIT is a remote-first custom software development company helping Georgia businesses build SaaS products, web applications and mobile apps with predictable delivery and product thinking.',
+            'h1'               => 'Custom Software Development Company in Georgia – Atlanta & Statewide',
+            'meta_title'       => 'Custom Software Development Company in Georgia – QalbIT',
+            'meta_description' => 'Custom software development for Georgia companies – Atlanta fintech and SaaS, Savannah logistics and growing businesses statewide – with senior engineers.',
             'canonical'        => '/usa/georgia/',
             'faq_key'          => 'location_usa_georgia',
             'breadcrumbs'      => [
@@ -3722,7 +3746,7 @@ return [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in Georgia, USA',
-                'title'    => 'Custom Software Development Company for Georgia Businesses',
+                'title'    => 'Custom Software Development Company in Georgia – Atlanta & Statewide',
                 'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that understands the expectations of Georgia’s research, healthcare and technology ecosystem.',
                 'body'     => 'From early-stage MVPs in the Research Triangle to internal platforms for Charlotte-based teams, QalbIT partners with Georgia founders and product leaders to design, build and iterate software that supports customers and operations.',
 
@@ -3809,7 +3833,7 @@ return [
                         'key'         => 'api-backend',
                         'label'       => 'API and Backend Engineering',
                         'description' => 'Secure APIs, integrations and background jobs running on modern PHP and Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -3821,7 +3845,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'A stable remote squad that works like an extension of your Georgia product and engineering team.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -3939,7 +3963,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team (PM, designers, engineers) acting as an extension of your Georgia product organisation.',
                         'best_for'    => 'Scale-ups and enterprises with a continuous roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -4080,8 +4104,8 @@ return [
         'order'      => 10,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development in New York, USA – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to startups and enterprises across New York, USA. Partner with a dedicated remote team to design, build and scale your digital products.',
+        'meta_title' => 'Custom Software Development Company in New York – QalbIT',
+        'meta_description' => 'QalbIT builds custom software, SaaS platforms and mobile apps for New York businesses – NYC startups and finance to Buffalo and Rochester firms upstate.',
         'headline' => 'Custom Software Development in New York, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for New York startups, scale-ups and enterprises.',
 
@@ -4105,9 +4129,9 @@ return [
         ],
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company for New York Businesses',
-            'meta_title'       => 'Custom Software Development in New York, USA – QalbIT',
-            'meta_description' => 'QalbIT is a remote-first custom software development company helping New York businesses build SaaS products, web applications and mobile apps with predictable delivery and product thinking.',
+            'h1'               => 'Custom Software Development Company in New York – NYC to Upstate',
+            'meta_title'       => 'Custom Software Development Company in New York – QalbIT',
+            'meta_description' => 'QalbIT builds custom software, SaaS platforms and mobile apps for New York businesses – NYC startups and finance to Buffalo and Rochester firms upstate.',
             'canonical'        => '/usa/newyork/',
             'faq_key'          => 'location_usa_new_york',
             'breadcrumbs'      => [
@@ -4134,7 +4158,7 @@ return [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in New York, USA',
-                'title'    => 'Custom Software Development Company for New York Businesses',
+                'title'    => 'Custom Software Development Company in New York – NYC to Upstate',
                 'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that understands New York’s pace and expectations.',
                 'body'     => 'From early-stage MVPs to enterprise modernization, QalbIT partners with New York founders and product leaders to design, build and iterate software that moves the needle for your customers and stakeholders.',
 
@@ -4221,7 +4245,7 @@ return [
                         'key'         => 'api-backend',
                         'label'       => 'API & Backend Engineering',
                         'description' => 'Secure APIs, integrations and background jobs running on modern PHP/Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -4233,7 +4257,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'Scale with a stable remote squad that works like an extension of your New York product and engineering team.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -4351,7 +4375,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team (PM, designers, engineers) that works as an extension of your New York product organisation.',
                         'best_for'    => 'Scale-ups and enterprises with a continuous roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -4492,8 +4516,8 @@ return [
         'order'      => 120,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development in Florida, USA – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to startups and enterprises across Florida, USA – from Miami and Orlando to Tampa and Jacksonville. Partner with a dedicated remote team to design, build and scale your digital products.',
+        'meta_title' => 'Custom Software Development Company in Florida – QalbIT',
+        'meta_description' => 'Custom software, portals and mobile apps for Florida businesses – Miami startups, Orlando and Tampa services, real estate and healthcare companies.',
         'headline' => 'Custom Software Development in Florida, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Florida startups, scale-ups and enterprises.',
 
@@ -4516,9 +4540,9 @@ return [
         ],
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company for Florida Businesses',
-            'meta_title'       => 'Custom Software Development in Florida, USA – QalbIT',
-            'meta_description' => 'QalbIT is a remote-first custom software development company helping Florida businesses build SaaS products, web applications and mobile apps with predictable delivery and product thinking.',
+            'h1'               => 'Custom Software Development in Florida – Miami, Orlando & Tampa',
+            'meta_title'       => 'Custom Software Development Company in Florida – QalbIT',
+            'meta_description' => 'Custom software, portals and mobile apps for Florida businesses – Miami startups, Orlando and Tampa services, real estate and healthcare companies.',
             'canonical'        => '/usa/florida/',
             'faq_key'          => 'location_usa_florida',
             'breadcrumbs'      => [
@@ -4540,7 +4564,7 @@ return [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in Florida, USA',
-                'title'    => 'Custom Software Development Company for Florida Businesses',
+                'title'    => 'Custom Software Development in Florida – Miami, Orlando & Tampa',
                 'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that understands the expectations of Florida’s technology, tourism, healthcare and logistics companies.',
                 'body'     => 'From early-stage MVPs in Miami and Orlando to internal platforms for Tampa and Jacksonville-based teams, QalbIT partners with Florida founders and product leaders to design, build and iterate software that supports customers and operations.',
 
@@ -4627,7 +4651,7 @@ return [
                         'key'         => 'api-backend',
                         'label'       => 'API & Backend Engineering',
                         'description' => 'Secure APIs, integrations and background jobs running on modern PHP and Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -4639,7 +4663,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'A stable remote squad that works like an extension of your Florida product and engineering team.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -4757,7 +4781,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team (PM, designers, engineers) acting as an extension of your Florida product organisation.',
                         'best_for'    => 'Scale-ups and enterprises with a continuous roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -4898,8 +4922,8 @@ return [
         'order'      => 30,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development in California, USA – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to startups and enterprises across California, USA – from San Francisco and the Bay Area to Los Angeles and San Diego. Partner with a dedicated remote team to design, build and scale your digital products.',
+        'meta_title' => 'Custom Software Development Company in California – QalbIT',
+        'meta_description' => 'QalbIT partners with California startups and SMEs – Bay Area SaaS, Los Angeles media and San Diego tech – to build custom software and mobile apps.',
         'headline' => 'Custom Software Development in California, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for California startups, scale-ups and enterprises.',
 
@@ -4923,9 +4947,9 @@ return [
 
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company for California Businesses',
-            'meta_title'       => 'Custom Software Development in California, USA – QalbIT',
-            'meta_description' => 'QalbIT is a remote-first custom software development company helping California businesses build SaaS products, web applications and mobile apps with predictable delivery and product thinking.',
+            'h1'               => 'Custom Software Development Company in California – Bay Area to San Diego',
+            'meta_title'       => 'Custom Software Development Company in California – QalbIT',
+            'meta_description' => 'QalbIT partners with California startups and SMEs – Bay Area SaaS, Los Angeles media and San Diego tech – to build custom software and mobile apps.',
             'canonical'        => '/usa/california/',
             'faq_key'          => 'location_usa_california',
             'breadcrumbs'      => [
@@ -4947,7 +4971,7 @@ return [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in California, USA',
-                'title'    => 'Custom Software Development Company for California Businesses',
+                'title'    => 'Custom Software Development Company in California – Bay Area to San Diego',
                 'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that understands the pace and expectations of California’s startup and enterprise ecosystem.',
                 'body'     => 'From venture-backed SaaS products in the Bay Area to internal platforms for Los Angeles and San Diego-based teams, QalbIT partners with California founders and product leaders to design, build and iterate software that supports aggressive roadmaps and scale.',
 
@@ -5034,7 +5058,7 @@ return [
                         'key'         => 'api-backend',
                         'label'       => 'API & Backend Engineering',
                         'description' => 'Secure APIs, integrations and background jobs running on modern PHP and Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -5046,7 +5070,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'A stable remote squad that works like an extension of your California product and engineering team.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -5164,7 +5188,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team (PM, designers, engineers) acting as an extension of your California product organisation.',
                         'best_for'    => 'Startups and enterprises with an ongoing roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -5305,8 +5329,8 @@ return [
         'order'      => 130,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development in Arizona, USA – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to startups and enterprises across Arizona, USA – from Phoenix and Scottsdale to Tempe and Tucson. Partner with a dedicated remote team to design, build and scale your digital products.',
+        'meta_title' => 'Custom Software Development Company in Arizona – QalbIT',
+        'meta_description' => 'Custom software development for Arizona businesses – Phoenix and Scottsdale real estate, healthcare and services firms – with a senior remote team.',
         'headline' => 'Custom Software Development in Arizona, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Arizona startups, scale-ups and enterprises.',
 
@@ -5330,9 +5354,9 @@ return [
 
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company for Arizona Businesses',
-            'meta_title'       => 'Custom Software Development in Arizona, USA – QalbIT',
-            'meta_description' => 'QalbIT is a remote-first custom software development company helping Arizona businesses build SaaS products, web applications and mobile apps with predictable delivery and product thinking.',
+            'h1'               => 'Custom Software Development Company in Arizona – Phoenix & Scottsdale',
+            'meta_title'       => 'Custom Software Development Company in Arizona – QalbIT',
+            'meta_description' => 'Custom software development for Arizona businesses – Phoenix and Scottsdale real estate, healthcare and services firms – with a senior remote team.',
             'canonical'        => '/usa/arizona/',
             'faq_key'          => 'location_usa_arizona',
             'breadcrumbs'      => [
@@ -5354,7 +5378,7 @@ return [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in Arizona, USA',
-                'title'    => 'Custom Software Development Company for Arizona Businesses',
+                'title'    => 'Custom Software Development Company in Arizona – Phoenix & Scottsdale',
                 'subtitle' => 'Build and scale SaaS, web and mobile products with a senior remote team that understands the needs of Arizona’s technology, logistics and financial services ecosystem.',
                 'body'     => 'From SaaS products in Phoenix and Scottsdale to internal tools for Tempe and Tucson-based teams, QalbIT partners with Arizona founders and product leaders to design, build and iterate software that supports customers and internal operations.',
 
@@ -5387,25 +5411,25 @@ return [
                 'id'      => 'location-about',
                 'section' => 'about',
                 'eyebrow' => 'About QalbIT',
-                'title'   => 'A remote custom software partner for Arizona startups and enterprises',
-                'intro'   => 'QalbIT is a product-driven engineering studio working with Arizona founders, CTOs and business leaders to plan, build and maintain digital products as a long-term technology partner.',
+                'title'   => 'A software partner for Arizona’s fastest-growing metro',
+                'intro'   => 'Metro Phoenix keeps adding people, homes and businesses – and the real estate, healthcare, home services and logistics companies riding that growth outgrow spreadsheets fast. QalbIT partners with Arizona founders and operators as a long-term engineering team, at rates far below Phoenix and Scottsdale agency quotes.',
 
                 'highlights' => [
                     [
-                        'label'       => '12+ years building products',
-                        'description' => 'Experience shipping complex SaaS, marketplaces, internal tools and ERP-style systems for global customers.',
+                        'label'       => 'Built for growth businesses',
+                        'description' => 'Property management platforms, booking and dispatch systems, patient portals – the software Arizona’s growth industries actually run on.',
                     ],
                     [
-                        'label'       => 'US time zone overlap',
-                        'description' => 'Overlap with Mountain and Pacific time for planning, reviews and critical releases, supported by structured rituals and clear written communication.',
+                        'label'       => 'Arizona-friendly hours, year-round',
+                        'description' => 'Arizona skips daylight saving; our overlap windows stay consistent all year for stand-ups, reviews and releases.',
                     ],
                     [
-                        'label'       => 'Full-stack product teams',
-                        'description' => 'Design, frontend, backend, mobile and QA aligned to your roadmap instead of isolated freelancers.',
+                        'label'       => 'Fits Arizona budgets',
+                        'description' => 'Senior engineering at 50–70% below typical Phoenix and Scottsdale agency rates, with fixed-scope phases and no hiring overhead.',
                     ],
                     [
                         'label'       => 'Security and compliance aware',
-                        'description' => 'Secure architectures, role-based access and stable deployment pipelines from day one.',
+                        'description' => 'HIPAA-conscious architectures for healthcare work, role-based access and stable deployment pipelines from day one.',
                     ],
                 ],
             ],
@@ -5416,32 +5440,44 @@ return [
                 'section' => 'services',
                 'eyebrow' => 'Services',
                 'title'   => 'Custom software development services for Arizona businesses',
-                'intro'   => 'Whether launching a new SaaS product, building tools for distributed teams or modernising legacy platforms, QalbIT brings architecture, engineering and product thinking tailored for Arizona organisations.',
+                'intro'   => 'Whether you run properties in Phoenix, a clinic network in Tucson or a home-services fleet across the Valley, QalbIT brings architecture, engineering and product thinking tailored to Arizona organisations.',
 
                 'items' => [
                     [
                         'key'         => 'custom-software',
                         'label'       => 'Custom Software Development',
-                        'description' => 'End-to-end web application development tailored to specific workflows, roles and security requirements.',
+                        'description' => 'End-to-end web applications for property management, dispatch, scheduling and back-office workflows Arizona companies run on.',
                         'url'         => '/services/custom-software-development/',
                     ],
                     [
+                        'key'         => 'crm-development',
+                        'label'       => 'CRM Development',
+                        'description' => 'Custom CRMs for Arizona real estate, home services and healthcare teams – leads, follow-ups and customer 360 views without per-seat licences.',
+                        'url'         => '/services/crm-development/',
+                    ],
+                    [
+                        'key'         => 'erp-development',
+                        'label'       => 'ERP Development',
+                        'description' => 'Modular ERPs for distributors and growing operators – inventory, purchasing, jobs and finance in one system instead of five spreadsheets.',
+                        'url'         => '/services/erp-development/',
+                    ],
+                    [
                         'key'         => 'saas-mvp',
-                        'label'       => 'SaaS & MVP Development',
-                        'description' => 'Design and deliver investor-ready MVPs and SaaS platforms with a focus on learning quickly from early users.',
-                        'url'         => '/start-up-mvp/',
+                        'label'       => 'MVP & SaaS Development',
+                        'description' => 'Investor-ready MVPs for Phoenix, Tempe and Scottsdale startups – scoped, designed and launched in 6–10 weeks.',
+                        'url'         => '/services/mvp-development/',
                     ],
                     [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
-                        'description' => 'Flutter and cross-platform mobile apps integrated with your existing systems and analytics.',
+                        'description' => 'Flutter apps for field technicians, agents and customers – built for crews that spend the day on the road, not at a desk.',
                         'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
-                        'label'       => 'API & Backend Engineering',
-                        'description' => 'Secure APIs, integrations and background jobs running on modern PHP and Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'label'       => 'Backend & API Engineering',
+                        'description' => 'Secure APIs, integrations and background jobs connecting MLS feeds, payment providers and the tools you already use.',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -5453,7 +5489,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'A stable remote squad that works like an extension of your Arizona product and engineering team.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -5464,23 +5500,23 @@ return [
                 'section' => 'why',
                 'eyebrow' => 'Why QalbIT',
                 'title'   => 'Why Arizona teams choose QalbIT as their custom software partner',
-                'intro'   => 'Arizona organisations operate in technology, logistics, manufacturing, solar/energy and financial services. QalbIT is structured to support this mix with clear delivery practices and senior oversight.',
+                'intro'   => 'From Phoenix real estate and home services to Tucson healthcare and statewide logistics, Arizona’s growth businesses need software that keeps pace without big-agency pricing. QalbIT is structured for exactly that.',
 
                 'reasons' => [
                     [
-                        'label'       => 'Remote, but in sync with Mountain time',
-                        'description' => 'Overlap with MT working hours for planning, reviews and critical releases, while leveraging an offshore team to maintain throughput.',
+                        'label'       => 'Remote, but in sync with Arizona time',
+                        'description' => 'Consistent overlap with Arizona working hours all year – no daylight-saving reshuffles – for planning, reviews and critical releases.',
                         'bullets'     => [
                             'Regular stand-ups and demos in Arizona-friendly hours.',
                             'Asynchronous updates, Loom walkthroughs and clear documentation.',
                         ],
                     ],
                     [
-                        'label'       => 'Product mindset, not just billable hours',
-                        'description' => 'Focus on outcomes, activation metrics and technical debt instead of simply closing tickets.',
+                        'label'       => 'Senior quality at 50–70% less',
+                        'description' => 'Comparable scope from a Phoenix or Scottsdale agency typically costs 2–3× more. Our senior India-based team delivers the same outcome without recruitment overhead.',
                         'bullets'     => [
-                            'Support with scoping, sequencing and launch strategy.',
-                            'Balance between shipping speed and long-term maintainability.',
+                            'Fixed-scope phases with budgets agreed before work starts.',
+                            'No competing for scarce Valley engineering talent.',
                         ],
                     ],
                     [
@@ -5571,7 +5607,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team (PM, designers, engineers) acting as an extension of your Arizona product organisation.',
                         'best_for'    => 'Scale-ups and enterprises with a continuous roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -5714,24 +5750,25 @@ return [
         'order'      => 210,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development in Riyadh, Saudi Arabia (KSA) – QalbIT',
-        'meta_description' => 'QalbIT provides custom software, web and mobile app development services to companies in Riyadh, Saudi Arabia (KSA). Partner with a remote custom software development team for SaaS products, internal tools and enterprise platforms.',
-        'headline' => 'Custom Software Development in Riyadh, Saudi Arabia',
-        'short_description' => 'End to end web, mobile and cloud solutions for Riyadh startups, enterprises and government backed initiatives.',
+        'meta_title' => 'Custom Software Development Company in Saudi Arabia | QalbIT',
+        'meta_description' => 'QalbIT is a custom software development company serving Riyadh, Jeddah and all of Saudi Arabia – custom software, SaaS, MVPs, mobile apps and custom backends.',
+        'headline' => 'Custom Software Development Company in Saudi Arabia',
+        'short_description' => 'End to end custom software, web, mobile and backend solutions for startups, enterprises and government backed initiatives in Riyadh, Jeddah and across Saudi Arabia.',
 
         // Optional – used if you still need it somewhere else
         'focus_services' => [
             'Custom Software Development',
-            'Web Development',
+            'CRM Development',
+            'ERP Development',
+            'MVP & SaaS Development',
             'Mobile App Development',
-            'SaaS Product Development',
-            'Cloud-Based Solutions',
+            'Backend & API Development',
         ],
 
         // Normalised SEO block for the new template
         'faq_key'      => 'faq_location_saudi_arabia_riyadh',
-        'faq_title'    => 'Frequently asked questions from Riyadh teams',
-        'faq_subtitle' => 'Answers to common questions from founders, product leaders and IT heads in Riyadh and across Saudi Arabia. You can always reach out if you do not see your question here.',
+        'faq_title'    => 'Frequently asked questions from teams in Saudi Arabia',
+        'faq_subtitle' => 'Answers to common questions from founders, product leaders and IT heads in Riyadh, Jeddah and across Saudi Arabia. You can always reach out if you do not see your question here.',
         'faq_bullets' => [
             '✓ Experience working with GCC-based organisations and their expectations.',
             '✓ Architectures designed with security, access control and audit in mind.',
@@ -5740,9 +5777,9 @@ return [
 
 
         'seo' => [
-            'h1'               => 'Custom Software Development Company in Riyadh, Saudi Arabia (KSA)',
-            'meta_title'       => 'Custom Software Development in Riyadh, Saudi Arabia (KSA) – QalbIT',
-            'meta_description' => 'QalbIT is a remote first custom software development company for Riyadh, Saudi Arabia (KSA). We build custom software, SaaS platforms and mobile apps for companies that search for software development companies and services in Riyadh and across the Kingdom.',
+            'h1'               => 'Custom Software Development Company in Saudi Arabia (Riyadh, Jeddah & KSA)',
+            'meta_title'       => 'Custom Software Development Company in Saudi Arabia | QalbIT',
+            'meta_description' => 'QalbIT is a custom software development company serving Riyadh, Jeddah and all of Saudi Arabia – custom software, SaaS, MVPs, mobile apps and custom backends.',
             'canonical'        => '/saudi-arabia/riyadh/',
             'faq_key'          => 'location_saudi_arabia_riyadh',
             'breadcrumbs'      => [
@@ -5753,9 +5790,9 @@ return [
 
         // High-level summary (optional convenience for cards, previews, etc.)
         'summary' => [
-            'eyebrow' => 'Custom Software Development in Riyadh, Saudi Arabia',
-            'title'   => 'Remote custom software partner for Riyadh and Saudi Arabia businesses',
-            'intro'   => 'QalbIT helps Riyadh based product teams and founders design, build and scale SaaS products, internal tools and mobile apps with a dedicated engineering squad that understands KSA timelines, approvals and delivery expectations.',
+            'eyebrow' => 'Custom Software Development in Saudi Arabia',
+            'title'   => 'Remote custom software partner for Riyadh, Jeddah and Saudi Arabia businesses',
+            'intro'   => 'QalbIT helps product teams and founders across Saudi Arabia design, build and scale SaaS products, custom CRMs and ERPs, internal tools and mobile apps with a dedicated engineering squad that understands KSA timelines, approvals and delivery expectations.',
         ],
 
         // -------------------------------------------------
@@ -5768,10 +5805,10 @@ return [
             'hero' => [
                 'id'       => 'location-hero',
                 'section'  => 'hero',
-                'eyebrow'  => 'Custom Software Development in Riyadh, Saudi Arabia',
-                'title'    => 'Custom Software Development Company in Riyadh, Saudi Arabia (KSA)',
-                'subtitle' => 'Build and scale custom software, SaaS and mobile apps with a remote team that understands how Riyadh and KSA organisations run projects.',
-                'body'     => 'From first product ideas to enterprise modernisation, QalbIT works with Riyadh based founders, IT leaders and business owners to design, build and iterate software that supports customers, internal teams and Vision 2030 goals.',
+                'eyebrow'  => 'Custom Software Development in Saudi Arabia',
+                'title'    => 'Custom Software Development Company in Saudi Arabia (Riyadh, Jeddah & KSA)',
+                'subtitle' => 'Build and scale custom software, SaaS, custom backends and mobile apps with an outsourced team that understands how Riyadh, Jeddah and KSA organisations run projects.',
+                'body'     => 'From first product ideas to enterprise modernisation, QalbIT works with founders, IT leaders and business owners in Riyadh, Jeddah, Khobar and across Saudi Arabia to design, build and iterate software that supports customers, internal teams and Vision 2030 goals.',
 
                 'primary_cta' => [
                     'label' => 'Schedule a discovery call',
@@ -5802,8 +5839,8 @@ return [
                 'id'      => 'location-about',
                 'section' => 'about',
                 'eyebrow' => 'About QalbIT',
-                'title'   => 'A remote custom software partner for Riyadh startups and enterprises',
-                'intro'   => 'QalbIT is a product driven engineering studio that supports Riyadh based startups, family businesses and enterprises. The goal is to act as a long term product and engineering arm rather than a short term outsourcing vendor.',
+                'title'   => 'An outsourced custom software partner for startups and enterprises across Saudi Arabia',
+                'intro'   => 'QalbIT is a product driven engineering studio that supports startups, family businesses and enterprises in Riyadh, Jeddah, Khobar and the wider Kingdom. The goal is to act as a long term product and engineering arm rather than a short term outsourcing vendor.',
 
                 'highlights' => [
                     [
@@ -5830,45 +5867,57 @@ return [
                 'id'      => 'location-services',
                 'section' => 'services',
                 'eyebrow' => 'Services',
-                'title'   => 'Custom software development services for Riyadh and Saudi Arabia',
-                'intro'   => 'Whether you need a new custom software product, a SaaS platform, a mobile app or an internal business tool, QalbIT provides custom software development services for companies in Riyadh and across Saudi Arabia.',
+                'title'   => 'Custom software development services for Riyadh, Jeddah and Saudi Arabia',
+                'intro'   => 'Whether you need a new custom software product, a SaaS platform, a custom CRM or ERP, a mobile app or a secure backend, QalbIT provides custom software development services for companies in Riyadh, Jeddah and across Saudi Arabia.',
 
                 'items' => [
                     [
                         'key'         => 'custom-software',
                         'label'       => 'Custom Software Development',
-                        'description' => 'End to end web application development shaped around your workflows, roles and approval processes in Riyadh.',
+                        'description' => 'End to end web application development shaped around your workflows, roles and approval processes in Saudi Arabia.',
                         'url'         => '/services/custom-software-development/',
+                    ],
+                    [
+                        'key'         => 'crm-development',
+                        'label'       => 'CRM Development',
+                        'description' => 'Custom CRM software built around your sales, service and operations teams in KSA – with Arabic-friendly UX and integrations.',
+                        'url'         => '/services/crm-development/',
+                    ],
+                    [
+                        'key'         => 'erp-development',
+                        'label'       => 'ERP Development',
+                        'description' => 'Modular ERP systems for inventory, purchase, production and finance, built for trading, manufacturing and services businesses in Saudi Arabia.',
+                        'url'         => '/services/erp-development/',
                     ],
                     [
                         'key'         => 'saas-mvp',
                         'label'       => 'SaaS and MVP Development',
-                        'description' => 'Design and deliver investor ready MVPs and SaaS products for Saudi Arabia markets with a focus on fast learning and clean architecture.',
-                        'url'         => '/start-up-mvp/',
+                        'description' => 'Design and deliver investor ready MVPs and custom SaaS products for Saudi Arabia markets with fast learning and clean architecture.',
+                        'url'         => '/services/mvp-development/',
                     ],
                     [
                         'key'         => 'mobile-apps',
                         'label'       => 'Mobile App Development',
-                        'description' => 'Flutter and cross platform mobile apps that work well for customers and internal teams in Riyadh and the wider region.',
+                        'description' => 'Flutter and cross platform mobile apps that work well for customers and internal teams in Riyadh, Jeddah and the wider region.',
                         'url'         => '/services/mobile-development/',
                     ],
                     [
                         'key'         => 'api-backend',
-                        'label'       => 'API and Backend Engineering',
-                        'description' => 'Secure APIs, integrations and background jobs running on modern PHP and Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
+                        'label'       => 'Custom Backend Solutions & APIs',
+                        'description' => 'Custom backend solutions for Saudi Arabia companies – secure APIs, integrations and background jobs on modern PHP and Node stacks and cloud infrastructure.',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
                         'label'       => 'Cloud and DevOps',
-                        'description' => 'CI/CD pipelines, environment strategy and observability so releases to users in Riyadh and across KSA stay reliable.',
+                        'description' => 'CI/CD pipelines, environment strategy and observability so releases to users across KSA stay reliable.',
                         'url'         => '/services/cloud-based-solutions/',
                     ],
                     [
                         'key'         => 'dedicated-team',
-                        'label'       => 'Dedicated Product Team',
-                        'description' => 'A stable remote squad that works as an extension of your Riyadh based product and technology organisation.',
-                        'url'         => '/engagement-models/',
+                        'label'       => 'Hire Dedicated Developers',
+                        'description' => 'Hire custom software developers in Saudi Arabia time zones – a stable outsourced squad that works as an extension of your product and technology organisation.',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -5878,8 +5927,8 @@ return [
                 'id'      => 'location-why',
                 'section' => 'why',
                 'eyebrow' => 'Why QalbIT',
-                'title'   => 'Why Riyadh teams choose QalbIT as a custom software partner',
-                'intro'   => 'Riyadh organisations work under tight timelines and high expectations. QalbIT is set up to support that with structured delivery, senior oversight and direct access to decision makers.',
+                'title'   => 'Why Saudi Arabia teams choose QalbIT as a custom software development company',
+                'intro'   => 'Organisations in Riyadh, Jeddah and across KSA work under tight timelines and high expectations. QalbIT is set up to support that with structured, agile delivery, senior oversight and direct access to decision makers.',
 
                 'reasons' => [
                     [
@@ -5986,7 +6035,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross functional team that works as an extension of your Riyadh product and engineering organisation.',
                         'best_for'    => 'Scale ups and enterprises with an ongoing roadmap.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -6090,7 +6139,7 @@ return [
                 'id'      => 'location-final-cta',
                 'section' => 'final_cta',
                 'eyebrow' => 'Start your project',
-                'title'   => 'Discuss your custom software project in Riyadh',
+                'title'   => 'Discuss your custom software project in Riyadh, Jeddah or anywhere in Saudi Arabia',
                 'body'    => 'Share a short brief about your software project, timelines and goals. QalbIT will respond with next steps and a suggested engagement model within one business day.',
 
                 'primary_cta' => [
@@ -6110,7 +6159,7 @@ return [
         ],
     ],
 
-    
+
 
     // -------------------------------------------------
     // Ahmedabad, India
@@ -6129,17 +6178,18 @@ return [
         'order'      => 310,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development in Ahmedabad, India – QalbIT',
-        'meta_description' => 'QalbIT is a custom software development company in Ahmedabad, Gujarat, India. We build custom software, web applications and mobile apps for startups, SMEs and enterprises across India and overseas.',
-        'headline' => 'Custom Software Development in Ahmedabad, India',
-        'short_description' => 'End-to-end web, mobile and cloud solutions for Ahmedabad and Gujarat-based businesses.',
+        'meta_title' => 'Custom Software Development Company in Ahmedabad, India – QalbIT',
+        'meta_description' => 'Custom software development company in Ahmedabad (Makarba) – QalbIT builds custom software, CRMs, ERPs, web applications and mobile apps for SMEs and startups.',
+        'headline' => 'Custom Software Development Company in Ahmedabad, India',
+        'short_description' => 'End-to-end custom software, CRM, ERP, web and mobile solutions for Ahmedabad and Gujarat-based businesses.',
 
         'focus_services' => [
             'Custom Software Development',
-            'Web Development',
+            'CRM Development',
+            'ERP Development',
+            'Web Application Development',
             'Mobile App Development',
-            'SaaS Product Development',
-            'Cloud-Based Solutions',
+            'MVP & SaaS Development',
         ],
 
         // Normalised SEO block
@@ -6154,8 +6204,8 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in Ahmedabad, India',
-            'meta_title'       => 'Custom Software Development in Ahmedabad, India – QalbIT',
-            'meta_description' => 'If you are searching for a custom software development company in Ahmedabad or a software development company near you, QalbIT builds SaaS products, ERPs, web and mobile apps with predictable delivery and clear communication.',
+            'meta_title'       => 'Custom Software Development Company in Ahmedabad, India – QalbIT',
+            'meta_description' => 'Custom software development company in Ahmedabad (Makarba) – QalbIT builds custom software, CRMs, ERPs, web applications and mobile apps for SMEs and startups.',
             'canonical'        => '/india/ahmedabad/',
             'faq_key'          => 'location_india_ahmedabad',
             'breadcrumbs'      => [
@@ -6178,8 +6228,8 @@ return [
                 'section'  => 'hero',
                 'eyebrow'  => 'Custom Software Development in Ahmedabad, India',
                 'title'    => 'Custom Software Development Company in Ahmedabad, India',
-                'subtitle' => 'Build and scale custom software, SaaS and mobile apps with a team that understands how Ahmedabad and Indian businesses operate.',
-                'body'     => 'From manufacturing and engineering to SaaS, trading and services, QalbIT works with Ahmedabad-based founders and leaders to design, build and iterate software that supports growth and operations.',
+                'subtitle' => 'Build and scale custom software, CRMs, ERPs, SaaS and mobile apps with a team that understands how Ahmedabad and Indian businesses operate.',
+                'body'     => 'From manufacturing and engineering to SaaS, trading and services, QalbIT works with Ahmedabad-based founders and leaders from our office in Makarba, Ahmedabad to design, build and iterate software that supports growth and operations.',
 
                 'primary_cta' => [
                     'label' => 'Schedule a discovery call',
@@ -6219,8 +6269,8 @@ return [
                         'description' => 'Experience in SaaS platforms, internal tools, ERPs and customer-facing apps for global and Indian customers.',
                     ],
                     [
-                        'label'       => 'Based in Ahmedabad, working globally',
-                        'description' => 'Core team in Ahmedabad with clients across India, the US, UK and GCC.',
+                        'label'       => 'Based in Makarba, Ahmedabad – working globally',
+                        'description' => 'Our office is at Siddhi Vinayak Towers, Makarba, Ahmedabad, with a core team serving clients across India, the US, UK and GCC.',
                     ],
                     [
                         'label'       => 'Full-stack delivery teams',
@@ -6239,20 +6289,38 @@ return [
                 'section' => 'services',
                 'eyebrow' => 'Services',
                 'title'   => 'Custom software development services for Ahmedabad and India',
-                'intro'   => 'QalbIT provides custom software development services in Ahmedabad for businesses that need stable, long-term engineering support instead of one-off freelancers.',
+                'intro'   => 'QalbIT provides custom software, CRM, ERP, web application and mobile app development services in Ahmedabad for businesses that need stable, long-term engineering support instead of one-off freelancers.',
 
                 'items' => [
                     [
                         'key'         => 'custom-software',
                         'label'       => 'Custom Software Development',
-                        'description' => 'End-to-end web application development tailored to your workflows, branches, warehouses and approval flows.',
+                        'description' => 'End-to-end custom software tailored to your workflows, branches, warehouses and approval flows.',
                         'url'         => '/services/custom-software-development/',
                     ],
                     [
+                        'key'         => 'crm-development',
+                        'label'       => 'CRM Development',
+                        'description' => 'Custom CRMs for sales, service and field teams – replace spreadsheets and per-seat licences with a system built for your process.',
+                        'url'         => '/services/crm-development/',
+                    ],
+                    [
+                        'key'         => 'erp-development',
+                        'label'       => 'ERP Development',
+                        'description' => 'Modular ERPs for inventory, purchase, production and finance – with Tally, Zoho Books and GST/e-invoicing integrations.',
+                        'url'         => '/services/erp-development/',
+                    ],
+                    [
+                        'key'         => 'web-applications',
+                        'label'       => 'Web Application Development',
+                        'description' => 'Portals, dashboards and business-critical web applications built by a web application development company in Ahmedabad.',
+                        'url'         => '/services/custom-web-development/',
+                    ],
+                    [
                         'key'         => 'saas-mvp',
-                        'label'       => 'SaaS & MVP Development',
+                        'label'       => 'MVP & SaaS Development',
                         'description' => 'Design and deliver investor-ready MVPs and SaaS platforms targeting Indian or global customers.',
-                        'url'         => '/start-up-mvp/',
+                        'url'         => '/services/mvp-development/',
                     ],
                     [
                         'key'         => 'mobile-apps',
@@ -6262,21 +6330,15 @@ return [
                     ],
                     [
                         'key'         => 'api-backend',
-                        'label'       => 'API & Backend Engineering',
+                        'label'       => 'Backend & API Development',
                         'description' => 'Secure APIs, integrations and background jobs on modern PHP/Node stacks and cloud infrastructure.',
-                        'url'         => '/services/api-development/',
-                    ],
-                    [
-                        'key'         => 'cloud-devops',
-                        'label'       => 'Cloud & DevOps',
-                        'description' => 'CI/CD pipelines, environment strategy and observability to keep deployments predictable.',
-                        'url'         => '/services/cloud-based-solutions/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
-                        'description' => 'A stable remote squad that works as an extension of your Ahmedabad-based product and IT team.',
-                        'url'         => '/engagement-models/',
+                        'description' => 'A stable squad that works as an extension of your Ahmedabad-based product and IT team.',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -6394,7 +6456,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team that works like an extension of your Ahmedabad product and IT organisation.',
                         'best_for'    => 'Companies with a continuous roadmap and backlog.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -6534,7 +6596,7 @@ return [
         'order'      => 320,
 
         'meta_title' => 'Custom Software Development in Mumbai, India – QalbIT',
-        'meta_description' => 'QalbIT is a custom software development company for businesses in Mumbai, India. We build custom software, web applications and mobile apps for startups, BFSI, media and enterprises.',
+        'meta_description' => 'QalbIT builds custom software, SaaS products and mobile apps for Mumbai businesses – fintech, media and services – with a senior dedicated remote team.',
         'headline' => 'Custom Software Development in Mumbai, India',
         'short_description' => 'Web, mobile and cloud solutions for Mumbai-based startups, SMEs, BFSI and enterprise teams.',
 
@@ -6558,7 +6620,7 @@ return [
         'seo' => [
             'h1'               => 'Custom Software Development Company in Mumbai, India',
             'meta_title'       => 'Custom Software Development in Mumbai, India – QalbIT',
-            'meta_description' => 'Looking for a custom software development company in Mumbai? QalbIT helps Mumbai-based businesses build SaaS products, trading platforms, internal tools and mobile apps with predictable delivery.',
+            'meta_description' => 'QalbIT builds custom software, SaaS products and mobile apps for Mumbai businesses – fintech, media and services – with a senior dedicated remote team.',
             'canonical'        => '/india/mumbai/',
             'faq_key'          => 'location_india_mumbai',
             'breadcrumbs'      => [
@@ -6664,7 +6726,7 @@ return [
                         'key'         => 'api-backend',
                         'label'       => 'API & Backend Engineering',
                         'description' => 'Stable APIs and integrations for core systems, payment gateways and data feeds.',
-                        'url'         => '/services/api-development/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -6676,7 +6738,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'A remote product squad that behaves like an extension of your Mumbai organisation.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -6791,7 +6853,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A cross-functional team that works closely with your Mumbai product organisation.',
                         'best_for'    => 'Startups and enterprises with a steady flow of work.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -7058,7 +7120,7 @@ return [
                         'key'         => 'api-backend',
                         'label'       => 'API & Backend Engineering',
                         'description' => 'Backends and integrations between existing systems, CRMs and ERPs.',
-                        'url'         => '/services/api-development/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -7070,7 +7132,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'A stable remote squad that acts as your extended product and development team.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -7185,7 +7247,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'External product engineering team aligned with your long-term roadmap.',
                         'best_for'    => 'Organisations building or evolving multiple systems.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',
@@ -7321,7 +7383,7 @@ return [
         'enabled'    => true,
         'order'      => 340,
 
-        'meta_title' => 'Custom Software Development in Bangalore (Bengaluru), India – QalbIT',
+        'meta_title' => 'Custom Software Development Company in Bangalore – QalbIT',
         'meta_description' => 'QalbIT is a custom software development company for startups and product companies in Bangalore (Bengaluru), India. We build SaaS products, web apps and mobile apps for global markets.',
         'headline' => 'Custom Software Development in Bangalore (Bengaluru), India',
         'short_description' => 'Product-focused software development for Bangalore SaaS teams, startups and tech-enabled businesses.',
@@ -7345,7 +7407,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in Bangalore (Bengaluru), India',
-            'meta_title'       => 'Custom Software Development in Bangalore (Bengaluru), India – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in Bangalore – QalbIT',
             'meta_description' => 'QalbIT works with Bangalore-based startups and SaaS companies as a product-first engineering partner, building and scaling custom software, web and mobile apps.',
             'canonical'        => '/india/bangalore/',
             'faq_key'          => 'location_india_bangalore',
@@ -7452,7 +7514,7 @@ return [
                         'key'         => 'api-backend',
                         'label'       => 'API & Backend Engineering',
                         'description' => 'APIs, integrations and services designed for scale and reliability.',
-                        'url'         => '/services/api-development/',
+                        'url'         => '/services/backend-development/',
                     ],
                     [
                         'key'         => 'cloud-devops',
@@ -7464,7 +7526,7 @@ return [
                         'key'         => 'dedicated-team',
                         'label'       => 'Dedicated Product Team',
                         'description' => 'Long-term remote squad that behaves like your internal product team.',
-                        'url'         => '/engagement-models/',
+                        'url'         => '/engagement-model/',
                     ],
                 ],
             ],
@@ -7579,7 +7641,7 @@ return [
                         'label'       => 'Dedicated product squad',
                         'description' => 'A long-term remote squad that works hand-in-hand with your core product team.',
                         'best_for'    => 'Startups and SaaS companies with ongoing roadmaps.',
-                        'link'        => '/engagement-models/',
+                        'link'        => '/engagement-model/',
                     ],
                     [
                         'key'         => 'continuous-support',

@@ -54,6 +54,7 @@ $router->get('/career/apply/', [CareerController::class, 'apply']);
 $router->post('/career/apply/', [CareerController::class, 'submit']);
 
 // Hire developers
+$router->get('/hire-developers/', [HireController::class, 'index']);
 $router->get('/hire-nodejs-developers/', [HireController::class, 'nodejs']);
 $router->get('/hire-laravel-developers/', [HireController::class, 'laravel']);
 $router->get('/hire-php-developers/', [HireController::class, 'php']);
@@ -65,6 +66,13 @@ $router->get('/hire-full-stack-javascript-developers/', [HireController::class, 
 
 // Services
 $router->get('/services/', [ServiceController::class, 'index']);
+
+// 301 redirects for retired / merged service pages (SEO restructure, Jul 2026)
+$router->redirect('/services/web-applications/', '/services/custom-web-development/');
+$router->redirect('/services/payment-gateway-services/', '/services/e-commerce/');
+$router->redirect('/services/mobile-app-backend/', '/services/backend-development/');
+$router->redirect('/services/api-development/', '/services/backend-development/');
+
 $router->get('/services/{slug}/', [ServiceController::class, 'show']);
 
 // Industries
@@ -72,6 +80,7 @@ $router->get('/industries/', [IndustryController::class, 'index']);
 $router->get('/industries/{slug}/', [IndustryController::class, 'show']);
 
 // Case studies
+$router->get('/case-studies/', [CaseStudyController::class, 'index']);
 $router->get('/case-studies/{slug}/', [CaseStudyController::class, 'show']);
 
 // Products (owned SaaS)
@@ -100,11 +109,18 @@ $router->get('/cookie-policy/', [LegalController::class, 'cookies']);
 // Sitemap Page
 $router->get('/sitemap/', [PageController::class, 'sitemap']);
 
+// Developer micro-tools
+$router->get('/tools/json-formatter/', [PageController::class, 'jsonFormatter']);
+$router->get('/tools/software-development-cost-calculator/', [PageController::class, 'costCalculator']);
+
 // SEO: sitemap
 $router->get('/sitemap.xml', [SeoController::class, 'sitemap']);
 
 // SEO: robots
 $router->get('/robots.txt', [SeoController::class, 'robots']);
+
+// SEO: llms.txt – curated site overview for AI assistants (llmstxt.org)
+$router->get('/llms.txt', [SeoController::class, 'llms']);
 
 // Geolocations 
 $router->get('/{country}/{state}/', [GeoController::class, 'show']);

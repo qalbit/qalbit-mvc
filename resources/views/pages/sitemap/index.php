@@ -9,6 +9,16 @@
 $pageTitle   = 'Our Sitemap';
 $pageSummary = 'Quick overview of all key pages on QalbIT – services, industries, technologies, portfolio, careers, insights and legal information.';
 
+// Location pages – built from the geo config so new locations appear automatically.
+$geoLinks = [];
+foreach (config('geo', []) as $geoEntry) {
+    if (empty($geoEntry['enabled']) || empty($geoEntry['slug']) || empty($geoEntry['name'])) {
+        continue;
+    }
+    $geoLinks[] = ['label' => $geoEntry['name'], 'href' => $geoEntry['slug']];
+}
+$geoColumns = array_chunk($geoLinks, (int) ceil(max(count($geoLinks), 1) / 2));
+
 $groups = [
     'discover' => [
         'title' => 'Discover QalbIT',
@@ -49,16 +59,51 @@ $groups = [
         'description' => 'Custom software development services we provide for founders, product teams and enterprises.',
         'columns' => [
             [
+                ['label' => 'Custom Software Development', 'href' => '/services/custom-software-development/'],
+                ['label' => 'CRM Development',             'href' => '/services/crm-development/'],
+                ['label' => 'ERP Development',             'href' => '/services/erp-development/'],
+                ['label' => 'MVP Development',             'href' => '/services/mvp-development/'],
                 ['label' => 'Custom Web Development',      'href' => '/services/custom-web-development/'],
                 ['label' => 'Mobile App Development',      'href' => '/services/mobile-development/'],
-                ['label' => 'E-Commerce Solutions',        'href' => '/services/e-commerce/'],
-                ['label' => 'Cloud-based Solutions',       'href' => '/services/cloud-based-solutions/'],
             ],
             [
-                ['label' => 'Custom Software Development', 'href' => '/services/custom-software-development/'],
-                ['label' => 'API Development',             'href' => '/services/api-development/'],
+                ['label' => 'AI Development',              'href' => '/services/ai-solutions/'],
                 ['label' => 'SaaS Application Development','href' => '/services/saas/'],
+                ['label' => 'Backend & API Development',   'href' => '/services/backend-development/'],
+                ['label' => 'E-Commerce Solutions',        'href' => '/services/e-commerce/'],
+                ['label' => 'Cloud-based Solutions',       'href' => '/services/cloud-based-solutions/'],
                 ['label' => 'UX & Product Design',         'href' => '/services/ui-ux-design-service/'],
+            ],
+        ],
+    ],
+    'hire' => [
+        'title' => 'Hire Dedicated Developers',
+        'description' => 'Hire dedicated developers in India – remote squads with flexible monthly engagement and time-zone overlap.',
+        'columns' => [
+            [
+                ['label' => 'All Developer Profiles',            'href' => '/hire-developers/'],
+                ['label' => 'Hire Laravel Developers',           'href' => '/hire-laravel-developers/'],
+                ['label' => 'Hire Node.js Developers',           'href' => '/hire-nodejs-developers/'],
+                ['label' => 'Hire Next.js Developers',           'href' => '/hire-nextjs-developers/'],
+                ['label' => 'Hire React.js Developers',          'href' => '/hire-reactjs-developers/'],
+            ],
+            [
+                ['label' => 'Hire Flutter Developers',           'href' => '/hire-flutter-developers/'],
+                ['label' => 'Hire MVP Developers',               'href' => '/hire-mvp-developers/'],
+                ['label' => 'Hire Full-Stack JS Developers',     'href' => '/hire-full-stack-javascript-developers/'],
+                ['label' => 'Hire PHP Developers',               'href' => '/hire-php-developers/'],
+            ],
+        ],
+    ],
+    'tools' => [
+        'title' => 'Free Tools',
+        'description' => 'Free calculators and developer utilities built by QalbIT.',
+        'columns' => [
+            [
+                ['label' => 'Software Development Cost Calculator', 'href' => '/tools/software-development-cost-calculator/'],
+            ],
+            [
+                ['label' => 'JSON Formatter & Minifier',            'href' => '/tools/json-formatter/'],
             ],
         ],
     ],
@@ -109,14 +154,22 @@ $groups = [
         'description' => 'Selected projects, internal products and platforms we have shipped with clients.',
         'columns' => [
             [
-                ['label' => 'Portfolio Overview', 'href' => '/portfolio/'],
-                ['label' => 'Snappystats',        'href' => '/case-studies/snappystats/'],
-                ['label' => 'Bloomford',          'href' => '/case-studies/bloomford/'],
+                ['label' => 'Portfolio Overview',    'href' => '/portfolio/'],
+                ['label' => 'All Case Studies',      'href' => '/case-studies/'],
+                ['label' => 'CyberFind',             'href' => '/case-studies/cyberfind/'],
             ],
             [
-                ['label' => 'Hellory',            'href' => '/case-studies/hellory/'],
+                ['label' => 'Snappystats',           'href' => '/case-studies/snappystats/'],
+                ['label' => 'Bloomford',             'href' => '/case-studies/bloomford/'],
+                ['label' => 'Hellory',               'href' => '/case-studies/hellory/'],
+                ['label' => 'Plugin',                'href' => '/case-studies/plugin/'],
             ],
         ],
+    ],
+    'locations' => [
+        'title' => 'Locations We Serve',
+        'description' => 'Regional pages for the markets where we deliver custom software, dedicated developers and ongoing support.',
+        'columns' => $geoColumns,
     ],
     'careers' => [
         'title' => 'Careers & Hiring',

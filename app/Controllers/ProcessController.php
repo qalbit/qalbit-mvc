@@ -91,6 +91,7 @@ class ProcessController
             'title'       => $process['meta_title']       ?? (($process['name'] ?? 'Our Process') . ' - QalbIT'),
             'description' => $process['meta_description'] ?? '',
             'canonical'   => $canonical,
+            'image'       => og_image_url($canonicalPath),
         ];
 
         // FAQs for the process slug

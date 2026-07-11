@@ -38,7 +38,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
         Skip to main content
     </a>
 
-    <div class="max-w-6xl mx-auto flex h-16 items-center justify-between px-4">
+    <div class="max-w-7xl mx-auto flex h-16 items-center justify-between px-4">
         <!-- Brand -->
         <a
             href="/"
@@ -56,7 +56,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
         <?php if (!empty($mainNav)): ?>
             <!-- Desktop navigation (only from lg and up) -->
             <nav
-                class="relative hidden lg:flex h-full items-center text-sm"
+                class="relative hidden lg:flex h-full items-center text-[13px] xl:text-sm"
                 aria-label="Primary navigation"
             >
                 <?php foreach ($mainNav as $item): ?>
@@ -77,7 +77,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
                             <?php if ($hasLink): ?>
                                 <a
                                     href="<?= htmlspecialchars($itemUrl) ?>"
-                                    class="flex h-full items-center justify-center px-3 font-medium <?= $textColorClass ?> hover:text-primary-900 transition-colors"
+                                    class="flex h-full items-center justify-center px-2 xl:px-3 font-medium <?= $textColorClass ?> hover:text-primary-900 transition-colors whitespace-nowrap"
                                     title="<?= htmlspecialchars($itemTitle) ?>"
                                     aria-haspopup="true"
                                     aria-expanded="false"
@@ -87,7 +87,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
                             <?php else: ?>
                                 <button
                                     type="button"
-                                    class="cursor-pointer flex h-full items-center px-3 font-medium <?= $textColorClass ?> hover:text-primary-900 transition-colors"
+                                    class="cursor-pointer flex h-full items-center px-2 xl:px-3 font-medium <?= $textColorClass ?> hover:text-primary-900 transition-colors whitespace-nowrap"
                                     aria-haspopup="true"
                                     aria-expanded="false"
                                 >
@@ -210,14 +210,14 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
                         <?php if ($hasLink): ?>
                             <a
                                 href="<?= htmlspecialchars($itemUrl) ?>"
-                                class="flex h-full items-center px-3 font-medium <?= $textColorClass ?> hover:text-primary-900 transition-colors"
+                                class="flex h-full items-center px-2 xl:px-3 font-medium <?= $textColorClass ?> hover:text-primary-900 transition-colors whitespace-nowrap"
                                 title="<?= htmlspecialchars($itemTitle) ?>"
                             >
                                 <?= htmlspecialchars($item['label']) ?>
                             </a>
                         <?php else: ?>
                             <div
-                                class="flex h-full items-center px-3 font-medium <?= $textColorClass ?> hover:text-primary-900 transition-colors"
+                                class="flex h-full items-center px-2 xl:px-3 font-medium <?= $textColorClass ?> hover:text-primary-900 transition-colors whitespace-nowrap"
                             >
                                 <?= htmlspecialchars($item['label']) ?>
                             </div>
@@ -228,7 +228,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
                 <!-- CTA visible only on lg+; prevents crowding -->
                 <a
                     href="/contact-us/"
-                    class="btn btn-primary btn-radius-pill ml-3 whitespace-nowrap"
+                    class="btn btn-primary btn-radius-pill ml-2 xl:ml-3 whitespace-nowrap"
                     title="Get Free Estimate"
                 >
                     Get Free Estimation

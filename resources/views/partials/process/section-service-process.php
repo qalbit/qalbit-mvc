@@ -24,7 +24,7 @@ $defaultItems = [
         'label'       => 'Web app MVPs',
         'description' => 'Browser-based products and internal tools with responsive UI, authentication, reporting and integrations into CRMs, ERPs or third-party APIs.',
         'link_label'  => 'Explore web application development',
-        'link_href'   => '/services/web-applications/',
+        'link_href'   => '/services/custom-web-development/',
     ],
     [
         'key'         => 'mobile-app-mvp',

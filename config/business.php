@@ -8,7 +8,28 @@ return [
     'primary_email' => 'info@qalbit.com',
     'primary_phone' => '+91-8511900440',
 
-    'logo_url' => 'https://staging.qalbit.com/assets/images/brand/logo-primary.png',
+    'logo_url' => 'https://qalbit.com/assets/apple-touch-icon.png',
+
+    // Entity data for Organization schema (AI / answer-engine visibility)
+    'founding_date' => '2018',
+    'slogan'        => 'Custom software that ships and scales.',
+    'description'   => 'QalbIT Infotech is a custom software development company in Ahmedabad, India, building web applications, SaaS platforms, CRM and ERP systems, MVPs and mobile apps for startups and businesses across India, the USA, Saudi Arabia and worldwide. Clients hire dedicated Laravel, Node.js, Next.js, React and Flutter developers on flexible engagement models.',
+    'knows_about'   => [
+        'Custom Software Development',
+        'CRM Development',
+        'ERP Development',
+        'MVP Development',
+        'SaaS Application Development',
+        'Web Application Development',
+        'Mobile App Development',
+        'Backend & API Development',
+        'E-commerce Development',
+        'AI Development',
+        'Cloud Solutions',
+        'UI/UX Design',
+        'Laravel', 'PHP', 'Node.js', 'Next.js', 'React', 'Flutter', 'Python', 'TypeScript', 'PostgreSQL', 'MySQL', 'AWS',
+    ],
+    'area_served'   => ['India', 'United States', 'Saudi Arabia', 'Worldwide'],
 
     'schema_address' => [
         'streetAddress'   => 'C109, Siddhi Vinayak Towers, Near Kataria Arcade, Opp. S.G. Highway, Makarba',

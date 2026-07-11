@@ -7,8 +7,8 @@ return [
         'enabled'  => true,
         'order'    => 40,
 
-        'meta_title'       => 'Hire Dedicated Node.js Developers – Remote Node.js Development Team | QalbIT',
-        'meta_description' => 'Hire dedicated Node.js and TypeScript developers from QalbIT to build and scale real-time applications, APIs and backends. Get a remote Node.js team that understands product, performance and clean architecture.',
+        'meta_title'       => 'Hire Dedicated Node.js Developers in India | QalbIT',
+        'meta_description' => 'Hire dedicated Node.js developers in India – onboard in 1–2 weeks, flexible monthly engagement and US/UK/GCC overlap. Real-time apps, APIs and backends.',
 
         'short_description' => 'Dedicated Node.js developers and product-minded teams to design, build and scale real-time apps, APIs and backends with clean architecture and predictable delivery.',
         'category'          => 'hire',
@@ -306,8 +306,8 @@ return [
         'enabled'  => true,
         'order'    => 30,
 
-        'meta_title'       => 'Hire Dedicated Laravel Developers – Remote Laravel Development Team | QalbIT',
-        'meta_description' => 'Hire dedicated Laravel developers from QalbIT to build and scale custom web applications, SaaS platforms and internal tools. Work with a remote Laravel development team that understands product, performance and long-term maintainability.',
+        'meta_title'       => 'Hire Dedicated Laravel Developers in India | QalbIT',
+        'meta_description' => 'Hire dedicated Laravel developers in India – onboard in 1–2 weeks, flexible monthly engagement and US/UK/GCC overlap. Web apps, SaaS and internal tools.',
 
         'short_description' => 'Dedicated Laravel developers and product-minded teams to design, build and maintain custom web apps, SaaS platforms and internal tools with clean architecture and predictable delivery.',
         'category'          => 'hire',
@@ -613,8 +613,8 @@ return [
         'enabled'  => true,
         'order'    => 50,
 
-        'meta_title'       => 'Hire Dedicated PHP Developers – Remote PHP Development Team | QalbIT',
-        'meta_description' => 'Hire dedicated PHP developers from QalbIT to build and modernise custom web applications, portals and platforms. Work with a remote PHP development team experienced in PHP 8, Laravel and modernising legacy PHP systems for long-term growth.',
+        'meta_title'       => 'Hire Dedicated PHP Developers – Remote PHP Team | QalbIT',
+        'meta_description' => 'Hire dedicated PHP developers from QalbIT to build and modernise web applications and portals – PHP 8, Laravel and legacy PHP modernisation expertise.',
 
         'short_description' => 'Dedicated PHP developers to build, extend and modernise custom web applications, portals and platforms using modern PHP 8 practices, clean architecture and predictable delivery.',
         'category'          => 'hire',
@@ -920,8 +920,8 @@ return [
         'enabled'  => true,
         'order'    => 60,
 
-        'meta_title'       => 'Hire Dedicated React.js Developers – Remote React Frontend Development Team | QalbIT',
-        'meta_description' => 'Hire dedicated React.js developers from QalbIT to design and build fast, product-grade frontends, dashboards and SaaS interfaces. Get a remote React development team focused on UX, performance and clean, maintainable code.',
+        'meta_title'       => 'Hire Dedicated React.js Developers – Remote Team | QalbIT',
+        'meta_description' => 'Hire dedicated React.js developers from QalbIT for fast, product-grade frontends, dashboards and SaaS interfaces – UX, performance and clean code.',
 
         'short_description' => 'Dedicated React.js developers and front-end squads to design, build and optimise dashboards, portals, SaaS frontends and marketing experiences on top of your APIs.',
         'category'          => 'hire',
@@ -1227,8 +1227,8 @@ return [
         'enabled'  => true,
         'order'    => 70,
 
-        'meta_title'       => 'Hire Dedicated Next.js Developers – Remote Next.js Development Team | QalbIT',
-        'meta_description' => 'Hire dedicated Next.js developers from QalbIT to build SEO-friendly, high-performance web applications, SaaS platforms and marketing sites. Get a remote Next.js development team that understands product, performance and modern React/Next.js patterns.',
+        'meta_title'       => 'Hire Dedicated Next.js Developers in India | QalbIT',
+        'meta_description' => 'Hire dedicated Next.js developers in India – onboard in 1–2 weeks with US/UK/GCC overlap. SEO-friendly, high-performance web apps and SaaS frontends.',
 
         'short_description' => 'Dedicated Next.js developers to design and ship SEO-friendly, fast React-based web apps, SaaS frontends and content-rich sites with modern routing and performance best practices.',
         'category'          => 'hire',
@@ -1541,8 +1541,8 @@ return [
         'enabled'  => true,
         'order'    => 80,
 
-        'meta_title'       => 'Hire Dedicated Flutter Developers – Cross-Platform Mobile App Development Team | QalbIT',
-        'meta_description' => 'Hire dedicated Flutter developers from QalbIT to build and scale cross-platform mobile apps for iOS and Android. Get a remote Flutter app development team focused on UX, performance and reliable delivery.',
+        'meta_title'       => 'Hire Dedicated Flutter Developers – Mobile App Team | QalbIT',
+        'meta_description' => 'Hire dedicated Flutter developers from QalbIT to build cross-platform iOS and Android apps – UX, performance and reliable store releases.',
 
         'short_description' => 'Dedicated Flutter developers to design, build and support cross-platform mobile apps for iOS and Android, with clean architecture, smooth UX and predictable release cycles.',
         'category'          => 'hire',
@@ -1849,7 +1849,7 @@ return [
         'order'    => 20,
 
         'meta_title'       => 'Hire MVP Developers – Startup MVP Development Team | QalbIT',
-        'meta_description' => 'Hire a dedicated MVP development team from QalbIT to define, design and launch your startup MVP quickly. Validate your idea with real users using a lean, product-led MVP process before you invest in a full build.',
+        'meta_description' => 'Hire a dedicated MVP development team to define, design and launch your startup MVP fast – validate with real users before investing in a full build.',
 
         'short_description' => 'Dedicated MVP developers and product-minded teams to define scope, design flows and ship the smallest valuable product version so you can learn from real users earlier.',
         'category'          => 'hire',
@@ -2153,8 +2153,8 @@ return [
         'enabled'  => true,
         'order'    => 90,
 
-        'meta_title'       => 'Hire Full-Stack JavaScript Developers – React, Next.js & Node.js Team | QalbIT',
-        'meta_description' => 'Hire full-stack JavaScript developers from QalbIT to build and scale end-to-end web applications using React, Next.js and Node.js. Get a remote full-stack JS team that can own both frontend and backend delivery.',
+        'meta_title'       => 'Hire Full-Stack JavaScript Developers – React & Node | QalbIT',
+        'meta_description' => 'Hire full-stack JavaScript developers building end-to-end products with React, Next.js and Node.js – one remote team owning frontend and backend.',
 
         'short_description' => 'Full-stack JavaScript developers who handle both React/Next.js frontends and Node.js/NestJS backends, giving you one team that can own features from UI to database.',
         'category'          => 'hire',

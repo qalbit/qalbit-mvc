@@ -46,9 +46,10 @@ class TechnologyController
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
 
         $seo = [
-            'title'       => 'Technologies We Use – React, Node.js, Laravel, Flutter & More | QalbIT',
+            'title'       => 'Technologies We Use – React, Node.js, Laravel | QalbIT',
             'description' => 'Explore the core technologies QalbIT uses to build web, mobile and SaaS products: React, Node.js, Nest.js, Laravel, Flutter, WordPress and more.',
             'canonical'   => $baseUrl . '/technologies/',
+            'image'       => og_image_url('/technologies/'),
         ];
 
         // FAQs for the technology page
@@ -160,6 +161,7 @@ class TechnologyController
             'title'       => $technology['meta_title']       ?? (($technology['name'] ?? 'Technology') . ' – QalbIT'),
             'description' => $technology['meta_description'] ?? '',
             'canonical'   => $canonical,
+            'image'       => og_image_url($canonicalPath),
         ];
 
         // Load FAQs for this specific technology (if configured)

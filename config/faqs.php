@@ -324,6 +324,142 @@ return [
     ],
 
     // -------------------------------------------------
+    // Cost Calculator tool page FAQs
+    // -------------------------------------------------
+    'tool_cost_calculator' => [
+        [
+            'question' => 'How much does custom software development cost in 2026?',
+            'answer'   => 'With an experienced India-based team like QalbIT, a lean startup MVP typically runs $6,500–$20,000, custom business software or a CRM $10,000–$44,000, and a phase-one ERP or complex SaaS product $20,000–$75,000. US and Western European agencies commonly quote 2–3× these figures for comparable scope. The exact number depends on user roles, workflows, integrations and platforms — which is what this calculator estimates.',
+        ],
+        [
+            'question' => 'Has AI made custom software development cheaper?',
+            'answer'   => 'Yes, meaningfully. Our engineers work with AI-assisted development tooling that accelerates boilerplate, CRUD modules, test writing and integration scaffolding — cutting typical build time by around 20%, and these calculator estimates already reflect that. What AI does not compress is discovery, architecture decisions, UX judgement, QA of business-critical flows and stakeholder communication, which is why the savings are real but not the 80% some marketing claims suggest.',
+        ],
+        [
+            'question' => 'What affects software development cost the most?',
+            'answer'   => 'Scope is the biggest driver: the number of user roles, screens and workflows accounts for 60–70% of any quote. Third-party integrations come second — each external system (ERP, accounting, payments, telephony) adds design, build and testing effort. Building for both web and mobile adds roughly 40%, and a fully custom design system adds around 10–15% over proven UI patterns.',
+        ],
+        [
+            'question' => 'How accurate is this cost calculator?',
+            'answer'   => 'It produces realistic planning ranges based on QalbIT delivery data and 2026 market rates — accurate enough to set a budget and compare options. A final quote always follows a short discovery call where an architect reviews your exact workflows, integrations and constraints; that review is free, and most final quotes land inside the calculator range.',
+        ],
+        [
+            'question' => 'Why is India-based software development 50–70% cheaper?',
+            'answer'   => 'Senior engineer salaries in India are a fraction of US, UK or GCC equivalents, with no quality gap on modern stacks like Laravel, Node.js, React and Flutter. Working with QalbIT you also avoid recruitment fees and benefits overhead, while IST working hours overlap naturally with US mornings, the full UK/European workday and GCC business hours.',
+        ],
+        [
+            'question' => 'Should I choose fixed-price or hourly billing for my project?',
+            'answer'   => 'For a first release with definable scope, fixed-price phases are safer: you approve a budget and deliverables before work starts. Hourly or monthly dedicated-team billing suits ongoing product development after launch, where priorities shift sprint to sprint. QalbIT typically starts fixed-scope and moves to a dedicated squad once the product is live.',
+        ],
+        [
+            'question' => 'How can I reduce my software development cost without hurting quality?',
+            'answer'   => 'Cut scope, not quality: launch a lean first release around the single core journey, use proven UI patterns instead of fully bespoke design, integrate with existing tools (like Tally or Stripe) rather than rebuilding them, and phase secondary modules for after launch. A good partner will push for these trade-offs in discovery — it is the difference between a $20K launch and a $60K one.',
+        ],
+    ],
+
+    // -------------------------------------------------
+    // CRM Development service page FAQs
+    // -------------------------------------------------
+    'service_crm_development' => [
+        [
+            'question' => 'What is custom CRM development and how is it different from Salesforce, HubSpot or Zoho?',
+            'answer'   => 'Custom CRM development means building a customer relationship management system around your exact sales cycle, fields, roles and reports – instead of adapting your process to a generic tool. Off-the-shelf CRMs like Salesforce, HubSpot or Zoho are excellent for standard pipelines, but teams with industry-specific workflows, deep integration needs or fast-growing seat counts often end up paying for features they never use while still relying on spreadsheets for the gaps. A custom CRM removes those gaps and the recurring per-seat licence cost.',
+        ],
+        [
+            'question' => 'How much does custom CRM development cost?',
+            'answer'   => 'A focused first release – leads, pipeline, customer 360 view and basic reports – is typically comparable to two to three years of licence fees for a mid-sized team on a commercial CRM. The exact cost depends on modules, integrations (ERP, telephony, WhatsApp, accounting) and data migration complexity. We start with a short discovery phase and give you a module-by-module estimate, so you can compare it directly against your current licence spend before committing.',
+        ],
+        [
+            'question' => 'How long does it take to build a custom CRM?',
+            'answer'   => 'A usable first release usually takes 8–14 weeks: discovery and process mapping (1–2 weeks), design (1–3 weeks), then core modules built in weekly increments. We migrate your data, train team leads and go live module by module, so your team is working in the new CRM long before the full roadmap is delivered.',
+        ],
+        [
+            'question' => 'Can you migrate our data from spreadsheets or an existing CRM?',
+            'answer'   => 'Yes. Migration is planned from day one – we map your existing fields, de-duplicate contacts and companies, preserve deal history where the source system allows it, and run verification reports so your team can confirm nothing was lost. We can also run the old and new systems in parallel for a transition period.',
+        ],
+        [
+            'question' => 'Can the CRM integrate with our ERP, accounting or telephony tools?',
+            'answer'   => 'Integration is usually the main reason clients choose a custom CRM. We build two-way syncs with ERPs and accounting tools (Tally, Zoho Books, QuickBooks and others), click-to-call and call-logging with telephony providers, WhatsApp and email conversation capture, and webhooks for your marketing stack – so customer data is entered once and flows everywhere.',
+        ],
+        [
+            'question' => 'Do you build industry-specific CRMs, for example for real estate or healthcare?',
+            'answer'   => 'Yes. Vertical CRMs are a large part of our CRM work – real estate CRMs with property inventory, site-visit scheduling and broker management; healthcare CRMs with patient journeys and appointment flows; fintech CRMs with KYC and onboarding pipelines. Starting from your industry’s real workflow is exactly where custom CRM development beats generic tools.',
+        ],
+        [
+            'question' => 'Who owns the CRM source code and our customer data?',
+            'answer'   => 'You do. The code, database and infrastructure are yours as per the agreement – we hand over repositories, documentation and deployment configurations. There are no per-seat licences and no lock-in: any competent team can take the system forward if you build an internal team later.',
+        ],
+    ],
+
+    // -------------------------------------------------
+    // ERP Development service page FAQs
+    // -------------------------------------------------
+    'service_erp_development' => [
+        [
+            'question' => 'What is custom ERP development and when does it make sense over SAP or Odoo?',
+            'answer'   => 'Custom ERP development means building the operations backbone of your business – inventory, purchase, sales, production, finance and HR modules – around your actual processes. Packaged suites like SAP or Oracle are powerful but heavy and expensive for SMEs, while flexible platforms like Odoo still force compromises once your workflows get specific. A custom ERP makes sense when your operations have outgrown spreadsheets, when packaged systems would require changing how you work, or when per-user licence costs no longer scale with your team.',
+        ],
+        [
+            'question' => 'How much does custom ERP software development cost?',
+            'answer'   => 'ERP costs depend on modules and complexity, which is why we never quote a single number upfront. A phase-one rollout covering inventory, purchase and sales for a single company typically sits in the range of a mid-sized annual licence bill for a packaged ERP – but it is a one-time build you own, not a recurring fee. After a 2–3 week discovery we give you a module-by-module estimate so you can start with the highest-pain area and expand only when each phase proves itself.',
+        ],
+        [
+            'question' => 'How long does an ERP implementation take?',
+            'answer'   => 'Phase one – typically inventory, purchase and sales for one location or company – takes about 3–5 months including discovery, build, master data migration, training and a parallel run. Further modules (production, HR, portals) roll out incrementally after that. We deliberately avoid big-bang go-lives: your existing tools keep running until the new system’s numbers reconcile.',
+        ],
+        [
+            'question' => 'Can the ERP integrate with Tally, Zoho Books or QuickBooks?',
+            'answer'   => 'Yes – and for most SMEs we recommend it. Your accountant keeps the tool they trust while the ERP handles operations: vouchers, invoices and payments sync automatically, and e-invoicing/GST flows are supported. The same applies to banking APIs, e-commerce platforms and existing tools you want to keep.',
+        ],
+        [
+            'question' => 'How do you handle data migration and go-live without disrupting operations?',
+            'answer'   => 'We migrate master data (items, parties, locations) and opening balances first, then run the new ERP in parallel with your current tools for a defined period. Supervisors are trained on real transactions, and we only cut over once daily numbers match. This parallel-run approach is slower on paper but avoids the operational chaos that kills most ERP projects.',
+        ],
+        [
+            'question' => 'Can you modernise or replace our old legacy ERP?',
+            'answer'   => 'Yes. We regularly rebuild legacy desktop, FoxPro/Access-era or unsupported ERP systems into modern web-based ERPs. Your historical data is migrated, familiar workflows are preserved where they still make sense, and improvements are introduced gradually so long-tenured staff are not retrained overnight.',
+        ],
+        [
+            'question' => 'Who owns the ERP source code, and what about long-term support?',
+            'answer'   => 'You own the code, database and infrastructure entirely – no per-user licences, no vendor lock-in. After go-live, most clients keep a monthly support retainer for enhancements, new reports and the next modules on the roadmap, but the system is documented and handover-ready at every stage.',
+        ],
+    ],
+
+    // -------------------------------------------------
+    // MVP Development service page FAQs
+    // -------------------------------------------------
+    'service_mvp_development' => [
+        [
+            'question' => 'What is MVP development and what makes a good MVP?',
+            'answer'   => 'MVP development means building the smallest version of your product that real users can use and pay for – so you can test your riskiest assumption before spending a full product budget. A good MVP is not a buggy demo: the core journey must feel polished and credible. The skill is in cutting scope everywhere else, which is exactly what our scoping sprint is designed to do.',
+        ],
+        [
+            'question' => 'How much does it cost to build an MVP?',
+            'answer'   => 'Most MVPs we build land in a fixed-scope range agreed before development starts – the final figure depends on platforms (web, mobile or both), integrations like payments and messaging, and how much design is needed. After a scoping call we give you a fixed cost and launch date rather than an open-ended hourly estimate, so your runway math stays predictable.',
+        ],
+        [
+            'question' => 'How long does MVP development take?',
+            'answer'   => 'Typically 6–10 weeks from kickoff to a launchable product: one week of scoping, one to two weeks of design, three to six weeks of weekly build increments, and a launch week where analytics and error tracking go live with your first users. Timelines stretch mainly when scope grows – which is why we fix scope first.',
+        ],
+        [
+            'question' => 'Should I build a web MVP, a mobile app, or both?',
+            'answer'   => 'Default to web unless your idea genuinely lives on the phone (location-based, camera-based or notification-driven products). Web MVPs launch faster, skip app-store review and are easier to iterate. When mobile is essential, we use Flutter or React Native so one codebase ships to both stores. Many clients launch web-first and add mobile once the idea is validated.',
+        ],
+        [
+            'question' => 'What happens after the MVP launches?',
+            'answer'   => 'Launch is the start of the learning loop, not the end of the project. We review real usage against the success criteria set in scoping, then run iteration sprints on what the data says. If the MVP takes off, our product scaling team takes over performance, features and infrastructure – the architecture is built so success does not require a rewrite.',
+        ],
+        [
+            'question' => 'Can you rebuild our no-code prototype (Bubble, Airtable, Glide) as a real product?',
+            'answer'   => 'Yes, and it is one of our most common MVP engagements. Your no-code prototype has already validated demand – we carry those learnings into a custom build that removes the platform limits: real performance, custom workflows, proper integrations and a codebase you own and can raise investment on.',
+        ],
+        [
+            'question' => 'Do you sign NDAs and who owns the MVP code?',
+            'answer'   => 'Yes, we are happy to sign an NDA before you share details. You own the source code, designs and infrastructure from day one – everything lives in repositories you control, with documentation good enough for a future CTO or internal team to take over without friction.',
+        ],
+    ],
+
+    // -------------------------------------------------
     // API Development service page FAQs
     // -------------------------------------------------
     'service_api_development' => [
@@ -2233,6 +2369,26 @@ return [
             'question' => 'How do we start a new engagement with QalbIT from Riyadh?',
             'answer'   => 'We usually begin with a discovery call to understand your product, constraints and timelines. From there, we propose a clear scope and a first phase—such as a discovery sprint or MVP build—so your Riyadh stakeholders can validate our fit before scaling up.',
         ],
+        [
+            'question' => 'Do you work with companies in Jeddah, Khobar, Makkah and other Saudi cities, or only Riyadh?',
+            'answer'   => 'We work with clients across all of Saudi Arabia – Riyadh, Jeddah, Khobar, Dammam, Makkah and Madinah. Because delivery is remote with meetings aligned to KSA hours, your city makes no difference to timelines or quality. Several of our GCC engagements combine stakeholders in more than one city on the same project.',
+        ],
+        [
+            'question' => 'How much does custom software development cost in Saudi Arabia?',
+            'answer'   => 'Working with QalbIT as an outsourced custom software development company typically costs 40–60% less than hiring an equivalent on-shore team in Saudi Arabia, while keeping senior engineers on your project. A focused MVP or first module usually lands in a predictable fixed-scope budget; larger platforms are phased so you approve costs stage by stage. After one discovery call we can give you a realistic estimate in SAR or USD.',
+        ],
+        [
+            'question' => 'Can we hire dedicated custom software developers or a full squad from QalbIT?',
+            'answer'   => 'Yes. You can hire dedicated developers – backend, frontend, mobile or full stack – or a complete cross-functional squad that works as an extension of your Saudi Arabia team. Working hours overlap with KSA time for stand-ups, demos and releases, and you can scale the team up or down as your roadmap changes.',
+        ],
+        [
+            'question' => 'Do you build custom backend solutions and APIs for Saudi Arabia companies?',
+            'answer'   => 'Yes – custom backend solutions are one of our strongest areas for KSA clients. We design and build secure REST APIs, authentication, integrations with local and international services, background processing and microservices on modern PHP (Laravel) and Node.js (NestJS) stacks, deployed on cloud infrastructure that meets your data and compliance preferences.',
+        ],
+        [
+            'question' => 'Can you build a SaaS product or MVP for the Saudi market?',
+            'answer'   => 'Yes. We act as an MVP and SaaS development partner for founders in Saudi Arabia – from product scoping and design sprints to a launchable first version in 6–10 weeks. We build with Arabic/RTL support, local payment options and KSA hosting preferences in mind, and continue with iteration sprints once real users are on the product.',
+        ],
     ],
 
     // -------------------------------------------------
@@ -2258,6 +2414,22 @@ return [
         [
             'question' => 'How quickly can an Ahmedabad-based company get started with QalbIT?',
             'answer'   => 'In many cases we can understand your requirements, align on scope and start an initial sprint within a couple of weeks. We recommend starting with a focused phase so you can see our way of working on a real deliverable.',
+        ],
+        [
+            'question' => 'Where is the QalbIT office in Ahmedabad?',
+            'answer'   => 'Our office is at C-109, Siddhi Vinayak Towers, Makarba, Ahmedabad – easily reachable from SG Highway and Prahlad Nagar. If you are searching for an IT company in Makarba or nearby areas of Ahmedabad, you are welcome to visit us for an in-person discussion after a quick call to schedule it.',
+        ],
+        [
+            'question' => 'How much does custom software development cost in Ahmedabad?',
+            'answer'   => 'Costs depend on scope, but working with an Ahmedabad-based team is significantly more economical than metro or overseas agencies while keeping communication face-to-face friendly. A focused MVP or first module typically starts at a budget comparable to a few months of a single senior hire, and we bill in INR with GST-compliant invoices. After a discovery call we provide a module-by-module estimate.',
+        ],
+        [
+            'question' => 'Do you build custom CRM and ERP software for Gujarat businesses?',
+            'answer'   => 'Yes – custom CRM and ERP development is a core service for our Ahmedabad and Gujarat clients. We build CRMs around your actual sales process and modular ERPs for inventory, purchase, production and finance, with two-way integrations to the tools your team already uses, such as Tally, Zoho Books and GST/e-invoicing systems.',
+        ],
+        [
+            'question' => 'Do you work with startups and fintech companies in Ahmedabad?',
+            'answer'   => 'Yes. We regularly work with Ahmedabad startups – including fintech teams – on MVP builds, SaaS products and mobile apps. We understand the compliance and security expectations that come with fintech work, and we can start with a small scoped phase so you can validate the fit before committing a bigger budget.',
         ],
     ],
 
@@ -2342,6 +2514,36 @@ return [
     // -------------------------------------------------
     // HIRE PAGE NODEJS – FAQs
     // -------------------------------------------------
+    // -------------------------------------------------
+    // HIRE DEVELOPERS HUB (/hire-developers/) – FAQs
+    // -------------------------------------------------
+    'service_hire_developers' => [
+        [
+            'question' => 'How much does it cost to hire dedicated developers from QalbIT?',
+            'answer'   => 'Hiring dedicated developers in India through QalbIT typically costs 50–70% less than equivalent in-house hires in the US, UK or GCC. Pricing is a simple monthly rate per developer that varies by stack and seniority, with no recruitment fees or benefits overhead. Share your requirements and we will send exact rates for the mix you need within 24–48 hours.',
+        ],
+        [
+            'question' => 'How quickly can a dedicated developer start on our project?',
+            'answer'   => 'Most engagements go from first call to first commit in about two weeks: we share matched profiles within 24–48 hours, you interview the developers, and onboarding usually completes within 1–2 weeks including access setup and a kickoff sprint plan.',
+        ],
+        [
+            'question' => 'Can we interview developers before hiring, and what if someone is not a fit?',
+            'answer'   => 'Yes — you review profiles and interview every developer before committing, including technical rounds if you prefer. If a developer turns out not to be the right fit at any point, we replace them quickly at no additional recruitment cost.',
+        ],
+        [
+            'question' => 'How do time zones work if we are in the US, UK, Europe or the GCC?',
+            'answer'   => 'Our developers work from India (IST), which overlaps naturally with the full GCC business day, the UK and European workday, and US mornings. Standups, demos and releases are scheduled in your hours, with written updates and recorded walkthroughs covering the rest asynchronously.',
+        ],
+        [
+            'question' => 'Who owns the code, and how is confidentiality handled?',
+            'answer'   => 'You do — all code, documentation and IP belong to you as defined in our agreement, and work happens in your repositories wherever possible. We sign NDAs before you share sensitive details and can work under your preferred jurisdiction or contract template.',
+        ],
+        [
+            'question' => 'Can we scale the team up or down after we start?',
+            'answer'   => 'Yes. Engagements run month to month: add developers, QA or DevOps support as your roadmap grows, or scale down with reasonable notice when it does not. Many clients start with one developer or a pilot sprint and expand from there.',
+        ],
+    ],
+
     'service_hire_nodejs_developers' => [
         [
             'question' => 'How does QalbIT typically work with teams that want to hire Node.js developers?',
@@ -2370,6 +2572,18 @@ return [
         [
             'question' => 'How quickly can we start working with your Node.js developers and what are typical engagement lengths?',
             'answer'   => 'In many cases we can validate requirements, align on the initial scope and start a pilot sprint within 1–3 weeks. Engagements usually run for several months and can extend into long-term product partnerships. You can start small with a pilot or fixed-scope module and then scale up the Node.js team as you see value.',
+        ],
+        [
+            'question' => 'How much does it cost to hire a dedicated Node.js developer from QalbIT?',
+            'answer'   => 'Hiring a dedicated Node.js developer in India through QalbIT typically costs 50–70% less than an equivalent full-time hire in the US, UK or GCC – with no recruitment fees, benefits overhead or long notice periods. We offer simple monthly pricing per developer (or per squad), and you can scale up or down with reasonable notice. After one call we can share exact rates for the seniority mix you need.',
+        ],
+        [
+            'question' => 'Why hire Node.js developers in India through QalbIT instead of freelancers?',
+            'answer'   => 'Freelancers work alone; our Node.js developers come with a team behind them – a technical lead reviewing architecture and code, QA support, DevOps help and a replacement guarantee if someone rotates out. You get the cost advantage of hiring in India with the continuity and accountability of an established engineering company, plus IST hours that overlap with the US morning, UK/Europe workday and full GCC business hours.',
+        ],
+        [
+            'question' => 'Can we interview and evaluate the Node.js developers before committing?',
+            'answer'   => 'Yes. You can review profiles, interview shortlisted Node.js developers and, if you prefer, start with a paid pilot sprint before signing a longer engagement. If a developer is not the right fit at any point, we replace them at no additional recruitment cost.',
         ],
     ],
 
@@ -2400,6 +2614,18 @@ return [
         [
             'question' => 'How quickly can QalbIT start on a Laravel project?',
             'answer'   => 'In many cases we can complete discovery and a codebase review (if needed) within one to two weeks, then start a first sprint or pilot module shortly after. Timelines depend on team composition and urgency, but we always align expectations before you commit.',
+        ],
+        [
+            'question' => 'How much does it cost to hire a dedicated Laravel developer from QalbIT?',
+            'answer'   => 'Hiring a dedicated Laravel developer in India through QalbIT typically costs 50–70% less than an equivalent in-house hire in the US, UK or GCC – with no recruitment fees, benefits or long notice periods. Pricing is a simple monthly rate per developer or per squad, and you can adjust team size as your roadmap changes. Share your requirements and we will send exact rates for the seniority mix you need.',
+        ],
+        [
+            'question' => 'Can we hire Laravel developers from QalbIT if we are based in the US, UK, Europe or Dubai/GCC?',
+            'answer'   => 'Yes – most of our Laravel clients are overseas. Our working hours in India overlap naturally with the full GCC business day (including Dubai, Riyadh and Jeddah), the UK and European workday, and US mornings. Standups, demos and go-lives are scheduled in your hours, contracts and invoicing are structured for your jurisdiction, and NDAs are standard.',
+        ],
+        [
+            'question' => 'Why hire dedicated Laravel developers instead of using freelancers?',
+            'answer'   => 'A dedicated Laravel developer from QalbIT comes with a team behind them: a technical lead who reviews architecture and code, QA and DevOps support when needed, documented handovers and a replacement guarantee. You get freelancer-level flexibility with company-level reliability – no single point of failure on a business-critical Laravel codebase.',
         ],
     ],
 
@@ -2490,6 +2716,14 @@ return [
         [
             'question' => 'How quickly can a Next.js squad start on our project?',
             'answer'   => 'In most cases we can complete discovery and align on scope within one to three weeks. After that, we start with a pilot slice such as a high-value flow or section of the site, so you can see real progress and validate collaboration before scaling the team.',
+        ],
+        [
+            'question' => 'How much does it cost to hire a dedicated Next.js developer from QalbIT?',
+            'answer'   => 'Hiring a dedicated Next.js developer in India through QalbIT typically costs 50–70% less than an equivalent hire in the US, UK or GCC, on a simple monthly rate with no recruitment fees or benefits overhead. You can start with one developer or a small squad and scale as the product grows – we will share exact rates for your required seniority mix after one call.',
+        ],
+        [
+            'question' => 'Why hire a dedicated Next.js team in India instead of freelancers?',
+            'answer'   => 'Our Next.js developers work inside a real delivery team – a technical lead reviews architecture and pull requests, designers and QA are available when needed, and a replacement guarantee protects your timeline if anyone rotates out. You keep the cost advantage of India-based rates with the reliability of an established company, and IST hours overlap comfortably with US mornings, the UK/European workday and GCC business hours.',
         ],
     ],
 

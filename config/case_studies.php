@@ -8,8 +8,8 @@ return [
         'enabled'     => true,
         'order'       => 10,
 
-        'meta_title'       => 'Snappy Stats – Shooting Academy Scheduling Web App Case Study | QalbIT',
-        'meta_description' => 'How QalbIT designed and built Snappy Stats, a custom Laravel-based scheduling management web application that eliminated double bookings, improved staff utilisation and gave a shooting academy real-time visibility into classes and events.',
+        'meta_title'       => 'Snappy Stats – Scheduling Web App Case Study | QalbIT',
+        'meta_description' => 'How QalbIT built Snappy Stats, a custom Laravel scheduling web app that eliminated double bookings and gave a shooting academy real-time visibility.',
 
         'summary'  => 'How we helped a growing shooting academy replace spreadsheets with a custom scheduling web app that centralises bookings, prevents double scheduling and gives real-time visibility into classes and events.',
 
@@ -341,7 +341,7 @@ return [
                     ],
                     [
                         'label' => 'API Development',
-                        'href'  => '/services/api-development/',
+                        'href'  => '/services/backend-development/',
                     ],
                 ],
             ],
@@ -369,8 +369,8 @@ return [
         'enabled'     => true,
         'order'       => 20,
 
-        'meta_title'       => 'Bloomford – Hiring Portal for HR Professionals | Recruitment Platform Case Study',
-        'meta_description' => 'How QalbIT designed and built Bloomford, a custom recruitment platform and hiring portal for HR professionals in Belgium – centralising employers, vacancies and candidates with CV parsing, search and modern HR workflows.',
+        'meta_title'       => 'Bloomford – HR Hiring Portal Case Study | QalbIT',
+        'meta_description' => 'How QalbIT built Bloomford, a recruitment platform for HR professionals in Belgium – employers, vacancies and candidates in one searchable portal.',
 
         'summary'  => 'How we helped Bloomford launch a modern hiring portal for HR professionals – connecting employers and candidates, streamlining vacancy management and turning scattered CVs into one searchable, structured talent pipeline.',
 
@@ -718,7 +718,7 @@ return [
                     ],
                     [
                         'label' => 'API Development',
-                        'href'  => '/services/api-development/',
+                        'href'  => '/services/backend-development/',
                     ],
                 ],
             ],
@@ -747,8 +747,8 @@ return [
         'enabled'     => true,
         'order'       => 40,
 
-        'meta_title'       => 'Hellory – Smart Reminder App for Busy Lives | Mobile Reminder App Case Study',
-        'meta_description' => 'How QalbIT helped design and build Hellory, a smart reminder app for busy lives – a cross-platform mobile reminder application with recurring reminders, custom templates and secure notifications, backed by a modern Node.js / MongoDB API.',
+        'meta_title'       => 'Hellory – Smart Reminder App Case Study | QalbIT',
+        'meta_description' => 'How QalbIT built Hellory, a cross-platform smart reminder app with recurring reminders and secure notifications on a Node.js/MongoDB backend.',
 
         'summary' => 'How we partnered with the Hellory team to build a smart reminder app for busy lives – combining recurring reminders, custom templates and secure messaging into one cross-platform mobile experience.',
 
@@ -1094,7 +1094,7 @@ return [
                     ],
                     [
                         'label' => 'API Development',
-                        'href'  => '/services/api-development/',
+                        'href'  => '/services/backend-development/',
                     ],
                     [
                         'label' => 'Start-up MVP',
@@ -1128,8 +1128,8 @@ return [
         'enabled'     => true,
         'order'       => 30,
 
-        'meta_title'       => 'Plugin – Tennis Club Management & Court Booking Web App Case Study | QalbIT',
-        'meta_description' => 'How QalbIT designed and built Plugin, a custom tennis club management and court booking web application for a Swiss club – centralising courts, schedules, members, pricing and payments in one platform.',
+        'meta_title'       => 'Plugin – Tennis Club Booking App Case Study | QalbIT',
+        'meta_description' => 'How QalbIT built Plugin, a tennis club management and court booking web app for a Swiss club – courts, members, pricing and payments in one platform.',
 
         'summary' => 'How we helped a tennis club replace manual court bookings and scattered member data with a custom web application that manages schedules, memberships, variable pricing and online payments in one place.',
 
@@ -1476,12 +1476,12 @@ return [
                         'href'  => '/start-up-mvp/',
                     ],
                     [
-                        'label' => 'API Development',
-                        'href'  => '/services/api-development/',
+                        'label' => 'Backend & API Development',
+                        'href'  => '/services/backend-development/',
                     ],
                     [
-                        'label' => 'Payment Gateway Integration',
-                        'href'  => '/services/payment-gateway-services/',
+                        'label' => 'E-Commerce Development',
+                        'href'  => '/services/e-commerce/',
                     ],
                 ],
             ],
@@ -1495,6 +1495,369 @@ return [
                 'primary_cta' => [
                     'label' => 'Book a free consultation',
                     'href'  => '/contact-us/?topic=cta-plugin',
+                ],
+                'secondary_cta' => [
+                    'label' => 'Book a quick discovery call',
+                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                ],
+            ],
+        ],
+    ],
+
+    'cyberfind' => [
+        'slug'        => '/case-studies/cyberfind/',
+        'name'        => 'CyberFind – Vendor Decision Engine for CISOs',
+        'h1'          => 'CyberFind – Cybersecurity Vendor Review & Decision Platform (Case Study)',
+        'enabled'     => true,
+        'order'       => 5,
+
+        'meta_title'       => 'CyberFind – CISO Vendor Review Platform Case Study | QalbIT',
+        'meta_description' => 'How QalbIT built CyberFind, a peer-review platform where 500+ verified CISOs compare security training vendors – Next.js, Node.js and Python.',
+
+        'summary'  => 'How we built CyberFind, a decision-support platform where verified CISOs review and compare Security Awareness Training and Human Risk Management vendors – with verified peer reviews, outcome metrics and side-by-side comparisons.',
+
+        'client'   => 'CyberFind',
+        'industry' => 'Cybersecurity / B2B SaaS',
+        'location' => 'Global (Remote collaboration)',
+
+        'banner'    => '/images/case-studies/cyberfind-webapp.png',
+        'bannerAlt' => 'CyberFind homepage showing verified CISO reviews, vendor stats and decision-support features',
+        'logo'      => '/images/case-studies/clients/cyberfind.png',
+        'logoAlt'   => 'CyberFind platform logo',
+
+        // Home featured spotlight visual (full hero capture, #18202b backdrop)
+        'featured_banner' => '/images/case-studies/cyberfind-hero.png',
+
+        'services' => [
+            'SaaS Product Development',
+            'Custom Software Development',
+            'Backend & API Development',
+            'Product UX & UI Design',
+        ],
+
+        'tech_stack' => [
+            'Next.js / React',
+            'Node.js APIs',
+            'Python data services',
+            'PostgreSQL',
+            'Role-based Access Control',
+        ],
+
+        'seo' => [
+            'primary_keyword'   => 'cybersecurity review platform case study',
+            'secondary_keywords'=> [
+                'B2B SaaS development case study',
+                'vendor comparison platform development',
+                'Next.js Node.js SaaS case study',
+                'peer review platform for CISOs',
+            ],
+            'canonical'         => 'https://www.qalbit.com/case-studies/cyberfind/',
+        ],
+
+        'sections' => [
+            'hero' => [
+                'id'       => 'cs1-hero',
+                'eyebrow'  => 'Case Study · Cybersecurity SaaS',
+                'title'    => 'CyberFind – <span class="text-gradient-brand-animated">The trusted decision engine</span> for security leaders',
+                'subtitle' => 'A peer-review and comparison platform where verified CISOs evaluate Security Awareness Training and Human Risk Management vendors – replacing months of vendor calls with days of evidence-based shortlisting.',
+                'primary_cta' => [
+                    'label' => 'Discuss a similar project',
+                    'href'  => '/contact-us/?topic=cs-cyberfind',
+                ],
+                'secondary_cta' => [
+                    'label' => 'Book a quick discovery call',
+                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                ],
+                'snapshot_cards' => [
+                    [
+                        'label' => 'Industry',
+                        'value' => 'Cybersecurity · Vendor intelligence',
+                    ],
+                    [
+                        'label' => 'Audience',
+                        'value' => 'CISOs & security leaders worldwide',
+                    ],
+                    [
+                        'label' => 'Platform',
+                        'value' => 'Next.js + Node.js SaaS with Python data services',
+                    ],
+                    [
+                        'label' => 'Engagement',
+                        'value' => 'Discovery → MVP → Continuous product development',
+                    ],
+                    [
+                        'label' => 'Key outcome',
+                        'value' => '500+ verified CISOs, 2,000+ peer reviews on the platform',
+                    ],
+                ],
+                'hero_media' => [
+                    'type' => 'image',
+                    'src'  => '/images/case-studies/cyberfind-webapp.png',
+                    'alt'  => 'CyberFind hero with verified CISO counts, vendor coverage and peer review stats',
+                ],
+            ],
+            'about' => [
+                'id'    => 'cs2-about',
+                'title' => 'About the client',
+                'intro' => 'CyberFind set out to fix a painful, expensive problem in enterprise security: choosing the right Security Awareness Training and Human Risk Management vendor. Security leaders were relying on analyst paywalls, vendor marketing and cold outreach – with no trusted place to hear how solutions actually performed for peers.',
+                'client_story' => 'The founding team envisioned a "decision engine" built on verified peer evidence: real CISOs, real deployments, real outcome data. They needed a product partner who could design and build the full platform – review verification workflows, vendor profiles, comparison tooling and a data pipeline to keep vendor information current – and evolve it quickly as the CISO community grew.',
+                'at_a_glance_title' => 'Client at a glance',
+                'at_a_glance' => [
+                    ['label' => 'Business type',      'value' => 'B2B SaaS – cybersecurity vendor intelligence'],
+                    ['label' => 'Audience',           'value' => 'CISOs and security leaders'],
+                    ['label' => 'Vendor coverage',    'value' => '50+ curated solutions'],
+                    ['label' => 'Community',          'value' => '500+ verified security professionals'],
+                    ['label' => 'Engagement length',  'value' => 'MVP + continuous iterations'],
+                ],
+            ],
+            'challenge' => [
+                'id'    => 'cs3-challenge',
+                'title' => 'The challenge',
+                'before_title' => 'Before CyberFind',
+                'before_story' => 'Vendor selection in the security awareness space took security teams months: demo cycles with a dozen vendors, reference calls arranged by the vendors themselves, and review sites where authenticity was impossible to verify. CyberFind needed a platform where trust was engineered in – not promised.',
+                'bullets_title' => 'Key challenges we had to solve',
+                'challenges' => [
+                    'Review authenticity: every review had to come from a verified security leader, with a verification workflow that didn’t scare busy CISOs away.',
+                    'Structured, comparable data: free-text reviews are not enough – the platform needed scenario-based feedback and outcome metrics (behaviour change, engagement, ROI) that could be compared across vendors.',
+                    'Powerful filtering: shortlists had to respect industry, company size, compliance requirements and integration needs.',
+                    'Keeping 50+ vendor profiles accurate over time without a large editorial team – calling for automated data aggregation and enrichment.',
+                    'Enterprise-grade trust signals: security leaders judge a platform’s credibility by its own engineering quality, performance and privacy posture.',
+                    'A roadmap-friendly architecture: reviews, comparisons and community features would evolve rapidly after launch.',
+                ],
+            ],
+            'goals' => [
+                'id'    => 'cs4-goals',
+                'title' => 'Project goals & success criteria',
+                'business_goals_title' => 'Business goals',
+                'business_goals' => [
+                    'Become the trusted, peer-driven starting point for Security Awareness Training and HRM vendor selection.',
+                    'Grow a verified community of security leaders contributing reviews and outcome data.',
+                    'Cut typical vendor shortlisting time from months to days for platform users.',
+                    'Build a data asset – structured vendor and outcome information – that compounds in value.',
+                ],
+                'product_goals_title' => 'Product & technical goals',
+                'product_goals' => [
+                    'Design a review submission and verification flow that respects a CISO’s time.',
+                    'Model vendors, scenarios and outcome metrics so comparisons are meaningful, not marketing.',
+                    'Build fast, SEO-friendly vendor and category pages on Next.js for organic discovery.',
+                    'Separate concerns cleanly: Next.js frontend, Node.js product APIs and Python services for data aggregation and enrichment.',
+                ],
+                'note' => 'We agreed to launch with a focused core – verified reviews, vendor profiles and comparison – and expand into deeper analytics and community features once real CISOs were active on the platform.',
+            ],
+            'solution' => [
+                'id'    => 'cs5-solution',
+                'title' => 'Our solution',
+                'intro' => 'QalbIT designed and built CyberFind as a modern, multi-service SaaS platform: a polished Next.js experience for security leaders, Node.js APIs powering reviews, profiles and comparisons, and Python services handling vendor data aggregation and review-verification support.',
+                'body'  => 'We started with discovery around the two personas – the CISO researching vendors and the security leader contributing reviews – and designed flows that make both fast and credible. Vendor profiles combine curated information with structured peer feedback and outcome metrics. The comparison engine lets users shortlist side by side, filtered by industry, company size, compliance requirements and integrations. Behind the scenes, Python pipelines keep vendor data fresh and support the verification workflow that gives every review its credibility.',
+                'highlight_strip' => [
+                    'End-to-end product design, frontend, backend and data engineering.',
+                    'Next.js + Node.js + Python architecture with clean service boundaries.',
+                    'Verification-first review system – the platform’s core trust asset.',
+                ],
+            ],
+            'features' => [
+                'id'    => 'cs6-features',
+                'title' => 'Key product features & UX highlights',
+                'subtitle' => 'Everything a security leader needs to move from long vendor lists to a confident, evidence-based shortlist.',
+                'items' => [
+                    [
+                        'name' => 'Verified CISO reviews',
+                        'description' => 'Every review is tied to an authenticated security leader through a verification workflow – no fake reviews, no vendor manipulation.',
+                    ],
+                    [
+                        'name' => 'Outcome metrics',
+                        'description' => 'Structured data on behaviour change, engagement rates and ROI, so vendors are compared on results rather than feature lists.',
+                    ],
+                    [
+                        'name' => 'Side-by-side comparison',
+                        'description' => 'Shortlist vendors and compare capabilities, outcomes and peer sentiment in a single view.',
+                    ],
+                    [
+                        'name' => 'Advanced filtering',
+                        'description' => 'Narrow 50+ solutions by industry, company size, compliance requirements and integration needs in seconds.',
+                    ],
+                    [
+                        'name' => 'Curated vendor profiles',
+                        'description' => 'Rich, consistently structured profiles kept current with the help of automated Python data aggregation.',
+                    ],
+                    [
+                        'name' => 'Scenario-based feedback',
+                        'description' => 'Reviews capture the deployment context – rollout size, industry, use case – so readers can find feedback from peers like them.',
+                    ],
+                    [
+                        'name' => 'CISO community layer',
+                        'description' => 'A growing network of 500+ verified security professionals whose collective experience powers the platform.',
+                    ],
+                    [
+                        'name' => 'Fast, SEO-friendly frontend',
+                        'description' => 'Next.js rendering keeps category and vendor pages fast and discoverable – organic search is a core acquisition channel.',
+                    ],
+                ],
+                'screenshot' => [
+                    'src' => '/images/case-studies/cyberfind-casestudy-page.png',
+                    'alt' => 'CyberFind decision-support features: verified CISO reviews, outcome metrics and advanced filtering',
+                ],
+            ],
+            'stack' => [
+                'id'    => 'cs7-stack',
+                'title' => 'Architecture & technology stack',
+                'backend_title' => 'Backend & data services',
+                'backend' => [
+                    'Node.js API layer powering reviews, vendor profiles, comparisons and user accounts.',
+                    'Python services for vendor data aggregation, enrichment and review-verification support.',
+                    'PostgreSQL as the system of record for vendors, reviews, outcomes and users.',
+                    'Role-based access control separating members, contributors and administrators.',
+                    'Clean service boundaries so product APIs and data pipelines evolve independently.',
+                ],
+                'frontend_title' => 'Frontend & UX',
+                'frontend' => [
+                    'Next.js (React) frontend with server-side rendering for speed and SEO.',
+                    'A trust-first visual language: metrics, verification badges and structured data up front.',
+                    'Reusable comparison, filtering and review components.',
+                    'Responsive layouts for research at the desk and quick checks on mobile.',
+                ],
+                'tech_pills' => [
+                    'Next.js',
+                    'React',
+                    'Node.js',
+                    'Python',
+                    'PostgreSQL',
+                    'REST APIs',
+                ],
+            ],
+            'process' => [
+                'id'    => 'cs8-process',
+                'title' => 'Delivery process & collaboration',
+                'steps' => [
+                    [
+                        'step'        => '01',
+                        'name'        => 'Discovery & data modelling',
+                        'duration'    => '2–3 weeks',
+                        'description' => 'Persona workshops with the founding team, competitive teardown of review platforms, and modelling of vendors, scenarios and outcome metrics.',
+                    ],
+                    [
+                        'step'        => '02',
+                        'name'        => 'UX flows & interface design',
+                        'duration'    => '2–3 weeks',
+                        'description' => 'Design of the research journey (discover → filter → compare → decide) and the contributor journey (verify → review), with a trust-first UI system.',
+                    ],
+                    [
+                        'step'        => '03',
+                        'name'        => 'MVP development',
+                        'duration'    => '8–10 weeks',
+                        'description' => 'Incremental delivery of the Next.js frontend, Node.js APIs and first Python aggregation pipelines, with weekly demos and course corrections.',
+                    ],
+                    [
+                        'step'        => '04',
+                        'name'        => 'Verified community launch',
+                        'duration'    => '2–3 weeks',
+                        'description' => 'Onboarding the first wave of verified CISOs, hardening the verification workflow and tuning performance ahead of public visibility.',
+                    ],
+                    [
+                        'step'        => '05',
+                        'name'        => 'Continuous product development',
+                        'duration'    => 'Ongoing',
+                        'description' => 'Iterating on comparison tooling, outcome analytics and community features as the review base and vendor coverage grow.',
+                    ],
+                ],
+                'engagement_model' => [
+                    'label' => 'Engagement model used',
+                    'description' => 'A Start-up MVP engagement to reach a credible launch fast, followed by a dedicated product squad for continuous development.',
+                    'links' => [
+                        [
+                            'label' => 'Start-up MVP approach',
+                            'href'  => '/start-up-mvp/',
+                        ],
+                        [
+                            'label' => 'Engagement models at QalbIT',
+                            'href'  => '/engagement-model/',
+                        ],
+                    ],
+                ],
+            ],
+            'results' => [
+                'id'    => 'cs9-results',
+                'title' => 'Results & impact',
+                'subtitle' => 'From an idea about trustworthy vendor selection to a growing decision engine for the security community.',
+                'metrics' => [
+                    [
+                        'label' => 'Verified community',
+                        'value' => '500+ verified CISOs',
+                        'note'  => 'Every reviewer authenticated as a real security leader.',
+                    ],
+                    [
+                        'label' => 'Peer evidence base',
+                        'value' => '2,000+ peer reviews',
+                        'note'  => 'Scenario-based, structured feedback across the vendor landscape.',
+                    ],
+                    [
+                        'label' => 'Vendor coverage',
+                        'value' => '50+ curated solutions',
+                        'note'  => 'Security Awareness Training and Human Risk Management vendors, kept current by automated pipelines.',
+                    ],
+                    [
+                        'label' => 'User satisfaction',
+                        'value' => '95% would recommend',
+                        'note'  => 'CISOs who would recommend CyberFind to a peer.',
+                    ],
+                ],
+                'narrative' => 'CyberFind now gives security leaders what the space was missing: a trusted, evidence-first way to choose vendors. Shortlisting that used to take months of calls happens in days, backed by verified peer experience and outcome data. The Next.js + Node.js + Python architecture keeps the platform fast for readers, credible for contributors and ready for the analytics and community features on the roadmap.',
+                'testimonial' => [
+                    'quote' => '“QalbIT took our idea of a trusted, peer-driven vendor platform and turned it into a product security leaders genuinely rely on. They understood that credibility had to be engineered into every flow – from review verification to how outcome data is presented – and delivered a platform we can keep building on.”',
+                    'name'  => 'Founding Team',
+                    'role'  => 'CyberFind',
+                ],
+                'inline_cta' => [
+                    'text' => 'Building a review, comparison or vendor-intelligence platform for your industry?',
+                    'link_label' => 'Talk to QalbIT about your SaaS product',
+                    'href' => '/contact-us/?topic=cs-cyberfind-results',
+                ],
+            ],
+            'related' => [
+                'id'    => 'cs10-related',
+                'title' => 'Related case studies & services',
+                'subtitle' => 'Explore more SaaS and platform case studies and the services we used on this project.',
+                'case_studies' => [
+                    [
+                        'slug'    => '/case-studies/bloomford/',
+                        'name'    => 'Bloomford – Hiring portal for HR professionals',
+                        'summary' => 'Recruitment & talent portal that gives HR teams a single workspace for employers, vacancies and candidates.',
+                    ],
+                    [
+                        'slug'    => '/case-studies/snappystats/',
+                        'name'    => 'Snappy Stats – Scheduling web app',
+                        'summary' => 'Custom Laravel scheduling platform that eliminated double bookings for a growing shooting academy.',
+                    ],
+                    [
+                        'slug'    => '/case-studies/hellory/',
+                        'name'    => 'Hellory – Smart reminder app for busy lives',
+                        'summary' => 'Cross-platform mobile reminder app with recurring schedules, templates and a robust notification pipeline.',
+                    ],
+                ],
+                'services_used_title' => 'Services used in this project',
+                'services_used' => [
+                    [
+                        'label' => 'SaaS Product Development',
+                        'href'  => '/services/saas/',
+                    ],
+                    [
+                        'label' => 'Backend & API Development',
+                        'href'  => '/services/backend-development/',
+                    ],
+                    [
+                        'label' => 'MVP Development',
+                        'href'  => '/services/mvp-development/',
+                    ],
+                ],
+            ],
+            'final_cta' => [
+                'id'    => 'cs10-final-cta',
+                'eyebrow' => 'Building a platform your industry can trust?',
+                'title'   => 'Let’s design a SaaS product where credibility is engineered in from day one.',
+                'text'    => 'Whether you are building a review platform, a marketplace or a data-driven B2B product, QalbIT combines product thinking, modern Next.js/Node.js engineering and data pipelines to ship platforms users believe in – not just prototypes.',
+                'primary_cta' => [
+                    'label' => 'Book a free consultation',
+                    'href'  => '/contact-us/?topic=cta-cyberfind',
                 ],
                 'secondary_cta' => [
                     'label' => 'Book a quick discovery call',

@@ -68,6 +68,7 @@ class ContactController
             'title'       => 'Contact QalbIT – Start Your Custom Software Project',
             'description' => 'Get in touch with QalbIT to discuss your custom software, web, mobile, or SaaS project. Share your requirements and we will get back within 24 hours.',
             'canonical'   => $baseUrl . '/contact-us/',
+            'image'       => og_image_url('/contact-us/'),
         ];
 
         // Flash data – consumed exactly once
@@ -94,6 +95,7 @@ class ContactController
                     'title'       => 'Contact QalbIT – Start Your Custom Software Project',
                     'description' => 'Get in touch with QalbIT to discuss your custom software, web, mobile, or SaaS project. Share your requirements and we will get back within 24 hours.',
                     'canonical'   => $baseUrl . '/contact-us/',
+            'image'       => og_image_url('/contact-us/'),
                 ];
 
                 // Blank state (no errors, no old data, no success message)
@@ -129,12 +131,14 @@ class ContactController
         $breadcrumbsSchema = Schema::breadcrumbs([
             ['name' => 'Contact Us', 'url' => '/contact-us/'],
         ]);
+        $localBusinessSchema = Schema::localBusiness();
 
         // JSON-LD
         $jsonLd = array_values(array_filter([
             $orgSchema,
             $websiteSchema,
             $breadcrumbsSchema,
+            $localBusinessSchema,
             $faqSchema,
         ]));
 

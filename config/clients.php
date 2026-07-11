@@ -1,6 +1,39 @@
 <?php
 
 return [
+    'cyberfind' => [
+        'id'        => 'cyberfind',
+        'name'      => 'CyberFind',
+        'logo'      => '/images/clients/cyberfind-logo.png',
+        'alt'       => 'CyberFind cybersecurity vendor review platform logo',
+        'url'       => null,
+        'industry'  => 'Cybersecurity / B2B SaaS',
+        'enabled'   => true,
+        'order'     => 10,
+    ],
+
+    'vedicwhisper' => [
+        'id'        => 'vedicwhisper',
+        'name'      => 'Vedic Whisper',
+        'logo'      => '/images/clients/vedicwhisper-logo.png',
+        'alt'       => 'Vedic Whisper astrology and spiritual guidance platform logo',
+        'url'       => null,
+        'industry'  => 'Spirituality / Consumer Apps',
+        'enabled'   => true,
+        'order'     => 20,
+    ],
+
+    'jewelnxt' => [
+        'id'        => 'jewelnxt',
+        'name'      => 'JewelNXT',
+        'logo'      => '/images/clients/jewelnxt-logo.png',
+        'alt'       => 'JewelNXT jewellery retail software platform logo',
+        'url'       => null,
+        'industry'  => 'Jewellery / Retail SaaS',
+        'enabled'   => true,
+        'order'     => 30,
+    ],
+
     'plugin' => [
         'id'        => 'plugin',
         'name'      => 'Plugin',

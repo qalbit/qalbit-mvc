@@ -10,7 +10,7 @@ return [
         // SEO and template
         'h1'               => 'Startup MVP Development Company',
         'meta_title'       => 'Startup MVP Development Company in India – QalbIT',
-        'meta_description' => 'QalbIT is a startup MVP development company helping founders design and build SaaS, web and mobile MVPs in 8–16 weeks. Work with a founder-led MVP development agency for clean, scalable code you own.',
+        'meta_description' => 'QalbIT is a startup MVP development company helping founders build SaaS, web and mobile MVPs in 8–16 weeks – founder-led, with clean code you own.',
         'template'         => 'pages/process/start-up-mvp',
 
         // FAQ meta (for schema etc.)
@@ -165,7 +165,7 @@ return [
                     'label'       => 'Web app MVPs',
                     'description' => 'Browser based products and internal tools with responsive UI, authentication, reporting and integrations into CRMs, ERPs or third party APIs.',
                     'link_label'  => 'Explore web application development',
-                    'link_href'   => '/services/web-applications/',
+                    'link_href'   => '/services/custom-web-development/',
                 ],
                 [
                     'key'         => 'mobile-app-mvp',
@@ -507,7 +507,7 @@ return [
         // SEO and template
         'h1'               => 'Product Scaling Team for SaaS and Software Products',
         'meta_title'       => 'Product Scaling Team for SaaS and Software Products – QalbIT',
-        'meta_description' => 'QalbIT provides a dedicated Product Scaling Team to help SaaS and software companies stabilise, optimise and scale existing products. Strengthen your product development practices, increase release velocity and improve reliability with a founder led engineering squad in India.',
+        'meta_description' => 'A dedicated Product Scaling Team from QalbIT helps SaaS companies stabilise, optimise and scale existing products – more velocity, better reliability.',
         'template'         => 'pages/process/product-scaling',
 
         // FAQ meta (for schema etc.)
@@ -690,7 +690,7 @@ return [
                     'label'       => 'Integrations and API expansion',
                     'description' => 'Design and extend APIs, webhooks and third party integrations that connect your product to CRMs, billing, analytics and external systems.',
                     'link_label'  => 'Explore API development',
-                    'link_href'   => '/services/api-development/',
+                    'link_href'   => '/services/backend-development/',
                 ],
                 [
                     'key'         => 'frontend-cleanup',
@@ -1013,7 +1013,7 @@ return [
         // SEO and template
         'h1'               => 'Digital Transformation Consulting & Software Partner',
         'meta_title'       => 'Digital Transformation Services & Software Partner – QalbIT',
-        'meta_description' => 'QalbIT is a digital transformation company helping SMEs and mid-market businesses replace spreadsheets and legacy systems with integrated web, mobile and cloud platforms. From discovery and roadmaps to pilots, rollout and long-term support, we act as your hands-on digital transformation partner.',
+        'meta_description' => 'QalbIT helps SMEs replace spreadsheets and legacy systems with integrated web, mobile and cloud platforms – discovery, pilots, rollout and support.',
         'template'         => 'pages/process/digital-transformation',
 
         // FAQ meta (for schema etc.)
@@ -1175,7 +1175,7 @@ return [
                     'label'       => 'Custom internal tools and platforms',
                     'description' => 'Web applications and internal portals that centralise workflows for operations, finance, logistics, HR and other teams, replacing spreadsheets and ad hoc tools.',
                     'link_label'  => 'See web application development',
-                    'link_href'   => '/services/web-applications/',
+                    'link_href'   => '/services/custom-web-development/',
                 ],
                 [
                     'key'         => 'integrations-automation',
@@ -1496,8 +1496,8 @@ return [
 
         // SEO and template
         'h1'               => 'Software Development Engagement Models',
-        'meta_title'       => 'Software Development Engagement Models – Fixed Cost, Time & Material, Dedicated Team',
-        'meta_description' => 'Compare QalbIT’s software development engagement models – fixed cost projects, time & material and dedicated product squads. See when to use each engagement model, how budgets work and how we start new engagements.',
+        'meta_title'       => 'Software Development Engagement Models & Pricing – QalbIT',
+        'meta_description' => 'Compare QalbIT’s engagement models – fixed cost, time & material and dedicated squads. When to use each, how budgets work and how engagements start.',
         'template'         => 'pages/process/engagement-model',
 
         // FAQ meta (for schema etc.)

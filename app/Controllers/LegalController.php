@@ -39,6 +39,7 @@ class LegalController
             'title'       => 'Privacy Policy | QalbIT Infotech Pvt Ltd',
             'description' => 'Read how QalbIT Infotech Pvt Ltd collects, uses and protects your personal data when you interact with qalbit.com and our services.',
             'canonical'   => $baseUrl . '/privacy-policy/',
+            'image'       => og_image_url('/privacy-policy/'),
             'noindex'     => false,
         ];
 
@@ -79,6 +80,7 @@ class LegalController
             'title'       => 'Terms & Conditions | QalbIT Infotech Pvt Ltd',
             'description' => 'Review the terms and conditions that apply when you use qalbit.com, our content and our software development services.',
             'canonical'   => $baseUrl . '/terms-and-condition/',
+            'image'       => og_image_url('/terms-and-condition/'),
             'noindex'     => false,
         ];
 
@@ -119,6 +121,7 @@ class LegalController
             'title'       => 'Cookie Policy | QalbIT Infotech Pvt Ltd',
             'description' => 'Learn how QalbIT uses cookies and similar technologies on qalbit.com, including what we collect and how you can control your preferences.',
             'canonical'   => $baseUrl . '/cookie-policy/',
+            'image'       => og_image_url('/cookie-policy/'),
             'noindex'     => false,
         ];
 

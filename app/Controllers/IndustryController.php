@@ -44,6 +44,7 @@ class IndustryController
             'title'       => 'Industries We Serve – QalbIT',
             'description' => 'QalbIT delivers custom software solutions for e-commerce, fintech, healthcare, education, travel, business operations and more.',
             'canonical'   => $baseUrl . '/industries/',
+            'image'       => og_image_url('/industries/'),
         ];
 
         // FAQs for the industries page
@@ -160,6 +161,7 @@ class IndustryController
             'title'       => $industry['meta_title']       ?? (($industry['name'] ?? 'Industry') . ' – QalbIT'),
             'description' => $industry['meta_description'] ?? '',
             'canonical'   => $canonical,
+            'image'       => og_image_url($canonicalPath),
         ];
 
         $faqKey = $industry['faq_key'] ?? null;

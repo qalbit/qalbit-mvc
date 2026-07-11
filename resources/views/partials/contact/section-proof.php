@@ -168,7 +168,7 @@
                         </a>
                     </article>
 
-                    <!-- Card 3 – Hellory -->
+                    <!-- Card 3 – CyberFind -->
                     <article
                         class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-100 transition-transform transition-shadow hover:-translate-y-1 hover:border-primary-500/80 hover:shadow-md hover:shadow-primary-100 focus-within:ring-2 focus-within:ring-primary-500/70 focus-within:ring-offset-2 focus-within:ring-offset-slate-50"
                         data-proof-card
@@ -179,24 +179,24 @@
                         ></div>
 
                         <p class="inline-flex items-center rounded-full bg-primary-50 px-2.5 py-0.5 text-[11px] font-medium text-primary-700">
-                            Productivity &amp; Communication
+                            Cybersecurity &amp; B2B SaaS
                         </p>
 
                         <h4 class="mt-2 text-sm font-semibold text-slate-950">
-                            Hellory Reminder – multi-channel productivity &amp; communication app
+                            CyberFind – vendor review &amp; decision platform for CISOs
                         </h4>
                         <p class="mt-2 text-xs sm:text-sm text-slate-600">
-                            Cross-platform reminder and communication product with Flutter apps and a Node.js/MongoDB
-                            backend to keep users on top of their busy lives.
+                            Decision-support SaaS where 500+ verified CISOs compare security training vendors –
+                            built with Next.js, Node.js APIs and Python data services.
                         </p>
                         <p class="mt-1 text-[11px] text-slate-500">
-                            Result: reliable notifications, stronger engagement and a foundation for future iterations.
+                            Result: verified peer reviews, outcome metrics and side-by-side vendor comparisons in one place.
                         </p>
                         <a
-                            href="<?= route_url('/case-studies/hellory/') ?>"
+                            href="<?= route_url('/case-studies/cyberfind/') ?>"
                             class="mt-3 inline-flex items-center text-[11px] font-medium text-primary-700 underline underline-offset-4 hover:text-primary-900"
                         >
-                            View Hellory case study
+                            View CyberFind case study
                             <svg
                                 class="ml-1 h-3 w-3"
                                 viewBox="0 0 16 16"

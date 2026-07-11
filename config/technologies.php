@@ -262,9 +262,9 @@ return [
             'primary_url'   => '/contact-us/?topic=reactjs-development',
             'primary_aria'  => 'Book a React.js discovery call with QalbIT',
 
-            'secondary_label' => 'Send us your frontend requirements',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
-            'secondary_aria'  => 'Send your React.js frontend requirements to QalbIT',
+            'secondary_label' => 'Hire dedicated React.js developers',
+            'secondary_url'   => '/hire-reactjs-developers/',
+            'secondary_aria'  => 'Hire dedicated React.js developers from QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
         ],
@@ -532,9 +532,9 @@ return [
             'primary_url'   => '/contact-us/?topic=nextjs-development',
             'primary_aria'  => 'Book a Next.js discovery call with QalbIT',
 
-            'secondary_label' => 'Send us your Next.js requirements',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
-            'secondary_aria'  => 'Send your Next.js requirements to QalbIT',
+            'secondary_label' => 'Hire dedicated Next.js developers',
+            'secondary_url'   => '/hire-nextjs-developers/',
+            'secondary_aria'  => 'Hire dedicated Next.js developers from QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
         ],
@@ -1072,9 +1072,9 @@ return [
             'primary_url'   => '/contact-us/?topic=nodejs-backend',
             'primary_aria'  => 'Book a Node.js backend discovery call with QalbIT',
 
-            'secondary_label' => 'Send us your API/backend requirements',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
-            'secondary_aria'  => 'Send your Node.js backend requirements to QalbIT',
+            'secondary_label' => 'Hire dedicated Node.js developers',
+            'secondary_url'   => '/hire-nodejs-developers/',
+            'secondary_aria'  => 'Hire dedicated Node.js developers from QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
         ],
@@ -1342,9 +1342,9 @@ return [
             'primary_url'   => '/contact-us/?topic=nestjs-backend',
             'primary_aria'  => 'Book a NestJS backend discovery call with QalbIT',
 
-            'secondary_label' => 'Send us your backend/API requirements',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
-            'secondary_aria'  => 'Send your NestJS backend requirements to QalbIT',
+            'secondary_label' => 'Hire dedicated Node.js/NestJS developers',
+            'secondary_url'   => '/hire-nodejs-developers/',
+            'secondary_aria'  => 'Hire dedicated Node.js and NestJS developers from QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
         ],
@@ -1612,9 +1612,9 @@ return [
             'primary_url'   => '/contact-us/?topic=laravel-development',
             'primary_aria'  => 'Book a Laravel discovery call with QalbIT',
 
-            'secondary_label' => 'Send us your Laravel requirements',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
-            'secondary_aria'  => 'Send your Laravel project requirements to QalbIT',
+            'secondary_label' => 'Hire dedicated Laravel developers',
+            'secondary_url'   => '/hire-laravel-developers/',
+            'secondary_aria'  => 'Hire dedicated Laravel developers from QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
         ],
@@ -1882,9 +1882,9 @@ return [
             'primary_url'   => '/contact-us/?topic=flutter-app-development',
             'primary_aria'  => 'Book a Flutter discovery call with QalbIT',
 
-            'secondary_label' => 'Send us your Flutter app requirements',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
-            'secondary_aria'  => 'Send your Flutter app requirements to QalbIT',
+            'secondary_label' => 'Hire dedicated Flutter developers',
+            'secondary_url'   => '/hire-flutter-developers/',
+            'secondary_aria'  => 'Hire dedicated Flutter developers from QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
         ],
@@ -3232,9 +3232,9 @@ return [
             'primary_url'   => '/contact-us/?topic=typescript-development',
             'primary_aria'  => 'Book a TypeScript development consultation with QalbIT',
 
-            'secondary_label' => 'Send us your current JS/TS repo',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
-            'secondary_aria'  => 'Send your current JavaScript/TypeScript repository details to QalbIT',
+            'secondary_label' => 'Hire full-stack JavaScript developers',
+            'secondary_url'   => '/hire-full-stack-javascript-developers/',
+            'secondary_aria'  => 'Hire dedicated full-stack JavaScript developers from QalbIT',
 
             'meta' => 'Share your stack, repositories and main pain points, and we will come back with a practical TypeScript plan.',
         ],

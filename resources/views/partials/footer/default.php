@@ -285,6 +285,16 @@ $currentYear = date('Y');
                         </a>
                     </li>
                     <li>
+                        <a title="Read detailed case studies of products we built" href="<?= route_url('/case-studies/') ?>" class="hover:text-sky-400">
+                            Case Studies
+                        </a>
+                    </li>
+                    <li>
+                        <a title="Estimate your software development cost instantly" href="<?= route_url('/tools/software-development-cost-calculator/') ?>" class="hover:text-sky-400">
+                            Cost Calculator
+                        </a>
+                    </li>
+                    <li>
                         <a title="SaaS products we built and operate" href="<?= route_url('/products/') ?>" class="hover:text-sky-400">
                             Our Products
                         </a>
@@ -399,8 +409,8 @@ $currentYear = date('Y');
                         </a>
                     </li>
                     <li>
-                        <a title="API Development Services for Seamless Integration" href="<?= route_url('/services/api-development/') ?>" class="hover:text-sky-400">
-                            API Development
+                        <a title="Backend & API Development Services for Seamless Integration" href="<?= route_url('/services/backend-development/') ?>" class="hover:text-sky-400">
+                            Backend & API Development
                         </a>
                     </li>
                     <li>
@@ -409,13 +419,18 @@ $currentYear = date('Y');
                         </a>
                     </li>
                     <li>
-                        <a title="Develop Advanced Web Applications with Us" href="<?= route_url('/services/web-applications/') ?>" class="hover:text-sky-400">
-                            Web Applications
+                        <a title="Custom CRM Development Tailored to Your Sales Process" href="<?= route_url('/services/crm-development/') ?>" class="hover:text-sky-400">
+                            CRM Development
                         </a>
                     </li>
                     <li>
-                        <a title="Back-end Development for Mobile Applications" href="<?= route_url('/services/mobile-app-backend/') ?>" class="hover:text-sky-400">
-                            Mobile App Backend
+                        <a title="Custom ERP Software Development for Growing Operations" href="<?= route_url('/services/erp-development/') ?>" class="hover:text-sky-400">
+                            ERP Development
+                        </a>
+                    </li>
+                    <li>
+                        <a title="MVP Development for Startups – Launch in Weeks" href="<?= route_url('/services/mvp-development/') ?>" class="hover:text-sky-400">
+                            MVP Development
                         </a>
                     </li>
                 </ul>
@@ -527,11 +542,81 @@ $currentYear = date('Y');
                             Hire Flutter Developers
                         </a>
                     </li>
+                    <li>
+                        <a
+                            title="Hire skilled React.js developers for your frontend projects"
+                            href="<?= route_url('/hire-reactjs-developers/') ?>"
+                            class="hover:text-sky-400"
+                        >
+                            Hire React.js Developers
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            title="Hire MVP developers to launch your startup faster"
+                            href="<?= route_url('/hire-mvp-developers/') ?>"
+                            class="hover:text-sky-400"
+                        >
+                            Hire MVP Developers
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            title="Hire dedicated developers in India – all profiles"
+                            href="<?= route_url('/hire-developers/') ?>"
+                            class="hover:text-sky-400"
+                        >
+                            All Developer Profiles
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
 
-        <!-- 5. Copyright + legal -->
+        <!-- 5. Locations we serve -->
+        <?php
+        $geoByCountry = [];
+        foreach (config('geo', []) as $geoEntry) {
+            if (empty($geoEntry['enabled']) || empty($geoEntry['slug']) || empty($geoEntry['name'])) {
+                continue;
+            }
+            $nameParts = array_map('trim', explode(',', $geoEntry['name']));
+            $geoCountry = count($nameParts) > 1 ? array_pop($nameParts) : 'Worldwide';
+            $geoByCountry[$geoCountry][] = [
+                'label' => implode(', ', $nameParts),
+                'slug'  => $geoEntry['slug'],
+                'name'  => $geoEntry['name'],
+            ];
+        }
+        ?>
+        <?php if (!empty($geoByCountry)): ?>
+            <nav class="border-t border-slate-700/60 pt-5 pb-1" aria-label="Locations we serve">
+                <p class="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-300">
+                    Locations we serve
+                </p>
+                <div class="space-y-2.5">
+                    <?php foreach ($geoByCountry as $countryLabel => $countryLocations): ?>
+                        <div class="flex flex-wrap items-center gap-y-1.5">
+                            <span class="mr-3 inline-flex items-center rounded-full bg-slate-800 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-300">
+                                <?= htmlspecialchars($countryLabel) ?>
+                            </span>
+                            <?php foreach ($countryLocations as $i => $loc): ?>
+                                <?php if ($i > 0): ?>
+                                    <span class="mx-2 text-slate-600" aria-hidden="true">·</span>
+                                <?php endif; ?>
+                                <a
+                                    title="Custom software development in <?= htmlspecialchars($loc['name']) ?>"
+                                    href="<?= route_url($loc['slug']) ?>"
+                                    class="text-xs text-slate-400 transition-colors hover:text-sky-400"
+                                ><?= htmlspecialchars($loc['label']) ?></a>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </nav>
+        <?php endif; ?>
+
+        <!-- 6. Copyright + legal -->
         <div class="flex flex-col gap-3 pt-2 text-xs text-slate-400 md:flex-row md:items-center md:justify-between">
             <p class="copyright-text">
                 © Copyright <?= $currentYear ?>. All rights reserved by QalbIT Infotech Pvt Ltd.

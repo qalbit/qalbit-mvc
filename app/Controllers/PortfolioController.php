@@ -24,6 +24,7 @@ class PortfolioController
             'title'       => 'Software Project Portfolio | QalbIT',
             'description' => 'Selected projects and case studies delivered by QalbIT across SaaS, healthcare, logistics, telecom and more.',
             'canonical'   => $baseUrl . '/portfolio/',
+            'image'       => og_image_url('/portfolio/'),
         ];
 
         // Read filters from query string: ?industry=healthcare&tech=laravel

@@ -34,10 +34,14 @@ class HireController
         });
 
         $seo = [
-            'title'       => 'Hire Dedicated Developers – QalbIT',
-            'description' => 'Hire dedicated Node.js, Laravel, React, Next.js, Flutter and full-stack developers from QalbIT to extend your team and ship reliable web, mobile and SaaS products.',
+            'title'       => 'Hire Dedicated Developers in India – Laravel & Node | QalbIT',
+            'description' => 'Hire dedicated Laravel, Node.js, Next.js, React and Flutter developers in India – onboard in 1–2 weeks, flexible monthly engagement, US/UK/GCC overlap.',
             'canonical'   => $baseUrl . '/hire-developers/',
+            'image'       => og_image_url('/hire-developers/'),
         ];
+
+        // FAQs for the hub page (rich results + on-page section)
+        $faqs = Faqs::for('service_hire_developers');
 
         // Global schemas for the index page
         $orgSchema         = Schema::organization();
@@ -46,16 +50,33 @@ class HireController
             ['name' => 'Home',            'url' => '/'],
             ['name' => 'Hire Developers', 'url' => '/hire-developers/'],
         ]);
+        $faqSchema = !empty($faqs)
+            ? Schema::faq($faqs, $seo['canonical'], $seo['title'])
+            : null;
+
+        // Structured list of hire profiles – the most-extracted format in AI answers
+        $itemListSchema = Schema::itemList(
+            'Dedicated Developer Profiles at QalbIT',
+            array_map(static function (array $role): array {
+                return [
+                    'name' => $role['name'] ?? '',
+                    'url'  => $role['slug'] ?? '',
+                ];
+            }, $enabledRoles)
+        );
 
         $jsonLd = array_values(array_filter([
             $orgSchema,
             $websiteSchema,
             $breadcrumbsSchema,
+            $itemListSchema,
+            $faqSchema,
         ]));
 
         $content = View::render('pages/hire/index', [
             'seo'   => $seo,
             'roles' => $enabledRoles,
+            'faqs'  => $faqs,
         ]);
 
         return View::render('layouts/main', [
@@ -173,6 +194,7 @@ class HireController
             'title'       => $role['meta_title']       ?? (($role['name'] ?? 'Hire Developers') . ' – QalbIT'),
             'description' => $role['meta_description'] ?? '',
             'canonical'   => $canonical,
+            'image'       => og_image_url($canonicalPath),
         ];
 
         // Load FAQs for this specific service (if configured)

@@ -26,7 +26,7 @@
  *       'services_used' => [
  *           ['label' => 'Custom Software Development', 'href' => '/services/custom-software-development/'],
  *           ['label' => 'Start-up MVP',                'href' => '/start-up-mvp/'],
- *           ['label' => 'API Development',             'href' => '/services/api-development/'],
+ *           ['label' => 'API Development',             'href' => '/services/backend-development/'],
  *       ],
  *   ],
  *
@@ -86,7 +86,7 @@ if (empty($servicesUsed) && !empty($caseStudy['services']) && is_array($caseStud
         if (stripos($label, 'Custom Software') !== false) {
             $href = '/services/custom-software-development/';
         } elseif (stripos($label, 'API Development') !== false) {
-            $href = '/services/api-development/';
+            $href = '/services/backend-development/';
         } elseif (stripos($label, 'Start-up MVP') !== false || stripos($label, 'Startup MVP') !== false) {
             $href = '/start-up-mvp/';
         }

@@ -144,3 +144,27 @@ if (! function_exists('nav_meta')) {
         return $cache[$path] = $meta;
     }
 }
+
+if (!function_exists('og_image_url')) {
+    /**
+     * Convention-based per-page OG image.
+     * Returns the absolute URL of /assets/images/og/pages/{slug-key}.png
+     * when the file exists, otherwise null (layout falls back to the default card).
+     */
+    function og_image_url(string $slugPath): ?string
+    {
+        $key = trim($slugPath, '/');
+        $key = $key === '' ? 'home' : str_replace('/', '-', $key);
+
+        foreach (['.jpg', '.png'] as $ext) {
+            $rel  = '/assets/images/og/pages/' . $key . $ext;
+            $file = __DIR__ . '/../../public' . $rel;
+
+            if (is_file($file)) {
+                return rtrim(config('app.url', 'https://qalbit.com'), '/') . $rel;
+            }
+        }
+
+        return null;
+    }
+}

@@ -8,6 +8,15 @@
 $caseStudies = [
     [
         'label'      => 'Case 01',
+        'title'      => 'CyberFind – Vendor review & decision platform for CISOs',
+        'industry'   => 'Cybersecurity · B2B SaaS',
+        'summary'    => 'Decision-support platform where 500+ verified CISOs review and compare Security Awareness Training vendors, with verified peer reviews and side-by-side comparisons.',
+        'stack_line' => 'Next.js / React · Node.js APIs · Python data services · PostgreSQL',
+        'outcome'    => 'A trusted research destination for security leaders with 2,000+ verified reviews across 50+ vendors.',
+        'url'        => '/case-studies/cyberfind/',
+    ],
+    [
+        'label'      => 'Case 02',
         'title'      => 'Plugin – Tennis club management web app',
         'industry'   => 'Sports clubs · Membership & bookings',
         'summary'    => 'Custom tennis club management & court booking web app that centralises courts, schedules, memberships, pricing and payments in one place.',
@@ -16,7 +25,7 @@ $caseStudies = [
         'url'        => '/case-studies/plugin/',
     ],
     [
-        'label'      => 'Case 02',
+        'label'      => 'Case 03',
         'title'      => 'Snappy Stats – Scheduling management web app',
         'industry'   => 'Sports academies · Training & education',
         'summary'    => 'Laravel-based scheduling management app that replaces spreadsheets with a centralised calendar for classes, coaches and shooting ranges.',
@@ -25,7 +34,7 @@ $caseStudies = [
         'url'        => '/case-studies/snappystats/',
     ],
     [
-        'label'      => 'Case 03',
+        'label'      => 'Case 04',
         'title'      => 'Hellory – Smart reminder mobile app',
         'industry'   => 'Consumer apps · Productivity',
         'summary'    => 'Cross-platform Flutter reminder app with recurring schedules, templates and secure notifications backed by a Node.js / MongoDB API.',
@@ -58,7 +67,7 @@ $caseStudies = [
                 Recent projects using these technologies
             </h2>
             <p class="text-sm sm:text-base text-slate-600 max-w-3xl">
-                A few examples of how we have used CodeIgniter, Laravel and Flutter in real products.
+                A few examples of how we have used Next.js, Node.js, Laravel, CodeIgniter and Flutter in real products.
                 More detailed case studies can be shared under NDA if your domain is similar.
             </p>
         </header>

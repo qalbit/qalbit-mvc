@@ -58,6 +58,7 @@ class ProductController
             'title'       => $page['meta_title']       ?? 'Products by QalbIT',
             'description' => $page['meta_description'] ?? '',
             'canonical'   => $baseUrl . '/products/',
+            'image'       => og_image_url('/products/'),
         ];
 
         $jsonLd = array_values(array_filter([
@@ -96,6 +97,7 @@ class ProductController
             'title'       => $product['meta_title']       ?? (($product['name'] ?? 'Product') . ' – Case Study | QalbIT'),
             'description' => $product['meta_description'] ?? '',
             'canonical'   => $canonical,
+            'image'       => og_image_url($canonicalPath),
         ];
 
         $jsonLd = array_values(array_filter([

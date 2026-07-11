@@ -27,6 +27,19 @@ class Router
         $this->addRoute('POST', $path, $handler);
     }
 
+    /**
+     * Register a permanent (or custom-status) redirect, e.g. for retired
+     * or merged pages so existing rankings and backlinks keep their value.
+     */
+    public function redirect(string $from, string $to, int $status = 301): void
+    {
+        $this->addRoute('GET', $from, static function () use ($to, $status): string {
+            http_response_code($status);
+            header('Location: ' . $to);
+            return '';
+        });
+    }
+
     protected function addRoute(string $method, string $path, $handler): void
     {
         if (str_contains($path, '{')) {
@@ -77,10 +90,19 @@ class Router
         $uri = $_SERVER['REQUEST_URI'] ?? '/';
         $uri = parse_url($uri, PHP_URL_PATH) ?: '/';
 
-        // Normalize trailing slash for pretty URLs
+        // Normalize trailing slash for pretty URLs.
+        // For GET/HEAD, 301 to the canonical slashed URL instead of serving the
+        // same content on two URLs; POST keeps internal normalization so form
+        // submissions are never redirected (which would drop the body).
         if ($uri !== '/' && substr($uri, -1) !== '/') {
             $basename = basename($uri);
             if (strpos($basename, '.') === false) {
+                if ($method === 'GET') {
+                    $query = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_QUERY);
+                    http_response_code(301);
+                    header('Location: ' . $uri . '/' . ($query ? '?' . $query : ''));
+                    return;
+                }
                 $uri .= '/';
             }
         }

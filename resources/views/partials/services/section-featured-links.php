@@ -8,24 +8,24 @@
  */
 
 $itemsPrimary = [
+    ['label' => 'Cost Calculator',     'href' => '/tools/software-development-cost-calculator/', 'meta' => 'Instant estimate'],
     ['label' => 'Engagement Models',   'href' => '/engagement-model/', 'meta' => 'Delivery options'],
     ['label' => 'Technologies we use', 'href' => '/technologies/',     'meta' => 'Our tech stack'],
     ['label' => 'Industry solutions',  'href' => '/industries/',       'meta' => 'Use cases'],
-    ['label' => 'View case studies',   'href' => '/portfolio/',        'meta' => 'Proof & outcomes'],
+    ['label' => 'View case studies',   'href' => '/case-studies/',     'meta' => 'Proof & outcomes'],
     ['label' => 'Get free estimation', 'href' => '/contact-us/',       'meta' => 'Talk to us'],
-    ['label' => 'Start-Up MVP',        'href' => '/start-up-mvp/',     'meta' => 'Launch roadmap'],
 ];
 
 // For /services/ page, the second row should be "popular services" (child pages)
 $itemsTech = [
     ['label' => 'Custom Software Development', 'href' => '/services/custom-software-development/', 'meta' => 'Web, mobile & cloud systems'],
+    ['label' => 'CRM Development',             'href' => '/services/crm-development/',             'meta' => 'Custom sales & service CRMs'],
+    ['label' => 'ERP Development',             'href' => '/services/erp-development/',             'meta' => 'Inventory, purchase & finance'],
+    ['label' => 'MVP Development',             'href' => '/services/mvp-development/',             'meta' => 'Launch in 6–10 weeks'],
     ['label' => 'Custom Web Development',      'href' => '/services/custom-web-development/',      'meta' => 'Web apps & platforms'],
     ['label' => 'Mobile App Development',      'href' => '/services/mobile-development/',          'meta' => 'iOS & Android apps'],
-    ['label' => 'SaaS Application Development','href' => '/services/saas/',                        'meta' => 'Multi-tenant SaaS builds'],
+    ['label' => 'Backend & API Development',   'href' => '/services/backend-development/',         'meta' => 'Secure scalable APIs'],
     ['label' => 'E-Commerce Solutions',        'href' => '/services/e-commerce/',                  'meta' => 'Stores & marketplaces'],
-    ['label' => 'API Development',             'href' => '/services/api-development/',             'meta' => 'Secure scalable APIs'],
-    ['label' => 'Cloud-based Solutions',       'href' => '/services/cloud-based-solutions/',       'meta' => 'Cloud infra & scaling'],
-    ['label' => 'Payment Gateway Services',    'href' => '/services/payment-gateway-services/',    'meta' => 'Integrations & compliance'],
 ];
 
 $toUrl = function($href) {

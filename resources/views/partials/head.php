@@ -109,10 +109,17 @@ $jsonLd = $jsonLd ?? null;
     <?php endforeach; ?>
 <?php endif; ?>
 
-<!-- Fonts -->
+<!-- Fonts (async: preload fetches early, print/onload applies without blocking render) -->
+<?php $fontsCssUrl = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap'; ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="preload" as="style" href="<?= $fontsCssUrl ?>">
+<link rel="stylesheet" href="<?= $fontsCssUrl ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= $fontsCssUrl ?>"></noscript>
+
+<!-- Script CDNs used site-wide (GSAP core/ScrollTrigger load deferred at end of body) -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
 <!-- Styles -->
 <link rel="stylesheet" href="<?= htmlspecialchars($cssHref) ?>">

@@ -44,19 +44,28 @@ $subtitle = $subtitle
                     <?= htmlspecialchars($subtitle) ?>
                 </p>
 
-                <ul class="mt-4 space-y-2 text-xs md:text-sm text-slate-300/95">
-                    <li>
-                        ✓ <span itemprop="supply">Custom software development, SaaS platforms and mobile apps.</span>
+                <ul class="mt-5 space-y-2.5 text-xs md:text-sm text-slate-300">
+                    <li class="flex items-start gap-2.5">
+                        <svg class="mt-0.5 h-4 w-4 flex-none text-emerald-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd"/>
+                        </svg>
+                        <span itemprop="supply">Custom software development, SaaS platforms and mobile apps.</span>
                     </li>
-                    <li>
-                        ✓ Dedicated engineering pods for product companies, agencies and enterprises.
+                    <li class="flex items-start gap-2.5">
+                        <svg class="mt-0.5 h-4 w-4 flex-none text-emerald-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Dedicated engineering pods for product companies, agencies and enterprises.</span>
                     </li>
-                    <li>
-                        ✓ Clear milestones, transparent pricing and ongoing delivery reporting.
+                    <li class="flex items-start gap-2.5">
+                        <svg class="mt-0.5 h-4 w-4 flex-none text-emerald-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Clear milestones, transparent pricing and ongoing delivery reporting.</span>
                     </li>
                 </ul>
 
-                <div class="mt-6 flex flex-wrap items-center gap-3">
+                <div class="mt-7 flex flex-wrap items-center gap-3">
                     <a
                         href="<?= route_url('/contact-us/') ?? 'https://qalbit.com/contact-us/' ?>"
                         class="btn btn-primary btn-radius-pill"
@@ -74,28 +83,28 @@ $subtitle = $subtitle
                         Or email your requirements
                     </a>
                 </div>
+
+                <p class="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-slate-400">
+                    <span>Typical kickoff within 1–2 weeks</span>
+                    <span aria-hidden="true">·</span>
+                    <span>NDA-friendly</span>
+                    <span aria-hidden="true">·</span>
+                    <span>IST–EST time-zone overlap</span>
+                </p>
             </header>
 
-            <!-- RIGHT: 3 animated step cards + connector line -->
-            <div class="relative lg:pl-4">
-                <!-- Horizontal connector line (desktop only) -->
-                <div
-                    class="pointer-events-none absolute inset-x-4 top-7 hidden md:block"
-                    aria-hidden="true"
-                >
+            <!-- RIGHT: vertical step timeline -->
+            <div class="relative lg:pl-6">
+                <ol class="relative space-y-8" data-cta-steps>
+                    <!-- Vertical rail connecting the step numbers -->
                     <div
-                        class="h-px w-full bg-gradient-to-r from-slate-700 via-slate-500 to-slate-700 origin-left scale-x-0"
-                        data-cta-connector
+                        class="pointer-events-none absolute bottom-8 left-[1.375rem] top-8 w-px bg-gradient-to-b from-sky-400/50 via-slate-600/50 to-slate-800"
+                        aria-hidden="true"
                     ></div>
-                </div>
 
-                <ol
-                    class="relative grid gap-5 md:grid-cols-3"
-                    data-cta-steps
-                >
                     <!-- STEP 1 -->
                     <li
-                        class="cta-step-card"
+                        class="cta-step-card flex items-start gap-4 sm:gap-6"
                         data-cta-step
                         data-cta-step-index="0"
                         itemscope
@@ -103,35 +112,25 @@ $subtitle = $subtitle
                         itemtype="https://schema.org/HowToStep"
                     >
                         <meta itemprop="position" content="1">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="step-icon-wrapper">
-                                <img
-                                    src="<?= asset('/images/icons/step-call.svg') ?>"
-                                    alt="Icon of discovery and exploration call"
-                                    loading="lazy"
-                                    decoding="async"
-                                    class="h-9 w-9 object-contain"
-                                />
-                            </div>
-                            <span class="step-badge">Step 1</span>
+                        <div class="step-node" aria-hidden="true">01</div>
+                        <div class="min-w-0 flex-1 pt-1.5">
+                            <h3 class="step-title" itemprop="name">
+                                Share your product and hiring needs.
+                            </h3>
+                            <p class="step-text" itemprop="text">
+                                Join a short discovery call to walk us through your product, tech stack, timelines, budget and required skills.
+                            </p>
+                            <ul class="step-list">
+                                <li>Clarify scope for web, mobile or SaaS.</li>
+                                <li>Align on success metrics and constraints.</li>
+                                <li>Decide if you need a full team or extra capacity.</li>
+                            </ul>
                         </div>
-
-                        <h3 class="step-title" itemprop="name">
-                            Share your product and hiring needs.
-                        </h3>
-                        <p class="step-text" itemprop="text">
-                            Join a short discovery call to walk us through your product, tech stack, timelines, budget and required skills.
-                        </p>
-                        <ul class="step-list">
-                            <li>Clarify scope for web, mobile or SaaS.</li>
-                            <li>Align on success metrics and constraints.</li>
-                            <li>Decide if you need a full team or extra capacity.</li>
-                        </ul>
                     </li>
 
                     <!-- STEP 2 -->
                     <li
-                        class="cta-step-card"
+                        class="cta-step-card flex items-start gap-4 sm:gap-6"
                         data-cta-step
                         data-cta-step-index="1"
                         itemscope
@@ -139,35 +138,25 @@ $subtitle = $subtitle
                         itemtype="https://schema.org/HowToStep"
                     >
                         <meta itemprop="position" content="2">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="step-icon-wrapper">
-                                <img
-                                    src="<?= asset('/images/icons/step-team.svg') ?>"
-                                    alt="Icon of software development team structure"
-                                    loading="lazy"
-                                    decoding="async"
-                                    class="h-9 w-9 object-contain"
-                                />
-                            </div>
-                            <span class="step-badge">Step 2</span>
+                        <div class="step-node" aria-hidden="true">02</div>
+                        <div class="min-w-0 flex-1 pt-1.5">
+                            <h3 class="step-title" itemprop="name">
+                                Finalise solution, engagement model and team.
+                            </h3>
+                            <p class="step-text" itemprop="text">
+                                Within a few days we propose architecture options, team composition and an engagement model that fits your roadmap.
+                            </p>
+                            <ul class="step-list">
+                                <li>Choose between fixed-scope or dedicated team.</li>
+                                <li>Lock in seniority mix and availability.</li>
+                                <li>Agree on milestones, reporting and tools.</li>
+                            </ul>
                         </div>
-
-                        <h3 class="step-title" itemprop="name">
-                            Finalise solution, engagement model and team.
-                        </h3>
-                        <p class="step-text" itemprop="text">
-                            Within a few days we propose architecture options, team composition and an engagement model that fits your roadmap.
-                        </p>
-                        <ul class="step-list">
-                            <li>Choose between fixed-scope or dedicated team.</li>
-                            <li>Lock in seniority mix and availability.</li>
-                            <li>Agree on milestones, reporting and tools.</li>
-                        </ul>
                     </li>
 
                     <!-- STEP 3 -->
                     <li
-                        class="cta-step-card"
+                        class="cta-step-card flex items-start gap-4 sm:gap-6"
                         data-cta-step
                         data-cta-step-index="2"
                         itemscope
@@ -175,30 +164,20 @@ $subtitle = $subtitle
                         itemtype="https://schema.org/HowToStep"
                     >
                         <meta itemprop="position" content="3">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="step-icon-wrapper">
-                                <img
-                                    src="<?= asset('/images/icons/step-started.svg') ?>"
-                                    alt="Icon of project kickoff and delivery tracking"
-                                    loading="lazy"
-                                    decoding="async"
-                                    class="h-9 w-9 object-contain"
-                                />
-                            </div>
-                            <span class="step-badge">Step 3</span>
+                        <div class="step-node" aria-hidden="true">03</div>
+                        <div class="min-w-0 flex-1 pt-1.5">
+                            <h3 class="step-title" itemprop="name">
+                                Kick off delivery and track progress in sprints.
+                            </h3>
+                            <p class="step-text" itemprop="text">
+                                We start with an agreed kickoff date, ship the first sprint quickly and keep you updated with demos, metrics and burn-down.
+                            </p>
+                            <ul class="step-list">
+                                <li>Regular demos, stand-ups and status reports.</li>
+                                <li>Transparent velocity and change management.</li>
+                                <li>Option to scale the team up or down as you grow.</li>
+                            </ul>
                         </div>
-
-                        <h3 class="step-title" itemprop="name">
-                            Kick off delivery and track progress in sprints.
-                        </h3>
-                        <p class="step-text" itemprop="text">
-                            We start with an agreed kickoff date, ship the first sprint quickly and keep you updated with demos, metrics and burn-down.
-                        </p>
-                        <ul class="step-list">
-                            <li>Regular demos, stand-ups and status reports.</li>
-                            <li>Transparent velocity and change management.</li>
-                            <li>Option to scale the team up or down as you grow.</li>
-                        </ul>
                     </li>
                 </ol>
             </div>

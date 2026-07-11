@@ -1057,13 +1057,13 @@
     // HELPER) Input Contact Field Picker
     // --------------------------------------------------------
     function initContactInputSection() {
+        var inputs = document.querySelectorAll("[data-intl-tel-input]");
+        if (!inputs.length) return;
+
         if (typeof window.intlTelInput !== "function") {
             console.warn("[intlTelInput] Library not available");
             return;
         }
-
-        var inputs = document.querySelectorAll("[data-intl-tel-input]");
-        if (!inputs.length) return;
         inputs.forEach(function (input) {
             if (input.__itiInstance) {
                 return;

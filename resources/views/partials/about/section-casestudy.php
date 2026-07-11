@@ -26,10 +26,65 @@
 
         <!-- Case study cards -->
         <div
-            class="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 lg:grid-cols-3"
+            class="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2"
             data-case-grid-about
         >
-            <!-- Case 1 – Snappy Stats -->
+            <!-- Case 1 – CyberFind -->
+            <article
+                class="flex flex-col rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm sm:p-5"
+                data-case-card-about
+            >
+                <div class="mb-2 flex items-center justify-between gap-2">
+                    <p class="text-[11px] font-medium uppercase tracking-wide text-accent-700">
+                        Case Study · Cybersecurity & B2B SaaS
+                    </p>
+                    <span class="rounded-full flex-shrink-0 bg-accent-50 px-2 py-0.5 text-[11px] font-medium text-accent-700">
+                        Review platform
+                    </span>
+                </div>
+
+                <h3 class="text-sm font-semibold text-slate-900">
+                    CyberFind – vendor review &amp; decision platform trusted by 500+ verified CISOs.
+                </h3>
+
+                <p class="mt-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
+                    We built a decision-support SaaS where security leaders review and compare Security Awareness
+                    Training vendors – Next.js frontend, Node.js APIs and Python data services with verified peer
+                    reviews and side-by-side comparisons.
+                </p>
+
+                <dl class="mt-3 space-y-1.5 text-[11px] text-slate-500">
+                    <div class="flex justify-between gap-2">
+                        <dt>Type</dt>
+                        <dd class="font-medium text-end text-slate-800">B2B SaaS review &amp; comparison platform</dd>
+                    </div>
+                    <div class="flex justify-between gap-2">
+                        <dt>Outcome</dt>
+                        <dd class="font-medium text-end text-slate-800">2,000+ verified reviews across 50+ vendors</dd>
+                    </div>
+                </dl>
+
+                <a
+                    href="<?= route_url('/case-studies/cyberfind/') ?>"
+                    class="mt-3 inline-flex items-center text-[11px] font-medium text-accent-700 hover:text-accent-800"
+                >
+                    View case study
+                    <svg
+                        class="ml-1 h-3 w-3"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M5.22 4.22a.75.75 0 0 1 1.06 0L13 10.94V7a.75.75 0 0 1 1.5 0v6.25a.75.75 0 0 1-.75.75H7.5a.75.75 0 0 1 0-1.5h3.94L4.22 5.28a.75.75 0 0 1 0-1.06Z"
+                            clip-rule="evenodd"
+                        />
+                    </svg>
+                </a>
+            </article>
+
+            <!-- Case 2 – Snappy Stats -->
             <article
                 class="flex flex-col rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm sm:p-5"
                 data-case-card-about
@@ -83,7 +138,7 @@
                 </a>
             </article>
 
-            <!-- Case 2 – Bloomford -->
+            <!-- Case 3 – Bloomford -->
             <article
                 class="flex flex-col rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm sm:p-5"
                 data-case-card-about
@@ -137,7 +192,7 @@
                 </a>
             </article>
 
-            <!-- Case 3 – Hellory -->
+            <!-- Case 4 – Hellory -->
             <article
                 class="flex flex-col rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm sm:p-5"
                 data-case-card-about

@@ -29,4 +29,26 @@ $faqs    = $faqs    ?? [];
     ?>
 <?php endif; ?>
 
+<?php
+$relatedGroups = [
+    [
+        'title' => 'Plan your project',
+        'links' => [
+            ['label' => 'Software Development Cost Calculator – free instant estimate', 'href' => '/tools/software-development-cost-calculator/', 'title' => 'Estimate your software development cost for free'],
+            ['label' => 'Client case studies & outcomes',                               'href' => '/case-studies/',                               'title' => 'Case studies of software we have shipped'],
+            ['label' => 'Our engagement models',                                        'href' => '/engagement-model/',                           'title' => 'Fixed price, dedicated team and hybrid engagement models'],
+        ],
+    ],
+    [
+        'title' => 'Build your team',
+        'links' => [
+            ['label' => 'Hire dedicated developers',  'href' => '/hire-developers/',  'title' => 'Hire dedicated developers in India – all profiles'],
+            ['label' => 'Explore our portfolio',      'href' => '/portfolio/',        'title' => 'Selected projects from the QalbIT portfolio'],
+            ['label' => 'Talk to our team',           'href' => '/contact-us/',       'title' => 'Contact QalbIT about your project'],
+        ],
+    ],
+];
+include __DIR__ . '/../../partials/cta/related-links.php';
+?>
+
 <?php include __DIR__ . '/../../partials/services/service-cta.php'; ?>

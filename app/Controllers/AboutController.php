@@ -27,6 +27,7 @@ class AboutController
             'title' => 'About QalbIT – Custom Software Development Company',
             'description' => 'Learn about QalbIT Infotech, a custom software development company helping startups and businesses build reliable web, mobile, and cloud solutions since 2018.',
             'canonical' => $baseUrl . '/about-us/',
+            'image'     => og_image_url('/about-us/'),
         ];
 
         // FAQs for the home context

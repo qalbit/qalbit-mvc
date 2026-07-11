@@ -40,6 +40,7 @@ class CareerController
             'description' => $page['meta_description']
                 ?? ($page['summary'] ?? 'Explore careers at QalbIT in Ahmedabad – engineering, frontend, mobile, QA and product roles.'),
             'canonical'   => $page['canonical'] ?? ($baseUrl . $slug),
+            'image'       => og_image_url('/career/'),
         ];
 
         // ---------------------------
@@ -226,10 +227,9 @@ class CareerController
                 . 'Share your experience, projects and resume – we will get back to you if there is a strong fit.';
         }
 
+        // Always canonicalise to the clean URL: ?role= variants are the same
+        // form pre-filled, not distinct pages – avoids thin duplicates in the index.
         $canonical = $baseUrl . '/career/apply/';
-        if ($roleSlug) {
-            $canonical .= '?role=' . urlencode($roleSlug);
-        }
 
         $seo = [
             'title'       => $pageTitle,

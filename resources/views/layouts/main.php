@@ -29,7 +29,11 @@ $globalNoindex = !$indexingEnabled;
 
 $shouldNoindex = $globalNoindex || $pageNoindex;
 
-$robots  = $shouldNoindex ? 'noindex, nofollow' : 'index, follow';
+// max-snippet/-image-preview let search + AI answer engines extract full
+// snippets and large previews (needed for AI Overviews / answer citations)
+$robots  = $shouldNoindex
+    ? 'noindex, nofollow'
+    : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
 
 if ($shouldNoindex) {
     header('X-Robots-Tag: noindex, nofollow', true);
@@ -41,6 +45,10 @@ $gtmId   = config('analytics.gtm_container_id', null);
 $layoutConfig   = $layout ?? [];
 $headerVariant  = $layoutConfig['header'] ?? 'default';
 $footerVariant  = $layoutConfig['footer'] ?? 'default';
+
+// intl-tel-input assets: load only when the rendered page content actually
+// contains a phone field (e.g. via the contact CTA section or contact hero).
+$needsPhoneInput = strpos($content ?? '', 'data-intl-tel-input') !== false;
 
 // JSON-LD passed from controllers
 $jsonLd = $jsonLd ?? null;
@@ -54,7 +62,11 @@ $jsonLd = $jsonLd ?? null;
         <link rel="stylesheet" href="<?= asset('/css/home.css') ?>">
     <?php endif; ?>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/css/intlTelInput.css">
+    <?php if ($needsPhoneInput): ?>
+        <!-- Styles only apply to JS-built widget DOM, so async load is safe -->
+        <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/css/intlTelInput.css" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/css/intlTelInput.css"></noscript>
+    <?php endif; ?>
 </head>
 <body class="bg-background antialiased <?= isset($pageId) ? 'page-' . $pageId : '' ?>">
     <?php if ($gtmId): ?>
@@ -92,10 +104,13 @@ $jsonLd = $jsonLd ?? null;
     <!-- GSAP core (CDN) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-    <script src="<?= asset('/js/main.js') ?>" defer></script>
 
-    <!-- Intl. Phone Core (CDN) -->
-    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/js/intlTelInput.min.js"></script>
+    <?php if ($needsPhoneInput): ?>
+        <!-- Intl. Phone Core (CDN) – deferred before main.js so it is defined when main.js initializes the widget -->
+        <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/js/intlTelInput.min.js" defer></script>
+    <?php endif; ?>
+
+    <script src="<?= asset('/js/main.js') ?>" defer></script>
 
     <?php if (isset($pageId) && $pageId === 'home'): ?>
         <script src="<?= asset('/js/home.js') ?>" defer></script>

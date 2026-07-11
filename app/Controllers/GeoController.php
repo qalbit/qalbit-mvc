@@ -68,6 +68,7 @@ class GeoController
             'title'       => $seoTitle,
             'description' => $seoDescription,
             'canonical'   => $canonical,
+            'image'       => og_image_url($canonicalPath),
         ];
 
         // Load FAQs for this specific location (if configured)
@@ -96,10 +97,16 @@ class GeoController
             ? Schema::faq($faqs, $canonical, $seoTitle)
             : null;
 
+        // LocalBusiness only where the physical office is (Ahmedabad)
+        $localBusinessSchema = ($location['state_key'] ?? null) === 'ahmedabad'
+            ? Schema::localBusiness()
+            : null;
+
         $jsonLd = array_values(array_filter([
             $orgSchema,
             $websiteSchema,
             $breadcrumbsSchema,
+            $localBusinessSchema,
             $faqSchema,
         ]));
 

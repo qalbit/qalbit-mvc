@@ -44,8 +44,9 @@ class ServiceController
 
         $seo = [
             'title'       => 'Custom Software Development Services – QalbIT',
-            'description' => 'Explore QalbIT’s custom software, web, mobile, e-commerce, SaaS, API, cloud and AI development services for startups and modern businesses.',
+            'description' => 'Explore QalbIT’s custom software, CRM, ERP, MVP, SaaS, web, mobile and AI development services for startups and modern businesses.',
             'canonical'   => $baseUrl . '/services/',
+            'image'       => og_image_url('/services/'),
         ];
 
         // FAQs for the services page (new context)
@@ -60,11 +61,23 @@ class ServiceController
         ]);
         $faqSchema         = Schema::faq($faqs, $seo['canonical'], $seo['title']);
 
+        // Structured list of services – the most-extracted format in AI answers
+        $itemListSchema = Schema::itemList(
+            'Custom Software Development Services by QalbIT',
+            array_map(static function (array $service): array {
+                return [
+                    'name' => $service['name'] ?? '',
+                    'url'  => $service['slug'] ?? '',
+                ];
+            }, $enabledServices)
+        );
+
         // JSON-LD
         $jsonLd = array_values(array_filter([
             $orgSchema,
             $websiteSchema,
             $breadcrumbsSchema,
+            $itemListSchema,
             $faqSchema,
         ]));
 
@@ -163,6 +176,7 @@ class ServiceController
             'title'       => $service['meta_title']       ?? (($service['name'] ?? 'Service') . ' – QalbIT'),
             'description' => $service['meta_description'] ?? '',
             'canonical'   => $canonical,
+            'image'       => og_image_url($canonicalPath),
         ];
 
         // Load FAQs for this specific service (if configured)
@@ -183,10 +197,14 @@ class ServiceController
             ? Schema::faq($faqs, $canonical, $seo['title'])
             : null;
 
+        // Service schema ties this page to the Organization entity
+        $serviceSchema = Schema::service($service, $canonical);
+
         $jsonLd = array_values(array_filter([
             $orgSchema,
             $websiteSchema,
             $breadcrumbsSchema,
+            $serviceSchema,
             $faqSchema,
         ]));
 

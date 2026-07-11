@@ -20,7 +20,17 @@ return [
                     'child' => [],
                 ],
                 [
-                    'label' => 'AI Solutions',
+                    'label' => 'CRM Development',
+                    'url'   => '/services/crm-development/',
+                    'child' => [],
+                ],
+                [
+                    'label' => 'ERP Development',
+                    'url'   => '/services/erp-development/',
+                    'child' => [],
+                ],
+                [
+                    'label' => 'AI Development',
                     'url'   => '/services/ai-solutions/',
                     'child' => [],
                 ],
@@ -30,12 +40,12 @@ return [
                     'child' => [],
                 ],
                 [
-                    'label' => 'Web Applications',
-                    'url'   => '/services/web-applications/',
+                    'label' => 'MVP Development',
+                    'url'   => '/services/mvp-development/',
                     'child' => [],
                 ],
                 [
-                    'label' => 'Custom Web Development',
+                    'label' => 'Web Development',
                     'url'   => '/services/custom-web-development/',
                     'child' => [],
                 ],
@@ -45,13 +55,8 @@ return [
                     'child' => [],
                 ],
                 [
-                    'label' => 'API Development',
-                    'url'   => '/services/api-development/',
-                    'child' => [],
-                ],
-                [
-                    'label' => 'Mobile App Backend',
-                    'url'   => '/services/mobile-app-backend/',
+                    'label' => 'Backend & API Development',
+                    'url'   => '/services/backend-development/',
                     'child' => [],
                 ],
                 [
@@ -65,13 +70,8 @@ return [
                     'child' => [],
                 ],
                 [
-                    'label' => 'UX Design Services',
+                    'label' => 'UI/UX Design Services',
                     'url'   => '/services/ui-ux-design-service/',
-                    'child' => [],
-                ],
-                [
-                    'label' => 'Payment Gateway Integration',
-                    'url'   => '/services/payment-gateway-services/',
                     'child' => [],
                 ],
             ]
@@ -237,6 +237,59 @@ return [
             'url'   => '/portfolio/',
         ],
         [
+            'label' => 'Hire Developers',
+            'url'   => '/hire-developers/',
+            'featured' => [
+                'eyebrow'   => 'Dedicated teams',
+                'title'     => 'Your remote squad in India',
+                'text'      => 'Hire dedicated developers with flexible monthly engagement, time-zone overlap and a replacement guarantee — no hiring overhead.',
+                'cta_label' => 'View all developer profiles',
+                'cta_href'  => '/hire-developers/',
+            ],
+            'child' => [
+                [
+                    'label' => 'Hire Laravel Developers',
+                    'url'   => '/hire-laravel-developers/',
+                    'child' => [],
+                ],
+                [
+                    'label' => 'Hire Node.js Developers',
+                    'url'   => '/hire-nodejs-developers/',
+                    'child' => [],
+                ],
+                [
+                    'label' => 'Hire Next.js Developers',
+                    'url'   => '/hire-nextjs-developers/',
+                    'child' => [],
+                ],
+                [
+                    'label' => 'Hire React.js Developers',
+                    'url'   => '/hire-reactjs-developers/',
+                    'child' => [],
+                ],
+                [
+                    'label' => 'Hire Flutter Developers',
+                    'url'   => '/hire-flutter-developers/',
+                    'child' => [],
+                ],
+                [
+                    'label' => 'Hire MVP Developers',
+                    'url'   => '/hire-mvp-developers/',
+                    'child' => [],
+                ],
+                [
+                    'label' => 'Hire Full-Stack JS Developers',
+                    'url'   => '/hire-full-stack-javascript-developers/',
+                    'child' => [],
+                ],
+                [
+                    'label' => 'Hire PHP Developers',
+                    'url'   => '/hire-php-developers/',
+                    'child' => [],
+                ],
+            ],
+        ],
+        [
             'label' => 'Our Process',
             'url'   => '',
             'child' => [
@@ -311,7 +364,7 @@ return [
             'label' => 'Company',
             'links' => [
                 ['label' => 'About Us',        'url' => '/about-us/'],
-                ['label' => 'Our Team',        'url' => '/our-team/'],
+                ['label' => 'Case Studies',    'url' => '/case-studies/'],
                 ['label' => 'Career',          'url' => '/career/'],
                 ['label' => 'Contact Us',      'url' => '/contact-us/'],
             ],
@@ -321,11 +374,11 @@ return [
             'label' => 'Services',
             'links' => [
                 ['label' => 'Custom Software Development', 'url' => '/services/custom-software-development/'],
+                ['label' => 'CRM Development',             'url' => '/services/crm-development/'],
+                ['label' => 'ERP Development',             'url' => '/services/erp-development/'],
+                ['label' => 'MVP Development',             'url' => '/services/mvp-development/'],
                 ['label' => 'Web Development',             'url' => '/services/custom-web-development/'],
                 ['label' => 'Mobile App Development',      'url' => '/services/mobile-development/'],
-                ['label' => 'E-commerce Solutions',        'url' => '/services/e-commerce/'],
-                ['label' => 'SaaS Development',            'url' => '/services/saas/'],
-                ['label' => 'API Development',             'url' => '/services/api-development/'],
             ],
         ],
 
@@ -344,8 +397,13 @@ return [
         'hire' => [
             'label' => 'Hire Developers',
             'links' => [
-                ['label' => 'Hire Node.js Developers',    'url' => '/hire-nodejs-developers/'],
                 ['label' => 'Hire Laravel Developers',    'url' => '/hire-laravel-developers/'],
+                ['label' => 'Hire Node.js Developers',    'url' => '/hire-nodejs-developers/'],
+                ['label' => 'Hire Next.js Developers',    'url' => '/hire-nextjs-developers/'],
+                ['label' => 'Hire React.js Developers',   'url' => '/hire-reactjs-developers/'],
+                ['label' => 'Hire Flutter Developers',    'url' => '/hire-flutter-developers/'],
+                ['label' => 'Hire MVP Developers',        'url' => '/hire-mvp-developers/'],
+                ['label' => 'All Developer Profiles',     'url' => '/hire-developers/'],
             ],
         ],
 

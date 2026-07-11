@@ -11,6 +11,66 @@ class CaseStudyController
 {
     private const CACHE_TTL        = 900; // 15 minutes
     private const CACHE_KEY_PREFIX = 'page_case_study_';
+    private const CACHE_KEY_INDEX  = 'page_case_studies_index';
+
+    /**
+     * Case studies index: /case-studies/
+     */
+    public function index(): string
+    {
+        return PageCache::remember(
+            self::CACHE_KEY_INDEX,
+            self::CACHE_TTL,
+            fn (): string => $this->renderIndexPage()
+        );
+    }
+
+    private function renderIndexPage(): string
+    {
+        $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
+
+        $all = array_values(array_filter(
+            config('case_studies', []),
+            static fn ($cs): bool => is_array($cs) && !empty($cs['enabled']) && !empty($cs['slug'])
+        ));
+
+        $seo = [
+            'title'       => 'Software Development Case Studies & Client Results – QalbIT',
+            'description' => 'Real case studies from QalbIT – custom web apps, SaaS platforms, portals and mobile products, with the outcomes they delivered for clients worldwide.',
+            'canonical'   => $baseUrl . '/case-studies/',
+            'image'       => og_image_url('/case-studies/'),
+        ];
+
+        $jsonLd = array_values(array_filter([
+            Schema::organization(),
+            Schema::website(),
+            Schema::breadcrumbs([
+                ['name' => 'Home',         'url' => '/'],
+                ['name' => 'Case Studies', 'url' => '/case-studies/'],
+            ]),
+            Schema::itemList(
+                'QalbIT Software Development Case Studies',
+                array_map(static function (array $cs): array {
+                    return [
+                        'name' => $cs['name'] ?? '',
+                        'url'  => $cs['slug'] ?? '',
+                    ];
+                }, $all)
+            ),
+        ]));
+
+        $content = View::render('pages/case-studies/index', [
+            'seo'         => $seo,
+            'caseStudies' => $all,
+        ]);
+
+        return View::render('layouts/main', [
+            'seo'     => $seo,
+            'content' => $content,
+            'jsonLd'  => $jsonLd,
+            'pageId'  => 'casestudy-index',
+        ]);
+    }
 
     /**
      * Individual case study: /case-studies/{slug}/
@@ -57,10 +117,16 @@ class CaseStudyController
         $canonicalPath  = '/' . ltrim($caseStudySlug, '/');
         $canonical      = $baseUrl . rtrim($canonicalPath, '/') . '/';
 
+        // Use the real product banner as the social share image
+        $ogImage = !empty($caseStudy['banner'])
+            ? $baseUrl . '/assets' . $caseStudy['banner']
+            : null;
+
         $seo = [
             'title'       => $caseStudy['meta_title']       ?? (($caseStudy['name'] ?? 'Case Study') . ' – Case Study | QalbIT'),
             'description' => $caseStudy['meta_description'] ?? '',
             'canonical'   => $canonical,
+            'image'       => $ogImage,
         ];
 
         // Load FAQs for this specific case study (if configured)
@@ -71,8 +137,8 @@ class CaseStudyController
         $orgSchema         = Schema::organization();
         $websiteSchema     = Schema::website();
         $breadcrumbsSchema = Schema::breadcrumbs([
-            ['name' => 'Home', 'url' => '/'],
-            // If you later add a /case-studies/ index, you can insert that breadcrumb here.
+            ['name' => 'Home',         'url' => '/'],
+            ['name' => 'Case Studies', 'url' => '/case-studies/'],
             ['name' => $caseStudy['name'] ?? 'Case Study', 'url' => $canonicalPath],
         ]);
 

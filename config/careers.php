@@ -13,7 +13,7 @@ return [
         'order'   => 10,
 
         'meta_title'       => 'Software Developer Jobs in Ahmedabad – Careers at QalbIT',
-        'meta_description' => 'Explore careers at QalbIT in Ahmedabad – Laravel, PHP, Node.js, React, Next.js, Flutter and QA roles. Product-focused work, modern tech stacks, growth paths for junior and senior software developers.',
+        'meta_description' => 'Explore careers at QalbIT in Ahmedabad – Laravel, Node.js, React, Flutter and QA roles with product-focused work, modern stacks and clear growth paths.',
         'summary'          => 'Join a product-focused software development team in Ahmedabad working on SaaS products, internal tools and mobile apps for startups and businesses worldwide.',
 
         'faq_key'      => 'faq_careers_qalbit',
@@ -73,7 +73,7 @@ return [
             'location'        => 'ahmedabad_onsite',
             'employment_type' => 'full_time',
             'mode'            => 'Onsite',
-            'is_open'         => true,
+            'is_open'         => false,
             'tags'            => ['Laravel', 'PHP', 'MySQL', 'REST APIs'],
             'summary'         => 'Work on SaaS products and internal tools built on Laravel, MySQL and modern frontend stacks.',
             'highlights'      => [
@@ -109,7 +109,7 @@ return [
             'location'        => 'ahmedabad_onsite',
             'employment_type' => 'full_time',
             'mode'            => 'Onsite',
-            'is_open'         => true,
+            'is_open'         => false,
             'tags'            => ['Node.js', 'NestJS', 'REST APIs', 'PostgreSQL'],
             'summary'         => 'Build APIs and backend services for high-traffic SaaS and platform projects.',
             'highlights'      => [

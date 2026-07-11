@@ -35,4 +35,6 @@ $faqs    = $faqs    ?? [];
     ?>
 <?php endif; ?>
 
+<?php include __DIR__ . '/../../partials/geo/geo-locations.php'; ?>
+
 <?php include __DIR__ . '/../../partials/geo/geo-cta.php'; ?>

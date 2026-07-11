@@ -9,7 +9,7 @@ return [
         'order'    => 10,
 
         'meta_title'       => 'Custom Software Development Company & Services – QalbIT',
-        'meta_description' => 'QalbIT is a custom software development company building secure web, mobile and cloud applications. We help you estimate custom software development costs realistically, then design, build and support platforms for modern teams.',
+        'meta_description' => 'QalbIT is a custom software development company building secure web, mobile and cloud applications – realistic costs, senior engineers, long-term support.',
 
         'short_description' => 'End-to-end custom software development for web, mobile and cloud – from MVPs to long-term platforms, with clear costs and ongoing support.',
         'category'          => 'core',
@@ -313,15 +313,15 @@ return [
 
     'ai_solutions' => [
         'slug'      => '/services/ai-solutions/',
-        'name'      => 'AI Solutions',
-        'h1'        => 'AI Solutions Company – NLP, Computer Vision & Automation',
+        'name'      => 'AI Development',
+        'h1'        => 'AI Development Company – LLM Apps, Copilots & Automation',
         'enabled'   => true,
         'order'     => 20,
 
-        'meta_title'        => 'AI Solutions Company – NLP, Computer Vision & Automation',
-        'meta_description'  => 'QalbIT delivers AI solutions including NLP, computer vision, and predictive analytics to automate workflows and unlock insights. Build your AI MVP in 90 days with our experts.',
+        'meta_title'        => 'AI Development Company – LLM Apps, Copilots & Automation Services',
+        'meta_description'  => 'QalbIT is an AI development company building LLM apps, AI copilots, chatbots and workflow automation for SaaS and internal tools. Ship your AI MVP in 90 days.',
 
-        'short_description' => 'Practical AI solutions using NLP, computer vision, and predictive analytics for real business use cases.',
+        'short_description' => 'AI development services – LLM apps, copilots, chatbots and workflow automation built for real business use cases.',
         'category'          => 'ai',
         'template'          => 'pages/services/ai-solutions',
 
@@ -628,7 +628,7 @@ return [
         'order' => 30,
 
         'meta_title' => 'SaaS Application Development Company – Launch & Scale Faster',
-        'meta_description' => 'QalbIT designs, develops, and scales SaaS products with secure, multi-tenant architecture. Launch your SaaS MVP faster and grow with a team experienced in subscription and product-led models.',
+        'meta_description' => 'QalbIT designs, develops and scales SaaS products with secure multi-tenant architecture. Launch your SaaS MVP faster with a product-led engineering team.',
 
         'short_description' => 'Multi-tenant SaaS products from MVP to scale, with billing, analytics, and secure architectures.',
         'category' => 'core',
@@ -934,11 +934,13 @@ return [
         ],
     ],
 
+    // Retired Jul 2026: merged into custom_web (301 → /services/custom-web-development/).
+    // Kept for reference; page cannibalised the same keywords as custom_web + custom_software.
     'web_applications' => [
         'slug'  => '/services/web-applications/',
         'name'  => 'Web Applications',
         'h1'    => 'Custom Web Application Development Services',
-        'enabled' => true,
+        'enabled' => false,
         'order' => 40,
 
         'meta_title' => 'Web Application Development Services – Custom Web Apps for Businesses',
@@ -1246,15 +1248,15 @@ return [
 
     'custom_web' => [
         'slug'  => '/services/custom-web-development/',
-        'name'  => 'Custom Web Development',
-        'h1'    => 'Custom Web Development Company',
+        'name'  => 'Web Development',
+        'h1'    => 'Custom Web Development & Web Application Services',
         'enabled' => true,
         'order' => 50,
 
-        'meta_title' => 'Custom Web Development Company – High-Performance Web Apps',
-        'meta_description' => 'QalbIT designs and builds custom web applications, portals, and websites that combine UX, performance, and scalability. Launch modern web experiences optimized for conversion and growth.',
+        'meta_title' => 'Custom Web Development Company – Web Application Services',
+        'meta_description' => 'QalbIT is a custom web development company building web applications, portals, dashboards and high-performance websites optimised for conversion and growth.',
 
-        'short_description' => 'High-performance custom web applications, portals, and responsive websites built for conversion and scale.',
+        'short_description' => 'Custom web development and web application services – portals, dashboards, internal tools and high-performance websites built for conversion and scale.',
         'category' => 'core',
         'template' => 'pages/services/custom-web',
 
@@ -1271,8 +1273,8 @@ return [
             'kicker_label'     => 'Custom web development & web applications',
             'kicker_detail'    => 'Web apps · Portals · Websites',
 
-            'title'     => 'Custom Web Development Services for <span class="text-gradient-brand-animated">Modern Websites, Portals & Web Applications</span>.',
-            'highlight' => 'Modern Websites, Portals & Web Applications',
+            'title'     => 'Custom Web Development Services for <span class="text-gradient-brand-animated">Web Applications, Portals & Modern Websites</span>.',
+            'highlight' => 'Web Applications, Portals & Modern Websites',
 
             'intro' => 'QalbIT designs and develops custom web experiences that go beyond templates – from marketing websites and customer portals to business-critical web applications. We focus on performance, UX, security and maintainability so your web presence supports growth instead of holding it back.',
 
@@ -1862,11 +1864,12 @@ return [
         ],
     ],
 
+    // Retired Jul 2026: merged into backend_development (301 → /services/backend-development/).
     'api_development' => [
         'slug'     => '/services/api-development/',
         'name'     => 'API Development',
         'h1'       => 'API Development & Integration Services',
-        'enabled'  => true,
+        'enabled'  => false,
         'order'    => 70,
 
         'meta_title'       => 'API Development & Integration Services – REST, Webhooks & Microservices',
@@ -2169,52 +2172,52 @@ return [
     ],
 
     'mobile_backend' => [
-        'slug'     => '/services/mobile-app-backend/',
-        'name'     => 'Mobile App Backend',
-        'h1'       => 'Mobile App Backend Development Services',
+        'slug'     => '/services/backend-development/',
+        'name'     => 'Backend Development',
+        'h1'       => 'Backend Development Services – APIs, Mobile App Backends & Microservices',
         'enabled'  => true,
         'order'    => 80,
 
-        'meta_title'       => 'Mobile App Backend Development Services – APIs, Authentication & Microservices',
-        'meta_description' => 'QalbIT provides mobile app backend development services including APIs, authentication, and microservices for iOS, Android and web apps. Design, build and scale secure backends that keep your mobile applications fast, reliable and ready to grow.',
+        'meta_title'       => 'Backend Development Services – APIs & Mobile App Backends',
+        'meta_description' => 'Backend development services from QalbIT – REST APIs, API integration, mobile app backends, authentication and microservices that scale with your product.',
 
-        'short_description' => 'Mobile app backend development with secure APIs, authentication and microservices for iOS, Android and web applications.',
+        'short_description' => 'Backend development services covering REST APIs, API integrations, mobile app backends, authentication and microservices for web and mobile applications.',
         'category'          => 'core',
-        'template'          => 'pages/services/mobile-app-backend',
+        'template'          => 'pages/services/backend-development',
 
         'icon'    => 'images/services/icon-mobile-app-backend.svg',
-        'iconAlt' => 'Icon representing Mobile App Backend',
+        'iconAlt' => 'Icon representing Backend Development',
 
         'faq_key'      => 'service_mobile_backend',
-        'faq_title'    => 'Frequently asked questions about mobile app backend development with QalbIT',
-        'faq_subtitle' => 'These are the questions product owners and tech leads usually ask when we discuss APIs, microservices and backends for mobile applications.',
+        'faq_title'    => 'Frequently asked questions about backend and API development with QalbIT',
+        'faq_subtitle' => 'These are the questions product owners and tech leads usually ask when we discuss APIs, microservices and backends for web and mobile applications.',
 
         'hero' => [
-            'breadcrumb_label' => 'Mobile app backend',
+            'breadcrumb_label' => 'Backend development',
             'kicker_prefix'    => 'Services',
-            'kicker_label'     => 'Mobile app backend & APIs',
-            'kicker_detail'    => 'APIs · Microservices · Cloud-native',
+            'kicker_label'     => 'Backend, API & mobile app backend development',
+            'kicker_detail'    => 'REST APIs · Microservices · Cloud-native',
 
-            'title'     => 'Mobile App Backend Development for <span class="text-gradient-brand-animated">iOS, Android & Web Apps</span>.',
-            'highlight' => 'iOS, Android & Web Apps',
+            'title'     => 'Backend Development Services for <span class="text-gradient-brand-animated">Web, Mobile Apps & APIs</span>.',
+            'highlight' => 'Web, Mobile Apps & APIs',
 
-            'intro' => 'QalbIT designs and builds secure mobile app backends – from REST APIs and authentication to microservices, queues and real-time features. We focus on performance, reliability and clean contracts between your mobile apps and the server, so your product team can ship updates without worrying about the backend.',
+            'intro' => 'QalbIT designs and builds secure backends – from REST API development and integration to mobile app backends, authentication, microservices, queues and real-time features. We focus on performance, reliability and clean contracts between your apps and the server, so your product team can ship updates without worrying about the backend.',
 
-            'primary_cta_label' => 'Discuss your mobile backend',
-            'primary_cta_href'  => '/contact-us/?service=mobile-backend',
+            'primary_cta_label' => 'Discuss your backend project',
+            'primary_cta_href'  => '/contact-us/?service=backend-development',
 
             'secondary_cta_label'  => 'Book a quick discovery call',
             'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
-            'snapshot_title' => 'Mobile backend snapshot',
+            'snapshot_title' => 'Backend development snapshot',
             'snapshot'       => [
                 [
                     'label' => 'Core focus',
-                    'value' => 'APIs, authentication, microservices for mobile apps',
+                    'value' => 'REST APIs, authentication, microservices and mobile app backends',
                 ],
                 [
                     'label' => 'Typical engagements',
-                    'value' => 'New app backends, backend rebuilds, performance fixes',
+                    'value' => 'New app backends, API integrations, backend rebuilds, performance fixes',
                 ],
                 [
                     'label' => 'Platforms',
@@ -2228,13 +2231,13 @@ return [
         ],
 
         'overview' => [
-            'id'      => 'mobile-backend-overview',
-            'eyebrow' => 'Mobile backend overview',
+            'id'      => 'backend-development-overview',
+            'eyebrow' => 'Backend development overview',
 
-            'title' => 'Mobile app backend development services for APIs, microservices and real-time features',
-            'intro' => 'We help teams design and implement the mobile app backends that sit behind their iOS, Android and web clients. From authentication and REST APIs to push notifications and background processing, we keep the backend predictable, well-documented and ready to scale.',
+            'title' => 'Backend development services for APIs, mobile app backends and real-time features',
+            'intro' => 'We help teams design and implement the backends that sit behind their web, iOS and Android clients. From authentication, REST API development and third-party API integrations to push notifications and background processing, we keep the backend predictable, well-documented and ready to scale.',
 
-            'left_title' => 'When a dedicated mobile app backend with QalbIT makes sense',
+            'left_title' => 'When a dedicated backend team from QalbIT makes sense',
             'left_items' => [
                 'You are planning a new mobile app and need a dedicated backend instead of a quick, hard-to-maintain API.',
                 'Your current backend (for example Firebase-only or a legacy API) is limiting new features or performance.',
@@ -2256,10 +2259,10 @@ return [
         ],
 
         'capabilities' => [
-            'id'      => 'mobile-backend-capabilities',
-            'eyebrow' => 'What we build for mobile backends',
-            'title'   => 'Mobile app backend capabilities across APIs, authentication and microservices',
-            'intro'   => 'From greenfield app backends to refactoring existing APIs, we cover architecture, core services and the tooling around them so your mobile applications stay maintainable as you grow.',
+            'id'      => 'backend-development-capabilities',
+            'eyebrow' => 'What we build for backends',
+            'title'   => 'Backend development capabilities across APIs, authentication and microservices',
+            'intro'   => 'From greenfield app backends and API integrations to refactoring existing APIs, we cover architecture, core services and the tooling around them so your applications stay maintainable as you grow.',
 
             'items' => [
                 [
@@ -2301,15 +2304,15 @@ return [
             ],
 
             'cta' => [
-                'label' => 'Discuss your mobile app backend scope',
-                'url'   => '/contact-us/?topic=mobile-backend',
+                'label' => 'Discuss your backend development scope',
+                'url'   => '/contact-us/?topic=backend-development',
             ],
         ],
 
         'process' => [
-            'id'      => 'mobile-backend-process',
-            'eyebrow' => 'How mobile backend projects work with QalbIT',
-            'title'   => 'A practical mobile backend development process from API design to stable production',
+            'id'      => 'backend-development-process',
+            'eyebrow' => 'How backend projects work with QalbIT',
+            'title'   => 'A practical backend development process from API design to stable production',
             'intro'   => 'We keep the process structured but lightweight so you can validate quickly, support existing apps and roll out backend improvements without breaking production.',
 
             'items' => [
@@ -2362,10 +2365,10 @@ return [
         ],
 
         'use_cases' => [
-            'id'      => 'mobile-backend-use-cases',
-            'eyebrow' => 'Where dedicated mobile backends work best',
-            'title'   => 'Mobile backend use cases we most often deliver',
-            'intro'   => 'Most of our mobile backend work is for teams that already have or are planning serious mobile apps – where reliable APIs, authentication and integrations matter more than quick prototypes.',
+            'id'      => 'backend-development-use-cases',
+            'eyebrow' => 'Where dedicated backends work best',
+            'title'   => 'Backend and API development use cases we most often deliver',
+            'intro'   => 'Most of our backend work is for teams that already have or are planning serious web and mobile products – where reliable APIs, authentication and integrations matter more than quick prototypes.',
 
             'items' => [
                 [
@@ -2405,10 +2408,10 @@ return [
         ],
 
         'stack' => [
-            'id'      => 'mobile-backend-tech-stack',
+            'id'      => 'backend-development-tech-stack',
             'eyebrow' => 'Tech stack & platforms',
-            'title'   => 'Mobile backend stack we most often use at QalbIT',
-            'intro'   => 'We choose backend stack and infrastructure based on your app, traffic expectations and in-house skills. These are the tools we rely on for most mobile backends across our own products and client work.',
+            'title'   => 'Backend stack we most often use at QalbIT',
+            'intro'   => 'We choose backend stack and infrastructure based on your app, traffic expectations and in-house skills. These are the tools we rely on for most backends across our own products and client work.',
             'note'    => 'Already have a live backend? We will review your current stack and only suggest changes where they clearly improve reliability, performance or maintainability.',
 
             'categories' => [
@@ -2454,13 +2457,13 @@ return [
         'cta' => [
             'enabled' => true,
 
-            'eyebrow' => 'Ready to talk about your mobile backend?',
+            'eyebrow' => 'Ready to talk about your backend?',
             'title'   => 'Let us review your existing backend or plan a new one together.',
-            'body'    => 'Share where your mobile app is today, how the current backend behaves and what you want to improve. We will review your goals, current stack and constraints, then suggest a realistic plan for your backend – whether that is a fresh build or a careful migration.',
+            'body'    => 'Share where your product is today, how the current backend behaves and what you want to improve. We will review your goals, current stack and constraints, then suggest a realistic plan for your backend – whether that is a fresh build, an API integration or a careful migration.',
 
-            'primary_label' => 'Book a mobile backend call',
-            'primary_url'   => '/contact-us/?topic=mobile-app-backend',
-            'primary_aria'  => 'Book a mobile app backend consultation with QalbIT',
+            'primary_label' => 'Book a backend development call',
+            'primary_url'   => '/contact-us/?topic=backend-development',
+            'primary_aria'  => 'Book a backend development consultation with QalbIT',
 
             'secondary_label' => 'Ask for a backend audit',
             'secondary_url'   => '/contact-us/?topic=backend-audit',
@@ -2477,8 +2480,8 @@ return [
         'enabled' => true,
         'order'   => 90,
 
-        'meta_title'       => 'Cloud Solutions & DevOps Services – Migration, Modernisation & Managed Cloud',
-        'meta_description' => 'QalbIT helps you design, migrate and optimize cloud solutions on AWS, Azure and Google Cloud. Modernise legacy systems, improve reliability, implement DevOps and keep your cloud costs under control with a senior, hands-on team.',
+        'meta_title'       => 'Cloud Solutions & DevOps Services – Migration & Managed Cloud',
+        'meta_description' => 'Design, migrate and optimise cloud solutions on AWS, Azure and GCP with QalbIT – legacy modernisation, DevOps and managed cloud with costs under control.',
 
         'short_description' => 'Cloud migration, modernisation and DevOps services on AWS, Azure and Google Cloud for stable, scalable and cost-efficient infrastructure.',
         'category'          => 'core',
@@ -2776,7 +2779,7 @@ return [
         'order' => 100,
 
         'meta_title'       => 'E-Commerce Development Company & Solutions Provider',
-        'meta_description' => 'QalbIT designs and builds cloud-based e-commerce solutions including online stores, B2B portals and multi-vendor marketplaces. We help you launch, migrate or optimise high-performing stores that convert and scale.',
+        'meta_description' => 'QalbIT builds e-commerce solutions – online stores, B2B portals and multi-vendor marketplaces. Launch, migrate or optimise stores that convert and scale.',
         'short_description'=> 'Custom e-commerce development for online stores, B2B portals and marketplaces that are fast, secure and built to convert.',
         'category'         => 'core',
         'template'         => 'pages/services/e-commerce',
@@ -3085,7 +3088,7 @@ return [
         'order'    => 110,
 
         'meta_title'       => 'UI UX Design Services – Product & Interface Design – QalbIT',
-        'meta_description' => 'QalbIT’s UI UX design services turn complex requirements into intuitive interfaces for web and mobile apps. We design SaaS dashboards, websites and internal tools that feel clear, fast and conversion-focused.',
+        'meta_description' => 'QalbIT’s UI UX design services turn complex requirements into intuitive web and mobile interfaces – SaaS dashboards, websites and tools built to convert.',
 
         'short_description' => 'User-centric UI UX and product design for SaaS products, web applications and mobile experiences.',
         'category'          => 'support',
@@ -3375,11 +3378,12 @@ return [
         ],
     ],
 
+    // Retired Jul 2026: query intent was DIY/tutorial, not agency hire (301 → /services/e-commerce/).
     'payment_gateway' => [
         'slug'  => '/services/payment-gateway-services/',
         'name'  => 'Payment Gateway Integration',
         'h1'    => 'Payment Gateway Integration Services for Web, Mobile & SaaS',
-        'enabled' => true,
+        'enabled' => false,
         'order' => 120,
 
         'meta_title' => 'Payment Gateway Integration Services – Stripe, Razorpay, PayPal & More',
@@ -3679,6 +3683,912 @@ return [
             'secondary_aria'  => 'Send your payment requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with next steps and suggested gateway options.',
+        ],
+    ],
+
+    'crm_development' => [
+        'slug'     => '/services/crm-development/',
+        'name'     => 'CRM Development',
+        'h1'       => 'Custom CRM Development Company & Services',
+        'enabled'  => true,
+        'order'    => 15,
+
+        'meta_title'       => 'Custom CRM Development Company & Services – QalbIT',
+        'meta_description' => 'QalbIT is a custom CRM development company building CRM software around your sales and support workflows – vertical CRMs, CRM–ERP integration, migrations.',
+
+        'short_description' => 'Custom CRM software development – sales pipelines, customer 360 views, vertical CRMs and CRM–ERP integrations built around how your team actually sells and serves.',
+        'category'          => 'core',
+        'template'          => 'pages/services/crm-development',
+
+        'icon'    => 'images/services/icon-custom-software-development.svg',
+        'iconAlt' => 'Icon representing Custom CRM Development',
+
+        'faq_key'      => 'service_crm_development',
+        'faq_title'    => 'Frequently asked questions about custom CRM development with QalbIT',
+        'faq_subtitle' => 'These are the questions founders, sales leaders and operations teams usually ask when they compare a custom CRM with off-the-shelf tools like Salesforce, HubSpot or Zoho.',
+
+        'hero' => [
+            'breadcrumb_label' => 'CRM development',
+            'kicker_prefix'    => 'Services',
+            'kicker_label'     => 'Custom CRM development',
+            'kicker_detail'    => 'Sales · Support · Operations · Integrations',
+
+            'title'     => 'Custom CRM Development Services for <span class="text-gradient-brand-animated">Sales, Support & Operations Teams</span>.',
+            'highlight' => 'Sales, Support & Operations Teams',
+
+            'intro' => 'QalbIT designs and builds custom CRM software around how your team actually sells, supports and operates – instead of forcing your process into Salesforce, HubSpot or Zoho. From lead capture and pipelines to customer 360 views, quotes, renewals and CRM–ERP integrations, you get a CRM your team genuinely uses, without per-seat licence costs growing every year.',
+
+            'primary_cta_label' => 'Discuss your CRM project',
+            'primary_cta_href'  => '/contact-us/?topic=crm-development',
+
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-crm-development',
+
+            'snapshot_title' => 'CRM development snapshot',
+            'snapshot'       => [
+                [
+                    'label' => 'Core focus',
+                    'value' => 'Custom CRMs for sales, support and operations workflows',
+                ],
+                [
+                    'label' => 'Typical engagements',
+                    'value' => 'New CRM builds, spreadsheet/legacy CRM replacements, CRM–ERP integrations',
+                ],
+                [
+                    'label' => 'Industries',
+                    'value' => 'Real estate, healthcare, fintech, services, manufacturing and more',
+                ],
+                [
+                    'label' => 'Delivery model',
+                    'value' => 'Fixed-scope first release, then module-by-module roadmap',
+                ],
+            ],
+        ],
+
+        'overview' => [
+            'id'      => 'crm-development-overview',
+            'eyebrow' => 'CRM development overview',
+
+            'title' => 'Custom CRM development services for teams that have outgrown generic tools',
+            'intro' => 'We help SMEs and growing companies replace spreadsheets, shared inboxes and rigid off-the-shelf CRMs with a system built around their own sales cycle, customers and reporting needs. The goal: one clean view of every lead and customer, and workflows your team follows because they fit.',
+
+            'left_title' => 'When a custom CRM from QalbIT makes sense',
+            'left_items' => [
+                'Off-the-shelf CRMs force workarounds – your sales cycle, fields or approval flows do not fit their model.',
+                'Per-seat licence costs keep rising while your team uses only a fraction of the features.',
+                'Customer data is scattered across spreadsheets, email, WhatsApp and disconnected tools.',
+                'You need industry-specific flows – site visits for real estate, patient journeys for healthcare, KYC for fintech.',
+                'Your CRM must talk to your ERP, accounting, telephony or product database without manual re-entry.',
+            ],
+
+            'right_title' => 'Outcomes we typically target for CRM projects',
+            'right_items' => [
+                'A single customer 360 view combining leads, deals, orders, support tickets and communication history.',
+                'Pipelines and stages that mirror your real sales process, with automation for follow-ups and assignments.',
+                'Dashboards and reports leadership actually checks – conversion, pipeline value, team activity, renewals.',
+                'Clean integrations with ERP, accounting, email, telephony and marketing tools.',
+                'Full ownership of code and data – no per-seat licences and no vendor lock-in.',
+            ],
+
+            'note' => 'Most CRM projects start with a short discovery phase where we map your sales and service workflows, audit existing data and tools, and define a first release your team can adopt in weeks – not a big-bang migration.',
+        ],
+
+        'capabilities' => [
+            'id'      => 'crm-development-capabilities',
+            'eyebrow' => 'What we build in custom CRMs',
+            'title'   => 'CRM development capabilities across sales, service and operations',
+            'intro'   => 'From lead capture to renewals, we build the CRM modules your team needs now and leave room for the ones you will need next year.',
+
+            'items' => [
+                [
+                    'label'       => 'Lead & pipeline management',
+                    'description' => 'Lead capture from web forms, portals and campaigns, with custom pipelines, stages, scoring, assignment rules and follow-up automation.',
+                    'badge'       => 'Sales',
+                    'icon'        => '/images/icons/modules.svg',
+                ],
+                [
+                    'label'       => 'Customer 360 & account management',
+                    'description' => 'One profile per customer combining contacts, deals, orders, invoices, documents, tickets and every conversation – no more tab-hopping.',
+                    'badge'       => 'Accounts',
+                    'icon'        => '/images/icons/dashboard.svg',
+                ],
+                [
+                    'label'       => 'Quotes, orders & renewals',
+                    'description' => 'Quotation builders, approval flows, order tracking and renewal reminders connected to your pricing and product catalogue.',
+                    'badge'       => 'Revenue',
+                    'icon'        => '/images/icons/report.svg',
+                ],
+                [
+                    'label'       => 'CRM–ERP & third-party integrations',
+                    'description' => 'Two-way sync with ERPs, accounting software, telephony, WhatsApp/email and marketing tools so data is entered once and flows everywhere.',
+                    'badge'       => 'Integrations',
+                    'icon'        => '/images/icons/api.svg',
+                ],
+                [
+                    'label'       => 'Vertical CRM solutions',
+                    'description' => 'Industry-specific CRMs – real estate (inventory, site visits, brokers), healthcare (patients, appointments), fintech (KYC, onboarding) and more.',
+                    'badge'       => 'Vertical',
+                    'icon'        => '/images/icons/architecture.svg',
+                ],
+                [
+                    'label'       => 'Reporting, dashboards & AI assist',
+                    'description' => 'Custom KPI dashboards, funnel analytics and exports – plus optional AI features like conversation summaries and next-best-action hints.',
+                    'badge'       => 'Insights',
+                    'icon'        => '/images/icons/ops.svg',
+                ],
+            ],
+
+            'cta' => [
+                'label' => 'Discuss your CRM scope',
+                'url'   => '/contact-us/?topic=crm-development-scope',
+            ],
+        ],
+
+        'process' => [
+            'id'      => 'crm-development-process',
+            'eyebrow' => 'How CRM projects work',
+            'title'   => 'A practical CRM development process from workflows to daily adoption',
+            'intro'   => 'CRMs fail when teams do not use them. Our process is built around early adoption – small releases, real data and feedback from the people who will live in the CRM every day.',
+
+            'items' => [
+                [
+                    'step'        => 1,
+                    'title'       => 'Discovery & sales-process mapping',
+                    'description' => 'Map your lead sources, sales stages, service flows, teams and reports. Audit current tools, spreadsheets and data quality.',
+                    'duration'    => '1–2 weeks',
+                    'outcome'     => 'Documented workflows, data model draft and a prioritised module list with cost estimates.',
+                    'icon'        => '/images/icons/discovery.svg',
+                ],
+                [
+                    'step'        => 2,
+                    'title'       => 'CRM design & data architecture',
+                    'description' => 'Design pipelines, entities, permissions, integrations and key screens. Plan migration from existing CRMs or spreadsheets.',
+                    'duration'    => '1–3 weeks',
+                    'outcome'     => 'Approved designs, integration contracts and a migration plan that protects your data.',
+                    'icon'        => '/images/icons/architecture-design.svg',
+                ],
+                [
+                    'step'        => 3,
+                    'title'       => 'Build core CRM modules & integrations',
+                    'description' => 'Develop leads, accounts, pipelines and dashboards in small increments with weekly demos to your sales and service leads.',
+                    'duration'    => '4–10+ weeks (scope-dependent)',
+                    'outcome'     => 'A working CRM covering your core workflows, tested with real scenarios.',
+                    'icon'        => '/images/icons/core-modules.svg',
+                ],
+                [
+                    'step'        => 4,
+                    'title'       => 'Data migration, training & go-live',
+                    'description' => 'Migrate and de-duplicate customer data, train team leads, run a parallel period if needed and cut over safely.',
+                    'duration'    => '2–4 weeks',
+                    'outcome'     => 'Your team working in the new CRM with clean data and clear ownership.',
+                    'icon'        => '/images/icons/launch.svg',
+                ],
+                [
+                    'step'        => 5,
+                    'title'       => 'Adoption tuning & roadmap',
+                    'description' => 'Watch real usage, remove friction, add automations and roll out the next modules – renewals, service, marketing – on a steady cadence.',
+                    'duration'    => 'Ongoing, month-to-month',
+                    'outcome'     => 'A CRM that keeps pace with your sales process instead of falling behind it.',
+                    'icon'        => '/images/icons/scale.svg',
+                ],
+            ],
+
+            'cta' => [
+                'label' => 'Walk me through this process for my CRM',
+                'url'   => '/contact-us/?topic=process-crm-development',
+            ],
+        ],
+
+        'use_cases' => [
+            'id'      => 'crm-development-use-cases',
+            'eyebrow' => 'Where custom CRMs fit best',
+            'title'   => 'CRM development use cases we most often deliver',
+            'intro'   => 'Most of our CRM work replaces a mix of spreadsheets, generic CRM licences and manual follow-ups with one system the whole team trusts.',
+
+            'items' => [
+                [
+                    'label'       => 'Replacing spreadsheets & shared inboxes',
+                    'description' => 'Moving lead lists, follow-up trackers and customer data out of Excel and email into a structured CRM with history and accountability.',
+                    'audience'    => 'SMEs and growing sales teams',
+                    'badge'       => 'First CRM',
+                ],
+                [
+                    'label'       => 'Migrating off Salesforce, HubSpot or Zoho',
+                    'description' => 'Replacing expensive or over-complex off-the-shelf CRMs with a leaner custom system that matches your process and cuts licence costs.',
+                    'audience'    => 'Teams paying for features they never use',
+                    'badge'       => 'Migration',
+                ],
+                [
+                    'label'       => 'Vertical CRMs for specific industries',
+                    'description' => 'Real estate CRMs with inventory and site visits, healthcare CRMs with patient journeys, fintech CRMs with KYC and onboarding flows.',
+                    'audience'    => 'Real estate, healthcare, fintech and services businesses',
+                    'badge'       => 'Vertical',
+                    'link'        => [
+                        'label' => 'Ask about a CRM for your industry',
+                        'url'   => '/contact-us/?topic=vertical-crm',
+                    ],
+                ],
+                [
+                    'label'       => 'CRM–ERP integration & customer portals',
+                    'description' => 'Connecting sales data with ERP, accounting and inventory systems, and adding self-service portals for customers and partners.',
+                    'audience'    => 'Companies with disconnected front and back office',
+                    'badge'       => 'Integration',
+                ],
+            ],
+
+            'cta' => [
+                'label' => 'Ask if your requirements fit these use cases',
+                'url'   => '/contact-us/?topic=use-cases-crm',
+            ],
+        ],
+
+        'stack' => [
+            'id'      => 'crm-development-tech-stack',
+            'eyebrow' => 'Tech stack & platforms',
+            'title'   => 'Tech stack we typically use for custom CRM development',
+            'intro'   => 'We use the same proven stack that powers our custom software work – chosen for maintainability, integration options and long-term cost of ownership.',
+            'note'    => 'Already using an off-the-shelf CRM? We can also build extensions and integrations around it first, and only replace it when the business case is clear.',
+
+            'categories' => [
+                [
+                    'name'        => 'Backend & business logic',
+                    'description' => 'The engine behind pipelines, automation and permissions.',
+                    'items'       => [
+                        'Laravel (PHP 8.x) for modular CRM backends with clean role-based access.',
+                        'NestJS (TypeScript, Node.js) for API-first CRMs and event-driven automation.',
+                        'Background jobs and queues for follow-up reminders, scoring and syncs.',
+                    ],
+                ],
+                [
+                    'name'        => 'Frontend & user experience',
+                    'description' => 'Fast screens your sales team will actually enjoy using.',
+                    'items'       => [
+                        'Next.js (React) dashboards with keyboard-fast pipelines and list views.',
+                        'Tailwind CSS design systems for consistent, responsive interfaces.',
+                        'Mobile-friendly layouts or companion apps for field sales teams.',
+                    ],
+                ],
+                [
+                    'name'        => 'Data & integrations',
+                    'description' => 'One source of truth, connected to everything else.',
+                    'items'       => [
+                        'PostgreSQL/MySQL with careful indexing for fast search and reporting.',
+                        'REST APIs and webhooks for ERP, accounting, telephony and marketing tools.',
+                        'Import/export tooling and de-duplication for clean migrations.',
+                    ],
+                ],
+                [
+                    'name'        => 'Security & reliability',
+                    'description' => 'Customer data deserves bank-grade care.',
+                    'items'       => [
+                        'Role-based access control, field-level permissions and audit logs.',
+                        'Encrypted backups and environment isolation for production data.',
+                        'Monitoring and alerting so sync failures never go unnoticed.',
+                    ],
+                ],
+            ],
+        ],
+
+        'cta' => [
+            'enabled' => true,
+
+            'eyebrow' => 'Ready to talk CRM?',
+            'title'   => 'Let’s design a CRM your team will actually use.',
+            'body'    => 'Tell us how you sell and serve customers today – tools, spreadsheets, pain points and all. We will map your workflows, estimate custom CRM development costs against your current licence spend, and propose a first release your team can adopt within weeks.',
+
+            'primary_label' => 'Book a CRM discovery call',
+            'primary_url'   => '/contact-us/?topic=crm-development',
+            'primary_aria'  => 'Book a custom CRM discovery call with QalbIT',
+
+            'secondary_label' => 'Send us your CRM requirements',
+            'secondary_url'   => '/contact-us/?topic=crm-development&source=requirements',
+            'secondary_aria'  => 'Send your CRM requirements to QalbIT',
+
+            'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
+        ],
+    ],
+
+    'erp_development' => [
+        'slug'     => '/services/erp-development/',
+        'name'     => 'ERP Development',
+        'h1'       => 'Custom ERP Software Development Company & Services',
+        'enabled'  => true,
+        'order'    => 18,
+
+        'meta_title'       => 'Custom ERP Development Company & Services – QalbIT',
+        'meta_description' => 'QalbIT builds custom ERP software for SMEs – inventory, purchase, production, finance and HR modules with Tally integration and legacy ERP modernisation.',
+
+        'short_description' => 'Custom ERP software development – modular systems for inventory, purchase, production, finance and HR, built for SMEs that have outgrown spreadsheets and rigid packaged ERPs.',
+        'category'          => 'core',
+        'template'          => 'pages/services/erp-development',
+
+        'icon'    => 'images/services/icon-custom-software-development.svg',
+        'iconAlt' => 'Icon representing Custom ERP Development',
+
+        'faq_key'      => 'service_erp_development',
+        'faq_title'    => 'Frequently asked questions about custom ERP development with QalbIT',
+        'faq_subtitle' => 'These are the questions owners, operations heads and finance teams usually ask when they compare a custom ERP with packaged suites like SAP, Odoo or Tally-plus-spreadsheets setups.',
+
+        'hero' => [
+            'breadcrumb_label' => 'ERP development',
+            'kicker_prefix'    => 'Services',
+            'kicker_label'     => 'Custom ERP software development',
+            'kicker_detail'    => 'Inventory · Purchase · Production · Finance · HR',
+
+            'title'     => 'Custom ERP Development Services for <span class="text-gradient-brand-animated">SMEs & Growing Operations</span>.',
+            'highlight' => 'SMEs & Growing Operations',
+
+            'intro' => 'QalbIT builds custom ERP software module by module – inventory, purchase, sales, production, finance and HR – around your actual operations instead of a one-size-fits-all suite. Start with the module that hurts most, integrate with the accounting tools you already trust, and grow the system as your business grows, without heavy per-user licence fees.',
+
+            'primary_cta_label' => 'Discuss your ERP project',
+            'primary_cta_href'  => '/contact-us/?topic=erp-development',
+
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-erp-development',
+
+            'snapshot_title' => 'ERP development snapshot',
+            'snapshot'       => [
+                [
+                    'label' => 'Core focus',
+                    'value' => 'Modular ERPs for inventory, purchase, production, finance and HR',
+                ],
+                [
+                    'label' => 'Typical engagements',
+                    'value' => 'First ERP for growing SMEs, legacy ERP rebuilds, module extensions and integrations',
+                ],
+                [
+                    'label' => 'Industries',
+                    'value' => 'Manufacturing, trading & distribution, logistics, services, healthcare',
+                ],
+                [
+                    'label' => 'Delivery model',
+                    'value' => 'Module-by-module rollout with a fixed-scope first phase',
+                ],
+            ],
+        ],
+
+        'overview' => [
+            'id'      => 'erp-development-overview',
+            'eyebrow' => 'ERP development overview',
+
+            'title' => 'Custom ERP development services for businesses that have outgrown spreadsheets and rigid suites',
+            'intro' => 'We help SMEs and mid-market companies bring orders, stock, purchasing, production and accounts into one connected system. Instead of bending your operations around a packaged ERP – or drowning in Excel – you get software that mirrors how your business actually runs.',
+
+            'left_title' => 'When a custom ERP from QalbIT makes sense',
+            'left_items' => [
+                'Operations run on a patchwork of spreadsheets, Tally/accounting software and WhatsApp updates.',
+                'Packaged ERPs (SAP, Oracle, even Odoo) are too heavy, too rigid or too expensive per user for your stage.',
+                'Stock, purchase and sales data never quite match, and month-end reconciliation eats days.',
+                'Your industry has specific flows – job work, batch tracking, multi-location stock – that generic ERPs handle poorly.',
+                'You want to keep your existing accounting tool and add operations modules around it, not rip everything out.',
+            ],
+
+            'right_title' => 'Outcomes we typically target for ERP projects',
+            'right_items' => [
+                'One source of truth for stock, orders, purchases and production across locations.',
+                'Live dashboards for owners – stock value, pending orders, receivables, production status.',
+                'Approval workflows and audit trails that reduce leakages and errors.',
+                'Smooth integrations with accounting (Tally, Zoho Books, QuickBooks), e-invoicing and banking.',
+                'A system your operators actually use on the floor – simple screens, barcode/mobile support where needed.',
+            ],
+
+            'note' => 'ERP projects fail when they try to change everything at once. We start with a discovery phase, pick the highest-pain module for phase one, and keep your current tools running until each module has earned its place.',
+        ],
+
+        'capabilities' => [
+            'id'      => 'erp-development-capabilities',
+            'eyebrow' => 'What we build in custom ERPs',
+            'title'   => 'ERP development capabilities across operations, finance and people',
+            'intro'   => 'We build ERP modules that talk to each other – so a sales order flows into stock, purchase, production and accounts without re-entry.',
+
+            'items' => [
+                [
+                    'label'       => 'Inventory & warehouse management',
+                    'description' => 'Multi-location stock, batches and serial numbers, barcode scanning, reorder levels, stock transfers and audits.',
+                    'badge'       => 'Inventory',
+                    'icon'        => '/images/icons/modules.svg',
+                ],
+                [
+                    'label'       => 'Purchase & supplier management',
+                    'description' => 'Indents, RFQs, purchase orders, GRNs, supplier ratings and approval workflows tuned to your buying process.',
+                    'badge'       => 'Purchase',
+                    'icon'        => '/images/icons/automation.svg',
+                ],
+                [
+                    'label'       => 'Sales, orders & dispatch',
+                    'description' => 'Quotations, sales orders, invoicing, dispatch planning and delivery tracking connected to stock and accounts.',
+                    'badge'       => 'Sales',
+                    'icon'        => '/images/icons/report.svg',
+                ],
+                [
+                    'label'       => 'Production & job work',
+                    'description' => 'BOMs, work orders, job-work tracking, wastage and batch costing for manufacturers and processors.',
+                    'badge'       => 'Production',
+                    'icon'        => '/images/icons/architecture.svg',
+                ],
+                [
+                    'label'       => 'Finance & accounting integrations',
+                    'description' => 'Two-way sync with Tally, Zoho Books or QuickBooks, e-invoicing/GST support and receivables dashboards – keep the accounting tool your CA trusts.',
+                    'badge'       => 'Finance',
+                    'icon'        => '/images/icons/api.svg',
+                ],
+                [
+                    'label'       => 'HR, payroll & approvals',
+                    'description' => 'Attendance, leave, expense claims and payroll inputs with role-based approvals and audit trails.',
+                    'badge'       => 'People',
+                    'icon'        => '/images/icons/ops.svg',
+                ],
+            ],
+
+            'cta' => [
+                'label' => 'Discuss your ERP scope',
+                'url'   => '/contact-us/?topic=erp-development-scope',
+            ],
+        ],
+
+        'process' => [
+            'id'      => 'erp-development-process',
+            'eyebrow' => 'How ERP projects work',
+            'title'   => 'A practical ERP development process that keeps your business running',
+            'intro'   => 'We roll out ERPs module by module with parallel runs and real data – so operations never stop while the system goes live.',
+
+            'items' => [
+                [
+                    'step'        => 1,
+                    'title'       => 'Discovery & operations mapping',
+                    'description' => 'Walk through your order-to-cash and procure-to-pay flows, locations, roles and current tools. Identify the highest-pain module for phase one.',
+                    'duration'    => '2–3 weeks',
+                    'outcome'     => 'Process maps, module roadmap and a realistic phase-one estimate.',
+                    'icon'        => '/images/icons/discovery.svg',
+                ],
+                [
+                    'step'        => 2,
+                    'title'       => 'ERP architecture & data design',
+                    'description' => 'Design masters (items, parties, locations), document flows, permissions and integration contracts with accounting and other tools.',
+                    'duration'    => '2–4 weeks',
+                    'outcome'     => 'Approved data model, screen designs and integration plan.',
+                    'icon'        => '/images/icons/architecture-design.svg',
+                ],
+                [
+                    'step'        => 3,
+                    'title'       => 'Build phase-one modules',
+                    'description' => 'Develop the first modules in weekly increments, demoing with your real items, parties and documents – not dummy data.',
+                    'duration'    => '6–14+ weeks (scope-dependent)',
+                    'outcome'     => 'Working modules validated against real operations scenarios.',
+                    'icon'        => '/images/icons/core-modules.svg',
+                ],
+                [
+                    'step'        => 4,
+                    'title'       => 'Master data migration, training & parallel run',
+                    'description' => 'Migrate masters and opening balances, train supervisors and run the ERP in parallel with existing tools until numbers match.',
+                    'duration'    => '3–6 weeks',
+                    'outcome'     => 'Confident go-live with reconciled data and trained users.',
+                    'icon'        => '/images/icons/launch.svg',
+                ],
+                [
+                    'step'        => 5,
+                    'title'       => 'Stabilise, extend & roll out next modules',
+                    'description' => 'Tune performance, add reports and automations, then roll out the next modules on the roadmap as adoption solidifies.',
+                    'duration'    => 'Ongoing, month-to-month',
+                    'outcome'     => 'An ERP that grows with your operations instead of a big-bang risk.',
+                    'icon'        => '/images/icons/scale.svg',
+                ],
+            ],
+
+            'cta' => [
+                'label' => 'Walk me through this process for my ERP',
+                'url'   => '/contact-us/?topic=process-erp-development',
+            ],
+        ],
+
+        'use_cases' => [
+            'id'      => 'erp-development-use-cases',
+            'eyebrow' => 'Where custom ERPs fit best',
+            'title'   => 'ERP development use cases we most often deliver',
+            'intro'   => 'Most of our ERP work is for businesses whose operations have outgrown spreadsheets but who are not ready to surrender their processes to a heavyweight suite.',
+
+            'items' => [
+                [
+                    'label'       => 'First ERP for a growing SME',
+                    'description' => 'Replacing spreadsheets and disconnected tools with core inventory, purchase and sales modules integrated with existing accounting.',
+                    'audience'    => 'Trading, distribution and manufacturing SMEs',
+                    'badge'       => 'First ERP',
+                ],
+                [
+                    'label'       => 'Legacy ERP modernisation',
+                    'description' => 'Rebuilding old desktop or FoxPro/Access-era systems into modern web ERPs without losing years of data or retraining everyone overnight.',
+                    'audience'    => 'Companies stuck on unsupported legacy systems',
+                    'badge'       => 'Modernisation',
+                    'link'        => [
+                        'label' => 'Ask about a legacy ERP rebuild',
+                        'url'   => '/contact-us/?topic=legacy-erp-rebuild',
+                    ],
+                ],
+                [
+                    'label'       => 'Industry-specific ERP modules',
+                    'description' => 'Job work and batch tracking for manufacturers, multi-location stock for distributors, project billing for services firms.',
+                    'audience'    => 'Businesses with flows generic ERPs handle poorly',
+                    'badge'       => 'Vertical',
+                ],
+                [
+                    'label'       => 'ERP integrations & portals',
+                    'description' => 'Connecting an existing ERP with e-commerce, CRM, supplier/customer portals and mobile apps for field or floor staff.',
+                    'audience'    => 'Companies extending systems they already own',
+                    'badge'       => 'Integration',
+                ],
+            ],
+
+            'cta' => [
+                'label' => 'Ask if your operations fit these use cases',
+                'url'   => '/contact-us/?topic=use-cases-erp',
+            ],
+        ],
+
+        'stack' => [
+            'id'      => 'erp-development-tech-stack',
+            'eyebrow' => 'Tech stack & platforms',
+            'title'   => 'Tech stack we typically use for custom ERP development',
+            'intro'   => 'ERPs live for a decade or more, so we choose boring, proven technology that your future team – internal or external – can maintain.',
+            'note'    => 'Running Odoo, an old ERP or Tally-plus-Excel today? We can integrate and extend before we replace – the migration path is part of the plan, not an afterthought.',
+
+            'categories' => [
+                [
+                    'name'        => 'Backend & business logic',
+                    'description' => 'Document flows, validations and approvals that keep data trustworthy.',
+                    'items'       => [
+                        'Laravel (PHP 8.x) for modular ERP backends with strong audit trails.',
+                        'NestJS (TypeScript) where event-driven flows and heavy integrations dominate.',
+                        'Queues and schedulers for syncs, alerts and heavy report generation.',
+                    ],
+                ],
+                [
+                    'name'        => 'Frontend & floor usability',
+                    'description' => 'Screens fast enough for billing counters and simple enough for the floor.',
+                    'items'       => [
+                        'Next.js (React) with keyboard-first data entry and fast list views.',
+                        'Responsive layouts plus barcode and mobile flows for stores and dispatch.',
+                        'Role-based dashboards for owners, managers and operators.',
+                    ],
+                ],
+                [
+                    'name'        => 'Data & integrations',
+                    'description' => 'Accurate numbers everywhere, reconciled automatically.',
+                    'items'       => [
+                        'PostgreSQL/MySQL with strict constraints for inventory and financial integrity.',
+                        'Integrations with Tally, Zoho Books, QuickBooks, e-invoicing and banking APIs.',
+                        'Report engines and exports your accountants and auditors will accept.',
+                    ],
+                ],
+                [
+                    'name'        => 'Security & continuity',
+                    'description' => 'Operations cannot stop – neither can the ERP.',
+                    'items'       => [
+                        'Role- and location-based permissions with full audit logging.',
+                        'Automated backups, disaster recovery and staged deployments.',
+                        'Monitoring and alerting for integrations, jobs and performance.',
+                    ],
+                ],
+            ],
+        ],
+
+        'cta' => [
+            'enabled' => true,
+
+            'eyebrow' => 'Ready to talk ERP?',
+            'title'   => 'Let’s plan an ERP rollout that will not disrupt your operations.',
+            'body'    => 'Tell us how orders, stock and purchasing flow through your business today. We will map your processes, identify the highest-impact first module, estimate custom ERP development costs honestly and propose a phased rollout with a parallel-run safety net.',
+
+            'primary_label' => 'Book an ERP discovery call',
+            'primary_url'   => '/contact-us/?topic=erp-development',
+            'primary_aria'  => 'Book a custom ERP discovery call with QalbIT',
+
+            'secondary_label' => 'Send us your ERP requirements',
+            'secondary_url'   => '/contact-us/?topic=erp-development&source=requirements',
+            'secondary_aria'  => 'Send your ERP requirements to QalbIT',
+
+            'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
+        ],
+    ],
+
+    'mvp_development' => [
+        'slug'     => '/services/mvp-development/',
+        'name'     => 'MVP Development',
+        'h1'       => 'MVP Development Company for Startups & New Products',
+        'enabled'  => true,
+        'order'    => 35,
+
+        'meta_title'       => 'MVP Development Company – Launch Your Startup MVP in 6–10 Weeks',
+        'meta_description' => 'MVP development company for startups – scope, design and launch investor-ready MVPs in 6–10 weeks with honest costs and a clear path from users to scale.',
+
+        'short_description' => 'MVP development services for startups – scope, design and launch a working product in 6–10 weeks, validate with real users and scale what works.',
+        'category'          => 'core',
+        'template'          => 'pages/services/mvp-development',
+
+        'icon'    => 'images/services/icon-saas-solutions.svg',
+        'iconAlt' => 'Icon representing MVP Development',
+
+        'faq_key'      => 'service_mvp_development',
+        'faq_title'    => 'Frequently asked questions about MVP development with QalbIT',
+        'faq_subtitle' => 'These are the questions founders usually ask when they plan their first build – about MVP costs, timelines, scope cuts and what happens after launch.',
+
+        'hero' => [
+            'breadcrumb_label' => 'MVP development',
+            'kicker_prefix'    => 'Services',
+            'kicker_label'     => 'MVP development for startups',
+            'kicker_detail'    => 'Scope · Build · Launch · Iterate',
+
+            'title'     => 'MVP Development Services to Take Your Idea from <span class="text-gradient-brand-animated">Pitch Deck to Paying Users</span>.',
+            'highlight' => 'Pitch Deck to Paying Users',
+
+            'intro' => 'QalbIT helps founders and product teams launch minimum viable products that are genuinely viable – scoped to answer your riskiest question, built by senior engineers in 6–10 weeks, and architected so the version that wins users does not need a rewrite to scale. Fixed scope, honest MVP development costs and no surprise invoices.',
+
+            'primary_cta_label' => 'Discuss your MVP idea',
+            'primary_cta_href'  => '/contact-us/?topic=mvp-development',
+
+            'secondary_cta_label' => 'Book a quick discovery call',
+            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-mvp-development',
+
+            'snapshot_title' => 'MVP development snapshot',
+            'snapshot'       => [
+                [
+                    'label' => 'Core focus',
+                    'value' => 'Web and mobile MVPs for startups and internal ventures',
+                ],
+                [
+                    'label' => 'Typical timeline',
+                    'value' => '6–10 weeks from kickoff to a launchable first version',
+                ],
+                [
+                    'label' => 'Engagements',
+                    'value' => 'Fixed-scope MVP builds, prototype-to-MVP upgrades, post-launch squads',
+                ],
+                [
+                    'label' => 'After launch',
+                    'value' => 'Iteration sprints, scaling support and fundraising-ready tech docs',
+                ],
+            ],
+        ],
+
+        'overview' => [
+            'id'      => 'mvp-development-overview',
+            'eyebrow' => 'MVP development overview',
+
+            'title' => 'MVP development services that optimise for learning speed, not feature count',
+            'intro' => 'An MVP has one job: prove that real users want what you are building, before you spend a full product budget. We help you cut scope ruthlessly, ship a polished core experience fast and set up the feedback loops that tell you what to build next.',
+
+            'left_title' => 'When MVP development with QalbIT makes sense',
+            'left_items' => [
+                'You have a validated idea and need a working product for first users, pilots or investors.',
+                'You want senior engineers who challenge scope – not a body shop that builds everything you list.',
+                'Your prototype or no-code build has hit its limits and real customers are waiting.',
+                'You need web and mobile covered by one accountable team, design included.',
+                'You want an architecture that survives success – no throwaway code if the MVP takes off.',
+            ],
+
+            'right_title' => 'Outcomes we typically target for MVP projects',
+            'right_items' => [
+                'A launchable product in 6–10 weeks focused on the core user journey.',
+                'Real usage data and feedback loops (analytics, session insights) from day one.',
+                'A clean, documented codebase you fully own – ready for your future CTO or team.',
+                'Costs and timeline agreed upfront, with scope-change decisions made together.',
+                'A prioritised post-launch roadmap based on what users actually did.',
+            ],
+
+            'note' => 'Every MVP starts with a scoping sprint where we define the riskiest assumption, cut the feature list to what tests it, and give you a fixed estimate – if we think your idea needs a landing page test instead of an MVP, we will say so.',
+        ],
+
+        'capabilities' => [
+            'id'      => 'mvp-development-capabilities',
+            'eyebrow' => 'What we build in MVPs',
+            'title'   => 'MVP development capabilities from scoping to launch',
+            'intro'   => 'Everything a first version needs – strategy, design, build, launch – from one senior team, without agency-sized overhead.',
+
+            'items' => [
+                [
+                    'label'       => 'MVP scoping & product strategy',
+                    'description' => 'Workshops that identify your riskiest assumption, define the smallest product that tests it and set measurable launch criteria.',
+                    'badge'       => 'Strategy',
+                    'icon'        => '/images/icons/discovery.svg',
+                ],
+                [
+                    'label'       => 'UX/UI design for first versions',
+                    'description' => 'Lean design sprints – core journeys polished, edge cases simplified – so the MVP feels credible to users and investors.',
+                    'badge'       => 'Design',
+                    'icon'        => '/images/icons/dashboard.svg',
+                ],
+                [
+                    'label'       => 'Web MVP development',
+                    'description' => 'SaaS dashboards, marketplaces, portals and booking flows built on Next.js and Laravel/NestJS foundations that scale later.',
+                    'badge'       => 'Web',
+                    'icon'        => '/images/icons/modules.svg',
+                ],
+                [
+                    'label'       => 'Mobile MVP development',
+                    'description' => 'Flutter or React Native apps that ship to both stores from one codebase – ideal for consumer and field-work MVPs.',
+                    'badge'       => 'Mobile',
+                    'icon'        => '/images/icons/architecture.svg',
+                ],
+                [
+                    'label'       => 'Payments, auth & integrations',
+                    'description' => 'Stripe/Razorpay billing, social logins, maps, messaging and the third-party services your MVP needs on day one.',
+                    'badge'       => 'Integrations',
+                    'icon'        => '/images/icons/api.svg',
+                ],
+                [
+                    'label'       => 'Analytics, feedback & iteration tooling',
+                    'description' => 'Event tracking, funnels and feedback widgets wired in from launch, so the next sprint is driven by data, not opinions.',
+                    'badge'       => 'Learning',
+                    'icon'        => '/images/icons/report.svg',
+                ],
+            ],
+
+            'cta' => [
+                'label' => 'Discuss your MVP scope',
+                'url'   => '/contact-us/?topic=mvp-development-scope',
+            ],
+        ],
+
+        'process' => [
+            'id'      => 'mvp-development-process',
+            'eyebrow' => 'How MVP projects work',
+            'title'   => 'A 6–10 week MVP development process from idea to first users',
+            'intro'   => 'The process is deliberately front-loaded: the hardest thinking happens in week one, so the build weeks are fast and decision-free.',
+
+            'items' => [
+                [
+                    'step'        => 1,
+                    'title'       => 'Scoping sprint & riskiest assumption',
+                    'description' => 'Define target users, the core problem and the single assumption your MVP must test. Cut everything that does not serve it.',
+                    'duration'    => '1 week',
+                    'outcome'     => 'A one-page MVP spec, fixed estimate and launch success criteria.',
+                    'icon'        => '/images/icons/discovery.svg',
+                ],
+                [
+                    'step'        => 2,
+                    'title'       => 'Design the core journey',
+                    'description' => 'Wireframe and design the primary user flow end to end, reusing proven UI patterns to save weeks.',
+                    'duration'    => '1–2 weeks',
+                    'outcome'     => 'Clickable designs for the full core journey, approved before code.',
+                    'icon'        => '/images/icons/architecture-design.svg',
+                ],
+                [
+                    'step'        => 3,
+                    'title'       => 'Build in weekly increments',
+                    'description' => 'Senior engineers ship the MVP in weekly demos – you see progress every Friday and course-correct early.',
+                    'duration'    => '3–6 weeks',
+                    'outcome'     => 'A working product with the core journey complete and tested.',
+                    'icon'        => '/images/icons/core-modules.svg',
+                ],
+                [
+                    'step'        => 4,
+                    'title'       => 'Launch & instrument',
+                    'description' => 'Deploy to production, wire up analytics and error tracking, onboard your first users and watch what they actually do.',
+                    'duration'    => '1 week',
+                    'outcome'     => 'A live MVP with real usage data flowing from day one.',
+                    'icon'        => '/images/icons/launch.svg',
+                ],
+                [
+                    'step'        => 5,
+                    'title'       => 'Iterate or scale',
+                    'description' => 'Review data against launch criteria, then run iteration sprints – or shift to our product scaling team when growth kicks in.',
+                    'duration'    => 'Ongoing, sprint-based',
+                    'outcome'     => 'Evidence-based next steps instead of guesswork – and a product ready to grow.',
+                    'icon'        => '/images/icons/scale.svg',
+                ],
+            ],
+
+            'cta' => [
+                'label' => 'Walk me through this process for my idea',
+                'url'   => '/contact-us/?topic=process-mvp-development',
+            ],
+        ],
+
+        'use_cases' => [
+            'id'      => 'mvp-development-use-cases',
+            'eyebrow' => 'Where MVP development fits best',
+            'title'   => 'MVP development use cases we most often deliver',
+            'intro'   => 'Most of our MVP work is for founders who need credibility fast – with users, pilot customers or investors – and cannot afford a 6-month build to get it.',
+
+            'items' => [
+                [
+                    'label'       => 'SaaS MVPs for B2B founders',
+                    'description' => 'Subscription products with auth, billing, core workflow and an admin panel – enough to close pilot customers.',
+                    'audience'    => 'B2B founders and bootstrappers',
+                    'badge'       => 'SaaS',
+                    'link'        => [
+                        'label' => 'Ask about a SaaS MVP',
+                        'url'   => '/contact-us/?topic=saas-mvp',
+                    ],
+                ],
+                [
+                    'label'       => 'Marketplace & booking MVPs',
+                    'description' => 'Two-sided platforms with listings, search, booking/ordering and payments – launched with the supply side seeded manually.',
+                    'audience'    => 'Marketplace and services founders',
+                    'badge'       => 'Marketplace',
+                ],
+                [
+                    'label'       => 'Mobile-first consumer MVPs',
+                    'description' => 'Cross-platform apps for consumer ideas where the phone is the product – shipped to both stores from one codebase.',
+                    'audience'    => 'Consumer startups and D2C brands',
+                    'badge'       => 'Mobile',
+                ],
+                [
+                    'label'       => 'Internal ventures & corporate MVPs',
+                    'description' => 'New digital products incubated inside established companies – built startup-fast but ready for corporate security reviews.',
+                    'audience'    => 'Innovation and digital teams',
+                    'badge'       => 'Corporate',
+                ],
+            ],
+
+            'cta' => [
+                'label' => 'Ask if your idea fits these use cases',
+                'url'   => '/contact-us/?topic=use-cases-mvp',
+            ],
+        ],
+
+        'stack' => [
+            'id'      => 'mvp-development-tech-stack',
+            'eyebrow' => 'Tech stack & platforms',
+            'title'   => 'Tech stack we typically use for MVP development',
+            'intro'   => 'MVP stacks must be fast to build with and cheap to run – but never throwaway. This is the stack that lets us ship in weeks and scale for years.',
+            'note'    => 'Coming from a no-code prototype (Bubble, Airtable, Glide)? We regularly rebuild validated no-code products into scalable custom MVPs – your learnings carry over, your limits do not.',
+
+            'categories' => [
+                [
+                    'name'        => 'Product foundation',
+                    'description' => 'Proven building blocks that cut weeks off delivery.',
+                    'items'       => [
+                        'Next.js (React) with battle-tested auth, billing and admin starters.',
+                        'Laravel or NestJS backends with clean APIs ready for a future mobile app.',
+                        'Flutter/React Native when the MVP must live on both app stores.',
+                    ],
+                ],
+                [
+                    'name'        => 'Launch infrastructure',
+                    'description' => 'Production-grade from day one, without enterprise cost.',
+                    'items'       => [
+                        'Vercel, AWS or DigitalOcean with CI/CD – deploys in minutes, not meetings.',
+                        'PostgreSQL/MySQL with migrations, backups and seed data.',
+                        'Staging environments so demos never break production.',
+                    ],
+                ],
+                [
+                    'name'        => 'Revenue & engagement',
+                    'description' => 'The integrations first users expect.',
+                    'items'       => [
+                        'Stripe and Razorpay for subscriptions and one-time payments.',
+                        'Transactional email/SMS/WhatsApp and push notifications.',
+                        'Social logins, maps and the APIs your niche demands.',
+                    ],
+                ],
+                [
+                    'name'        => 'Learning loop',
+                    'description' => 'Instruments that turn launch week into insight.',
+                    'items'       => [
+                        'Product analytics and event tracking mapped to your success criteria.',
+                        'Error tracking and session insights to catch friction fast.',
+                        'Feature flags for safe experiments with early users.',
+                    ],
+                ],
+            ],
+        ],
+
+        'cta' => [
+            'enabled' => true,
+
+            'eyebrow' => 'Ready to build your MVP?',
+            'title'   => 'Let’s scope the smallest product that proves your idea.',
+            'body'    => 'Share your idea, target users and timeline. We will help you find the riskiest assumption, cut scope to what tests it, and give you a fixed MVP development cost and launch date – usually within one scoping call.',
+
+            'primary_label' => 'Book an MVP scoping call',
+            'primary_url'   => '/contact-us/?topic=mvp-development',
+            'primary_aria'  => 'Book an MVP scoping call with QalbIT',
+
+            'secondary_label' => 'Send us your idea brief',
+            'secondary_url'   => '/contact-us/?topic=mvp-development&source=requirements',
+            'secondary_aria'  => 'Send your MVP idea brief to QalbIT',
+
+            'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps. NDAs are fine.',
         ],
     ],
 ];
