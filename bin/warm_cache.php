@@ -14,6 +14,7 @@ use App\Controllers\LegalController;
 use App\Controllers\PageController;
 use App\Controllers\PortfolioController;
 use App\Controllers\ProcessController;
+use App\Controllers\ProductController;
 use App\Controllers\ServiceController;
 use App\Controllers\SeoController;
 use App\Controllers\TechnologyController;
@@ -68,6 +69,7 @@ $legalController      = new LegalController();
 $pageController       = new PageController();
 $seoController        = new SeoController();
 $geoController        = new GeoController();
+$productController    = new ProductController();
 
 // ---------------------------------------------------------
 // Core static pages
@@ -172,8 +174,10 @@ foreach ($technologies as $technology) {
 }
 
 // ---------------------------------------------------------
-// Case studies (all enabled case study pages)
+// Case studies (index + all enabled case study pages)
 // ---------------------------------------------------------
+warm('Case studies index /case-studies/', fn() => $caseStudyController->index());
+
 $caseStudies = config('case_studies', []);
 foreach ($caseStudies as $cs) {
     if (empty($cs['enabled'] ?? true) === false) {
@@ -198,7 +202,7 @@ foreach ($caseStudies as $cs) {
 // ---------------------------------------------------------
 // Hire developers (index + each dedicated role page)
 // ---------------------------------------------------------
-warm('Hire index /hire-developers/', fn() => $hireController->index ?? null);
+warm('Hire index /hire-developers/', fn() => $hireController->index());
 
 // Individual roles via dedicated routes
 warm('Hire Node.js /hire-nodejs-developers/', fn() => $hireController->nodejs());
@@ -236,5 +240,26 @@ foreach ($locations as $location) {
 
     warm("Geo /{$country}/{$state}/", fn() => $geoController->show($country, $state));
 }
+
+// ---------------------------------------------------------
+// Products (index + all enabled product pages)
+// ---------------------------------------------------------
+warm('Products index /products/', fn() => $productController->index());
+
+foreach (config('products.items', []) as $product) {
+    if (empty($product['enabled']) || empty($product['slug'])) {
+        continue;
+    }
+
+    $slug = trim((string) $product['slug'], '/');
+    warm("Product /products/{$slug}/", fn() => $productController->show($slug));
+}
+
+// ---------------------------------------------------------
+// Free tools + llms.txt
+// ---------------------------------------------------------
+warm('Cost calculator /tools/software-development-cost-calculator/', fn() => $pageController->costCalculator());
+warm('JSON formatter /tools/json-formatter/', fn() => $pageController->jsonFormatter());
+warm('llms.txt /llms.txt', fn() => $seoController->llms());
 
 echo "Warm-up complete.\n";
