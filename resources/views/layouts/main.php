@@ -59,7 +59,7 @@ $jsonLd = $jsonLd ?? null;
     <?php include __DIR__ . '/../partials/head.php'; ?>
     
     <?php if (isset($pageId) && $pageId === 'home'): ?>
-        <link rel="stylesheet" href="<?= asset('/css/home.css') ?>">
+        <link rel="stylesheet" href="<?= asset_v('/css/home.css') ?>">
     <?php endif; ?>
 
     <?php if ($needsPhoneInput): ?>
@@ -110,62 +110,62 @@ $jsonLd = $jsonLd ?? null;
         <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.5/build/js/intlTelInput.min.js" defer></script>
     <?php endif; ?>
 
-    <script src="<?= asset('/js/main.js') ?>" defer></script>
+    <script src="<?= asset_v('/js/main.js') ?>" defer></script>
 
     <?php if (isset($pageId) && $pageId === 'home'): ?>
-        <script src="<?= asset('/js/home.js') ?>" defer></script>
+        <script src="<?= asset_v('/js/home.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'services'): ?>
-        <script src="<?= asset('/js/services.js') ?>" defer></script>
+        <script src="<?= asset_v('/js/services.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'service-detail'): ?>
-        <script src="<?= asset('/js/service-detail.js') ?>" defer></script>
+        <script src="<?= asset_v('/js/service-detail.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'technologies'): ?>
-        <script src="<?= asset('/js/technologies.js') ?>" defer></script>
+        <script src="<?= asset_v('/js/technologies.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'technology-detail'): ?>
-        <script src="<?= asset('/js/technology-detail.js') ?>" defer></script>
+        <script src="<?= asset_v('/js/technology-detail.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'industries'): ?>
-        <script src="<?= asset('/js/industries.js') ?>" defer></script>
+        <script src="<?= asset_v('/js/industries.js') ?>" defer></script>
     <?php endif; ?>
     
     <?php if (isset($pageId) && $pageId === 'industry-detail'): ?>
-        <script src="<?= asset('/js/industry-detail.js') ?>" defer></script>
+        <script src="<?= asset_v('/js/industry-detail.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'aboutus'): ?>
-        <script src="<?= asset('/js/aboutus.js') ?>" defer></script>
+        <script src="<?= asset_v('/js/aboutus.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'contactus'): ?>
-        <script src="<?= asset('/js/contactus.js') ?>" defer></script>
+        <script src="<?= asset_v('/js/contactus.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'process-detail'): ?>
-        <script src="<?= asset('/js/process-detail.js') ?>" defer></script>
+        <script src="<?= asset_v('/js/process-detail.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'location-detail'): ?>
-        <script src="<?= asset('/js/location-detail.js') ?>" defer></script>
+        <script src="<?= asset_v('/js/location-detail.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'hire-developer'): ?>
-        <script src="<?= asset('/js/hire-developer.js') ?>" defer></script>
+        <script src="<?= asset_v('/js/hire-developer.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'casestudy-detail'): ?>
-        <script src="<?= asset('/js/casestudy-detail.js') ?>" defer></script>
+        <script src="<?= asset_v('/js/casestudy-detail.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'careers'): ?>
-        <script src="<?= asset('/js/careers.js') ?>" defer></script>
+        <script src="<?= asset_v('/js/careers.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php include __DIR__ . '/../common/floating-stack.php'; ?>

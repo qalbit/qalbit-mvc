@@ -81,12 +81,12 @@ $jsonLd = $jsonLd ?? null;
 
 <?php if ($gtmId): ?>
     <!-- Consent Mode + Google Tag Manager (using GTM container only) -->
-    <script src="<?= asset('/js/gtag-layer.js') ?>" data-gtm-id="<?= htmlspecialchars($gtmId) ?>"></script>
+    <script src="<?= asset_v('/js/gtag-layer.js') ?>" data-gtm-id="<?= htmlspecialchars($gtmId) ?>"></script>
 <?php endif; ?>
 
 <?php if ($recaptchaEnabled): ?>
     <script src="https://www.google.com/recaptcha/api.js?render=<?= htmlspecialchars($recaptchaSiteKey) ?>" async defer></script>
-    <script src="<?= asset('/js/recaptcha-layer.js') ?>" 
+    <script src="<?= asset_v('/js/recaptcha-layer.js') ?>" 
         data-recaptcha-site-key="<?= htmlspecialchars($recaptchaSiteKey) ?>" defer></script>
 <?php endif; ?>
 

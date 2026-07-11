@@ -168,3 +168,22 @@ if (!function_exists('og_image_url')) {
         return null;
     }
 }
+
+if (! function_exists('asset_v')) {
+    /**
+     * Like asset(), but appends the file's mtime as a version query.
+     * Long-lived browser/proxy caches (max-age + immutable) then bust
+     * automatically whenever a deploy updates the file.
+     */
+    function asset_v(string $path): string
+    {
+        $url  = asset($path);
+        $file = __DIR__ . '/../../public/assets/' . ltrim($path, '/');
+
+        if (is_file($file)) {
+            $url .= '?v=' . filemtime($file);
+        }
+
+        return $url;
+    }
+}
