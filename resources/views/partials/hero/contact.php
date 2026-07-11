@@ -279,6 +279,8 @@
                             <?php endif; ?>
                         </div>
 
+                        <!-- Honeypot: bots fill this, humans never see it -->
+                        <input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
                         <input type="hidden" name="recaptcha_token" id="recaptcha_token" value="">
                         <input type="hidden" name="lead_from" id="lead_from" value="lead_contact_page">
                         <input type="hidden" name="lead_source" id="lead_source" value="<?= $_GET['source'] ?? 'general' ?>">

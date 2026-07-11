@@ -10,6 +10,7 @@ use App\Support\Mailer;
 use App\Support\Schema;
 use App\Support\PageCache;
 use App\Support\Recaptcha;
+use App\Support\LiftUpCrm;
 
 class ContactController
 {
@@ -168,6 +169,7 @@ class ContactController
             'name'        => trim($_POST['name']        ?? ''),
             'email'       => trim($_POST['email']       ?? ''),
             'phone'       => trim($_POST['phone']       ?? ''),
+            'phone_full'  => trim($_POST['phone_full']  ?? ''),
             'message'     => trim($_POST['message']     ?? ''),
             'lead_country'=> trim($_POST['country_code']?? ''),
             'lead_from'   => trim($_POST['lead_from']   ?? ''),
@@ -179,11 +181,20 @@ class ContactController
         $errors = [];
 
         $isAjax = $this->isAjaxRequest();
-        error_log('AJAX DEBUG: ' . json_encode([
-            'HTTP_X_REQUESTED_WITH' => $_SERVER['HTTP_X_REQUESTED_WITH'] ?? null,
-            'HTTP_ACCEPT'           => $_SERVER['HTTP_ACCEPT']           ?? null,
-            'POST_ajax'             => $_POST['ajax']                    ?? null,
-        ]));
+
+        // Honeypot: real visitors never see or fill this field. Pretend
+        // success so bots do not learn they were filtered.
+        if (trim($_POST['website'] ?? '') !== '') {
+            $successMessage = 'Thank you. We have received your enquiry and will respond within 24 hours (business days).';
+
+            if ($isAjax) {
+                $this->jsonResponse(['success' => true, 'message' => $successMessage]);
+            }
+
+            Session::flash('contact_success', $successMessage);
+            header('Location: ' . $redirectTo);
+            exit;
+        }
 
         // --- Field validation ---
         if ($data['name'] === '') {
@@ -224,10 +235,30 @@ class ContactController
             exit;
         }
 
+        // Capture the lead in LiftUp CRM first so it survives an SMTP outage.
+        $metadata = array_filter([
+            'country_code' => $data['lead_country'],
+            'client_ip'    => $_SERVER['REMOTE_ADDR'] ?? null,
+            'user_agent'   => substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 500),
+        ]);
+
+        $crmCaptured = LiftUpCrm::pushLead(array_filter([
+            'name'        => $data['name'],
+            'email'       => $data['email'],
+            'phone'       => $data['phone_full'] !== '' ? $data['phone_full'] : $data['phone'],
+            'message'     => $data['message'],
+            'lead_from'   => $data['lead_from'],
+            'lead_source' => $data['lead_source'],
+            'lead_topic'  => $data['lead_topic'],
+            'source_page' => $_SERVER['HTTP_REFERER'] ?? null,
+            'metadata'    => $metadata,
+        ], fn ($value) => $value !== '' && $value !== null && $value !== []));
+
         $mailer = new Mailer();
         $sent   = $mailer->sendContact($data);
 
-        if (!$sent) {
+        // The enquiry is safe if either channel took it; error only when both failed.
+        if (!$sent && !$crmCaptured) {
             $errors['global'] = 'We could not send your message right now. Please try again later or email us directly at ' . config('app.contact_email', 'info@qalbit.com') . '.';
 
             if ($isAjax) {
