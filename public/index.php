@@ -32,6 +32,7 @@ use App\Controllers\IndustryController;
 use App\Controllers\PageController;
 use App\Controllers\ServiceController;
 use App\Controllers\SeoController;
+use App\Controllers\HealthController;
 use App\Controllers\CaseStudyController;
 use App\Controllers\HomeController;
 use App\Controllers\LegalController;
@@ -118,6 +119,9 @@ $router->get('/sitemap.xml', [SeoController::class, 'sitemap']);
 
 // SEO: robots
 $router->get('/robots.txt', [SeoController::class, 'robots']);
+
+// Health endpoint polled by the LiftUp CRM product sync
+$router->get('/v1/health/', [HealthController::class, 'show']);
 
 // SEO: llms.txt – curated site overview for AI assistants (llmstxt.org)
 $router->get('/llms.txt', [SeoController::class, 'llms']);
