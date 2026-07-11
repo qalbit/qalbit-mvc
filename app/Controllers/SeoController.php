@@ -174,11 +174,9 @@ class SeoController
         header('Content-Type: text/markdown; charset=UTF-8');
         http_response_code(200);
 
-        return \App\Support\PageCache::remember(
-            'seo_llms_txt',
-            3600,
-            fn (): string => $this->renderLlmsTxt()
-        );
+        // No PageCache here: it minifies via HtmlMinifier, which strips the
+        // newlines markdown depends on. The render is cheap (config loops only).
+        return $this->renderLlmsTxt();
     }
 
     private function renderLlmsTxt(): string
