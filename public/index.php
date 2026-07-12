@@ -54,6 +54,21 @@ $router->get('/career/', [CareerController::class, 'index']);
 $router->get('/career/apply/', [CareerController::class, 'apply']);
 $router->post('/career/apply/', [CareerController::class, 'submit']);
 
+// 301: old site's careers URL (still in Google's index / external links)
+$router->redirect('/career-opportunities/', '/career/');
+
+// 301 redirects for other old-site URLs still crawled by Google (GSC 404 report).
+// Each points at its closest living successor; retired pages with no
+// successor (old foreign geo pages, one-off campaigns) intentionally 404.
+$router->redirect('/index.php', '/');
+$router->redirect('/our-team/', '/about-us/');
+$router->redirect('/hiring-solutions/', '/hire-developers/');
+$router->redirect('/engagement-models/', '/engagement-model/');
+$router->redirect('/custom-software-development-usa/', '/services/custom-software-development/');
+$router->redirect('/technologies/vuejs/', '/technologies/');
+$router->redirect('/industries/fitness/', '/industries/sports/');
+$router->redirect('/images/favicon/site.webmanifest', '/assets/site.webmanifest');
+
 // Hire developers
 $router->get('/hire-developers/', [HireController::class, 'index']);
 $router->get('/hire-nodejs-developers/', [HireController::class, 'nodejs']);

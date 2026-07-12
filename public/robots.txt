@@ -31,6 +31,13 @@ Disallow: /helper.php
 Disallow: /*?ref=
 Disallow: /*?estimate
 
+# Lead-form prefill variants (?topic= / ?source=) are the same page as the
+# clean URL and already canonicalise to it — keep crawlers on the canonical
+# and stop crawl-budget waste (GSC: "Alternate page with proper canonical").
+Disallow: /contact-us/?
+Disallow: /career/apply/?
+Disallow: /portfolio/?
+
 # --- AI search & assistant crawlers (retrieval): allowed so QalbIT
 # --- can be cited and recommended in AI answers.
 User-agent: OAI-SearchBot
