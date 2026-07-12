@@ -39,13 +39,19 @@ return [
         'addressCountry'  => 'IN',
     ],
 
-    // Social profiles for Organization.sameAs
+    // Social + authority profiles for Organization.sameAs. The review-platform
+    // profiles matter most for entity resolution: they let Google tie the
+    // ratings and citations on those platforms back to this organization.
     'social_profiles' => [
-        'linkedin' => 'https://www.linkedin.com/company/qalbit/',
-        'x'        => 'https://x.com/qalb_it',
-        'facebook' => 'https://www.facebook.com/qalbitinfotech',
-        'instagram'=> 'https://www.instagram.com/qalbitinfotech',
-        'github'   => 'https://github.com/qalbit',
+        'linkedin'      => 'https://www.linkedin.com/company/qalbit/',
+        'x'             => 'https://x.com/qalb_it',
+        'facebook'      => 'https://www.facebook.com/qalbitinfotech',
+        'instagram'     => 'https://www.instagram.com/qalbitinfotech',
+        'github'        => 'https://github.com/qalbit',
+        'clutch'        => 'https://clutch.co/profile/qalbit-infotech',
+        'goodfirms'     => 'https://www.goodfirms.co/company/qalbit-solution',
+        'upwork'        => 'https://www.upwork.com/agencies/qalbit/',
+        'techbehemoths' => 'https://techbehemoths.com/company/qalbit-solution',
     ],
 
     // Primary locations / offices that we want to show on Contact page
