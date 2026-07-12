@@ -37,7 +37,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=entertainment',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         'overview' => [
@@ -308,7 +308,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=social-networking',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         'overview' => [
@@ -578,7 +578,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=sports-fitness',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         'overview' => [
@@ -846,7 +846,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=travel-mobility',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         'overview' => [
@@ -1114,7 +1114,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=food-delivery',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         'overview' => [
@@ -1382,7 +1382,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=ecommerce-marketplace',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         'overview' => [
@@ -1650,7 +1650,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=fintech',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         'overview' => [
@@ -1918,7 +1918,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=real-estate',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         'overview' => [
@@ -2186,7 +2186,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=healthcare',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         'overview' => [
@@ -2454,7 +2454,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=education-elearning',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         'overview' => [
@@ -2722,7 +2722,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=business-corporate',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         'overview' => [

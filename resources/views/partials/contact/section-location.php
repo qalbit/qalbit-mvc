@@ -185,10 +185,10 @@
             <p class="text-[11px] text-slate-400">
                 For RFPs, detailed scopes or procurement processes, you can also book a call directly via our
                 <a
-                    href="https://calendly.com/abidhusain-qalbit/discuss-project"
+                    href="https://crm.qalbit.com/book/discuss-project"
                     class="font-medium text-sky-300 hover:text-sky-200 underline underline-offset-4"
                 >
-                    Calendly link
+                    booking page
                 </a>.
             </p>
         </div>

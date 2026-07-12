@@ -400,8 +400,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -812,8 +812,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -1224,8 +1224,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -1643,8 +1643,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -2048,8 +2048,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -2453,8 +2453,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -2855,8 +2855,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -3257,8 +3257,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -3672,8 +3672,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -4075,8 +4075,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -4487,8 +4487,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -4893,8 +4893,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -5300,8 +5300,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -5719,8 +5719,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -6147,8 +6147,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -6568,8 +6568,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -6962,8 +6962,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -7356,8 +7356,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [
@@ -7750,8 +7750,8 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a call on Calendly',
-                    'url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'label' => 'Book a discovery call',
+                    'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
                 'meta' => [

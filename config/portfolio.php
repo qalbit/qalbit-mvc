@@ -50,7 +50,7 @@ return [
                 ],
                 'secondary_cta' => [
                     'label' => 'Book a 30-min discovery call',
-                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?ref=portfolio-hero',
+                    'href'  => 'https://crm.qalbit.com/book/discuss-project?ref=portfolio-hero',
                 ],
             ],
 

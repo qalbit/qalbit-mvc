@@ -41,7 +41,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=hire-nodejs-developers',
 
             'secondary_cta_label' => 'Book a free consultation',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
 
             'snapshot_title' => 'Node.js hiring snapshot',
             'snapshot'       => [
@@ -340,7 +340,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=hire-laravel-developers',
 
             'secondary_cta_label' => 'Book a free consultation',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
 
             'snapshot_title' => 'Laravel hiring snapshot',
             'snapshot'       => [
@@ -647,7 +647,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=hire-php-developers',
 
             'secondary_cta_label' => 'Book a free consultation',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
 
             'snapshot_title' => 'PHP hiring snapshot',
             'snapshot'       => [
@@ -954,7 +954,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=hire-reactjs-developers',
 
             'secondary_cta_label' => 'Book a free consultation',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
 
             'snapshot_title' => 'React.js hiring snapshot',
             'snapshot'       => [
@@ -1262,7 +1262,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=hire-nextjs-developers',
 
             'secondary_cta_label' => 'Book a free consultation',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
 
             'snapshot_title' => 'Next.js hiring snapshot',
             'snapshot'       => [
@@ -1575,7 +1575,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=hire-flutter-developers',
 
             'secondary_cta_label' => 'Book a free consultation',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
 
             'snapshot_title' => 'Flutter hiring snapshot',
             'snapshot'       => [
@@ -2186,7 +2186,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=hire-full-stack-javascript-developers',
 
             'secondary_cta_label' => 'Book a free consultation',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
 
             'snapshot_title' => 'Full-stack JavaScript hiring snapshot',
             'snapshot'       => [

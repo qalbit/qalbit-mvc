@@ -39,7 +39,7 @@ return [
             'primary_cta_href'     => '/contact-us/?topic=custom-software',
 
             'secondary_cta_label'  => 'Book a quick discovery call',
-            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-custom-software',
+            'secondary_cta_href'   => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-custom-software',
 
             'snapshot_title' => 'Custom software snapshot',
             'snapshot'       => [
@@ -347,7 +347,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=ai-solutions',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-ai-software',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-ai-software',
 
             'snapshot_title' => 'AI solutions snapshot',
             'snapshot'       => [
@@ -654,7 +654,7 @@ return [
             'primary_cta_href'     => '/contact-us/?topic=saas-development',
             
             'secondary_cta_label'  => 'Book a quick discovery call',
-            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
+            'secondary_cta_href'   => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title'       => 'SaaS snapshot',
             'snapshot' => [
@@ -974,7 +974,7 @@ return [
             'primary_cta_href'     => '/contact-us/?topic=web-applications',
             
             'secondary_cta_label'  => 'Book a quick discovery call',
-            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
+            'secondary_cta_href'   => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'Web applications snapshot',
             'snapshot'       => [
@@ -1282,7 +1282,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=custom-web-development',
 
             'secondary_cta_label'  => 'Book a quick discovery call',
-            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
+            'secondary_cta_href'   => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'Custom web snapshot',
             'snapshot'       => [
@@ -1590,7 +1590,7 @@ return [
             'primary_cta_href'  => '/contact-us/?service=mobile-development',
 
             'secondary_cta_label'  => 'Book a quick discovery call',
-            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
+            'secondary_cta_href'   => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'Mobile development snapshot',
             'snapshot'       => [
@@ -1901,7 +1901,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=api-development',
 
             'secondary_cta_label'  => 'Book a quick discovery call',
-            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
+            'secondary_cta_href'   => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'API development snapshot',
             'snapshot'       => [
@@ -2207,7 +2207,7 @@ return [
             'primary_cta_href'  => '/contact-us/?service=backend-development',
 
             'secondary_cta_label'  => 'Book a quick discovery call',
-            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
+            'secondary_cta_href'   => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'Backend development snapshot',
             'snapshot'       => [
@@ -2509,7 +2509,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=cloud-solutions',
 
             'secondary_cta_label'  => 'Book a quick discovery call',
-            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
+            'secondary_cta_href'   => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'Cloud solutions snapshot',
             'snapshot'       => [
@@ -2806,7 +2806,7 @@ return [
             'primary_cta_href'  => '/contact-us/?service=e-commerce',
 
             'secondary_cta_label'  => 'Book a quick discovery call',
-            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
+            'secondary_cta_href'   => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'E-commerce snapshot',
             'snapshot'       => [
@@ -3116,7 +3116,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=ux-design',
 
             'secondary_cta_label'  => 'Book a quick discovery call',
-            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
+            'secondary_cta_href'   => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'UX design snapshot',
             'snapshot'       => [
@@ -3415,7 +3415,7 @@ return [
             'primary_cta_href'  => '/contact-us/?service=payment-gateway',
 
             'secondary_cta_label'  => 'Book a quick discovery call',
-            'secondary_cta_href'   => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
+            'secondary_cta_href'   => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-saas-solutions',
 
             'snapshot_title' => 'Payment integration snapshot',
             'snapshot'       => [
@@ -3722,7 +3722,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=crm-development',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-crm-development',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-crm-development',
 
             'snapshot_title' => 'CRM development snapshot',
             'snapshot'       => [
@@ -4024,7 +4024,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=erp-development',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-erp-development',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-erp-development',
 
             'snapshot_title' => 'ERP development snapshot',
             'snapshot'       => [
@@ -4326,7 +4326,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=mvp-development',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-mvp-development',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&utm_medium=hero-cta&utm_campaign=service-mvp-development',
 
             'snapshot_title' => 'MVP development snapshot',
             'snapshot'       => [

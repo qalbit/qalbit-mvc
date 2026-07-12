@@ -303,7 +303,7 @@
                             <p class="text-[11px] text-slate-500">
                                 Prefer to schedule directly? You can also
                                 <a
-                                    href="https://calendly.com/abidhusain-qalbit/discuss-project"
+                                    href="https://crm.qalbit.com/book/discuss-project"
                                     class="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
                                 >
                                     book a discovery call

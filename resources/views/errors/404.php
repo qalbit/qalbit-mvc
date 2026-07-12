@@ -119,7 +119,7 @@
                                 Contact QalbIT
                             </a>
                             <a
-                                href="https://calendly.com/abidhusain-qalbit/discuss-project"
+                                href="https://crm.qalbit.com/book/discuss-project"
                                 class="inline-flex flex-1 items-center justify-center rounded-full border border-slate-600 bg-slate-900/40 px-4 py-2.5 text-sm font-semibold text-slate-100 shadow-sm hover:border-slate-400 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
                             >
                                 Book call

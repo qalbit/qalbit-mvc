@@ -117,7 +117,7 @@ $finalPrimaryCtaLabel = $finalCtaConfig['primary_cta']['label'] ?? 'Book a free 
 $finalPrimaryCtaHref  = $finalCtaConfig['primary_cta']['href']  ?? '/contact-us/';
 
 $finalSecondaryCtaLabel = $finalCtaConfig['secondary_cta']['label'] ?? 'Book a quick discovery call';
-$finalSecondaryCtaHref  = $finalCtaConfig['secondary_cta']['href']  ?? 'https://calendly.com/abidhusain-qalbit/discuss-project';
+$finalSecondaryCtaHref  = $finalCtaConfig['secondary_cta']['href']  ?? 'https://crm.qalbit.com/book/discuss-project';
 ?>
 
 <section

@@ -86,7 +86,7 @@ $iconFor = function (string $slug) use ($roleIcons): string {
                         <a href="<?= route_url('/contact-us/?topic=hire-developers') ?>" class="btn btn-accent btn-radius-pill">
                             Request developer profiles
                         </a>
-                        <a href="https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit-site&amp;utm_medium=hero-cta&amp;utm_campaign=hire-developers-hub"
+                        <a href="https://crm.qalbit.com/book/discuss-project?utm_source=qalbit-site&amp;utm_medium=hero-cta&amp;utm_campaign=hire-developers-hub"
                            class="btn btn-primary-outline btn-radius-pill">
                             Book a quick intro call
                         </a>

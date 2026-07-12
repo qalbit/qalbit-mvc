@@ -12,7 +12,7 @@ $body    = $cta['body']
 
 // Primary CTA
 $primaryLabel = $cta['primary_label'] ?? 'Schedule a discovery call';
-$primaryUrl   = $cta['primary_url']   ?? 'https://calendly.com/abidhusain-qalbit/discuss-project';
+$primaryUrl   = $cta['primary_url']   ?? 'https://crm.qalbit.com/book/discuss-project';
 $primaryAria  = $cta['primary_aria']  ?? 'Schedule a Startup MVP discovery call with QalbIT';
 
 // Secondary CTA

@@ -60,7 +60,7 @@ return [
                 ],
                 'secondary_cta' => [
                     'label' => 'Book a quick discovery call',
-                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'href'  => 'https://crm.qalbit.com/book/discuss-project',
                 ],
                 'snapshot_cards' => [
                     [
@@ -356,7 +356,7 @@ return [
                 ],
                 'secondary_cta' => [
                     'label' => 'Book a quick discovery call',
-                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'href'  => 'https://crm.qalbit.com/book/discuss-project',
                 ],
             ],
         ],
@@ -426,7 +426,7 @@ return [
                 ],
                 'secondary_cta' => [
                     'label' => 'Book a quick discovery call',
-                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'href'  => 'https://crm.qalbit.com/book/discuss-project',
                 ],
                 'snapshot_cards' => [
                     [
@@ -734,7 +734,7 @@ return [
                 ],
                 'secondary_cta' => [
                     'label' => 'Book a quick discovery call',
-                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'href'  => 'https://crm.qalbit.com/book/discuss-project',
                 ],
             ],
         ],
@@ -802,7 +802,7 @@ return [
                 ],
                 'secondary_cta' => [
                     'label' => 'Book a quick discovery call',
-                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'href'  => 'https://crm.qalbit.com/book/discuss-project',
                 ],
                 'snapshot_cards' => [
                     [
@@ -1115,7 +1115,7 @@ return [
                 ],
                 'secondary_cta' => [
                     'label' => 'Book a quick discovery call',
-                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'href'  => 'https://crm.qalbit.com/book/discuss-project',
                 ],
             ],
         ],
@@ -1185,7 +1185,7 @@ return [
                 ],
                 'secondary_cta' => [
                     'label' => 'Book a quick discovery call',
-                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'href'  => 'https://crm.qalbit.com/book/discuss-project',
                 ],
                 'snapshot_cards' => [
                     [
@@ -1498,7 +1498,7 @@ return [
                 ],
                 'secondary_cta' => [
                     'label' => 'Book a quick discovery call',
-                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'href'  => 'https://crm.qalbit.com/book/discuss-project',
                 ],
             ],
         ],
@@ -1566,7 +1566,7 @@ return [
                 ],
                 'secondary_cta' => [
                     'label' => 'Book a quick discovery call',
-                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'href'  => 'https://crm.qalbit.com/book/discuss-project',
                 ],
                 'snapshot_cards' => [
                     [
@@ -1861,7 +1861,7 @@ return [
                 ],
                 'secondary_cta' => [
                     'label' => 'Book a quick discovery call',
-                    'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+                    'href'  => 'https://crm.qalbit.com/book/discuss-project',
                 ],
             ],
         ],

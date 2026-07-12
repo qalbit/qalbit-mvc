@@ -67,7 +67,7 @@
                         </a>
 
                         <a
-                            href="<?= route_url('https://calendly.com/abidhusain-qalbit/discuss-project') ?>"
+                            href="<?= route_url('https://crm.qalbit.com/book/discuss-project') ?>"
                             class="btn btn-primary-outline btn-radius-pill"
                         >
                             Book a 30-min tech stack call

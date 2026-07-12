@@ -45,7 +45,7 @@
                         aria-label="Get Your Free Estimation Now in 24 Hours!">
                         Get Your Free Estimate Now
                     </a>
-                    <a href="<?= route_url('https://calendly.com/abidhusain-qalbit/discuss-project') ?>" 
+                    <a href="<?= route_url('https://crm.qalbit.com/book/discuss-project') ?>" 
                         class="btn btn-accent-outline btn-radius-pill w-full md:w-auto text-center"
                         target="_blank"
                         rel="noopener noreferrer"

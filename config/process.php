@@ -48,7 +48,7 @@ return [
             ],
             'secondary_cta' => [
                 'label' => 'Schedule a quick MVP call',
-                'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=startup-mvp-hero',
+                'href'  => 'https://crm.qalbit.com/book/discuss-project?utm_source=startup-mvp-hero',
             ],
 
             'internal_links' => [
@@ -488,7 +488,7 @@ return [
             'body'            => 'Share where you are today, what you want to launch and by when. We will walk you through how QalbIT can support you as your startup MVP development partner, with clear timelines, budget ranges and next steps.',
 
             'primary_label'   => 'Schedule a discovery call',
-            'primary_url'     => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'primary_url'     => 'https://crm.qalbit.com/book/discuss-project',
             'primary_aria'    => 'Schedule a Startup MVP discovery call with QalbIT',
 
             'secondary_label' => 'Or email us at sales@qalbit.com',
@@ -545,7 +545,7 @@ return [
             ],
             'secondary_cta' => [
                 'label' => 'Book a product scaling call',
-                'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=product-scaling-hero',
+                'href'  => 'https://crm.qalbit.com/book/discuss-project?utm_source=product-scaling-hero',
             ],
 
             'internal_links' => [
@@ -994,7 +994,7 @@ return [
             'body'    => 'Share where your product is today, what challenges you are facing and what you want the next 6–12 months to look like. We will walk you through how QalbIT can support you with a dedicated Product Scaling Team, including timelines, budget ranges and next steps.',
 
             'primary_label' => 'Schedule a product scaling call',
-            'primary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'primary_url'   => 'https://crm.qalbit.com/book/discuss-project',
             'primary_aria'  => 'Schedule a Product Scaling Team discovery call with QalbIT',
 
             'secondary_label' => 'Or email us at sales@qalbit.com',
@@ -1051,7 +1051,7 @@ return [
             ],
             'secondary_cta' => [
                 'label' => 'Book a 30-min discovery call',
-                'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=digital-transformation-hero',
+                'href'  => 'https://crm.qalbit.com/book/discuss-project?utm_source=digital-transformation-hero',
             ],
 
             'internal_links' => [
@@ -1478,7 +1478,7 @@ return [
             'body'            => 'Share where your organisation is today, which processes hurt the most and what outcomes you want to see. We will review your situation, outline practical options and propose a phased digital transformation approach that fits your budget and timelines.',
 
             'primary_label'   => 'Schedule a discovery call',
-            'primary_url'     => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'primary_url'     => 'https://crm.qalbit.com/book/discuss-project',
             'primary_aria'    => 'Schedule a digital transformation discovery call with QalbIT',
 
             'secondary_label' => 'Or email us at sales@qalbit.com',
@@ -1535,7 +1535,7 @@ return [
             ],
             'secondary_cta' => [
                 'label' => 'Book a quick discovery call',
-                'href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project?utm_source=qalbit&utm_medium=website&utm_campaign=engagement-models-hero',
+                'href'  => 'https://crm.qalbit.com/book/discuss-project?utm_source=qalbit&utm_medium=website&utm_campaign=engagement-models-hero',
             ],
 
             'internal_links' => [
@@ -1943,7 +1943,7 @@ return [
             'body'    => 'Share where your product or project is today, what you want to achieve and your internal capacity. We will walk you through how QalbIT would structure the work, which engagement model fits best and what budget and timelines to expect.',
 
             'primary_label' => 'Schedule an discovery call',
-            'primary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'primary_url'   => 'https://crm.qalbit.com/book/discuss-project',
             'primary_aria'  => 'Schedule an engagement discovery call with QalbIT',
 
             'secondary_label' => 'Or email us at sales@qalbit.com',

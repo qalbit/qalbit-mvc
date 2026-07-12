@@ -36,7 +36,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=reactjs',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         // Overview (same shape as services)
@@ -306,7 +306,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=nextjs',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         // Overview
@@ -576,7 +576,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=tailwindcss',
 
             'secondary_cta_label' => 'See Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         // Overview
@@ -803,7 +803,7 @@ return [
             'primary_aria'  => 'Book a Tailwind CSS discovery call with QalbIT',
 
             'secondary_label' => 'Send us your UI requirements',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_url'   => 'https://crm.qalbit.com/book/discuss-project',
             'secondary_aria'  => 'Send your Tailwind CSS UI requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
@@ -846,7 +846,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=nodejs',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         // Overview
@@ -1116,7 +1116,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=nestjs',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         // Overview
@@ -1386,7 +1386,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=laravel',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         // Overview
@@ -1656,7 +1656,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=flutter',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         // Overview
@@ -1926,7 +1926,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=android',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         // Overview
@@ -2153,7 +2153,7 @@ return [
             'primary_aria'  => 'Book an Android app development discovery call with QalbIT',
 
             'secondary_label' => 'Send us your Android requirements',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_url'   => 'https://crm.qalbit.com/book/discuss-project',
             'secondary_aria'  => 'Send your Android app requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
@@ -2196,7 +2196,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=reactnative',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         // Overview
@@ -2423,7 +2423,7 @@ return [
             'primary_aria'  => 'Book a React Native development discovery call with QalbIT',
 
             'secondary_label' => 'Send us your React Native requirements',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_url'   => 'https://crm.qalbit.com/book/discuss-project',
             'secondary_aria'  => 'Send your React Native app requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
@@ -2466,7 +2466,7 @@ return [
             'primary_cta_href'  => '/contact-us/?topic=wordpress',
 
             'secondary_cta_label' => 'Book a quick discovery call',
-            'secondary_cta_href'  => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_cta_href'  => 'https://crm.qalbit.com/book/discuss-project',
         ],
 
         // Overview
@@ -2693,7 +2693,7 @@ return [
             'primary_aria'  => 'Book a WordPress development consultation with QalbIT',
 
             'secondary_label' => 'Send us your WordPress requirements',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_url'   => 'https://crm.qalbit.com/book/discuss-project',
             'secondary_aria'  => 'Send your WordPress requirements to QalbIT',
 
             'meta' => 'Typically we respond within 24–48 hours with clarifying questions and next steps.',
@@ -2963,7 +2963,7 @@ return [
             'primary_aria'  => 'Book a CodeIgniter modernisation call with QalbIT',
 
             'secondary_label' => 'Send us details of your legacy app',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_url'   => 'https://crm.qalbit.com/book/discuss-project',
             'secondary_aria'  => 'Send your CodeIgniter legacy app details to QalbIT',
 
             'meta' => 'Share your current app URL (if applicable), hosting details and main pain points and we will respond with next steps.',
@@ -3503,7 +3503,7 @@ return [
             'primary_aria'  => 'Book a PostgreSQL consulting call with QalbIT',
 
             'secondary_label' => 'Send us your database details',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_url'   => 'https://crm.qalbit.com/book/discuss-project',
             'secondary_aria'  => 'Send your PostgreSQL database requirements to QalbIT',
 
             'meta' => 'We usually start with a short assessment and then outline quick wins plus a longer-term roadmap.',
@@ -3773,7 +3773,7 @@ return [
             'primary_aria'  => 'Book a MySQL consulting call with QalbIT',
 
             'secondary_label' => 'Send us your database details',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_url'   => 'https://crm.qalbit.com/book/discuss-project',
             'secondary_aria'  => 'Send your MySQL database requirements to QalbIT',
 
             'meta' => 'We usually begin with a short audit and highlight both quick wins and longer-term improvements.',
@@ -4043,7 +4043,7 @@ return [
             'primary_aria'  => 'Book an AWS consulting call with QalbIT',
 
             'secondary_label' => 'Send us your AWS details',
-            'secondary_url'   => 'https://calendly.com/abidhusain-qalbit/discuss-project',
+            'secondary_url'   => 'https://crm.qalbit.com/book/discuss-project',
             'secondary_aria'  => 'Send your AWS environment details to QalbIT',
 
             'meta' => 'Often we begin with a focused review of your current setup, then phase improvements to reduce risk and downtime.',
