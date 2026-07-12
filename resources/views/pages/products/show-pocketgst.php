@@ -32,7 +32,7 @@ $related     = $product['related_service'] ?? ['label' => 'Mobile App Developmen
             <!-- left: copy -->
             <div>
                 <div class="flex flex-wrap items-center gap-2">
-                    <span class="inline-flex items-center gap-1.5 rounded-full bg-primary-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-700 ring-1 ring-primary-200">
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-primary-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-800 ring-1 ring-primary-200">
                         <span class="relative flex h-2 w-2">
                             <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-400 opacity-75"></span>
                             <span class="relative inline-flex h-2 w-2 rounded-full bg-primary-500"></span>
@@ -112,7 +112,7 @@ $related     = $product['related_service'] ?? ['label' => 'Mobile App Developmen
                                 <span class="text-[11px] text-white/70">Total</span>
                                 <span class="text-base font-extrabold">₹ 11,800</span>
                             </div>
-                            <div class="flex items-center justify-center gap-2 rounded-xl border border-primary-200 bg-primary-50 py-2 text-[11px] font-semibold text-primary-700">
+                            <div class="flex items-center justify-center gap-2 rounded-xl border border-primary-200 bg-primary-50 py-2 text-[11px] font-semibold text-primary-800">
                                 📄 Create invoice · Share on WhatsApp
                             </div>
                         </div>
@@ -231,7 +231,7 @@ $related     = $product['related_service'] ?? ['label' => 'Mobile App Developmen
                                         <?php endforeach; ?>
                                     </div>
                                     <div class="mt-2 grid grid-cols-2 gap-2">
-                                        <div class="rounded-lg bg-primary-50 py-1.5 text-center text-[11px] font-bold text-primary-700">CGST ₹900</div>
+                                        <div class="rounded-lg bg-primary-50 py-1.5 text-center text-[11px] font-bold text-primary-800">CGST ₹900</div>
                                         <div class="rounded-lg bg-accent-50 py-1.5 text-center text-[11px] font-bold text-accent-700">SGST ₹900</div>
                                     </div>
                                 </div>

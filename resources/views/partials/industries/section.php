@@ -96,7 +96,7 @@ $subtitle = $subtitle
                                 href="<?= route_url($industry['slug']) ?>"
                                 class="inline-flex items-center text-[11px] font-semibold text-slate-200 group-hover:text-primary-200"
                                 title="Explore software solutions for <?= htmlspecialchars($industry['name']) ?>"
-                                aria-label="Explore software solutions for <?= htmlspecialchars($industry['name']) ?>"
+                                aria-label="View solutions for <?= htmlspecialchars($industry['name']) ?>"
                             >
                                 View solutions
                                 <span

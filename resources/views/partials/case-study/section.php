@@ -81,7 +81,7 @@ $others   = array_slice($caseList, 1);
                     <!-- Copy -->
                     <div class="flex flex-col p-6 sm:p-8 lg:p-10">
                         <div class="flex flex-wrap items-center gap-2">
-                            <span class="inline-flex items-center rounded-full bg-primary-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-700">
+                            <span class="inline-flex items-center rounded-full bg-primary-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-800">
                                 Featured case study
                             </span>
                             <?php if ($fIndustry !== ''): ?>

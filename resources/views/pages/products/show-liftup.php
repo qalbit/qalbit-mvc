@@ -106,7 +106,7 @@ $related     = $product['related_service'] ?? ['label' => 'SaaS Product Developm
                         <div class="flex-1 space-y-3 p-4">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold text-slate-800">Lead inbox · All products</span>
-                                <span class="rounded-full bg-primary-50 px-2 py-0.5 text-[10px] font-semibold text-primary-700">12 new</span>
+                                <span class="rounded-full bg-primary-50 px-2 py-0.5 text-[10px] font-semibold text-primary-800">12 new</span>
                             </div>
                             <?php
                             $leads = [
@@ -282,7 +282,7 @@ $related     = $product['related_service'] ?? ['label' => 'SaaS Product Developm
                                         <?php endforeach; ?>
                                     </div>
                                     <div class="mt-3 grid grid-cols-2 gap-2">
-                                        <div class="rounded-lg bg-primary-50 px-2 py-1.5 text-center text-[10px] font-semibold text-primary-700">GA4 · connected</div>
+                                        <div class="rounded-lg bg-primary-50 px-2 py-1.5 text-center text-[10px] font-semibold text-primary-800">GA4 · connected</div>
                                         <div class="rounded-lg bg-accent-50 px-2 py-1.5 text-center text-[10px] font-semibold text-accent-700">Search Console · connected</div>
                                     </div>
                                 </div>

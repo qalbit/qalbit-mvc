@@ -26,7 +26,7 @@
             </h2>
 
             <!-- Keep old tagline for SEO, but visually subtle -->
-            <p class="mt-1 text-[11px] uppercase tracking-[0.16em] text-slate-500">
+            <p class="mt-1 text-[11px] uppercase tracking-[0.16em] text-slate-400">
                 Our precise processes for enabling custom web development
             </p>
 
@@ -142,7 +142,7 @@
                 data-process-panels
             >
                 <!-- PANEL 1 – MVP -->
-                <article
+                <section
                     id="process-panel-mvp"
                     role="tabpanel"
                     aria-labelledby="process-tab-mvp"
@@ -198,10 +198,10 @@
                             </ul>
                         </div>
                     </div>
-                </article>
+                </section>
 
                 <!-- PANEL 2 – Product Scaling -->
-                <article
+                <section
                     id="process-panel-scaling"
                     role="tabpanel"
                     aria-labelledby="process-tab-scaling"
@@ -253,10 +253,10 @@
                             </ul>
                         </div>
                     </div>
-                </article>
+                </section>
 
                 <!-- PANEL 3 – Digital Transformation -->
-                <article
+                <section
                     id="process-panel-digital"
                     role="tabpanel"
                     aria-labelledby="process-tab-digital"
@@ -316,10 +316,10 @@
                             </ul>
                         </div>
                     </div>
-                </article>
+                </section>
 
                 <!-- PANEL 4 – Engagement Model -->
-                <article
+                <section
                     id="process-panel-engagement"
                     role="tabpanel"
                     aria-labelledby="process-tab-engagement"
@@ -367,7 +367,7 @@
                             </ul>
                         </div>
                     </div>
-                </article>
+                </section>
             </div>
         </div>
 

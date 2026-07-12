@@ -38,7 +38,7 @@ $related     = $product['related_service'] ?? ['label' => 'SaaS Product Developm
                         <span class="h-2 w-2 rounded-full bg-amber-400"></span>
                         Coming soon
                     </span>
-                    <span class="inline-flex items-center rounded-full bg-primary-50 px-3 py-1 text-[11px] font-semibold text-primary-700 ring-1 ring-primary-200">QalbIT Product · HR SaaS</span>
+                    <span class="inline-flex items-center rounded-full bg-primary-50 px-3 py-1 text-[11px] font-semibold text-primary-800 ring-1 ring-primary-200">QalbIT Product · HR SaaS</span>
                 </div>
 
                 <h1 class="mt-5 text-4xl font-extrabold leading-[1.05] tracking-tight text-slate-900 sm:text-5xl">

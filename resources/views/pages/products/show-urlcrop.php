@@ -34,7 +34,7 @@ $related     = $product['related_service'] ?? ['label' => 'Web Application Devel
             <!-- left: copy -->
             <div>
                 <div class="flex flex-wrap items-center gap-2">
-                    <span class="inline-flex items-center gap-1.5 rounded-full bg-primary-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-700 ring-1 ring-primary-200">
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-primary-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-800 ring-1 ring-primary-200">
                         <span class="relative flex h-2 w-2">
                             <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-400 opacity-75"></span>
                             <span class="relative inline-flex h-2 w-2 rounded-full bg-primary-500"></span>
@@ -101,7 +101,7 @@ $related     = $product['related_service'] ?? ['label' => 'Web Application Devel
                         <div class="rounded-xl border border-slate-200 p-3">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-medium text-slate-500">Clicks this week</span>
-                                <span class="inline-flex items-center gap-1 rounded-full bg-primary-50 px-2 py-0.5 text-[11px] font-semibold text-primary-700">▲ 38%</span>
+                                <span class="inline-flex items-center gap-1 rounded-full bg-primary-50 px-2 py-0.5 text-[11px] font-semibold text-primary-800">▲ 38%</span>
                             </div>
                             <div class="mt-3 flex h-24 items-end gap-1.5">
                                 <?php foreach ([35,52,44,68,58,82,73] as $h): ?>
@@ -228,9 +228,9 @@ $related     = $product['related_service'] ?? ['label' => 'Web Application Devel
                                         <?php endforeach; ?>
                                     </div>
                                     <div class="mt-3 grid grid-cols-3 gap-2 text-center">
-                                        <div class="rounded-lg bg-primary-50 py-1.5 text-[11px] font-semibold text-primary-700">🇺🇸 42%</div>
-                                        <div class="rounded-lg bg-primary-50 py-1.5 text-[11px] font-semibold text-primary-700">📱 61%</div>
-                                        <div class="rounded-lg bg-primary-50 py-1.5 text-[11px] font-semibold text-primary-700">🔗 X</div>
+                                        <div class="rounded-lg bg-primary-50 py-1.5 text-[11px] font-semibold text-primary-800">🇺🇸 42%</div>
+                                        <div class="rounded-lg bg-primary-50 py-1.5 text-[11px] font-semibold text-primary-800">📱 61%</div>
+                                        <div class="rounded-lg bg-primary-50 py-1.5 text-[11px] font-semibold text-primary-800">🔗 X</div>
                                     </div>
                                 </div>
                             <?php elseif ($p['visual'] === 'branded'): ?>
@@ -257,7 +257,7 @@ $related     = $product['related_service'] ?? ['label' => 'Web Application Devel
                                     </div>
                                     <div class="space-y-2">
                                         <div class="rounded-lg bg-white px-3 py-2 text-xs text-slate-600 ring-1 ring-slate-200">Destination: <span class="font-semibold text-slate-900">/spring-sale</span></div>
-                                        <div class="rounded-lg bg-primary-50 px-3 py-2 text-xs font-semibold text-primary-700 ring-1 ring-primary-200">Edit → /summer-sale ✓</div>
+                                        <div class="rounded-lg bg-primary-50 px-3 py-2 text-xs font-semibold text-primary-800 ring-1 ring-primary-200">Edit → /summer-sale ✓</div>
                                         <div class="text-[11px] text-slate-400">Same QR, new destination — no reprint.</div>
                                     </div>
                                 </div>

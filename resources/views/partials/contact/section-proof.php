@@ -86,7 +86,7 @@
                             aria-hidden="true"
                         ></div>
 
-                        <p class="inline-flex items-center rounded-full bg-primary-50 px-2.5 py-0.5 text-[11px] font-medium text-primary-700">
+                        <p class="inline-flex items-center rounded-full bg-primary-50 px-2.5 py-0.5 text-[11px] font-medium text-primary-800">
                             Sports &amp; Club Management
                         </p>
 
@@ -132,7 +132,7 @@
                             aria-hidden="true"
                         ></div>
 
-                        <p class="inline-flex items-center rounded-full bg-primary-50 px-2.5 py-0.5 text-[11px] font-medium text-primary-700">
+                        <p class="inline-flex items-center rounded-full bg-primary-50 px-2.5 py-0.5 text-[11px] font-medium text-primary-800">
                             HR Tech &amp; Recruitment
                         </p>
 
@@ -178,7 +178,7 @@
                             aria-hidden="true"
                         ></div>
 
-                        <p class="inline-flex items-center rounded-full bg-primary-50 px-2.5 py-0.5 text-[11px] font-medium text-primary-700">
+                        <p class="inline-flex items-center rounded-full bg-primary-50 px-2.5 py-0.5 text-[11px] font-medium text-primary-800">
                             Cybersecurity &amp; B2B SaaS
                         </p>
 
