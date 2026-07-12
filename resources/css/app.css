@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Metric-matched fallback: Arial resized to occupy the same space as
+   Poppins (width ratio measured at 1.1234), so the webfont swap causes
+   no layout shift while Poppins loads. */
+@font-face {
+    font-family: "Poppins Fallback";
+    src: local("Arial");
+    size-adjust: 112.34%;
+    ascent-override: 93.46%;
+    descent-override: 31.16%;
+    line-gap-override: 8.9%;
+}
+
 @layer base {
     :root {
         /* Base surfaces */
@@ -49,7 +61,7 @@
 
     body {
         @apply bg-background text-foreground antialiased;
-        font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+        font-family: "Poppins", "Poppins Fallback", system-ui, -apple-system, BlinkMacSystemFont,
             "Segoe UI", sans-serif;
     }
 
@@ -57,7 +69,7 @@
     h2,
     h3,
     h4 {
-        font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+        font-family: "Poppins", "Poppins Fallback", system-ui, -apple-system, BlinkMacSystemFont,
             "Segoe UI", sans-serif;
     }
 }
