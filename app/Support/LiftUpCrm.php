@@ -107,6 +107,20 @@ class LiftUpCrm
             return false;
         }
 
+        // The CRM confirms whether the résumé actually made it — a dropped
+        // file (server upload config, storage failure) must not pass silently.
+        if (isset($lead['resume'])) {
+            $body = json_decode((string) $response, true);
+            if (is_array($body) && (($body['resume_stored'] ?? null) !== true)) {
+                error_log(sprintf(
+                    '[LiftUpCrm] Career lead accepted but resume NOT stored (received=%s stored=%s) lead_id=%s',
+                    var_export($body['resume_received'] ?? 'unknown', true),
+                    var_export($body['resume_stored'] ?? 'unknown', true),
+                    $body['lead_id'] ?? '?'
+                ));
+            }
+        }
+
         return true;
     }
 
