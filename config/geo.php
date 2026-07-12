@@ -400,7 +400,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -812,7 +812,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -1224,7 +1224,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -1643,7 +1643,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -2048,7 +2048,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -2453,7 +2453,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -2855,7 +2855,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -3257,7 +3257,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -3672,7 +3672,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -4075,7 +4075,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -4487,7 +4487,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -4893,7 +4893,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -5300,7 +5300,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -5719,7 +5719,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -6147,7 +6147,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -6568,7 +6568,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -6962,7 +6962,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -7356,7 +7356,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
@@ -7750,7 +7750,7 @@ return [
                     'url'   => '/contact-us/',
                 ],
                 'secondary_cta' => [
-                    'label' => 'Book a discovery call',
+                    'label' => 'Book a free strategy call',
                     'url'   => 'https://crm.qalbit.com/book/discuss-project',
                 ],
 
