@@ -101,9 +101,10 @@ $jsonLd = $jsonLd ?? null;
 
     <?php include __DIR__ . '/../partials/tawk.php'; ?>
 
-    <!-- GSAP core (CDN) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+    <!-- GSAP core + ScrollTrigger: same version, same CDN (previously mixed
+         3.13.0/3.12.5 across two CDNs — extra connection + API drift risk) -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
 
     <?php if ($needsPhoneInput): ?>
         <!-- Intl. Phone Core (CDN) – deferred before main.js so it is defined when main.js initializes the widget -->

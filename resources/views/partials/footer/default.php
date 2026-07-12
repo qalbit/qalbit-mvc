@@ -643,6 +643,10 @@ $currentYear = date('Y');
                     >
                         <img
                             src="https://images.dmca.com/Badges/dmca-badge-w200-5x1-10.png?ID=1369625d-1306-472c-afec-8d78bdacae4c"
+                            width="200"
+                            height="40"
+                            loading="lazy"
+                            decoding="async"
                             alt="DMCA.com Protection Status"
                         />
                     </a>

@@ -64,21 +64,51 @@
     }
 
     // ------------------------------------------------------
-    // 3) Load the Google Tag Manager script
+    // 3) Load Google Tag Manager on first interaction (or idle)
+    //
+    // GTM pulls in gtag + the Facebook/LinkedIn pixels (~600 KB,
+    // ~400 ms of mobile main-thread). Deferring it until the user
+    // interacts keeps all of that out of the critical rendering
+    // window; a timeout fallback still records page views for
+    // visitors who never touch the page. Events pushed to the
+    // dataLayer before GTM boots are replayed by GTM on load.
     // ------------------------------------------------------
-    (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-            'gtm.start': new Date().getTime(),
-            event: 'gtm.js'
+    var gtmLoaded = false;
+
+    function loadGtm() {
+        if (gtmLoaded) return;
+        gtmLoaded = true;
+
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+
+            var f = d.getElementsByTagName(s)[0];
+            var j = d.createElement(s);
+            var dl = l !== 'dataLayer' ? '&l=' + l : '';
+
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', gtmId);
+    }
+
+    var interactionEvents = ['pointerdown', 'touchstart', 'keydown', 'scroll'];
+
+    function onFirstInteraction() {
+        interactionEvents.forEach(function (ev) {
+            window.removeEventListener(ev, onFirstInteraction, true);
         });
+        loadGtm();
+    }
 
-        var f = d.getElementsByTagName(s)[0];
-        var j = d.createElement(s);
-        var dl = l !== 'dataLayer' ? '&l=' + l : '';
+    interactionEvents.forEach(function (ev) {
+        window.addEventListener(ev, onFirstInteraction, { capture: true, passive: true });
+    });
 
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', gtmId);
+    // Fallback for completely passive visitors.
+    window.setTimeout(loadGtm, 4000);
 })();

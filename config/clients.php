@@ -4,7 +4,7 @@ return [
     'cyberfind' => [
         'id'        => 'cyberfind',
         'name'      => 'CyberFind',
-        'logo'      => '/images/clients/cyberfind-logo.png',
+        'logo'      => '/images/clients/cyberfind-logo.webp',
         'alt'       => 'CyberFind cybersecurity vendor review platform logo',
         'url'       => null,
         'industry'  => 'Cybersecurity / B2B SaaS',
@@ -15,7 +15,7 @@ return [
     'vedicwhisper' => [
         'id'        => 'vedicwhisper',
         'name'      => 'Vedic Whisper',
-        'logo'      => '/images/clients/vedicwhisper-logo.png',
+        'logo'      => '/images/clients/vedicwhisper-logo.webp',
         'alt'       => 'Vedic Whisper astrology and spiritual guidance platform logo',
         'url'       => null,
         'industry'  => 'Spirituality / Consumer Apps',
@@ -26,7 +26,7 @@ return [
     'jewelnxt' => [
         'id'        => 'jewelnxt',
         'name'      => 'JewelNXT',
-        'logo'      => '/images/clients/jewelnxt-logo.png',
+        'logo'      => '/images/clients/jewelnxt-logo.webp',
         'alt'       => 'JewelNXT jewellery retail software platform logo',
         'url'       => null,
         'industry'  => 'Jewellery / Retail SaaS',
@@ -37,7 +37,7 @@ return [
     'plugin' => [
         'id'        => 'plugin',
         'name'      => 'Plugin',
-        'logo'      => '/images/clients/pluginch-logo.png',
+        'logo'      => '/images/clients/pluginch-logo.webp',
         'alt'       => 'Plugin.ch tennis club booking platform logo',
         'url'       => null,
         'industry'  => 'Sports / Club Management',
@@ -48,7 +48,7 @@ return [
     'credifana' => [
         'id'        => 'credifana',
         'name'      => 'Credifana',
-        'logo'      => '/images/clients/credifana-logo.png',
+        'logo'      => '/images/clients/credifana-logo.webp',
         'alt'       => 'Credifana fintech platform logo',
         'url'       => null,
         'industry'  => 'Fintech / Lending',
@@ -59,7 +59,7 @@ return [
     'utapy' => [
         'id'        => 'utapy',
         'name'      => 'Utapy',
-        'logo'      => '/images/clients/utap-logo.png',
+        'logo'      => '/images/clients/utap-logo.webp',
         'alt'       => 'Utapy marketplace logo',
         'url'       => null,
         'industry'  => 'Marketplace / Platform',
@@ -70,7 +70,7 @@ return [
     'snappystats' => [
         'id'        => 'snappystats',
         'name'      => 'Snappystats',
-        'logo'      => '/images/clients/snappy-logo.png',
+        'logo'      => '/images/clients/snappy-logo.webp',
         'alt'       => 'Snappystats shooting analytics platform logo',
         'url'       => null,
         'industry'  => 'Sports / Analytics',
@@ -81,7 +81,7 @@ return [
     'heuvelman' => [
         'id'        => 'heuvelman',
         'name'      => 'Heuvelman',
-        'logo'      => '/images/clients/heuvelman-logo.png',
+        'logo'      => '/images/clients/heuvelman-logo.webp',
         'alt'       => 'Heuvelman Sound & Vision logo',
         'url'       => null,
         'industry'  => 'AV / Events',
@@ -92,7 +92,7 @@ return [
     'contractor-plus' => [
         'id'        => 'contractor-plus',
         'name'      => 'Contractor Plus',
-        'logo'      => '/images/clients/contractor-plus-logo.png',
+        'logo'      => '/images/clients/contractor-plus-logo.webp',
         'alt'       => 'Contractor Plus field service management app logo',
         'url'       => null,
         'industry'  => 'Field Service / Construction',
@@ -103,7 +103,7 @@ return [
     'flickstur' => [
         'id'        => 'flickstur',
         'name'      => 'Flickstur',
-        'logo'      => '/images/clients/flickstur-logo.png',
+        'logo'      => '/images/clients/flickstur-logo.webp',
         'alt'       => 'Flickstur travel platform logo',
         'url'       => null,
         'industry'  => 'Travel / Hospitality',
@@ -114,7 +114,7 @@ return [
     'bloomford' => [
         'id'        => 'bloomford',
         'name'      => 'Bloomford',
-        'logo'      => '/images/clients/bloomford-logo.png',
+        'logo'      => '/images/clients/bloomford-logo.webp',
         'alt'       => 'Bloomford executive search brand logo',
         'url'       => null,
         'industry'  => 'Recruitment / Executive Search',
@@ -125,7 +125,7 @@ return [
     'hotel-bhagyoday' => [
         'id'        => 'hotel-bhagyoday',
         'name'      => 'Hotel Bhagyoday',
-        'logo'      => '/images/clients/bhagyoday-logo.png',
+        'logo'      => '/images/clients/bhagyoday-logo.webp',
         'alt'       => 'Hotel Bhagyoday hospitality brand logo',
         'url'       => null,
         'industry'  => 'Hospitality',
@@ -136,7 +136,7 @@ return [
     'de-ruwenberg' => [
         'id'        => 'de-ruwenberg',
         'name'      => 'De Ruwenberg',
-        'logo'      => '/images/clients/de-ruwenberg-logo.png',
+        'logo'      => '/images/clients/de-ruwenberg-logo.webp',
         'alt'       => 'De Ruwenberg hotel and conference center logo',
         'url'       => null,
         'industry'  => 'Hospitality / Conference',
@@ -147,7 +147,7 @@ return [
     'lmc' => [
         'id'        => 'lmc',
         'name'      => 'LMC',
-        'logo'      => '/images/clients/lmc-logo.png',
+        'logo'      => '/images/clients/lmc-logo.webp',
         'alt'       => 'LMC healthcare organization logo',
         'url'       => null,
         'industry'  => 'Healthcare',
@@ -158,7 +158,7 @@ return [
     'clothing-care' => [
         'id'        => 'clothing-care',
         'name'      => 'Clothing Care',
-        'logo'      => '/images/clients/clothing-care-logo.png',
+        'logo'      => '/images/clients/clothing-care-logo.webp',
         'alt'       => 'Clothing Care logistics and laundry service logo',
         'url'       => null,
         'industry'  => 'Logistics / Services',
@@ -169,7 +169,7 @@ return [
     'dalil' => [
         'id'        => 'dalil',
         'name'      => 'Dalil',
-        'logo'      => '/images/clients/dalil-logo.png',
+        'logo'      => '/images/clients/dalil-logo.webp',
         'alt'       => 'Dalil directory application logo',
         'url'       => null,
         'industry'  => 'Directory / Local Search',
@@ -180,7 +180,7 @@ return [
     'feyenoord-app' => [
         'id'        => 'feyenoord-app',
         'name'      => 'Feyenoord Android Application',
-        'logo'      => '/images/clients/feyenoord-logo.png',
+        'logo'      => '/images/clients/feyenoord-logo.webp',
         'alt'       => 'Feyenoord Android application logo',
         'url'       => null,
         'industry'  => 'Sports / Media',
@@ -191,7 +191,7 @@ return [
     'feestbeesten' => [
         'id'        => 'feestbeesten',
         'name'      => 'Feestbeesten Application',
-        'logo'      => '/images/clients/feestbeesten-logo.png',
+        'logo'      => '/images/clients/feestbeesten-logo.webp',
         'alt'       => 'Feestbeesten event application logo',
         'url'       => null,
         'industry'  => 'Events / Entertainment',
@@ -202,7 +202,7 @@ return [
     'rucheconnect' => [
         'id'        => 'rucheconnect',
         'name'      => 'Rucheconnect Application',
-        'logo'      => '/images/clients/rucheconnect-logo.png',
+        'logo'      => '/images/clients/rucheconnect-logo.webp',
         'alt'       => 'Rucheconnect application logo',
         'url'       => null,
         'industry'  => 'Communication / Social',
@@ -213,7 +213,7 @@ return [
     'nvvc' => [
         'id'        => 'nvvc',
         'name'      => 'NVVC',
-        'logo'      => '/images/clients/nvvc-logo.png',
+        'logo'      => '/images/clients/nvvc-logo.webp',
         'alt'       => 'NVVC logo',
         'url'       => null,
         'industry'  => 'Healthcare / Association',
@@ -224,7 +224,7 @@ return [
     'sonolas' => [
         'id'        => 'sonolas',
         'name'      => 'Sonolas',
-        'logo'      => '/images/clients/sonolas-logo.png',
+        'logo'      => '/images/clients/sonolas-logo.webp',
         'alt'       => 'Sonolas audio brand logo',
         'url'       => null,
         'industry'  => 'Audio / Technology',
@@ -235,7 +235,7 @@ return [
     'writesonic' => [
         'id'        => 'writesonic',
         'name'      => 'Writesonic',
-        'logo'      => '/images/clients/writesonic-logo.png',
+        'logo'      => '/images/clients/writesonic-logo.webp',
         'alt'       => 'Writesonic AI copywriting platform logo',
         'url'       => null,
         'industry'  => 'SaaS / AI',
@@ -246,7 +246,7 @@ return [
     'scribable' => [
         'id'        => 'scribable',
         'name'      => 'Scribable',
-        'logo'      => '/images/clients/scribable-logo.png',
+        'logo'      => '/images/clients/scribable-logo.webp',
         'alt'       => 'Scribable SaaS logo',
         'url'       => null,
         'industry'  => 'SaaS / Productivity',

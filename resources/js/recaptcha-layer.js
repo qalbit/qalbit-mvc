@@ -60,21 +60,39 @@
         });
     }
 
-    function waitForRecaptchaAndAttach(siteKey) {
-        var attempts = 0;
-        var maxAttempts = 50; // ~10s at 200ms
+    // Handlers are safe to attach before grecaptcha exists — the submit
+    // handler checks window.grecaptcha at submit time and degrades to a
+    // token-less native submit (the server fails closed).
 
-        function tryInit() {
-            if (window.grecaptcha && typeof window.grecaptcha.ready === 'function') {
-                attachRecaptchaHandlers(siteKey);
-            } else if (attempts++ < maxAttempts) {
-                setTimeout(tryInit, 200);
-            } else {
-                // Give up silently if reCAPTCHA never loads
-            }
+    // Inject Google's api.js (≈374 KB) only when the visitor first interacts
+    // with the page — tokens are only ever minted at form submit, so loading
+    // it during initial render just burns main-thread time for everyone.
+    var apiInjected = false;
+
+    function injectRecaptchaApi(siteKey) {
+        if (apiInjected) return;
+        apiInjected = true;
+
+        var s = document.createElement('script');
+        s.src = 'https://www.google.com/recaptcha/api.js?render=' + encodeURIComponent(siteKey);
+        s.async = true;
+        s.defer = true;
+        document.head.appendChild(s);
+    }
+
+    function armLazyLoad(siteKey) {
+        var events = ['pointerdown', 'touchstart', 'keydown', 'scroll', 'focusin'];
+
+        function onFirstInteraction() {
+            events.forEach(function (ev) {
+                window.removeEventListener(ev, onFirstInteraction, true);
+            });
+            injectRecaptchaApi(siteKey);
         }
 
-        tryInit();
+        events.forEach(function (ev) {
+            window.addEventListener(ev, onFirstInteraction, { capture: true, passive: true, once: false });
+        });
     }
 
     function bootstrap() {
@@ -89,13 +107,15 @@
         var siteKey = currentScript.getAttribute('data-recaptcha-site-key');
         if (!siteKey) return;
 
+        armLazyLoad(siteKey);
+
         // Ensure DOM is ready before querying forms
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function () {
-                waitForRecaptchaAndAttach(siteKey);
+                attachRecaptchaHandlers(siteKey);
             });
         } else {
-            waitForRecaptchaAndAttach(siteKey);
+            attachRecaptchaHandlers(siteKey);
         }
     }
 

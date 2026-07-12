@@ -25,6 +25,8 @@
                             src="<?= asset('images/reviews/clutch-logo.svg') ?>"
                             alt="Clutch reviews for QalbIT"
                             class="h-8 w-auto"
+                            width="96"
+                            height="32"
                             loading="lazy"
                             decoding="async"
                         />
@@ -51,6 +53,8 @@
                             src="<?= asset('images/reviews/google-logo.svg') ?>"
                             alt="Google reviews for QalbIT"
                             class="h-8 w-auto"
+                            width="96"
+                            height="32"
                             loading="lazy"
                             decoding="async"
                         />
@@ -77,6 +81,8 @@
                             src="<?= asset('images/reviews/upwork-logo.svg') ?>"
                             alt="Upwork reviews for QalbIT"
                             class="h-8 w-auto"
+                            width="96"
+                            height="32"
                             loading="lazy"
                             decoding="async"
                         />
@@ -97,6 +103,8 @@
                         src="<?= asset('images/reviews/toptracker-logo.svg') ?>"
                         alt="TopTracker hours worked with QalbIT"
                         class="h-8 w-auto shrink-0"
+                        width="96"
+                        height="32"
                         loading="lazy"
                         decoding="async"
                     />

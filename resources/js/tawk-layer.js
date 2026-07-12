@@ -17,8 +17,15 @@
     window.Tawk_API = window.Tawk_API || {};
     window.Tawk_LoadStart = new Date();
 
-    // Dynamically inject the Tawk script
-    (function () {
+    // Inject the Tawk widget (~330 KB) on first interaction or after a
+    // 6 s idle fallback — nobody opens live chat during the first paint,
+    // so keep it out of the critical rendering window.
+    var tawkLoaded = false;
+
+    function loadTawk() {
+        if (tawkLoaded) return;
+        tawkLoaded = true;
+
         var s1 = document.createElement('script');
         var s0 = document.getElementsByTagName('script')[0];
 
@@ -32,5 +39,20 @@
         } else {
             document.head.appendChild(s1);
         }
-    })();
+    }
+
+    var interactionEvents = ['pointerdown', 'touchstart', 'keydown', 'scroll'];
+
+    function onFirstInteraction() {
+        interactionEvents.forEach(function (ev) {
+            window.removeEventListener(ev, onFirstInteraction, true);
+        });
+        loadTawk();
+    }
+
+    interactionEvents.forEach(function (ev) {
+        window.addEventListener(ev, onFirstInteraction, { capture: true, passive: true });
+    });
+
+    window.setTimeout(loadTawk, 6000);
 })();

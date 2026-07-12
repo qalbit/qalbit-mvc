@@ -85,8 +85,9 @@ $jsonLd = $jsonLd ?? null;
 <?php endif; ?>
 
 <?php if ($recaptchaEnabled): ?>
-    <script src="https://www.google.com/recaptcha/api.js?render=<?= htmlspecialchars($recaptchaSiteKey) ?>" async defer></script>
-    <script src="<?= asset_v('/js/recaptcha-layer.js') ?>" 
+    <!-- reCAPTCHA api.js (374 KB) is injected lazily by recaptcha-layer.js on
+         first user interaction — tokens are only minted at form submit. -->
+    <script src="<?= asset_v('/js/recaptcha-layer.js') ?>"
         data-recaptcha-site-key="<?= htmlspecialchars($recaptchaSiteKey) ?>" defer></script>
 <?php endif; ?>
 
@@ -113,6 +114,11 @@ $jsonLd = $jsonLd ?? null;
 <?php $fontsCssUrl = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap'; ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Preload the two critical Poppins weights so text renders with the web
+     font on first paint instead of swapping later (hero CLS fix). If Google
+     revs the font version these preloads become harmless no-ops. -->
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2">
 <link rel="preload" as="style" href="<?= $fontsCssUrl ?>">
 <link rel="stylesheet" href="<?= $fontsCssUrl ?>" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="<?= $fontsCssUrl ?>"></noscript>
