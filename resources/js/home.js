@@ -248,6 +248,7 @@
             items.forEach((item) => {
                 const clone = item.cloneNode(true);
                 clone.setAttribute("aria-hidden", "true");
+                clone.setAttribute("inert", ""); // clones must not be focusable
                 clone.dataset.industryClone = "true";
                 clone
                     .querySelectorAll("a")
@@ -1014,6 +1015,7 @@
                 cards.forEach((card) => {
                     const clone = card.cloneNode(true);
                     clone.setAttribute("aria-hidden", "true");
+                    clone.setAttribute("inert", ""); // clones must not be focusable
                     clone.dataset.reviewClone = "true";
                     track.appendChild(clone);
                 });

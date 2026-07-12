@@ -96,7 +96,7 @@ $columns      = array_chunk($reviews, $perColumn);
                                         <?php endif; ?>
 
                                         <?php if ($rating): ?>
-                                            <div class="mb-2 flex items-center gap-1 text-[10px] text-amber-500" aria-label="Rated <?= $rating ?> out of 5">
+                                            <div class="mb-2 flex items-center gap-1 text-[10px] text-amber-500" role="img" aria-label="Rated <?= $rating ?> out of 5">
                                                 <?php for ($i = 0; $i < $rating; $i++): ?>
                                                     <span aria-hidden="true">★</span>
                                                 <?php endfor; ?>

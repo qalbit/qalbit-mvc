@@ -91,7 +91,7 @@ $subtitle   = $subtitle ?? 'Partner with our dedicated team of software professi
                                     href="<?= route_url($slug) ?>"
                                     class="inline-flex items-center text-sm font-semibold text-primary-800 hover:text-primary-900"
                                     title="Explore our <?= htmlspecialchars($title) ?> to enhance your operations"
-                                    aria-label="Explore <?= htmlspecialchars($title) ?> that drive automation and growth"
+                                    aria-label="Explore Our Services – <?= htmlspecialchars($title) ?>"
                                 >
                                     Explore Our Services
                                     <span class="ml-1 inline-block translate-x-0 transition-transform duration-150 group-hover:translate-x-0.5">

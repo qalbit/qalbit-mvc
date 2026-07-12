@@ -84,7 +84,7 @@ $jsonLd = $jsonLd ?? null;
     include $headerFile;
     ?>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <?= $content ?? '' ?>
     </main>
 

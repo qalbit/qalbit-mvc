@@ -42,7 +42,7 @@
                     <a href="<?= route_url('/contact-us/') ?>" 
                         class="btn btn-primary btn-radius-pill w-full md:w-auto text-center"
                         title="Get Your Free Estimation Now!"
-                        aria-label="Get Your Free Estimation Now in 24 Hours!">
+                        aria-label="Get Your Free Estimate Now – response within 24 hours">
                         Get Your Free Estimate Now
                     </a>
                     <a href="<?= route_url('https://crm.qalbit.com/book/discuss-project') ?>" 

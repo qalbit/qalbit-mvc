@@ -52,14 +52,12 @@ $subtitle = $subtitle
             <div
                 class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 lg:flex lg:gap-6 lg:pb-2"
                 data-horizontal-track
-                role="list"
             >
                 <?php foreach ($industries as $industry): ?>
                     <article
                         itemscope
                         itemtype="https://schema.org/Service"
                         class="group relative flex flex-col justify-between rounded-2xl border border-slate-800/80 bg-slate-900/70 p-5 backdrop-blur-sm transition-colors duration-200 hover:border-primary-400/70 lg:min-w-[320px]"
-                        role="listitem"
                     >
                         <div class="flex items-center gap-3 mb-3">
                             <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-slate-950/60 ring-1 ring-slate-700/80 group-hover:ring-primary-400/80">
@@ -84,19 +82,19 @@ $subtitle = $subtitle
 
                         <p
                             itemprop="description"
-                            class="text-xs md:text-sm text-slate-300"
+                            class="text-xs md:text-sm text-slate-200"
                         >
                             <?= htmlspecialchars($industry['summary']) ?>
                         </p>
 
-                        <div class="mt-4 flex items-center justify-between text-[11px] uppercase tracking-[0.16em] text-slate-400">
+                        <div class="mt-4 flex items-center justify-between text-[11px] uppercase tracking-[0.16em] text-slate-200">
                             <span class="group-hover:text-primary-200">
                                 Industry focus
                             </span>
                             <a
                                 itemprop="url"
                                 href="<?= route_url($industry['slug']) ?>"
-                                class="inline-flex items-center text-[11px] font-semibold text-slate-300 group-hover:text-primary-200"
+                                class="inline-flex items-center text-[11px] font-semibold text-slate-200 group-hover:text-primary-200"
                                 title="Explore software solutions for <?= htmlspecialchars($industry['name']) ?>"
                                 aria-label="Explore software solutions for <?= htmlspecialchars($industry['name']) ?>"
                             >
