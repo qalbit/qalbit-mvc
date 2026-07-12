@@ -1867,6 +1867,7 @@
             panel.classList.remove('translate-x-full');
             panel.classList.add('translate-x-0');
             overlay.setAttribute('aria-hidden', 'false');
+            overlay.removeAttribute('inert');
             openBtn.setAttribute('aria-expanded', 'true');
         }
 
@@ -1876,6 +1877,7 @@
             panel.classList.add('translate-x-full');
             panel.classList.remove('translate-x-0');
             overlay.setAttribute('aria-hidden', 'true');
+            overlay.setAttribute('inert', ''); // closed menu must not be focusable
             openBtn.setAttribute('aria-expanded', 'false');
         }
 

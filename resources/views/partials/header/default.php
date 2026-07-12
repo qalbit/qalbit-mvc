@@ -254,11 +254,13 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
         </button>
     </div>
 
-    <!-- Mobile drawer -->
+    <!-- Mobile drawer: inert while closed so the hidden links are neither
+         focusable nor exposed to assistive tech / AI agents -->
     <div
         id="mobile-menu"
         class="fixed inset-0 z-50 bg-slate-950/40 opacity-0 pointer-events-none transition-opacity duration-200 lg:hidden"
         aria-hidden="true"
+        inert
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
