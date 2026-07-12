@@ -110,18 +110,18 @@ $jsonLd = $jsonLd ?? null;
     <?php endforeach; ?>
 <?php endif; ?>
 
-<!-- Fonts (async: preload fetches early, print/onload applies without blocking render) -->
+<!-- Fonts: the css2 stylesheet is tiny and loads blocking so the hero text
+     paints once with the web font (async print/onload swap caused a 0.11
+     hero CLS on every load). The woff2 preloads put the two critical
+     Poppins weights on the wire immediately; if Google revs the font
+     version they degrade to harmless no-ops. -->
 <?php $fontsCssUrl = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap'; ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Preload the two critical Poppins weights so text renders with the web
-     font on first paint instead of swapping later (hero CLS fix). If Google
-     revs the font version these preloads become harmless no-ops. -->
 <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2">
 <link rel="preload" as="style" href="<?= $fontsCssUrl ?>">
-<link rel="stylesheet" href="<?= $fontsCssUrl ?>" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="<?= $fontsCssUrl ?>"></noscript>
+<link rel="stylesheet" href="<?= $fontsCssUrl ?>">
 
 <!-- Script CDNs used site-wide (GSAP core/ScrollTrigger load deferred at end of body) -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
