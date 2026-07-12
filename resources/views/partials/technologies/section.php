@@ -69,7 +69,7 @@ usort($enabled, static function ($a, $b) {
                 <a
                     href="/technologies/"
                     class="inline-flex items-center text-xs font-semibold text-primary-700 hover:text-primary-800 mt-5"
-                    aria-label="Open QalbIT technologies page listing all supported stacks"
+                    aria-label="View all technologies QalbIT supports"
                 >
                     View all technologies
                     <span aria-hidden="true" class="ml-1">↗</span>
@@ -155,7 +155,7 @@ usort($enabled, static function ($a, $b) {
                             <a
                                 href="<?= htmlspecialchars($slug) ?>"
                                 class="mt-4 inline-flex items-center text-[11px] font-semibold text-primary-700 hover:text-primary-800"
-                                aria-label="Read more about <?= htmlspecialchars($name) ?> at QalbIT"
+                                aria-label="Learn more about <?= htmlspecialchars($name) ?> at QalbIT"
                                 itemprop="url"
                             >
                                 Learn more
