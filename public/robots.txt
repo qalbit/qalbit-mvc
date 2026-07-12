@@ -11,6 +11,9 @@ Disallow: /sass/
 Disallow: /tmp/
 Disallow: /logs/
 Disallow: */feed/
+# Main blog feed stays crawlable: Google Discover's Follow feature reads it
+# (longest-match Allow wins over the */feed/ rule above).
+Allow: /blog/feed/$
 Disallow: /blog/wp-admin/
 Disallow: /blog/wp-includes/
 Disallow: /blog/wp-content/plugins/
