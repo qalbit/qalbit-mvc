@@ -3703,8 +3703,8 @@ return [
         'resources' => [
             'title' => 'CRM guides & comparisons',
             'links' => [
-                ['label' => 'Custom CRM development cost in 2026 (real numbers)', 'href' => '/blog/crm-development-cost-2026/',            'title' => 'What custom CRM development actually costs in 2026'],
-                ['label' => 'Custom CRM vs Salesforce, HubSpot & Zoho',           'href' => '/blog/custom-crm-vs-salesforce-hubspot-zoho/', 'title' => 'Build vs buy: custom CRM compared with Salesforce, HubSpot and Zoho'],
+                ['label' => 'Custom CRM development cost in 2026', 'href' => '/blog/crm-development-cost-2026/',            'title' => 'What custom CRM development actually costs in 2026',                'desc' => 'Real numbers, module by module',          'img' => 'https://qalbit.com/blog/wp-content/uploads/2026/07/crm-development-cost-2026-banner-2048x1152-1-768x432.webp'],
+                ['label' => 'Custom CRM vs Salesforce, HubSpot & Zoho', 'href' => '/blog/custom-crm-vs-salesforce-hubspot-zoho/', 'title' => 'Build vs buy: custom CRM compared with Salesforce, HubSpot and Zoho', 'desc' => 'Build vs buy, with a decision checklist', 'img' => 'https://qalbit.com/blog/wp-content/uploads/2026/07/custom-crm-vs-salesforce-hubspot-zoho-2026-768x432.webp'],
             ],
         ],
 
@@ -4013,8 +4013,8 @@ return [
         'resources' => [
             'title' => 'ERP guides & comparisons',
             'links' => [
-                ['label' => 'Custom ERP development cost in 2026 (SME guide)', 'href' => '/blog/erp-development-cost-2026/', 'title' => 'What custom ERP development costs for SMEs in 2026'],
-                ['label' => 'Custom ERP vs Odoo vs SAP',                      'href' => '/blog/custom-erp-vs-odoo-vs-sap/', 'title' => 'Build vs buy: custom ERP compared with Odoo and SAP'],
+                ['label' => 'Custom ERP development cost in 2026', 'href' => '/blog/erp-development-cost-2026/', 'title' => 'What custom ERP development costs for SMEs in 2026', 'desc' => 'Phase-one pricing for SMEs',       'img' => 'https://qalbit.com/blog/wp-content/uploads/2026/07/custom-erp-development-cost-2026-qalbit-768x432.webp'],
+                ['label' => 'Custom ERP vs Odoo vs SAP',          'href' => '/blog/custom-erp-vs-odoo-vs-sap/', 'title' => 'Build vs buy: custom ERP compared with Odoo and SAP', 'desc' => 'Five-year cost & fit comparison', 'img' => 'https://qalbit.com/blog/wp-content/uploads/2026/07/custom-erp-vs-odoo-vs-sap-2026-comparison-768x432.webp'],
             ],
         ],
 
@@ -4323,8 +4323,8 @@ return [
         'resources' => [
             'title' => 'MVP guides & timelines',
             'links' => [
-                ['label' => 'How much does it cost to build an MVP in 2026?', 'href' => '/blog/mvp-development-cost-2026/', 'title' => 'MVP development cost in 2026 – founder’s guide'],
-                ['label' => 'MVP development timeline: ship in 6–10 weeks',    'href' => '/blog/mvp-development-timeline/', 'title' => 'A realistic week-by-week MVP development timeline'],
+                ['label' => 'How much does it cost to build an MVP?', 'href' => '/blog/mvp-development-cost-2026/', 'title' => 'MVP development cost in 2026 – founder’s guide', 'desc' => 'What your runway actually buys',        'img' => 'https://qalbit.com/blog/wp-content/uploads/2026/07/mvp-development-cost-2026-banner-3200x1800-1-768x432.webp'],
+                ['label' => 'MVP development timeline',               'href' => '/blog/mvp-development-timeline/', 'title' => 'A realistic week-by-week MVP development timeline', 'desc' => 'Week by week to launch in 6–10 weeks', 'img' => 'https://qalbit.com/blog/wp-content/uploads/2026/07/mvp-development-timeline-2026-768x432.webp'],
             ],
         ],
 
