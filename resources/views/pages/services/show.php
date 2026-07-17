@@ -48,6 +48,15 @@ $relatedGroups = [
         ],
     ],
 ];
+
+// Per-service further-reading links (e.g. cost guides and comparison articles).
+if (!empty($service['resources']['links'])) {
+    $relatedGroups[] = [
+        'title' => $service['resources']['title'] ?? 'Further reading',
+        'links' => $service['resources']['links'],
+    ];
+}
+
 include __DIR__ . '/../../partials/cta/related-links.php';
 ?>
 

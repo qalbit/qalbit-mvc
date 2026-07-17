@@ -3700,6 +3700,14 @@ return [
         'category'          => 'core',
         'template'          => 'pages/services/crm-development',
 
+        'resources' => [
+            'title' => 'CRM guides & comparisons',
+            'links' => [
+                ['label' => 'Custom CRM development cost in 2026 (real numbers)', 'href' => '/blog/crm-development-cost-2026/',            'title' => 'What custom CRM development actually costs in 2026'],
+                ['label' => 'Custom CRM vs Salesforce, HubSpot & Zoho',           'href' => '/blog/custom-crm-vs-salesforce-hubspot-zoho/', 'title' => 'Build vs buy: custom CRM compared with Salesforce, HubSpot and Zoho'],
+            ],
+        ],
+
         'icon'    => 'images/services/icon-custom-software-development.svg',
         'iconAlt' => 'Icon representing Custom CRM Development',
 
@@ -4002,6 +4010,14 @@ return [
         'category'          => 'core',
         'template'          => 'pages/services/erp-development',
 
+        'resources' => [
+            'title' => 'ERP guides & comparisons',
+            'links' => [
+                ['label' => 'Custom ERP development cost in 2026 (SME guide)', 'href' => '/blog/erp-development-cost-2026/', 'title' => 'What custom ERP development costs for SMEs in 2026'],
+                ['label' => 'Custom ERP vs Odoo vs SAP',                      'href' => '/blog/custom-erp-vs-odoo-vs-sap/', 'title' => 'Build vs buy: custom ERP compared with Odoo and SAP'],
+            ],
+        ],
+
         'icon'    => 'images/services/icon-custom-software-development.svg',
         'iconAlt' => 'Icon representing Custom ERP Development',
 
@@ -4303,6 +4319,14 @@ return [
         'short_description' => 'MVP development services for startups – scope, design and launch a working product in 6–10 weeks, validate with real users and scale what works.',
         'category'          => 'core',
         'template'          => 'pages/services/mvp-development',
+
+        'resources' => [
+            'title' => 'MVP guides & timelines',
+            'links' => [
+                ['label' => 'How much does it cost to build an MVP in 2026?', 'href' => '/blog/mvp-development-cost-2026/', 'title' => 'MVP development cost in 2026 – founder’s guide'],
+                ['label' => 'MVP development timeline: ship in 6–10 weeks',    'href' => '/blog/mvp-development-timeline/', 'title' => 'A realistic week-by-week MVP development timeline'],
+            ],
+        ],
 
         'icon'    => 'images/services/icon-saas-solutions.svg',
         'iconAlt' => 'Icon representing MVP Development',
