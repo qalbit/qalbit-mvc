@@ -125,13 +125,17 @@ $emptyMessage = $config['empty_message'] ?? 'Try adjusting the industry or tech 
                             <div class="flex items-start justify-between gap-2">
                                 <div class="space-y-1">
                                     <h3 class="text-sm sm:text-[15px] font-semibold leading-snug text-slate-900">
-                                        <a
-                                            href="<?= htmlspecialchars($href, ENT_QUOTES); ?>"
-                                            class="hover:text-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
-                                            <?= $targetAttr; ?>
-                                        >
+                                        <?php if ($href): ?>
+                                            <a
+                                                href="<?= htmlspecialchars($href, ENT_QUOTES); ?>"
+                                                class="hover:text-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+                                                <?= $targetAttr; ?>
+                                            >
+                                                <?= htmlspecialchars($name, ENT_QUOTES); ?>
+                                            </a>
+                                        <?php else: ?>
                                             <?= htmlspecialchars($name, ENT_QUOTES); ?>
-                                        </a>
+                                        <?php endif; ?>
                                     </h3>
                                     <?php if ($client): ?>
                                         <p class="text-[11px] text-slate-500">

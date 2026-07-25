@@ -30,7 +30,10 @@ return [
         'author_name' => 'Wouter Santens',
         'author_role' => 'Executive Search Consultant at Bloomford',
         'company'     => 'Bloomford',
-        'company_url' => 'https://bloomford.be',
+        // bloomford.be no longer resolves (NXDOMAIN as of 2026-07-25). The review
+        // and the internal case study stay; only the dead outbound link is dropped,
+        // so the template renders the company name as plain text.
+        'company_url' => null,
         'rating'      => 5,
         'industry'    => 'Recruitment / HR Tech',
         'region'      => 'Belgium (remote-first collaboration)',

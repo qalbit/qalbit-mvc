@@ -321,7 +321,9 @@ return [
             'technologies'  => ['wordpress', 'payment-gateway', 'php'],
             'type'          => 'product',
             'case_study_url'=> null,
-            'external_url'  => 'https://www.myhouzzzmanagement.com/en/',
+            // Client site is offline (DNS resolves, ports 80/443 refused as of 2026-07-25).
+            // Link removed so the card renders as plain text instead of a dead outbound link.
+            'external_url'  => null,
             'thumbnail'     => '/images/portfolio/my-houzzz-thumb.png',
             'featured'      => false,
             'enabled'       => true,
