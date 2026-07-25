@@ -34,12 +34,18 @@ Disallow: /helper.php
 Disallow: /*?ref=
 Disallow: /*?estimate
 
-# Lead-form prefill variants (?topic= / ?source=) are the same page as the
-# clean URL and already canonicalise to it — keep crawlers on the canonical
-# and stop crawl-budget waste (GSC: "Alternate page with proper canonical").
-Disallow: /contact-us/?
-Disallow: /career/apply/?
-Disallow: /portfolio/?
+# Lead-form prefill variants (?topic= / ?source=) and portfolio filters
+# (?industry=) are the same page as the clean URL and already serve
+# rel=canonical pointing at it.
+#
+# These are deliberately NOT disallowed. Blocking them here would stop
+# Googlebot fetching them, which means it could never read that canonical —
+# so the duplicates would never consolidate, and with ~357 internal links
+# pointing at them they could still be indexed URL-only ("Indexed, though
+# blocked by robots.txt"). Let them be crawled; the canonical does the work.
+#
+# Note: GSC "Alternate page with proper canonical" is the healthy result
+# here, not an error — it means the canonical was read and honoured.
 
 # --- AI search & assistant crawlers (retrieval): allowed so QalbIT
 # --- can be cited and recommended in AI answers.
