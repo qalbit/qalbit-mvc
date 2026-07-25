@@ -10,6 +10,16 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
+# --- MIME types ---
+# The server default served .js as the legacy "application/x-javascript".
+# text/javascript is the type standardised by RFC 9239 and is what
+# Screaming Frog / security scanners expect. Both are spec-valid JavaScript
+# MIME types, so this is a standards fix, not a functional one.
+<IfModule mod_mime.c>
+  AddType text/javascript .js
+  AddType text/javascript .mjs
+</IfModule>
+
 # --- Static asset caching ---
 <IfModule mod_expires.c>
   ExpiresActive On
@@ -19,6 +29,7 @@
 
   # Long cache for versioned assets
   ExpiresByType text/css "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
   ExpiresByType application/javascript "access plus 1 year"
   ExpiresByType application/x-javascript "access plus 1 year"
   ExpiresByType image/jpeg "access plus 1 year"
