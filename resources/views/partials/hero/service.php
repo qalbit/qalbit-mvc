@@ -41,9 +41,16 @@
                 </div>
 
 
+                <?php /*
+                    Hub H1 must stay distinct from the detail page at
+                    /services/custom-software-development/, which owns
+                    "Custom Software Development Services for Web, Mobile & Cloud."
+                    (config/services.php). Both pages previously shared that exact
+                    H1, which put them in competition for the same term.
+                */ ?>
                 <h1 class="text-display-md sm:text-display-lg md:text-display-2xl font-bold text-center md:text-left">
-                    Custom Software Development Services for
-                    <span class="text-gradient-brand-animated">Web, Mobile &amp; Cloud</span>.
+                    Software Development Services for
+                    <span class="text-gradient-brand-animated">Startups &amp; Growing Businesses</span>.
                 </h1>
 
                 <p class="text-md font-medium text-slate-600 text-center md:text-left px-0 md:px-4 lg:px-2">
