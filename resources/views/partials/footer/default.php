@@ -637,7 +637,7 @@ $currentYear = date('Y');
                     <a
                         target="_blank"
                         rel="noopener noreferrer"
-                        href="//www.dmca.com/Protection/Status.aspx?ID=1369625d-1306-472c-afec-8d78bdacae4c"
+                        href="https://www.dmca.com/Protection/Status.aspx?ID=1369625d-1306-472c-afec-8d78bdacae4c"
                         title="DMCA.com Protection Status"
                         class="dmca-badge"
                     >
