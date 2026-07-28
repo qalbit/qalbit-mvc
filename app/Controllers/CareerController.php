@@ -244,7 +244,7 @@ class CareerController
 
         // SEO defaults
         $pageTitle = 'Apply for a role at QalbIT';
-        $pageDesc  = 'Submit your profile, experience and resume to apply for current or future roles at QalbIT.';
+        $pageDesc  = 'Apply for a role at QalbIT in Ahmedabad – share your profile, experience and resume for current and upcoming developer and QA openings.';
 
         if ($selectedRole) {
             $roleTitle = $selectedRole['title']
@@ -252,8 +252,21 @@ class CareerController
                 ?? ucfirst(str_replace('-', ' ', (string) $roleSlug));
 
             $pageTitle = 'Apply – ' . $roleTitle . ' | Careers at QalbIT';
-            $pageDesc  = 'Apply for the ' . $roleTitle . ' role at QalbIT. '
-                . 'Share your experience, projects and resume – we will get back to you if there is a strong fit.';
+
+            // Role titles carry an experience/location suffix ("PHP Developer – 1–3 years –
+            // Ahmedabad") that blows the description past the 140-char cap, so trim to the
+            // role name and pick the longest closing clause that still fits.
+            $roleName = trim(explode('–', $roleTitle)[0]);
+            $descHead = 'Apply for the ' . $roleName
+                . ' role at QalbIT in Ahmedabad – share your experience, projects and resume';
+
+            $pageDesc = $descHead . '.';
+            foreach ([' and we will get back to you if there is a strong fit.', ' and we will be in touch.'] as $tail) {
+                if (mb_strlen($descHead . $tail) <= 140) {
+                    $pageDesc = $descHead . $tail;
+                    break;
+                }
+            }
         }
 
         // Always canonicalise to the clean URL: ?role= variants are the same

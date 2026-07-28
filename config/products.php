@@ -252,7 +252,7 @@ return [
             'logoAlt'     => 'Emplyft logo',
 
             'meta_title'       => 'Emplyft Case Study — HR SaaS by QalbIT',
-            'meta_description' => 'How QalbIT is building Emplyft, an HR and employee-management platform for growing teams.',
+            'meta_description' => 'Emplyft case study – the HR and employee management SaaS QalbIT designed, built and operates for growing teams outgrowing spreadsheets.',
 
             'role'   => 'Design + Build + Operate',
             'domain' => 'HR SaaS',
