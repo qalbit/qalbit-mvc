@@ -31,7 +31,7 @@ return [
                 'product studio software company',
                 'multi-tenant SaaS development',
             ],
-            'canonical' => 'https://www.qalbit.com/products/',
+            'canonical' => 'https://qalbit.com/products/',
         ],
 
         'sections' => [

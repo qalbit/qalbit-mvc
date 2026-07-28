@@ -23,7 +23,7 @@ return [
                 'SaaS development portfolio',
                 'Laravel and Node.js project examples',
             ],
-            'canonical'          => 'https://www.qalbit.com/portfolio/',
+            'canonical'          => 'https://qalbit.com/portfolio/',
         ],
 
         'faq_key'      => 'faq_portfolio',

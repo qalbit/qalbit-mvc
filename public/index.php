@@ -1,4 +1,25 @@
 <?php
+
+/*
+ * Canonical host.
+ *
+ * qalbit.com serves the site; www.qalbit.com must not. Without this the whole
+ * site answers 200 on both hosts, so every page is crawled twice. rel=canonical
+ * stops the duplicate being *indexed*, but not being *crawled* — the 28 Jul
+ * audit found ~567 flagged rows that were simply the www copy of a row already
+ * counted on the apex.
+ *
+ * Runs before session_start() so a redirect never sets a session cookie, and
+ * carries its own Cache-Control so the CDN can answer repeats without touching
+ * origin. /blog/ (WordPress) already redirects itself.
+ */
+$requestHost = strtolower($_SERVER['HTTP_HOST'] ?? '');
+if (str_starts_with($requestHost, 'www.')) {
+    header('Location: https://' . substr($requestHost, 4) . ($_SERVER['REQUEST_URI'] ?? '/'), true, 301);
+    header('Cache-Control: public, max-age=86400');
+    exit;
+}
+
 session_set_cookie_params([
     'lifetime'  => 0,
     'path'      => '/',

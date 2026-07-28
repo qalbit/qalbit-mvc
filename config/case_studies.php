@@ -45,7 +45,7 @@ return [
                 'Laravel scheduling web app',
                 'custom class management system case study',
             ],
-            'canonical'         => 'https://www.qalbit.com/case-studies/snappystats/',
+            'canonical'         => 'https://qalbit.com/case-studies/snappystats/',
         ],
 
         'sections' => [
@@ -1551,7 +1551,7 @@ return [
                 'Next.js Node.js SaaS case study',
                 'peer review platform for CISOs',
             ],
-            'canonical'         => 'https://www.qalbit.com/case-studies/cyberfind/',
+            'canonical'         => 'https://qalbit.com/case-studies/cyberfind/',
         ],
 
         'sections' => [
