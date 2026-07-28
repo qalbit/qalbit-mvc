@@ -180,11 +180,57 @@ Phase 4 addresses the cause directly: at a 21% cache ratio almost every crawler 
 > Note for Phase 4.2: Cloudflare will not cache HTML at the edge on origin `Cache-Control` alone. It needs an
 > explicit Cache Rule, which means `Cache Rules → Edit` and `Cache Purge → Purge` when we get there.
 
-### Phase 3 — Image accessibility `2–3 h`
+### Phase 3 — Image accessibility ✅ COMPLETE `~1.5 h` (est. 2–3 h)
 
-| ID | Task | Rows | Where | Est | Status |
-|---|---|---:|---|---:|---|
-| 3.1 | Resolve 38 `alt=""` icons rendered on ~590 pages (mega-menu + related-links) | 602 | `partials/header/default.php`, `partials/cta/related-links.php` | 2 h | TODO |
+| ID | Task | Rows | Status |
+|---|---|---:|---|
+| 3.1 | Mega-menu icons → CSS background, deferred to hover | ~590 | **DONE** `45880de` |
+| 3.2 | Related-links thumbnails → descriptive `alt` | 13 | **DONE** `45880de` |
+| 3.3 | LiftUp admin avatar on `crm.qalbit.com` | 9 | **DEFERRED** — see 7.1 |
+
+**Attribution was exact.** Of 22 distinct alt-less images, **14 were mega-menu icons repeated on 590–592
+pages each** — 98% of the actionable total. The remaining 13 were related-links thumbnails and 9 were on
+`crm.qalbit.com`.
+
+**The two got different treatments, deliberately.**
+
+- **Mega-menu icons — CSS background (`.nav-icon`), gated on `.group:hover`.** These are decoration: each sits
+  beside its own visible text label. Drawing them as backgrounds means they carry no image semantics at all,
+  which is a better answer than bolting on alt text a screen reader would have to read twice.
+- **Related-links thumbnails — kept as `<img>` with a real `alt`.** These are *content* images for the article
+  being linked, not chrome. Converting them would have cost native `loading="lazy"` for no benefit. Alt falls
+  back through `img_alt` → `label`.
+
+**Phase 3 did Phase 2's job as predicted.** The panel hides behind `invisible`, not `display:none`, so all 38
+icons were fetched on **every page view** for a menu most visitors never open. Verified with a Chrome netlog
+against the live site, no hover:
+
+```
+distinct qalbit SVG asset URLs requested on load: 15
+   brand 2   icons 10   reviews 3
+   → zero services/*, technologies/*, industries/*
+```
+
+All 38 mega-menu requests now defer until the menu is opened. That is the per-page SVG flood that was
+tripping Cloudflare's rate limiter into 429ing those files during crawls.
+
+**Verification**
+
+| Check | Result |
+|---|---|
+| `<img>` count on `/about-us/` | 68 → **30** |
+| Empty or missing `alt` on `/`, `/about-us/`, `/services/`, `/technologies/`, `/contact-us/` | **0** on all five |
+| `.nav-icon` spans per page | 38, with `--nav-icon` custom property set |
+| Rendered appearance | Screenshot against the **live** stylesheet: boxed variant 24 px icon centred in the 44 px rounded box, bare variant 36 px — both identical to before |
+| Asset requests on load | 15 SVGs, none from the mega menu |
+
+**Two caveats worth recording.**
+
+1. **Hover-gating is safe here but only here.** The mega menu is `hidden lg:flex` and already opens only on
+   `group-hover`; the mobile menu renders no icons at all. The icon appears exactly when the panel does.
+2. **The mega menu was already keyboard-inaccessible** — it opens on `group-hover` alone, with no focus or
+   click path. This change neither causes nor worsens that, but it is a real accessibility gap and is worth
+   fixing on its own merits. Out of scope for this audit; flagged rather than silently absorbed.
 
 **Approach: (b), approved 28 Jul 2026.** `alt=""` on an icon that sits beside its own visible text label is
 *correct* accessibility practice — the icon is decorative and a screen reader should skip it. Ahrefs flags it
