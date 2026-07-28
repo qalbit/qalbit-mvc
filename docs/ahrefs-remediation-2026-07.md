@@ -527,6 +527,41 @@ keeping scoped if this CSS is ever revisited.
 A control screenshot of `/blog/crm-development-cost-2026/` — untouched by this work — clips identically, so
 it predates the rebuild. Worth a look on a real device.
 
+#### Subscribe button opened a new tab and hung
+
+Pressing Subscribe opened `assets.mailerlite.com/jsonp/1436867/forms/.../subscribe` in a new tab instead of
+submitting in place.
+
+MailerLite's embedded form ships with `target="_blank"` and a real `action` URL as its no-JavaScript
+fallback. The script meant to intercept that submit and send it as JSONP is `webforms.min.js` — and it is
+served from **`groot.mailerlite.com` / `static.mailerlite.com`**, neither of which the CSP allowed. Only
+`assets.mailerlite.com` was permitted, which is enough to *render* the form but not to *submit* it, so the
+browser fell through to a plain form post.
+
+Confirmed before changing anything:
+
+```
+groot.mailerlite.com/js/w/webforms.min.js   200
+static.mailerlite.com/js/w/webforms.min.js  200
+assets.mailerlite.com/js/w/webforms.min.js  404
+```
+
+and `webforms.min.js` contains `preventDefault` plus `createElement("script")` and a `jsonp` path — i.e. it
+is the interceptor. MailerLite spreads one integration across assets / groot / static / track, so the CSP
+entry was collapsed to a single `https://*.mailerlite.com` rather than enumerating hosts and finding the
+next one only when something else quietly broke.
+
+#### Sidebar newsletter showed the old count
+
+Blog detail pages embed the *same* form (`1QvGRf`) through a block widget, so the hero-scoped CSS never
+reached it and MailerLite's own "Join 500+ Smart Readers" heading was still rendering there. The widget now
+carries the same theme-rendered heading, with a `--bare` modifier that drops the hero's top rule — that rule
+exists to separate the block from the card section above it and would only draw a stray line in a sidebar.
+
+Written through `update_option()` rather than SQL: `widget_block` is a serialized array, and a raw `REPLACE`
+would leave the `s:NN:` length prefix pointing at the wrong byte count. The array was read back and
+re-validated afterwards (4 entries, intact). Backup: `~/backups/widget_block-20260728.txt`.
+
 > The blog theme and DB are outside git. Every change above is reversible from the listed backup. **1.5 lives
 > in a theme file — a theme update would revert it.** If that becomes a risk, move it to a child theme or an
 > mu-plugin filter.
