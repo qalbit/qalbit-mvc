@@ -481,14 +481,102 @@ twice. Aligning the title with the H1 is the documented lever, not a guarantee.
 
 | ID | Task | Rows | Where | Est | Status |
 |---|---|---:|---|---:|---|
-| 6.1 | Re-investigate the 191 blog schema errors (was ~130 last crawl) | 191 | blog | 2 h | TODO |
-| 6.2 | Blog theme `<section itemscope class="faqs">` has no `itemtype` — 10 itemprops resolve to `qalbit.com/*` | — | blog theme | 60 m | TODO |
+| 6.1 | Re-investigate the 191 blog schema errors (was ~130 last crawl) | 191 | blog | 2 h | **DONE** (WP only) |
+| 6.2 | Blog theme `<section itemscope class="faqs">` has no `itemtype` | 151 | blog theme | 60 m | **DONE** (WP only) |
 
-**Caveat, carried forward from last cycle:** every blog page type I put through `validator.schema.org` returned
-**0 severe errors and 0 warnings**. Ahrefs reports a bare `"Schema.org validation error"` with no field, no
-type and no message, so there is nothing to act on yet. The count rising from ~130 to 191 tracks blog posts
-crawled, not a regression. I will not guess at a fix — 6.1 is time-boxed to reproducing the error against
-Ahrefs' own validator. **If it stays unreproducible I will report that and change nothing.**
+**The carried-forward caveat was wrong, and it was wrong because of how I checked.** Spot-checking a page in
+`validator.schema.org` returned 0 errors, so the plan recorded the 191 rows as probably unreproducible. What
+that actually proved is that a UI spot-check on one page is not a measurement.
+
+Reproducing it took a validator built against schema.org's own published vocabulary
+(`schemaorg-current-https-types.csv` / `-properties.csv`, 2.5 MB and 512 KB), checking every microdata item
+and JSON-LD node for unknown types, unknown properties, `domainIncludes` violations and `rangeIncludes`
+violations — then running it over **all 191 URLs**, not one.
+
+**Result: 191 of 191 reproduced. Zero clean pages.** Three distinct defects, all in the blog theme:
+
+| Pages | Defect |
+|---:|---|
+| **191** | `"publisher": {"@type": "ProfilePage"}` — `publisher` accepts `Organization` or `Person`. A `ProfilePage` is a `WebPage`. Two hand-written `WebPage` blocks in `header.php` carried it, so it landed on every blog page. **This is the whole 191.** |
+| **151** | `<section itemscope class="faqs">` with no `itemtype` — the untyped item (6.2) |
+| **18** | JSON-LD that does not parse at all |
+
+#### 6.1 — what was actually in `header.php`
+
+Five JSON-LD blocks, all built by interpolating PHP straight into JSON strings. That technique is the
+common cause of every one of these:
+
+- **The unparseable 18.** `"description": "<?php echo get_the_excerpt(); ?>"` — excerpts end in a newline,
+  which is illegal inside a JSON string, so the whole block was discarded (4 posts). The FAQ block
+  concatenated question and answer text and leaned on `preg_replace('/\s\s+/', ' ', …)` to clean it — that
+  only collapses runs of **two or more** whitespace characters, so a single newline inside an answer passed
+  through and broke the JSON (14 posts). Those 14 posts had **no working FAQ markup at all** and nothing
+  said so.
+- **Dates.** `get_the_date()` returns the site's display format — `"July 22, 2023"` — where schema.org
+  wants ISO 8601. On all 159 posts.
+- **`author` and `editor` as bare strings**, where the range is `Person`/`Organization`.
+- **`url` and `mainEntityOfPage` hardcoded** to the homepage and the blog index, on every post.
+- A blog-index **`NewsArticle`** headlined "QalbIT Blog" with no `datePublished`, no `publisher` and no
+  `mainEntityOfPage`, contradicting the `CollectionPage` Yoast emits for the same URL.
+- A second bare **`LocalBusiness`** duplicating the `ProfessionalService` above it, with `addressLocality`
+  holding street, locality and region mashed together.
+- A **stray unmatched `</script>`** before `</head>`.
+
+**The fix was mostly deletion.** Yoast already emits a complete, cross-linked `@graph` — `Article` with ISO
+dates, a `Person` author resolved by `@id`, `WebPage`, `BreadcrumbList`, `WebSite`, `ImageObject`. The
+hand-written `Article` was a second, untyped, unlinked entity for the same URL: a competing claim, not extra
+signal. It and both `WebPage` blocks, the `NewsArticle` and the duplicate `LocalBusiness` are gone.
+
+What remains is the `ProfessionalService` (the business entity, which Yoast does not emit) and the FAQ
+block, now built as a PHP array and passed through `wp_json_encode(… JSON_HEX_TAG)` so newlines, quotes,
+unicode and any stray `</script>` in the source text are all escaped properly. `openingHours` also went from
+`"Mo, Tu, We, Th, Fr 09:30-19:00"` to the documented `"Mo-Fr 09:30-19:00"` — not a validation error, but not
+parseable by anything either.
+
+#### 6.2 — the FAQ microdata could not have been fixed by adding `itemtype`
+
+The plan assumed a missing attribute. The markup was structurally broken underneath it: every question's
+`itemprop="name"` and `itemprop="acceptedAnswer"` hung directly off the one `<section>` element, with **no
+per-question `Question` scope**. Ten itemprops on a single item — the pairing between each question and its
+answer did not exist. The answers carried no `itemprop="text"` either. Adding `itemtype="…/FAQPage"` would
+have traded "untyped item" for "invalid properties on FAQPage", because `acceptedAnswer` belongs on
+`Question`, not on `FAQPage`.
+
+The microdata was **removed** instead. The same FAQs are already published as a valid JSON-LD `FAQPage` from
+`header.php`, and Google asks for one representation rather than two. The `aria-expanded` /
+`aria-controls` / `role="region"` wiring is the accordion's accessibility contract and is untouched;
+`assets/main.js` binds on `.faq-question` / `.faq-answer` and no CSS selects on microdata attributes, both
+checked.
+
+#### Verification
+
+Re-ran the same validator over the same 191 URLs after deploying:
+
+| | Before | After |
+|---|---:|---:|
+| Pages with findings | **191 / 191** | **0 / 191** |
+| `publisher` → `ProfilePage` | 191 | 0 |
+| Untyped `itemscope` | 151 | 0 |
+| JSON-LD that fails to parse | 18 | 0 |
+| Valid `FAQPage` blocks | 137 | **151** |
+
+The FAQ count going *up* is the 14 posts whose markup had been silently void. All 151 now carry 2–10
+questions each, none empty. `ProfessionalService` 191, `BreadcrumbList` 191, `WebSite` 191, `Article` 159,
+`CollectionPage` 32. The `<head>` script tags balance 7/7 with the stray close gone, and all three page
+types return 200 with no PHP notices.
+
+**Two limits on this verification, stated plainly.** `validator.schema.org` serves a CAPTCHA to automated
+requests, so I could not cross-check against Google's validator programmatically — the checking is mine,
+against schema.org's published vocabulary. And headless Chrome would not render this blog (it hung, then
+produced blank frames), so there is **no visual confirmation** of the FAQ accordion; the evidence there is
+structural — markup, JS selectors and CSS all inspected. Same headless limitation hit during the blog hero
+work.
+
+**One thing I did not change.** Yoast emits no `Organization` node and no `publisher` on `Article`, because
+the site's Yoast representation is set to a *person* rather than the company. Deleting the hand-written
+`Article` removed the only `publisher` the posts had. That is a Yoast setting for a company blog to
+reconsider — **Yoast → Settings → Site representation → Organization** — but it rewrites the graph for the
+whole blog, which is a bigger decision than this phase, so it is flagged rather than done.
 
 ### Phase 7 — Deferred and no-action
 
@@ -701,3 +789,5 @@ copy and inputs sat flush against the border while the neighbouring widget was c
 | 4.5b | `home-hero.php` + `inc/template-helpers.php` — 4 `<i class="fa…">` replaced with inline SVG | `~/backups/{home-hero,template-helpers}-20260728-pre-fa.php` |
 | 4.5b | `blog-modern.css` section 9 — CSS-mask stand-ins for the plugin-rendered envelope icon | `~/backups/blog-modern-20260728-pre-fa.css` |
 | 5.2 | `_yoast_wpseo_title` on post 1464 → `WebSockets vs Server-Sent Events (SSE): When to Use Each` | `~/backups/websockets-title-20260728.tsv` |
+| 6.1 | `header.php` — removed the hand-written `Article`, both `WebPage`/`ProfilePage` blocks, the `NewsArticle` and the duplicate `LocalBusiness`; FAQ block rebuilt on `wp_json_encode`; stray `</script>` removed | `~/backups/header-20260728-pre-schema.php` |
+| 6.2 | `template-parts/post/content-article.php` — removed the untyped FAQ microdata, kept the aria wiring | `~/backups/content-article-20260728-pre-schema.php` |
