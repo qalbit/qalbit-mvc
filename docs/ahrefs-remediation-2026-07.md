@@ -562,6 +562,28 @@ Written through `update_option()` rather than SQL: `widget_block` is a serialize
 would leave the `s:NN:` length prefix pointing at the wrong byte count. The array was read back and
 re-validated afterwards (4 entries, intact). Backup: `~/backups/widget_block-20260728.txt`.
 
+#### Two buttons on submit — a bug in this CSS, not MailerLite's
+
+Pressing Subscribe left the button in place and drew a second, spinner button underneath it.
+
+Cause was the styling added above. MailerLite ships **two** buttons inside `.ml-form-embedSubmit` — the
+primary one and a spinner — and swaps them with an inline `style="display:…"`. The rule here declared
+`display: inline-flex !important` on *every* button in that container, and `!important` outranks an inline
+style, so the primary button could never be hidden and both showed at once.
+
+Fixed by not declaring `display` at all and centring the label with `text-align`, which a `<button>` honours
+natively. Visibility is MailerLite's business again. The companion rule that hid `button.loading` went too —
+it was written to paper over this and would have suppressed the loading state entirely.
+
+Worth remembering when overriding a third-party widget: `!important` does not just win a specificity
+argument, it takes the element away from the script that owns its behaviour.
+
+#### Sidebar form ran into the widget edge
+
+In the hero the block takes its spacing from the card around it; as a standalone widget it had none, so the
+copy and inputs sat flush against the border while the neighbouring widget was comfortably padded. Now
+`20 px` (`16 px` under 768 px). Backup: `~/backups/blog-modern-20260728-pre-uifix.css`.
+
 > The blog theme and DB are outside git. Every change above is reversible from the listed backup. **1.5 lives
 > in a theme file — a theme update would revert it.** If that becomes a risk, move it to a child theme or an
 > mu-plugin filter.
