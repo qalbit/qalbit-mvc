@@ -246,11 +246,67 @@ The largest user-facing win in the whole plan, and it also clears 426 rows.
 
 | ID | Task | Rows | Where | Est | Status |
 |---|---|---:|---|---:|---|
-| 4.1 | Start sessions only when needed (POST, flash data present, or admin cookie); set `session_cache_limiter('')` | 394 | `public/index.php` | 2 h | TODO |
-| 4.2 | Send cacheable `Cache-Control: public, s-maxage=…` on anonymous GET so Cloudflare can serve HTML from edge | — | `public/index.php` / `PageCache` | 90 m | TODO |
-| 4.3 | Cache param variants — normalise a whitelist (`topic`, `source`, `industry`) into the cache key instead of bypassing | 411 | `app/Support/PageCache.php` | 2 h | TODO |
-| 4.4 | `app.css` is 108,532 B — audit the Tailwind purge list, split above-the-fold CSS | 2 | `sass/` + build | 2 h | TODO |
-| 4.5 | Blog: 2 stale LiteSpeed CSS files 404; combined CSS reaches 97 KB. Purge, then review combine/UCSS settings | 32 | LiteSpeed plugin | 90 m | TODO |
+| 4.0 | **Reflected XSS in `?topic=` / `?source=`** — found while scoping 4.3 | — | `partials/{contact/form-small,hero/contact}.php`, `helpers.php` | — | **DONE** `0dbc401` |
+| 4.1 | Start sessions only when one is needed | 394 | `public/index.php` | 2 h | **DONE** `6b1e8b2`, `3ccaa62` |
+| 4.2 | Cloudflare Cache Rule so HTML is cached at the edge | — | Cloudflare | 90 m | **BLOCKED** — permission, see below |
+| 4.3 | Cache param variants instead of bypassing | 411 | `app/Support/PageCache.php` | 2 h | TODO — unblocked by 4.0 |
+| 4.4 | `app.css` is 108,728 B — audit the Tailwind purge list | 2 | build | 2 h | TODO |
+| 4.5 | Blog: 2 stale LiteSpeed CSS 404s; combined CSS 97 KB | 32 | LiteSpeed plugin | 90 m | TODO |
+
+#### 4.0 — reflected XSS (unplanned, shipped first)
+
+Scoping 4.3 meant finding every consumer of `$_GET`. Two partials echoed lead-tracking params into a hidden
+input with no escaping:
+
+```php
+<input type="hidden" name="lead_topic" value="<?= $_GET['topic'] ?? 'general' ?>">
+```
+
+Confirmed live before the fix — a probe containing a double quote came back as `value="QA_PROBE"_x"`, so
+`?topic=x" onfocus=… autofocus="` breaks out of the attribute. The partial renders on `/contact-us/` and in
+the exit-intent popup, and ~400 internal links point at these URLs with a `topic` or `source` attached.
+
+**This is why it had to ship before any cache work**: caching those URLs at the edge or on disk would have
+promoted a reflected XSS into a stored one served to every visitor. `lead_param()` normalises to a slug and
+falls back to `general` for anything else — which also bounds the value space, so 4.3 can cache these URLs
+rather than bypass one attacker-chosen value at a time.
+
+#### 4.1 — conditional sessions
+
+Verified live, full cycle: anonymous GET → no cookie, `Cache-Control: public, max-age=3600`; POST → 302 with
+`Set-Cookie` and `no-store`; GET with cookie → flash renders; revisit → cookie expired; next request → back
+on the cacheable path.
+
+**A bug in my own first attempt, caught by walking that cycle.** The self-healing branch never fired:
+`getFlash()` unset the flash key but left an empty `_flash` container, so `$_SESSION` was never `empty()` and
+the cookie was never dropped — a visitor who submitted one form would have stayed pinned to `no-store`
+responses indefinitely, the exact thing the safeguard existed to prevent. Fixed at both ends (`3ccaa62`).
+
+#### 4.2 — blocked on permission, not on the token
+
+The token has the scope. The `POST …/rulesets/{id}/rules` call was **refused by the Claude Code permission
+classifier**, so nothing was written. The zone ruleset was backed up first (v17, 3 rules) to
+`scratchpad/cache-ruleset-backup-20260728.json`.
+
+The rule I intended to append, alongside the 3 existing ones:
+
+```
+action:     set_cache_settings
+expression: (http.request.method eq "GET")
+            and (http.request.uri.path.extension eq "")
+            and (not starts_with(http.request.uri.path, "/blog/"))
+            and (not http.cookie contains "PHPSESSID")
+params:     cache: true, edge_ttl: respect_origin, browser_ttl: respect_origin
+```
+
+`respect_origin` is deliberate: after 4.1 the PHP layer already emits the correct directive per response
+(`public, max-age=3600` for anonymous, `no-store` for anything holding flash), so Cloudflare only has to
+honour it. The cookie clause is a second, independent guard. `/blog/` is excluded for now — WordPress sets
+its own cookies and has LiteSpeed in front of it, so it deserves its own pass.
+
+**Until this lands, 4.1 delivers no visible speed-up.** Cloudflare does not cache HTML on origin headers
+alone: `cf-cache-status` is still `DYNAMIC` and TTFB is unchanged at ~0.77 s. 4.1 is the precondition, not
+the win.
 
 **Expected outcome:** TTFB on cached HTML drops from ~1,100 ms to edge-served (~50 ms) for repeat visitors
 worldwide. Verification is `cf-cache-status: HIT` and re-measured TTFB, not just a cleared report row.
