@@ -2429,7 +2429,7 @@ return [
         'enabled'    => true,
         'order'      => 100,
 
-        'meta_title'       => 'Education & eLearning Software Development Company | QalbIT',
+        'meta_title'       => 'Education & eLearning Software Development Company',
         'meta_description' => 'QalbIT builds education and elearning platforms including LMS implementations, course marketplaces, student portals and cohort-based learning tools.',
 
         'tagline' => 'Education and elearning software for schools, training providers and digital learning products.',

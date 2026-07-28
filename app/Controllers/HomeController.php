@@ -31,7 +31,7 @@ class HomeController
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
 
         $seo = [
-            'title' => 'Custom Software Development Company - QalbIT',
+            'title' => 'QalbIT: Custom Software Development Company in India',
             'description' => 'QalbIT builds custom web, mobile, and cloud software for startups and businesses worldwide. 11+ years, 120+ projects, 90+ clients.',
             'canonical'   => $baseUrl . '/',
         ];

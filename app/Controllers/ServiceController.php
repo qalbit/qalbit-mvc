@@ -43,7 +43,7 @@ class ServiceController
         $baseUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
 
         $seo = [
-            'title'       => 'Custom Software Development Services – QalbIT',
+            'title'       => 'Custom Software Development Services: Web, Mobile & SaaS',
             'description' => 'Explore QalbIT’s custom software, CRM, ERP, MVP, SaaS, web, mobile and AI development services for startups and modern businesses.',
             'canonical'   => $baseUrl . '/services/',
             'image'       => og_image_url('/services/'),
