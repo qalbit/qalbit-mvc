@@ -18,7 +18,7 @@ return [
         'order'      => 20,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development Company in Washington – QalbIT',
+        'meta_title' => 'Custom Software Development Company in Washington',
         'meta_description' => 'Custom software, SaaS and mobile app development for Washington businesses – from Seattle and Bellevue tech startups to retailers and logistics firms statewide.',
         'headline' => 'Custom Software Development in Washington, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Washington startups, scale-ups and enterprises.',
@@ -44,7 +44,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company for Washington – Seattle, Bellevue & Beyond',
-            'meta_title'       => 'Custom Software Development Company in Washington – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in Washington',
             'meta_description' => 'Custom software, SaaS and mobile app development for Washington businesses – from Seattle and Bellevue tech startups to retailers and logistics firms statewide.',
             'canonical'        => '/usa/washington/',
             'faq_key'          => 'location_usa_washington',
@@ -429,7 +429,7 @@ return [
         'order'      => 30,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development Company in Virginia – QalbIT',
+        'meta_title' => 'Custom Software Development Company in Virginia',
         'meta_description' => 'QalbIT builds custom software, web portals and mobile apps for Virginia companies in Northern Virginia, Richmond and Virginia Beach – with senior engineers.',
         'headline' => 'Custom Software Development in Virginia, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Virginia startups, scale-ups and enterprises.',
@@ -455,7 +455,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development for Virginia – Northern Virginia to Richmond',
-            'meta_title'       => 'Custom Software Development Company in Virginia – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in Virginia',
             'meta_description' => 'QalbIT builds custom software, web portals and mobile apps for Virginia companies in Northern Virginia, Richmond and Virginia Beach – with senior engineers.',
             'canonical'        => '/usa/virginia/',
             'faq_key'          => 'location_usa_virginia',
@@ -841,7 +841,7 @@ return [
         'order'      => 40,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development Company in Texas – QalbIT',
+        'meta_title' => 'Custom Software Development Company in Texas',
         'meta_description' => 'From Austin startups to Houston energy and Dallas logistics firms – QalbIT builds custom software, SaaS platforms and mobile apps for Texas businesses.',
         'headline' => 'Custom Software Development in Texas, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Texas startups, scale-ups and enterprises.',
@@ -867,7 +867,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in Texas – Austin, Dallas & Houston',
-            'meta_title'       => 'Custom Software Development Company in Texas – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in Texas',
             'meta_description' => 'From Austin startups to Houston energy and Dallas logistics firms – QalbIT builds custom software, SaaS platforms and mobile apps for Texas businesses.',
             'canonical'        => '/usa/texas/',
             'faq_key'          => 'location_usa_texas',
@@ -1253,7 +1253,7 @@ return [
         'order'      => 50,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development Company in Pennsylvania – QalbIT',
+        'meta_title' => 'Custom Software Development Company in Pennsylvania',
         'meta_description' => 'Custom software development for Pennsylvania businesses – manufacturers, healthcare and services firms in Philadelphia, Pittsburgh, Lancaster and York.',
         'headline' => 'Custom Software Development in Pennsylvania, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Pennsylvania startups, scale-ups and enterprises.',
@@ -1277,7 +1277,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in Pennsylvania – Philadelphia to Pittsburgh',
-            'meta_title'       => 'Custom Software Development Company in Pennsylvania – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in Pennsylvania',
             'meta_description' => 'Custom software development for Pennsylvania businesses – manufacturers, healthcare and services firms in Philadelphia, Pittsburgh, Lancaster and York.',
             'canonical'        => '/usa/pennsylvania/',
             'faq_key'          => 'location_usa_pennsylvania',
@@ -1672,7 +1672,7 @@ return [
         'order'      => 60,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development Company in Ohio – QalbIT',
+        'meta_title' => 'Custom Software Development Company in Ohio',
         'meta_description' => 'QalbIT helps Ohio manufacturers, insurers and logistics companies in Columbus, Cleveland and Cincinnati replace spreadsheets with custom software and portals.',
         'headline' => 'Custom Software Development in Ohio, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Ohio startups, scale-ups and enterprises.',
@@ -1696,7 +1696,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development for Ohio – Columbus, Cleveland & Cincinnati',
-            'meta_title'       => 'Custom Software Development Company in Ohio – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in Ohio',
             'meta_description' => 'QalbIT helps Ohio manufacturers, insurers and logistics companies in Columbus, Cleveland and Cincinnati replace spreadsheets with custom software and portals.',
             'canonical'        => '/usa/ohio/',
             'faq_key'          => 'location_usa_ohio',
@@ -2077,7 +2077,7 @@ return [
         'order'      => 70,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development Company in North Carolina – QalbIT',
+        'meta_title' => 'Custom Software Development Company in North Carolina',
         'meta_description' => 'Custom software and SaaS development for North Carolina – Charlotte fintech, Research Triangle startups and growing businesses across the state.',
         'headline' => 'Custom Software Development in North Carolina, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for North Carolina startups, scale-ups and enterprises.',
@@ -2102,7 +2102,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development in North Carolina – Charlotte & the Research Triangle',
-            'meta_title'       => 'Custom Software Development Company in North Carolina – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in North Carolina',
             'meta_description' => 'Custom software and SaaS development for North Carolina – Charlotte fintech, Research Triangle startups and growing businesses across the state.',
             'canonical'        => '/usa/north-carolina/',
             'faq_key'          => 'location_usa_north_carolina',
@@ -2480,7 +2480,7 @@ return [
         'enabled'    => true,
         'order'      => 80,
 
-        'meta_title' => 'Custom Software Development Company in New Jersey – QalbIT',
+        'meta_title' => 'Custom Software Development Company in New Jersey',
         'meta_description' => 'QalbIT builds custom software, portals and mobile apps for New Jersey pharma, finance and logistics companies – Newark, Jersey City, Princeton and beyond.',
         'headline' => 'Custom Software Development in New Jersey, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for New Jersey startups, scale-ups and enterprises.',
@@ -2504,7 +2504,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in New Jersey – Newark to Princeton',
-            'meta_title'       => 'Custom Software Development Company in New Jersey – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in New Jersey',
             'meta_description' => 'QalbIT builds custom software, portals and mobile apps for New Jersey pharma, finance and logistics companies – Newark, Jersey City, Princeton and beyond.',
             'canonical'        => '/usa/new-jersey/',
             'faq_key'          => 'location_usa_new_jersey',
@@ -2882,7 +2882,7 @@ return [
         'enabled'    => true,
         'order'      => 90,
 
-        'meta_title' => 'Custom Software Development Company in Michigan – QalbIT',
+        'meta_title' => 'Custom Software Development Company in Michigan',
         'meta_description' => 'Custom software for Michigan’s automotive suppliers, manufacturers and startups in Detroit, Grand Rapids and Ann Arbor – built by a dedicated remote team.',
         'headline' => 'Custom Software Development in Michigan, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Michigan startups, scale-ups and enterprises.',
@@ -2906,7 +2906,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development for Michigan – Detroit, Grand Rapids & Ann Arbor',
-            'meta_title'       => 'Custom Software Development Company in Michigan – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in Michigan',
             'meta_description' => 'Custom software for Michigan’s automotive suppliers, manufacturers and startups in Detroit, Grand Rapids and Ann Arbor – built by a dedicated remote team.',
             'canonical'        => '/usa/michigan/',
             'faq_key'          => 'location_usa_michigan',
@@ -3284,7 +3284,7 @@ return [
         'enabled'    => true,
         'order'      => 100,
 
-        'meta_title' => 'Custom Software Development Company in Illinois – QalbIT',
+        'meta_title' => 'Custom Software Development Company in Illinois',
         'meta_description' => 'From Chicago finance and logistics to downstate manufacturers – QalbIT designs and builds custom software, SaaS and mobile apps for Illinois businesses.',
         'headline' => 'Custom Software Development in Illinois, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Illinois startups, scale-ups and enterprises.',
@@ -3309,7 +3309,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in Illinois – Chicago & Beyond',
-            'meta_title'       => 'Custom Software Development Company in Illinois – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in Illinois',
             'meta_description' => 'From Chicago finance and logistics to downstate manufacturers – QalbIT designs and builds custom software, SaaS and mobile apps for Illinois businesses.',
             'canonical'        => '/usa/illinois/',
             'faq_key'          => 'location_usa_illinois',
@@ -3699,7 +3699,7 @@ return [
         'enabled'    => true,
         'order'      => 110,
 
-        'meta_title' => 'Custom Software Development Company in Georgia – QalbIT',
+        'meta_title' => 'Custom Software Development Company in Georgia',
         'meta_description' => 'Custom software development for Georgia companies – Atlanta fintech and SaaS, Savannah logistics and growing businesses statewide – with senior engineers.',
         'headline' => 'Custom Software Development in Georgia, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Georgia startups, scale-ups and enterprises.',
@@ -3724,7 +3724,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in Georgia – Atlanta & Statewide',
-            'meta_title'       => 'Custom Software Development Company in Georgia – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in Georgia',
             'meta_description' => 'Custom software development for Georgia companies – Atlanta fintech and SaaS, Savannah logistics and growing businesses statewide – with senior engineers.',
             'canonical'        => '/usa/georgia/',
             'faq_key'          => 'location_usa_georgia',
@@ -4104,7 +4104,7 @@ return [
         'order'      => 10,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development Company in New York – QalbIT',
+        'meta_title' => 'Custom Software Development Company in New York',
         'meta_description' => 'QalbIT builds custom software, SaaS platforms and mobile apps for New York businesses – NYC startups and finance to Buffalo and Rochester firms upstate.',
         'headline' => 'Custom Software Development in New York, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for New York startups, scale-ups and enterprises.',
@@ -4130,7 +4130,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in New York – NYC to Upstate',
-            'meta_title'       => 'Custom Software Development Company in New York – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in New York',
             'meta_description' => 'QalbIT builds custom software, SaaS platforms and mobile apps for New York businesses – NYC startups and finance to Buffalo and Rochester firms upstate.',
             'canonical'        => '/usa/newyork/',
             'faq_key'          => 'location_usa_new_york',
@@ -4516,7 +4516,7 @@ return [
         'order'      => 120,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development Company in Florida – QalbIT',
+        'meta_title' => 'Custom Software Development Company in Florida',
         'meta_description' => 'Custom software, portals and mobile apps for Florida businesses – Miami startups, Orlando and Tampa services, real estate and healthcare companies.',
         'headline' => 'Custom Software Development in Florida, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Florida startups, scale-ups and enterprises.',
@@ -4541,7 +4541,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development in Florida – Miami, Orlando & Tampa',
-            'meta_title'       => 'Custom Software Development Company in Florida – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in Florida',
             'meta_description' => 'Custom software, portals and mobile apps for Florida businesses – Miami startups, Orlando and Tampa services, real estate and healthcare companies.',
             'canonical'        => '/usa/florida/',
             'faq_key'          => 'location_usa_florida',
@@ -4922,7 +4922,7 @@ return [
         'order'      => 30,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development Company in California – QalbIT',
+        'meta_title' => 'Custom Software Development Company in California',
         'meta_description' => 'QalbIT partners with California startups and SMEs – Bay Area SaaS, Los Angeles media and San Diego tech – to build custom software and mobile apps.',
         'headline' => 'Custom Software Development in California, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for California startups, scale-ups and enterprises.',
@@ -4948,7 +4948,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in California – Bay Area to San Diego',
-            'meta_title'       => 'Custom Software Development Company in California – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in California',
             'meta_description' => 'QalbIT partners with California startups and SMEs – Bay Area SaaS, Los Angeles media and San Diego tech – to build custom software and mobile apps.',
             'canonical'        => '/usa/california/',
             'faq_key'          => 'location_usa_california',
@@ -5329,7 +5329,7 @@ return [
         'order'      => 130,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development Company in Arizona – QalbIT',
+        'meta_title' => 'Custom Software Development Company in Arizona',
         'meta_description' => 'Custom software development for Arizona businesses – Phoenix and Scottsdale real estate, healthcare and services firms – with a senior remote team.',
         'headline' => 'Custom Software Development in Arizona, USA',
         'short_description' => 'End-to-end web, mobile and cloud solutions for Arizona startups, scale-ups and enterprises.',
@@ -5355,7 +5355,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in Arizona – Phoenix & Scottsdale',
-            'meta_title'       => 'Custom Software Development Company in Arizona – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in Arizona',
             'meta_description' => 'Custom software development for Arizona businesses – Phoenix and Scottsdale real estate, healthcare and services firms – with a senior remote team.',
             'canonical'        => '/usa/arizona/',
             'faq_key'          => 'location_usa_arizona',
@@ -5750,7 +5750,7 @@ return [
         'order'      => 210,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development Company in Saudi Arabia | QalbIT',
+        'meta_title' => 'Custom Software Development Company in Saudi Arabia',
         'meta_description' => 'QalbIT is a custom software development company serving Riyadh, Jeddah and all of Saudi Arabia – custom software, SaaS, MVPs, mobile apps and custom backends.',
         'headline' => 'Custom Software Development Company in Saudi Arabia',
         'short_description' => 'End to end custom software, web, mobile and backend solutions for startups, enterprises and government backed initiatives in Riyadh, Jeddah and across Saudi Arabia.',
@@ -5778,7 +5778,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in Saudi Arabia (Riyadh, Jeddah & KSA)',
-            'meta_title'       => 'Custom Software Development Company in Saudi Arabia | QalbIT',
+            'meta_title'       => 'Custom Software Development Company in Saudi Arabia',
             'meta_description' => 'QalbIT is a custom software development company serving Riyadh, Jeddah and all of Saudi Arabia – custom software, SaaS, MVPs, mobile apps and custom backends.',
             'canonical'        => '/saudi-arabia/riyadh/',
             'faq_key'          => 'location_saudi_arabia_riyadh',
@@ -6178,7 +6178,7 @@ return [
         'order'      => 310,
 
         // Backward-compatible SEO fields
-        'meta_title' => 'Custom Software Development Company in Ahmedabad, India – QalbIT',
+        'meta_title' => 'Custom Software Development Company in Ahmedabad, India',
         'meta_description' => 'Custom software development company in Ahmedabad (Makarba) – QalbIT builds custom software, CRMs, ERPs, web applications and mobile apps for SMEs and startups.',
         'headline' => 'Custom Software Development Company in Ahmedabad, India',
         'short_description' => 'End-to-end custom software, CRM, ERP, web and mobile solutions for Ahmedabad and Gujarat-based businesses.',
@@ -6204,7 +6204,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in Ahmedabad, India',
-            'meta_title'       => 'Custom Software Development Company in Ahmedabad, India – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in Ahmedabad, India',
             'meta_description' => 'Custom software development company in Ahmedabad (Makarba) – QalbIT builds custom software, CRMs, ERPs, web applications and mobile apps for SMEs and startups.',
             'canonical'        => '/india/ahmedabad/',
             'faq_key'          => 'location_india_ahmedabad',
@@ -6595,7 +6595,7 @@ return [
         'enabled'    => true,
         'order'      => 320,
 
-        'meta_title' => 'Custom Software Development in Mumbai, India – QalbIT',
+        'meta_title' => 'Custom Software Development in Mumbai, India',
         'meta_description' => 'QalbIT builds custom software, SaaS products and mobile apps for Mumbai businesses – fintech, media and services – with a senior dedicated remote team.',
         'headline' => 'Custom Software Development in Mumbai, India',
         'short_description' => 'Web, mobile and cloud solutions for Mumbai-based startups, SMEs, BFSI and enterprise teams.',
@@ -6619,7 +6619,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in Mumbai, India',
-            'meta_title'       => 'Custom Software Development in Mumbai, India – QalbIT',
+            'meta_title'       => 'Custom Software Development in Mumbai, India',
             'meta_description' => 'QalbIT builds custom software, SaaS products and mobile apps for Mumbai businesses – fintech, media and services – with a senior dedicated remote team.',
             'canonical'        => '/india/mumbai/',
             'faq_key'          => 'location_india_mumbai',
@@ -6989,7 +6989,7 @@ return [
         'enabled'    => true,
         'order'      => 330,
 
-        'meta_title' => 'Custom Software Development in Delhi, India – QalbIT',
+        'meta_title' => 'Custom Software Development in Delhi, India',
         'meta_description' => 'QalbIT is a custom software development company for startups, SMEs, enterprises and consultancies in Delhi, India. We build custom software, web applications and mobile apps.',
         'headline' => 'Custom Software Development in Delhi, India',
         'short_description' => 'Software, SaaS and internal tools for Delhi-based startups, enterprises and consulting firms.',
@@ -7013,7 +7013,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in Delhi, India',
-            'meta_title'       => 'Custom Software Development in Delhi, India – QalbIT',
+            'meta_title'       => 'Custom Software Development in Delhi, India',
             'meta_description' => 'QalbIT helps Delhi and NCR organisations design and build custom software, SaaS, internal tools and mobile apps with a structured, transparent delivery model.',
             'canonical'        => '/india/delhi/',
             'faq_key'          => 'location_india_delhi',
@@ -7383,7 +7383,7 @@ return [
         'enabled'    => true,
         'order'      => 340,
 
-        'meta_title' => 'Custom Software Development Company in Bangalore – QalbIT',
+        'meta_title' => 'Custom Software Development Company in Bangalore',
         'meta_description' => 'QalbIT is a custom software development company for startups and product companies in Bangalore (Bengaluru), India. We build SaaS products, web apps and mobile apps for global markets.',
         'headline' => 'Custom Software Development in Bangalore (Bengaluru), India',
         'short_description' => 'Product-focused software development for Bangalore SaaS teams, startups and tech-enabled businesses.',
@@ -7407,7 +7407,7 @@ return [
 
         'seo' => [
             'h1'               => 'Custom Software Development Company in Bangalore (Bengaluru), India',
-            'meta_title'       => 'Custom Software Development Company in Bangalore – QalbIT',
+            'meta_title'       => 'Custom Software Development Company in Bangalore',
             'meta_description' => 'QalbIT works with Bangalore-based startups and SaaS companies as a product-first engineering partner, building and scaling custom software, web and mobile apps.',
             'canonical'        => '/india/bangalore/',
             'faq_key'          => 'location_india_bangalore',
