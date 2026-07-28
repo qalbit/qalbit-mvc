@@ -251,12 +251,25 @@ class CareerController
                 ?? $selectedRole['name']
                 ?? ucfirst(str_replace('-', ' ', (string) $roleSlug));
 
-            $pageTitle = 'Apply – ' . $roleTitle . ' | Careers at QalbIT';
-
             // Role titles carry an experience/location suffix ("PHP Developer – 1–3 years –
-            // Ahmedabad") that blows the description past the 140-char cap, so trim to the
-            // role name and pick the longest closing clause that still fits.
+            // Ahmedabad") that blows both the title and the description past their caps,
+            // so trim to the role name and pick the longest form that still fits.
             $roleName = trim(explode('–', $roleTitle)[0]);
+
+            // Degrade suffix-first rather than truncating a job title mid-word: the full
+            // role, then the role name alone, then a shorter brand tail. The fallback is
+            // the shortest rung, so a role name we have not seen yet still lands inside 60.
+            $pageTitle = 'Apply – ' . $roleName . ' | QalbIT';
+            foreach ([
+                'Apply – ' . $roleTitle . ' | Careers at QalbIT',
+                'Apply – ' . $roleName . ' | Careers at QalbIT',
+            ] as $candidate) {
+                if (mb_strlen($candidate) <= 60) {
+                    $pageTitle = $candidate;
+                    break;
+                }
+            }
+
             $descHead = 'Apply for the ' . $roleName
                 . ' role at QalbIT in Ahmedabad – share your experience, projects and resume';
 
