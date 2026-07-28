@@ -499,10 +499,13 @@ Stated up front so the next crawl holds no surprises.
 gap. It brings its own heading, card and margins, so its title landed on top of the "Get a free instant
 estimate" button and the whole thing read as two unrelated widgets sharing a box.
 
-**Change.** The card now has two labelled sections — *Start here* and *Newsletter* — separated by a rule, and
-the newsletter heading and supporting line are rendered by the **theme**, not by MailerLite. Space is
-reserved for the embed (`min-height: 112px`) so the hero does not jump when the widget paints. The intro line
-was rewritten from generic filler to what the blog actually publishes.
+**Change.** The newsletter heading and supporting line are rendered by the **theme**, not by MailerLite.
+Space is reserved for the embed (`min-height: 112px`) so the hero does not jump when the widget paints. The
+intro line was rewritten from generic filler to what the blog actually publishes.
+
+**Then, on request: the "Start here" block was removed entirely** — the card now holds the newsletter alone.
+Its divider is scoped to `.blog-head-right > .hero-subscribe:first-child`, so the top border and padding
+vanish while it is the only section and return by themselves if anything is ever placed above it again.
 
 **Where the "500+" lived.** Not in the theme and not in the WordPress database — it is inside MailerLite's
 hosted form definition (account `1436867`, form `1QvGRf`), painted client-side. That means it was invisible
