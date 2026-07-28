@@ -63,7 +63,9 @@ if ($needsSession) {
      * pin that visitor to uncacheable responses forever. If a reader arrives
      * with a cookie and the session holds nothing, drop both.
      */
-    if ($isReadRequest && empty($_SESSION)) {
+    // array_filter, not empty(): a consumed session can still hold empty
+    // containers, and those must not count as "has data".
+    if ($isReadRequest && empty(array_filter($_SESSION))) {
         session_destroy();
         setcookie(session_name(), '', [
             // setcookie() takes 'expires', not session's 'lifetime'.
