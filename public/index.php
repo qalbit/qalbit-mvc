@@ -89,6 +89,9 @@ $router->redirect('/custom-software-development-usa/', '/services/custom-softwar
 $router->redirect('/technologies/vuejs/', '/technologies/');
 $router->redirect('/industries/fitness/', '/industries/sports/');
 $router->redirect('/images/favicon/site.webmanifest', '/assets/site.webmanifest');
+// Old "Hire Us" page. The one internal link (a blog FAQ answer) now points at
+// /hire-developers/ directly; this covers external links still on the old URL.
+$router->redirect('/estimation/', '/hire-developers/');
 
 // Hire developers
 $router->get('/hire-developers/', [HireController::class, 'index']);
