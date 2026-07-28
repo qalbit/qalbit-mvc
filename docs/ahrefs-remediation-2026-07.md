@@ -489,6 +489,40 @@ Stated up front so the next crawl holds no surprises.
 | 1.5 | Removed `base`/`format` overrides from `qalbit_pagination()` in `wp-content/themes/qalbit/inc/template-helpers.php` | `~/backups/template-helpers-20260728.php` |
 | B.1 | `theme/header.php` — favicons pointed at `/images/favicon/*`, which has never existed (3 × 404 per blog page). Repointed at the `/assets/` set the main site uses | `~/backups/theme-header-20260728.php` |
 | B.2 | `theme/footer.php` — DMCA badge was written `<img src ="…">` with a space. LiteSpeed's lazy-loader did not recognise it, so it *added* its own `src` placeholder and left the original: two `src` attributes, browser takes the first, badge never loaded. Now `src=` and LiteSpeed rewrites it correctly to `data-src` | `~/backups/theme-footer-20260728.php` |
+| B.3 | `.htaccess` CSP widened for MailerLite (`blob:`, `assets.mailerlite.com`) and LinkedIn (`px.` → `*.ads.linkedin.com`). **Applied by the user** — the write was refused here, correctly, as it weakens a security policy | `~/backups/htaccess-csp-20260728` |
+| B.4 | `theme/template-parts/banner/home-hero.php` — hero right-hand card restructured; newsletter heading now rendered by the theme | `~/backups/home-hero-20260728.php` |
+| B.5 | `theme/assets/blog-modern.css` — section 8 appended: newsletter block + MailerLite embed restyling | `~/backups/blog-modern-20260728.css` |
+
+### Blog hero rebuild (28 Jul)
+
+**Problem.** The MailerLite embed was dropped straight into the hero card after the guides list with a 10 px
+gap. It brings its own heading, card and margins, so its title landed on top of the "Get a free instant
+estimate" button and the whole thing read as two unrelated widgets sharing a box.
+
+**Change.** The card now has two labelled sections — *Start here* and *Newsletter* — separated by a rule, and
+the newsletter heading and supporting line are rendered by the **theme**, not by MailerLite. Space is
+reserved for the embed (`min-height: 112px`) so the hero does not jump when the widget paints. The intro line
+was rewritten from generic filler to what the blog actually publishes.
+
+**Where the "500+" lived.** Not in the theme and not in the WordPress database — it is inside MailerLite's
+hosted form definition (account `1436867`, form `1QvGRf`), painted client-side. That means it was invisible
+to crawlers and uneditable from this repo. The theme now renders **"Join 1,000+ smart readers"** itself and
+hides MailerLite's own title block, so the copy is version-controlled and server-rendered.
+
+**Verification limit — read this before trusting the styling.** MailerLite refuses to render in headless
+Chrome (tried twice, including with a real user-agent string and a 30 s budget), so the embed's own markup
+could not be captured and **the CSS targeting its internals is unverified**. What *was* verified: the card
+layout, divider, section headings, reserved space, that the new CSS reaches the served LiteSpeed bundle, and
+that mobile stacks correctly. The embed's input, button and consent row need a human eye.
+
+The selector hiding MailerLite's title is deliberately scoped to `.ml-form-embedBody > .ml-form-embedContent`
+— a direct child only. An unscoped version would also have matched any nested content block, which risks
+hiding the consent and privacy text. That is a compliance question, not a cosmetic one, so it is worth
+keeping scoped if this CSS is ever revisited.
+
+**Pre-existing issue, not introduced here:** at a 390 px viewport the blog clips content at the right edge.
+A control screenshot of `/blog/crm-development-cost-2026/` — untouched by this work — clips identically, so
+it predates the rebuild. Worth a look on a real device.
 
 > The blog theme and DB are outside git. Every change above is reversible from the listed backup. **1.5 lives
 > in a theme file — a theme update would revert it.** If that becomes a risk, move it to a child theme or an
