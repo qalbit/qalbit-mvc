@@ -21,3 +21,5 @@ storage
 .htaccess
 
 public/router.php
+
+content/wp-blog-backups
