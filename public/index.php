@@ -20,18 +20,67 @@ if (str_starts_with($requestHost, 'www.')) {
     exit;
 }
 
-session_set_cookie_params([
+$originalMethod = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
+
+/*
+ * Sessions, only when a session is actually needed.
+ *
+ * The only thing this app keeps in a session is form flash data: the contact
+ * and career POST handlers write it, and the GET that follows the redirect
+ * reads it back once. Nothing else touches $_SESSION.
+ *
+ * Starting one unconditionally cost the whole site its cacheability. PHP's
+ * session cache limiter stamps "Cache-Control: no-store, no-cache,
+ * must-revalidate" on every response it touches, and the PHPSESSID cookie
+ * independently disqualifies a response from Cloudflare's cache. Between them
+ * every HTML response sitewide came back cf-cache-status: DYNAMIC, so an
+ * anonymous visitor in another country waited on the Hostinger origin for a
+ * page whose HTML had not changed in fifteen minutes.
+ *
+ * So: start a session for anything that is not a plain read, and for a reader
+ * who already carries a session cookie (they may have flash data waiting).
+ * Everyone else - which is every crawler and every first-time visitor - gets
+ * no session, no cookie, and a response the edge is allowed to keep.
+ */
+$sessionCookieParams = [
     'lifetime'  => 0,
     'path'      => '/',
     'domain'    => 'qalbit.com',
     'secure'    => true,
     'httponly'  => true,
-    'samesite'  => 'Lax'
-]);
+    'samesite'  => 'Lax',
+];
 
-session_start();
+$isReadRequest = in_array($originalMethod, ['GET', 'HEAD'], true);
+$needsSession  = !$isReadRequest || isset($_COOKIE[session_name()]);
 
-$originalMethod = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
+if ($needsSession) {
+    session_set_cookie_params($sessionCookieParams);
+    session_start();
+
+    /*
+     * Self-healing: a cookie that outlived its session data would otherwise
+     * pin that visitor to uncacheable responses forever. If a reader arrives
+     * with a cookie and the session holds nothing, drop both.
+     */
+    if ($isReadRequest && empty($_SESSION)) {
+        session_destroy();
+        setcookie(session_name(), '', [
+            // setcookie() takes 'expires', not session's 'lifetime'.
+            'expires'  => time() - 3600,
+            'path'     => $sessionCookieParams['path'],
+            'domain'   => $sessionCookieParams['domain'],
+            'secure'   => $sessionCookieParams['secure'],
+            'httponly' => $sessionCookieParams['httponly'],
+            'samesite' => $sessionCookieParams['samesite'],
+        ]);
+        $_SESSION = [];
+    }
+} else {
+    // Keep the superglobal defined so Session:: reads stay harmless.
+    $_SESSION = [];
+}
+
 if ($originalMethod === 'HEAD') {
     $_SERVER['REQUEST_METHOD'] = 'GET';
 }
