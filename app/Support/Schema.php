@@ -397,53 +397,6 @@ class Schema
     }
 
     /**
-     * SoftwareApplication schema for an owned product (case-study page).
-     *
-     * @param array  $product   A product config array (see config/products.php)
-     * @param string $pageUrl   Absolute canonical URL of the product page
-     */
-    public static function softwareApplication(array $product, string $pageUrl): ?array
-    {
-        $name = trim((string) ($product['name'] ?? ''));
-
-        if ($name === '') {
-            return null;
-        }
-
-        $schema = [
-            '@context'           => 'https://schema.org',
-            '@type'              => 'SoftwareApplication',
-            'name'               => $name,
-            'applicationCategory' => 'BusinessApplication',
-            'operatingSystem'    => 'Web',
-            'url'                => $pageUrl,
-        ];
-
-        $description = $product['valueProp'] ?? ($product['meta_description'] ?? null);
-        if ($description) {
-            $schema['description'] = $description;
-        }
-
-        // Link to the live product where one exists.
-        if (!empty($product['externalUrl'])) {
-            $schema['sameAs'] = $product['externalUrl'];
-        }
-
-        // Attribute authorship to QalbIT.
-        $business = config('business', []);
-        $orgUrl   = $business['website'] ?? rtrim(config('app.url', ''), '/');
-        if ($orgUrl) {
-            $schema['author'] = [
-                '@type' => 'Organization',
-                'name'  => $business['legal_name'] ?? 'QalbIT Infotech Pvt Ltd',
-                'url'   => $orgUrl,
-            ];
-        }
-
-        return $schema;
-    }
-
-    /**
      * ItemList schema for index/hub pages (services, hire, case studies).
      * Structured lists are the most-cited content format in AI answers.
      *

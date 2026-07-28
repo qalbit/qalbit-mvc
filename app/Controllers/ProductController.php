@@ -108,7 +108,6 @@ class ProductController
                 ['name' => 'Products', 'url' => '/products/'],
                 ['name' => $product['name'] ?? 'Product', 'url' => $canonicalPath],
             ]),
-            Schema::softwareApplication($product, $canonical),
         ]));
 
         // Prefer a bespoke per-product view (e.g. pages/products/show-urlcrop.php)
