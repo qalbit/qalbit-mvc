@@ -136,7 +136,6 @@ if (empty($items)) {
                         itemscope
                         itemtype="https://schema.org/Thing"
                     >
-                        <meta itemprop="position" content="<?= (int) $position; ?>">
 
                         <div class="mb-3 flex items-start justify-between gap-3">
                             <div>

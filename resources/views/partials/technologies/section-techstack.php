@@ -112,7 +112,6 @@ $stackCategories = [
                     itemprop="itemListElement"
                     itemtype="https://schema.org/Thing"
                 >
-                    <meta itemprop="position" content="<?= (int) $position; ?>">
                     <meta itemprop="url" content="<?= htmlspecialchars($anchor, ENT_QUOTES); ?>">
 
                     <div class="mb-4 flex items-start justify-between gap-3">

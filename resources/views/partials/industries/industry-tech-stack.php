@@ -173,7 +173,6 @@ if (empty($categories)) {
                         itemscope
                         itemtype="https://schema.org/Thing"
                     >
-                        <meta itemprop="position" content="<?= (int) $position; ?>">
 
                         <?php if ($name !== ''): ?>
                             <h3 class="mb-2 text-sm sm:text-base font-semibold text-slate-50" itemprop="name">
