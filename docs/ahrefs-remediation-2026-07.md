@@ -122,14 +122,55 @@ is no such link — the nav link is relative (`href="/blog/"`). All 282 source p
 `wp search-replace --precise` (serialization-aware); a raw SQL `REPLACE` would have corrupted the `s:NNN:`
 length prefixes. The array was re-validated as intact after each run.
 
-### Phase 2 — Crawl rate limiting `2–3 h`
-No code change expected; this is diagnosis and configuration.
+### Phase 2 — Crawl rate limiting ✅ DIAGNOSED `~1 h`
 
-| ID | Task | Rows | Where | Est | Status |
-|---|---|---:|---|---:|---|
-| 2.1 | Identify the 429 source — Cloudflare rate-limit/bot-fight rules, LiteSpeed, or Hostinger throttle | 600 | Cloudflare + hPanel | 90 m | TODO |
-| 2.2 | Allow verified `AhrefsBot` at the identified layer; keep protection for unverified traffic | — | Cloudflare | 30 m | TODO |
-| 2.3 | Check WP error logs for the 3 blog 503s to rule out a genuine PHP fault | 9 | server | 30 m | TODO |
+| ID | Task | Rows | Status |
+|---|---|---:|---|
+| 2.1 | Identify the 429 source | 600 | **DONE** — Cloudflare edge, see below |
+| 2.2 | Allow verified `AhrefsBot` | — | **SUPERSEDED** — not the right fix, see below |
+| 2.3 | Blog 503s | 9 | **DONE** — origin, crawl-load correlated |
+
+**2.1 — the 429s come from Cloudflare itself, not from the origin.** Cloudflare's GraphQL analytics for the
+last 23 h, filtered to `edgeResponseStatus: 429`:
+
+```
+count  origin  cache  country  path
+   32     0     hit     US     /assets/images/services/icon-ui-ux-design-service.svg
+   26     0     hit     US     /assets/images/technologies/laravel.svg
+   24     0     hit     US     /assets/images/industries/icon-sports-dark.svg
+   22     0     hit     US     /assets/images/industries/icon-food-delivery-dark.svg
+   …every single row is /assets/images/*.svg
+```
+
+`originResponseStatus: 0` means the request never reached Hostinger, and `cacheStatus: hit` means the file
+was already in edge cache. **Cloudflare generated the 429 on its own.** The zone is on the Free plan with
+`advanced_ddos: on` and no configurable rate-limit rules; this is its built-in abuse protection reacting to
+the same handful of SVGs being fetched tens of thousands of times in a short window — a few hundred crawled
+pages × ~38 icons each.
+
+This is also **not a one-off crawl artifact**, which is what I assumed when writing the plan. It is
+continuous — 320 / 71 / 318 / 78 / 125 / 586 / 269 / 371 per day over 21–28 Jul.
+
+**2.2 — a WAF allowlist is the wrong fix, so it is dropped.** The Free plan has no configurable rate limiting
+to exempt anything *from*; the throttle is built in. What actually reduces it is sending fewer image requests
+per page — which is exactly **Phase 3(b)**. Converting the 38 decorative icons from `<img>` to inline SVG
+removes ~38 HTTP requests per page render. **Phase 3 and Phase 2 turn out to be the same fix.** Secondary
+lever, free and instant: lower the crawl speed in Ahrefs Site Audit settings.
+
+**2.3 — the 503s are origin-side and load-correlated.** 503s ran 3–63/day all week and spiked to **223 on
+28 Jul**, the crawl day — consistent with PHP workers saturating under crawl load rather than a code fault.
+Phase 4 addresses the cause directly: at a 21% cache ratio almost every crawler request currently reaches PHP.
+
+**Two findings outside the audit, worth knowing:**
+
+- **~2,000 origin 403s per day are hostile vulnerability scans being correctly blocked** — `/.env.production`,
+  `/core/.env`, `/.hermes/config.yaml`, `/sixxis.php`, `/aa2.php`, `/yup.php`, `//wp-includes/…`. The
+  `.htaccess` hardening rules are doing their job. No action; this is the system working.
+- **`525` (CF↔origin TLS handshake failure) runs 144–340/day.** Also ~95% scanner traffic, but one real
+  victim shows up: `/blog/wp-json/wp/v2/posts`, which is the homepage's own blog-posts fetch via
+  `WordPressClient`. Worth a look if the homepage ever renders without blog cards.
+- **Cache ratio is 21%** (3,693 cached of 17,292 requests on 28 Jul), which independently confirms the
+  Phase 4 diagnosis.
 
 > **Access, agreed 28 Jul 2026:** a scoped Cloudflare API token. Read-only first (`Zone`, `Zone Settings`,
 > `Firewall Services`, `Cache Rules`, `Page Rules`, `Analytics` — all Read; zone `qalbit.com`; short TTL) so
