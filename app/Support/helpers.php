@@ -187,3 +187,36 @@ if (! function_exists('asset_v')) {
         return $url;
     }
 }
+
+if (! function_exists('lead_param')) {
+    /**
+     * Read a lead-tracking query parameter (?topic=, ?source=) as a safe slug.
+     *
+     * These land in a hidden input and are submitted on to the CRM. They were
+     * previously echoed straight out of $_GET, so `?topic=x" onfocus=…` broke
+     * out of the value attribute — a reflected XSS on a page linked from ~400
+     * internal URLs. Escaping alone would close that, but normalising to a slug
+     * also bounds the value space, which is what lets these URLs be cached
+     * safely rather than bypassing the cache one attacker-chosen value at a
+     * time.
+     *
+     * Anything that is not a plain slug falls back to the default rather than
+     * being partially salvaged — these are internal campaign tags, not free text.
+     */
+    function lead_param(string $key, string $default = 'general'): string
+    {
+        $raw = $_GET[$key] ?? null;
+
+        if (!is_string($raw)) {
+            return $default;
+        }
+
+        $raw = trim($raw);
+
+        if ($raw === '' || strlen($raw) > 64 || !preg_match('/^[A-Za-z0-9_-]+$/', $raw)) {
+            return $default;
+        }
+
+        return $raw;
+    }
+}

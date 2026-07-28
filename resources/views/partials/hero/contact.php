@@ -287,8 +287,8 @@
                         <input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
                         <input type="hidden" name="recaptcha_token" id="recaptcha_token" value="">
                         <input type="hidden" name="lead_from" id="lead_from" value="lead_contact_page">
-                        <input type="hidden" name="lead_source" id="lead_source" value="<?= $_GET['source'] ?? 'general' ?>">
-                        <input type="hidden" name="lead_topic" id="lead_topic" value="<?= $_GET['topic'] ?? 'general' ?>">
+                        <input type="hidden" name="lead_source" id="lead_source" value="<?= htmlspecialchars(lead_param('source'), ENT_QUOTES) ?>">
+                        <input type="hidden" name="lead_topic" id="lead_topic" value="<?= htmlspecialchars(lead_param('topic'), ENT_QUOTES) ?>">
 
                         <!-- Submit -->
                         <div class="space-y-3 pt-1">
