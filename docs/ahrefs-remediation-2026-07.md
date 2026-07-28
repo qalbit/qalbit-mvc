@@ -843,3 +843,47 @@ copy and inputs sat flush against the border while the neighbouring widget was c
 | 6.3 | Yoast `company_name` / `company_alternate_name` / `company_logo` / `company_logo_id`, plus social profiles for `sameAs` | `~/backups/wpseo_titles-20260728.json`, `~/backups/wpseo_social-20260728.json` |
 | 6.3 | Media library: `qalbit-logo-512.png` imported as attachment **3424** | source is `public/assets/web-app-manifest-512x512.png` in this repo |
 | 6.3 | `header.php` — `ProfessionalService` given Yoast's `#organization` `@id`; `url`/`logo`/`image`/`sameAs` dropped as Yoast now states them | `~/backups/header-20260728-pre-schema.php` |
+
+---
+
+## 7. Pre-audit cross-verification (28 Jul)
+
+Every phase re-checked against the live site rather than against this file's Status column.
+
+| Phase | Check | Result |
+|---|---|---|
+| 1.1 | `www` → apex, path and query preserved | 301 on `/`, `/services/`, `?role=` — query intact |
+| 1.2 | Canonicals on `/`, `/case-studies/`, `/portfolio/`, `/products/` | all apex |
+| 1.3 | `/estimation/` | 301 → `/hire-developers/` |
+| 1.4 | Stale `www`/`estimation` links on `/blog/` | 0 |
+| 1.5 | `page/1/` links on `/blog/` and `/blog/page/2/` | 0 and 0 |
+| 1.7 | `/career/apply/` in sitemap | present |
+| 3.1–3.2 | Images without `alt` on `/`, `/services/`, `/case-studies/` | 0 of 155 |
+| 4.0 | `?topic=` with encoded **and** literal-quote payloads | no attribute breakout |
+| 4.1 | `Set-Cookie: PHPSESSID` on GET | 0; `Cache-Control: public, max-age=3600` |
+| 4.2 | `cf-cache-status` on `/`, `/services/`, `/about/`, `/portfolio/` | HIT (after warm) |
+| 4.3 | `?utm_source=`, `?topic=`, `?gclid=` variants | all HIT |
+| 4.5b | Font Awesome references on the blog | 0; CSS 220 KB raw / 64 KB gz |
+| 5.1 | All seven role apply titles | 39–56 chars |
+| 5.2 | WebSockets post `<title>` | new title live |
+| 6.x | Full re-validation of all 191 blog URLs | **0 findings, 191/191** |
+| 7.2 | 229 `og:title` / `twitter:title` tags across the blog | 0 slug-shaped |
+| 7.5 | 18 geo titles | 43–55 chars, no brand suffix |
+| — | Every URL in `sitemap.xml` | **96/96 return 200** |
+| — | `noindex` / missing canonical across the sitemap | 0 and 0 |
+
+`/blog/` reads `cf-cache-status: DYNAMIC` **by design** — the Cache Rule carries
+`not starts_with(http.request.uri.path, "/blog/")`, because LiteSpeed serves that path and WordPress sets
+its own cookies. Ruleset v20 also now matches `{"GET" "HEAD"}`, so the `curl -I` trap noted in §3 no longer
+misreports.
+
+### The one thing not deployed
+
+**7.1 is written but not live.** [PR #9](https://github.com/qalbit/app.liftup.sh/pull/9) is still `OPEN`
+(`mergeable: MERGEABLE`), and `https://crm.qalbit.com/book/discuss-project` currently returns **0**
+`description`, **0** `canonical`, **0** `og:*` and **0** `twitter:*` tags. Merging is what deploys it — that
+repo ships to production from CI on `master`.
+
+Re-crawling before that merge means the ~55 `crm.qalbit.com` rows come back unchanged, including the
+duplicate-URL rows for the 7 `?utm_*` / `?ref=` variants of the same booking link that the canonical exists
+to fold together.
