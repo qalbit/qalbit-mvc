@@ -86,18 +86,41 @@ Hostinger) and stop it happening on the next crawl.
 
 ## 2. Phase plan
 
-### Phase 1 — Crawl integrity `4–5 h`
-Highest leverage per hour and lowest risk. Clears ~880 rows.
+### Phase 1 — Crawl integrity ✅ COMPLETE `~3 h actual` (est. 4–5 h)
+Highest leverage per hour and lowest risk. Cleared ~880 rows.
 
-| ID | Task | Rows | Where | Est | Status |
-|---|---|---:|---|---:|---|
-| 1.1 | 301 `www.qalbit.com` → `qalbit.com` (all paths, before front-controller rewrite) | ~567 | `public/.htaccess` | 45 m | TODO |
-| 1.2 | Remove dead `www.qalbit.com` canonicals in config (unused today — prevents a future regression) | 0 | `config/{case_studies,products,portfolio}.php` | 15 m | TODO |
-| 1.3 | Fix `/estimation/` 404 — linked from one blog post; repoint or 301 | 3 | WP post + `public/index.php` | 30 m | TODO |
-| 1.4 | Repoint 8 in-content blog links at redirect targets (`/hire-laravel-developers` → trailing slash, `/services/web-applications/` → `/services/custom-web-development/`, `/tools/json-formatter` → trailing slash, `/custom-software-development-usa/`) | 8 | WP, `wp search-replace` | 45 m | TODO |
-| 1.5 | Stop WP pagination emitting `page/1/` links (23 links → 301) | 23 | blog theme / mu-plugin | 45 m | TODO |
-| 1.6 | Fix hardcoded `https://www.qalbit.com/blog/` link in blog theme — appears on 282 pages | 282 | blog theme | 30 m | TODO |
-| 1.7 | Add `/career/apply/` + blog pagination to sitemaps; resolve `/blog/` appearing in two sitemaps | 34 | `SeoController`, Yoast | 60 m | TODO |
+| ID | Task | Rows | Where | Status |
+|---|---|---:|---|---|
+| 1.1 | 301 `www.qalbit.com` → apex, all paths, query preserved | ~567 | `public/index.php` | **DONE** `404e2ba` |
+| 1.2 | Repoint 4 dead `www` canonicals in config at the apex | 0 | `config/{case_studies,products,portfolio}.php` | **DONE** `404e2ba` |
+| 1.3 | Retire the `/estimation/` 404 — repoint the link, 301 the URL | 3 | WP postmeta + `public/index.php` | **DONE** `e372112` |
+| 1.4 | Repoint blog links aimed at redirect targets | 8 | WP `search-replace` | **DONE** (WP only) |
+| 1.5 | Stop WP pagination emitting `page/1/` links | 23 | blog theme | **DONE** (WP only) |
+| 1.6 | ~~Hardcoded `www.qalbit.com/blog/` link in blog theme~~ | 282 | — | **NO ACTION** — see below |
+| 1.7 | `/career/apply/` added to sitemap | 1 | `SeoController` | **DONE** `4bb2860` |
+| 1.7b | Blog pagination + `/blog/` in two sitemaps | 33 | — | **NO ACTION** — see below |
+
+**Two corrections to this plan, found during the work.**
+
+**1.6 was wrong.** I recorded it as a hardcoded `https://www.qalbit.com/blog/` link in the blog theme. There
+is no such link — the nav link is relative (`href="/blog/"`). All 282 source pages were themselves on
+`www.qalbit.com`, so Ahrefs resolved the relative link against the www host and counted a redirect. **Task
+1.1 removes all 282 rows on its own**; there was never separate work to do here.
+
+**1.7 splits.** `/career/apply/` was a genuine gap — indexable, carries organic traffic, linked from
+`/career/`, absent from the sitemap. Added. The other 33 rows are not defects:
+
+- **22 blog pagination URLs** (`/blog/page/N/`, `/blog/{cat}/page/N/`). Paginated archives are meant to be
+  crawlable but *not* listed in a sitemap — a sitemap advertises primary content. Adding them would be
+  worse practice than the notice they clear.
+- **`/blog/` in two sitemaps.** Yoast lists the posts page in both `page-sitemap.xml` and `post-sitemap.xml`.
+  Google explicitly permits a URL in multiple sitemaps. A Yoast filter to suppress one risks breaking sitemap
+  generation for a single cosmetic notice.
+
+**Note on 1.4** — the `/estimation/` link was not in post content but in a **serialized** FAQ array in
+`wp_postmeta`, which is why a content search found nothing. All replacements went through
+`wp search-replace --precise` (serialization-aware); a raw SQL `REPLACE` would have corrupted the `s:NNN:`
+length prefixes. The array was re-validated as intact after each run.
 
 ### Phase 2 — Crawl rate limiting `2–3 h`
 No code change expected; this is diagnosis and configuration.
@@ -108,7 +131,13 @@ No code change expected; this is diagnosis and configuration.
 | 2.2 | Allow verified `AhrefsBot` at the identified layer; keep protection for unverified traffic | — | Cloudflare | 30 m | TODO |
 | 2.3 | Check WP error logs for the 3 blog 503s to rule out a genuine PHP fault | 9 | server | 30 m | TODO |
 
-> Requires Cloudflare dashboard access. If that is not available to me, 2.1–2.2 become a hand-off with exact instructions.
+> **Access, agreed 28 Jul 2026:** a scoped Cloudflare API token. Read-only first (`Zone`, `Zone Settings`,
+> `Firewall Services`, `Cache Rules`, `Page Rules`, `Analytics` — all Read; zone `qalbit.com`; short TTL) so
+> 2.1 is pure diagnosis. Edit scopes are issued separately only once we know what needs changing — WAF and
+> rate-limit rules sit in front of all production traffic. Token is read from a file, never pasted into chat.
+>
+> Note for Phase 4.2: Cloudflare will not cache HTML at the edge on origin `Cache-Control` alone. It needs an
+> explicit Cache Rule, which means `Cache Rules → Edit` and `Cache Purge → Purge` when we get there.
 
 ### Phase 3 — Image accessibility `2–3 h`
 
@@ -116,15 +145,14 @@ No code change expected; this is diagnosis and configuration.
 |---|---|---:|---|---:|---|
 | 3.1 | Resolve 38 `alt=""` icons rendered on ~590 pages (mega-menu + related-links) | 602 | `partials/header/default.php`, `partials/cta/related-links.php` | 2 h | TODO |
 
-**Decision needed.** `alt=""` on an icon that sits beside its own visible text label is *correct* accessibility
-practice — the icon is decorative and a screen reader should skip it. Ahrefs flags it anyway. Two ways out:
+**Approach: (b), approved 28 Jul 2026.** `alt=""` on an icon that sits beside its own visible text label is
+*correct* accessibility practice — the icon is decorative and a screen reader should skip it. Ahrefs flags it
+anyway. The two options were:
 
 - **(a) Descriptive `alt`** — clears Ahrefs immediately; makes screen readers announce every icon, so the
   menu is read twice. Worse for real users, better for the report.
 - **(b) Render decorative icons as CSS `background-image` or inline `<svg aria-hidden="true">`** — removes
-  them from Ahrefs' image inventory entirely *and* is the textbook-correct answer. More work, better outcome.
-
-I recommend **(b)**. Flagging it rather than picking for you.
+  them from Ahrefs' image inventory entirely *and* is the textbook-correct answer. ← **chosen**
 
 ### Phase 4 — Performance `8–10 h`
 The largest user-facing win in the whole plan, and it also clears 426 rows.
@@ -215,6 +243,22 @@ Stated up front so the next crawl holds no surprises.
 
 ## 5. Change log
 
-| Date | Phase | Task | Commit | Deployed | Verified |
-|---|---|---|---|---|---|
-| — | — | *(populated as work lands)* | — | — | — |
+| Date | Task | Commit | Verified live |
+|---|---|---|---|
+| 28 Jul | 1.1 www → apex 301; 1.2 config canonicals | `404e2ba` | `www.qalbit.com/{,services/,portfolio/?industry=…}` all 301 with query preserved and **no** `Set-Cookie`; apex still 200 |
+| 28 Jul | 1.3 `/estimation/` link + 301 | `e372112` | `/estimation/` → 301 `/hire-developers/`; 0 `estimation` refs left on the source post |
+| 28 Jul | 1.4 blog links → redirect targets | WP only | 24 replacements across `wp_posts` + `wp_postmeta`; 8 affected posts render clean |
+| 28 Jul | 1.5 pagination `page/1/` | WP only | 0 `page/1/` links across 6 paginated archives; page-1 link now `https://qalbit.com/blog/` |
+| 28 Jul | 1.7 `/career/apply/` in sitemap | `4bb2860` | present in `sitemap.xml` |
+
+### WordPress-side changes (not version controlled)
+
+| Task | Command | Backup |
+|---|---|---|
+| 1.3 | `wp search-replace 'https://qalbit.com/estimation/' 'https://qalbit.com/hire-developers/' wp_postmeta --precise` | `~/backups/postmeta-estimation-backup-20260728.tsv` |
+| 1.4 | 5 × `wp search-replace … wp_posts wp_postmeta --precise` (see `/tmp/fix-redirect-links.sh`) | `~/backups/blog-redirect-links-backup-20260728-{posts,meta}.tsv` |
+| 1.5 | Removed `base`/`format` overrides from `qalbit_pagination()` in `wp-content/themes/qalbit/inc/template-helpers.php` | `~/backups/template-helpers-20260728.php` |
+
+> The blog theme and DB are outside git. Every change above is reversible from the listed backup. **1.5 lives
+> in a theme file — a theme update would revert it.** If that becomes a risk, move it to a child theme or an
+> mu-plugin filter.
