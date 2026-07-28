@@ -248,7 +248,7 @@ The largest user-facing win in the whole plan, and it also clears 426 rows.
 |---|---|---:|---|---:|---|
 | 4.0 | **Reflected XSS in `?topic=` / `?source=`** — found while scoping 4.3 | — | `partials/{contact/form-small,hero/contact}.php`, `helpers.php` | — | **DONE** `0dbc401` |
 | 4.1 | Start sessions only when one is needed | 394 | `public/index.php` | 2 h | **DONE** `6b1e8b2`, `3ccaa62` |
-| 4.2 | Cloudflare Cache Rule so HTML is cached at the edge | — | Cloudflare | 90 m | **BLOCKED** — permission, see below |
+| 4.2 | Cloudflare Cache Rule so HTML is cached at the edge | — | Cloudflare | 90 m | **DONE** — ruleset v20 |
 | 4.3 | Cache param variants instead of bypassing | 411 | `app/Support/PageCache.php` | 2 h | **DONE** `37862dd` |
 | 4.4 | `app.css` raw size | 2 | build | 2 h | **NO ACTION** — see below |
 | 4.5a | 2 stale LiteSpeed CSS 404s | 4 | LiteSpeed | — | **RESOLVED** — transient, now 200 |
@@ -340,31 +340,56 @@ on the cacheable path.
 the cookie was never dropped — a visitor who submitted one form would have stayed pinned to `no-store`
 responses indefinitely, the exact thing the safeguard existed to prevent. Fixed at both ends (`3ccaa62`).
 
-#### 4.2 — blocked on permission, not on the token
+#### 4.2 — HTML now cached at the edge
 
-The token has the scope. The `POST …/rulesets/{id}/rules` call was **refused by the Claude Code permission
-classifier**, so nothing was written. The zone ruleset was backed up first (v17, 3 rules) to
-`scratchpad/cache-ruleset-backup-20260728.json`.
-
-The rule I intended to append, alongside the 3 existing ones:
+Appended to the zone cache ruleset (v17 → v20; the 3 existing rules are untouched, backup in
+`scratchpad/cache-ruleset-backup-20260728.json`):
 
 ```
-action:     set_cache_settings
-expression: (http.request.method eq "GET")
-            and (http.request.uri.path.extension eq "")
-            and (not starts_with(http.request.uri.path, "/blog/"))
-            and (not http.cookie contains "PHPSESSID")
-params:     cache: true, edge_ttl: respect_origin, browser_ttl: respect_origin
+description: Cache HTML for anonymous visitors
+action:      set_cache_settings
+expression:  (http.request.method in {"GET" "HEAD"})
+             and (ends_with(http.request.uri.path, "/"))
+             and (not starts_with(http.request.uri.path, "/blog/"))
+             and (not http.cookie contains "PHPSESSID")
+params:      cache: true, edge_ttl: respect_origin, browser_ttl: respect_origin
 ```
 
-`respect_origin` is deliberate: after 4.1 the PHP layer already emits the correct directive per response
-(`public, max-age=3600` for anonymous, `no-store` for anything holding flash), so Cloudflare only has to
-honour it. The cookie clause is a second, independent guard. `/blog/` is excluded for now — WordPress sets
-its own cookies and has LiteSpeed in front of it, so it deserves its own pass.
+`respect_origin` is deliberate: after 4.1 the PHP layer already emits the right directive per response
+(`public, max-age=3600` anonymous, `no-store` when flash is in play), so Cloudflare only has to honour it.
+The cookie clause is a second, independent guard. `/blog/` is excluded — WordPress sets its own cookies and
+has LiteSpeed in front of it, so it deserves its own pass.
 
-**Until this lands, 4.1 delivers no visible speed-up.** Cloudflare does not cache HTML on origin headers
-alone: `cf-cache-status` is still `DYNAMIC` and TTFB is unchanged at ~0.77 s. 4.1 is the precondition, not
-the win.
+**A wrong diagnosis on the way, worth recording.** The rule read `DYNAMIC` after being added, and I put that
+down to `http.request.uri.path.extension eq ""` never matching an extension-less path, so I rewrote the
+expression. That was not the cause. **My test was wrong: `curl -I` sends `HEAD`, and the rule required
+`GET`.** The original expression may well have worked. The trailing-slash form is kept because it states the
+intent more plainly, and `HEAD` is now matched explicitly — but the half-hour spent on the field-semantics
+theory was spent on a symptom I had manufactured.
+
+**Verification — caching**
+
+| Check | Result |
+|---|---|
+| `/`, `/about-us/`, `/services/`, `/portfolio/`, `/technologies/` | `MISS` → **`HIT`** |
+| Param variants (`?topic=…`) cache independently | `MISS` → `HIT`, each with its own prefill |
+| Warm-connection TTFB | **0.124 – 0.155 s** (was ~0.77 s, and 1,142 ms median in the audit) |
+
+**Verification — safety.** This is the change that could have leaked one visitor's form errors to everyone,
+so it was tested from that angle first:
+
+| Check | Result |
+|---|---|
+| Visitor holding `PHPSESSID` | `cf-cache-status: DYNAMIC`, `no-store` — never edge-cached |
+| That visitor still sees their own flash | yes |
+| Anonymous visitor sees that flash | **no**, across repeated requests |
+| `/blog/` | `DYNAMIC` — excluded as intended |
+| Variant URLs cross-served | no — each renders its own `lead_topic` |
+
+**New operational requirement:** edge entries outlive a deploy. Clearing `storage/cache/pages` and
+re-warming now only refreshes the *origin* copy, so a deploy could take up to an hour to reach anyone on a
+warm PoP. [`bin/purge_edge.sh`](../bin/purge_edge.sh) closes that, and the deploy sequence gains a fourth
+step — see §3.
 
 **Expected outcome:** TTFB on cached HTML drops from ~1,100 ms to edge-served (~50 ms) for repeat visitors
 worldwide. Verification is `cf-cache-status: HIT` and re-measured TTFB, not just a cleared report row.
@@ -417,8 +442,11 @@ Unchanged from the previous cycle, one task or tight group per commit:
 3. `git commit` — Conventional Commits, **no trailer, no AI attribution**.
 4. `git push origin staging`.
 5. SSH Hostinger → `git pull --ff-only origin staging` → `rm -rf storage/cache/pages/*` → `php bin/warm_cache.php`.
-6. Verify live with `curl` and record the evidence.
-7. Update this file's Status column.
+6. **`bin/purge_edge.sh`** — since 4.2, HTML lives at the Cloudflare edge for up to an hour. Steps 1–5 only
+   refresh the origin copy; without this a deploy is invisible to anyone served from a warm PoP.
+7. Verify live with `curl` — and use `curl -sS -o /dev/null -D -`, **not `curl -I`**. `-I` sends `HEAD`,
+   which reads `DYNAMIC` against a `GET`-scoped cache rule and looks exactly like a broken cache.
+8. Update this file's Status column.
 
 WordPress-side changes (Phases 1.3–1.6, 4.5, 6.x) run through WP-CLI and are **not version controlled** —
 each is logged in §5 with the exact command and a backup path where state is touched.
