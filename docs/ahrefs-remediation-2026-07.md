@@ -572,11 +572,60 @@ produced blank frames), so there is **no visual confirmation** of the FAQ accord
 structural — markup, JS selectors and CSS all inspected. Same headless limitation hit during the blog hero
 work.
 
-**One thing I did not change.** Yoast emits no `Organization` node and no `publisher` on `Article`, because
-the site's Yoast representation is set to a *person* rather than the company. Deleting the hand-written
-`Article` removed the only `publisher` the posts had. That is a Yoast setting for a company blog to
-reconsider — **Yoast → Settings → Site representation → Organization** — but it rewrites the graph for the
-whole blog, which is a bigger decision than this phase, so it is flagged rather than done.
+#### 6.3 — site representation set to Organization (approved separately)
+
+Deleting the hand-written `Article` removed the only `publisher` the posts had, and Yoast was emitting no
+`Organization` to replace it.
+
+**The diagnosis in the paragraph above was wrong.** `company_or_person` was *already* `company`. The reason
+no `Organization` appeared is that Yoast's `set_site_represents_company()` bails when `company_logo_id < 1`
+— **a company with no logo is not treated as a company at all**, silently. The logo was the blocker, not
+the representation setting.
+
+| Setting | Before | After |
+|---|---|---|
+| `company_name` | `QalbIT Blog` | `QalbIT Infotech Pvt Ltd` |
+| `company_alternate_name` | *(empty)* | `QalbIT` |
+| `company_logo_id` | `0` | `3424` |
+| `company_logo` | *(empty)* | `…/uploads/2026/07/qalbit-logo-512.png` |
+
+The logo is the 512×512 raster mark from `public/assets/web-app-manifest-512x512.png` in this repo, imported
+into the media library. The theme's own brand assets are SVG only, which Google will not accept as an
+`Organization` logo. Social profiles were filled in so the node carries `sameAs`; the four URLs are the same
+ones the `ProfessionalService` block already published on every page. Backups:
+`~/backups/wpseo_titles-20260728.json`, `~/backups/wpseo_social-20260728.json`.
+
+Result: `Organization` on all 191 pages, `"publisher": {"@id": "…#organization"}` on every `Article`.
+
+**I took the blog down for a few minutes doing this.** I patched `company_logo_meta` to `false` without
+`--format=json`, so WP-CLI stored the *string* `'false'` where Yoast expects an array or a boolean; Yoast
+then array-accessed a string and every blog page returned **HTTP 500**. Caught on the verification curl
+immediately after, fixed by re-patching with `--format=json`. That key did not need touching at all — it was
+an unnecessary belt-and-braces edit that caused the only outage in this remediation. **Patch WP option
+sub-keys with `--format=json` whenever the value is not a plain string.**
+
+#### The duplicate-business problem, closed
+
+Adding `Organization` re-created exactly what removing the duplicate `LocalBusiness` had fixed: two unlinked
+entities for one company, Yoast's `Organization` and the theme's `ProfessionalService`.
+
+They are now **one node**. The `ProfessionalService` block carries
+`"@id": "<?php echo esc_url( trailingslashit( home_url() ) ); ?>#organization"` — byte-identical to the `@id`
+Yoast assigns — and in JSON-LD two nodes sharing an `@id` are the same node. `ProfessionalService` is a
+subtype of `LocalBusiness`, itself a subtype of `Organization`, so the merged node simply holds both types.
+
+The split is clean, with no property stated twice except an identical `name`:
+
+| From Yoast | From the theme block |
+|---|---|
+| `name`, `alternateName`, `url`, `logo`, `image`, `sameAs` | `address`, `geo`, `hasMap`, `openingHours`, `contactPoint`, `description` |
+
+`url`, `logo`, `image` and `sameAs` were dropped from the theme block rather than duplicated — its `logo`
+pointed at an SVG, which is the thing Google will not render.
+
+**Final sweep after all of the above: 0 findings across 191 / 191 pages.** `Organization` 191,
+`ProfessionalService` 191, `BreadcrumbList` 191, `WebSite` 191, `Article` 159, `FAQPage` 151,
+`CollectionPage` 32, untyped items 0, parse failures 0.
 
 ### Phase 7 — Deferred and no-action
 
@@ -791,3 +840,6 @@ copy and inputs sat flush against the border while the neighbouring widget was c
 | 5.2 | `_yoast_wpseo_title` on post 1464 → `WebSockets vs Server-Sent Events (SSE): When to Use Each` | `~/backups/websockets-title-20260728.tsv` |
 | 6.1 | `header.php` — removed the hand-written `Article`, both `WebPage`/`ProfilePage` blocks, the `NewsArticle` and the duplicate `LocalBusiness`; FAQ block rebuilt on `wp_json_encode`; stray `</script>` removed | `~/backups/header-20260728-pre-schema.php` |
 | 6.2 | `template-parts/post/content-article.php` — removed the untyped FAQ microdata, kept the aria wiring | `~/backups/content-article-20260728-pre-schema.php` |
+| 6.3 | Yoast `company_name` / `company_alternate_name` / `company_logo` / `company_logo_id`, plus social profiles for `sameAs` | `~/backups/wpseo_titles-20260728.json`, `~/backups/wpseo_social-20260728.json` |
+| 6.3 | Media library: `qalbit-logo-512.png` imported as attachment **3424** | source is `public/assets/web-app-manifest-512x512.png` in this repo |
+| 6.3 | `header.php` — `ProfessionalService` given Yoast's `#organization` `@id`; `url`/`logo`/`image`/`sameAs` dropped as Yoast now states them | `~/backups/header-20260728-pre-schema.php` |
