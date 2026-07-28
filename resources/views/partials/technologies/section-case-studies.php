@@ -93,7 +93,7 @@ $caseStudies = [
                         data-tech-case-study-card
                         itemprop="itemListElement"
                         itemscope
-                        itemtype="https://schema.org/CaseStudy"
+                        itemtype="https://schema.org/CreativeWork"
                     >
                         <meta itemprop="position" content="<?= (int) $position; ?>">
                         <meta itemprop="url" content="<?= htmlspecialchars($url, ENT_QUOTES); ?>">
