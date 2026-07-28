@@ -97,7 +97,7 @@ Highest leverage per hour and lowest risk. Cleared ~880 rows.
 | 1.4 | Repoint blog links aimed at redirect targets | 8 | WP `search-replace` | **DONE** (WP only) |
 | 1.5 | Stop WP pagination emitting `page/1/` links | 23 | blog theme | **DONE** (WP only) |
 | 1.6 | ~~Hardcoded `www.qalbit.com/blog/` link in blog theme~~ | 282 | — | **NO ACTION** — see below |
-| 1.7 | `/career/apply/` added to sitemap | 1 | `SeoController` | **DONE** `4bb2860` |
+| 1.7 | `/career/apply/` added to sitemap | 1 | `SeoController` | **DONE** `83d8c9d` |
 | 1.7b | Blog pagination + `/blog/` in two sitemaps | 33 | — | **NO ACTION** — see below |
 
 **Two corrections to this plan, found during the work.**
@@ -249,7 +249,7 @@ Stated up front so the next crawl holds no surprises.
 | 28 Jul | 1.3 `/estimation/` link + 301 | `e372112` | `/estimation/` → 301 `/hire-developers/`; 0 `estimation` refs left on the source post |
 | 28 Jul | 1.4 blog links → redirect targets | WP only | 24 replacements across `wp_posts` + `wp_postmeta`; 8 affected posts render clean |
 | 28 Jul | 1.5 pagination `page/1/` | WP only | 0 `page/1/` links across 6 paginated archives; page-1 link now `https://qalbit.com/blog/` |
-| 28 Jul | 1.7 `/career/apply/` in sitemap | `4bb2860` | present in `sitemap.xml` |
+| 28 Jul | 1.7 `/career/apply/` in sitemap | `83d8c9d` | present in `sitemap.xml` |
 
 ### WordPress-side changes (not version controlled)
 
