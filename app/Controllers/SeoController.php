@@ -41,6 +41,7 @@ class SeoController
             '/hire-developers/',
             '/case-studies/',
             '/career/',
+            '/career/apply/',
             '/privacy-policy/',
             '/terms-and-condition/',
             '/cookie-policy/',
