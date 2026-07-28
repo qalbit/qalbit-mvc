@@ -887,3 +887,92 @@ repo ships to production from CI on `master`.
 Re-crawling before that merge means the ~55 `crm.qalbit.com` rows come back unchanged, including the
 duplicate-URL rows for the 7 `?utm_*` / `?ref=` variants of the same booking link that the canonical exists
 to fold together.
+
+---
+
+## 8. Live incident during the 28 Jul re-crawl — origin dropping ~25–45% of requests
+
+Reported as scattered 521/525 rows. Those were the visible edge of something larger.
+
+### What Cloudflare's own analytics show
+
+24-hour rolling window, by hour (UTC), all hostnames on the zone:
+
+| Hour | Requests | 200 | 504 | 504 rate |
+|---|---:|---:|---:|---:|
+| 00:00–06:00 | 181–1,096 | — | 6–50 | **1–9%** |
+| **07:00** | 3,072 | 1,958 | 735 | **23.9%** |
+| 08:00–12:00 | 1,849–4,914 | — | 489–1,268 | **23–30%** |
+| 14:00 | 2,136 | 1,665 | 248 | 11.6% |
+| **15:00** | 6,627 | 1,045 | 2,498 | **37.7%** |
+| 16:00 | 2,909 | 1,729 | 672 | 23.1% |
+
+Every one of those 504s carries **`originResponseStatus: 0`** — the origin never answered at all.
+The rate steps from a 1–9% overnight baseline to 25–30% the moment hourly traffic clears roughly 2,000
+requests, i.e. about **33 requests per minute**. That is a very low ceiling.
+
+### It is not the application, and not our code
+
+Measured while 504s were running at 25–33%:
+
+- **Origin direct, bypassing Cloudflare: `TTFB 0.10–0.24 s`, 8/8 → 200.** 30 parallel requests: 30/30 → 200.
+- **Through Cloudflare from here: 30/30 → 200**, and 25 sequential fresh `?topic=` variants: 25/25 → 200.
+- **`AhrefsBot` user agent: 200 both direct and through the edge** — not a bot block.
+- **Our account was idle**: 2–3 `lsphp` processes sampled every 5 s for 90 s, 0.7% CPU total.
+- The shared node meanwhile sat at **load 43–61 across 64 cores**, essentially none of it ours.
+- Origin cert for `qalbit.com` is valid (Google Trust Services, 16 Jul → 14 Oct), `Verify return code: 0`.
+
+So the app renders in ~100 ms, our account is doing nothing, and Cloudflare still cannot get a response
+about a third of the time. The failure is in the Cloudflare→origin path on Hostinger's side, and the
+`load 43–61` from co-tenants is the most likely reason.
+
+The 504s are also concentrated on the crawl's own shape — top path is **`/contact-us/` with 170 hits**,
+which is the `?topic=` variant set. Each distinct query string is its own edge cache key, so every variant
+is a guaranteed MISS and a guaranteed origin hit. The parameter explosion that Phase 4.3 made *cacheable*
+is still, on a cold cache, ~400 separate origin renders.
+
+**Honest caveat on the 15:00 spike:** I was re-validating all 191 blog URLs three times and purging the
+whole edge cache repeatedly in that hour. A purge makes every subsequent request a MISS. My own verification
+contributed to that hour's load — though 6,627 requests is far more than my sweeps account for.
+
+### `beta.qalbit.com` — a dangling DNS record, 100% broken
+
+147 of the 206 52x events, and completely separate from the above:
+
+```
+openssl s_client -connect 31.97.238.147:443 -servername beta.qalbit.com
+  → tlsv1 alert internal error / no peer certificate available
+```
+
+The origin aborts the TLS handshake because **`beta.qalbit.com` is not hosted on the server** — there is no
+docroot for it under `~/domains/` and no vhost. A proxied DNS record points at an origin that has never
+served it, so with SSL mode `strict` every request is a 525. It returns 525 right now, on every attempt.
+
+It appears in no sitemap and is referenced nowhere in this repo — Ahrefs is reaching it because the project
+scope includes subdomains (the same reason `crm.qalbit.com` is in the audit).
+
+**Do not "fix" this by switching SSL mode to Full.** That is the standard internet advice for 525 and it
+would not work here: the origin sends *no certificate at all* and aborts the handshake, which fails under
+Full just as it does under strict. It would only weaken origin validation for the hostnames that do work.
+
+### Also seen, and not a problem
+
+38 × 403 on `/adminfuns.php`, `/admin.php`, `/wp-act.php`, `/update/da222.php` and similar — background
+vulnerability scanning, correctly refused. Noise, not a defect.
+
+### Recommendation
+
+**Do not trust a report produced from this crawl.** At a 25–45% 504 rate, a quarter of the site will be
+recorded as `5xx`, `page-has-broken-*` and `indexable-page-became-non-indexable` — the same class of
+phantom rows Phase 2 spent an hour disproving, but an order of magnitude more of them. It would bury the
+signal the re-crawl exists to produce.
+
+In order:
+
+1. **Stop the running audit.** It is generating a misleading report and adding origin load.
+2. **Take the origin drop-rate to Hostinger** with the numbers above: ~25–30% of requests unanswered above
+   ~33 req/min, while the account uses 2–3 PHP processes and 0.7% CPU on a node at load 45–60.
+3. **Delete or repoint the `beta.qalbit.com` DNS record.**
+4. **Re-crawl only once the 504 rate is back to its overnight 1–9% baseline**, with Ahrefs' crawl speed
+   lowered and URL parameters excluded so the ~400 `?topic=` duplicates are not crawled individually.
+5. Merge [PR #9](https://github.com/qalbit/app.liftup.sh/pull/9) before that re-crawl, per §7.
