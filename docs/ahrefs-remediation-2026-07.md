@@ -252,7 +252,7 @@ The largest user-facing win in the whole plan, and it also clears 426 rows.
 | 4.3 | Cache param variants instead of bypassing | 411 | `app/Support/PageCache.php` | 2 h | **DONE** `37862dd` |
 | 4.4 | `app.css` raw size | 2 | build | 2 h | **NO ACTION** — see below |
 | 4.5a | 2 stale LiteSpeed CSS 404s | 4 | LiteSpeed | — | **RESOLVED** — transient, now 200 |
-| 4.5b | Blog CSS weight — 449 KB raw / 102 KB compressed per page | 28 | LiteSpeed | — | **NEEDS A DECISION** — see below |
+| 4.5b | Blog CSS weight | 28 | LiteSpeed | — | **DONE** — 449 KB → 226 KB raw, 102 KB → 66 KB gz |
 
 #### 4.3 — variant caching
 
@@ -295,21 +295,37 @@ saw `?ver=9755b`. This is the LiteSpeed combine race: HTML cached with a referen
 that a later purge regenerated. It self-heals, and it recurs whenever CSS is purged while HTML is still
 cached — including when we purge during this work. Not worth a settings change on its own.
 
-#### 4.5b — the blog's CSS is genuinely heavy, and this one needs your call
+#### 4.5b — the blog was shipping a whole icon library for three icons
 
 | | Raw | Compressed |
 |---|---:|---:|
-| Main site `app.css` | 108 KB | **17.6 KB** |
-| Blog combined CSS | 449 KB | **102 KB** |
+| Blog CSS **before** | 449 KB | 102 KB |
+| Blog CSS **after** | **226 KB** | **66 KB** |
 
-Every blog page pulls roughly **six times** the entire main site's stylesheet. LiteSpeed settings:
-`optm-css_comb: 1`, `optm-css_min: 1`, `optm-ucss: 1`. UCSS is meant to strip unused rules per page, and a
-449 KB result says it is not doing so — most likely because UCSS generation depends on a QUIC.cloud
-connection, so it is silently falling back to plain concatenation of every theme and plugin stylesheet.
+The suspicion in the plan was UCSS silently failing and falling back to plain concatenation. The real cause
+was narrower and easier to fix. A signature scan of the combined bundle showed **2,566 Font Awesome
+matches**, traced to `wp-user-profile-avatar`, which registers the full library
+(`assets/lib/fontawesome/all.css`, 140 KB, 2,538 icon classes) on `wp_enqueue_scripts` for *every*
+front-end page.
 
-**Not changed, because every option here can visibly break the blog:** turning off combine, forcing UCSS
-regeneration, or dequeueing plugin CSS all change what styles reach the page. This needs a decision and a
-staging check, not a live toggle.
+The blog uses **four glyphs**: `fa-chevron-up` (scroll-to-top), `fa-angle-left` / `fa-angle-right`
+(pagination), and `fa-envelope-square` (the author box's mailto link).
+
+- The theme's three are now inline SVG — a few hundred bytes, and they inherit colour through
+  `currentColor` exactly as the icon font did.
+- The fourth is markup the plugin emits and the theme cannot edit, so it is drawn with a CSS mask that also
+  keeps `currentColor`.
+- An mu-plugin dequeues the library on the front end only, leaving it registered for wp-admin where the
+  plugin's own screens use it.
+
+**The webfont downloads go too**, which the CSS figures above do not capture: a Chrome netlog on a post
+page now shows zero Font Awesome requests and no webfont requests at all.
+
+Verified: pagination arrows and the envelope render correctly against the live stylesheet, and the
+scroll-to-top button stays hidden until scrolled, as before.
+
+Combine/UCSS settings were left alone. There was no need to touch them once the actual payload was gone,
+and they were the risky option.
 
 #### 4.0 — reflected XSS (unplanned, shipped first)
 
@@ -425,11 +441,44 @@ Ahrefs' own validator. **If it stays unreproducible I will report that and chang
 
 | ID | Item | Rows | Status | Note |
 |---|---|---:|---|---|
-| 7.1 | `crm.qalbit.com` — missing meta description, OG tags, X card, no outgoing links, 9 uncanonicalised param duplicates | 55 | DEFERRED | Your call: "ignore for now" |
-| 7.2 | 17 blog posts whose `og:title` is the raw URL slug | 17 | TODO (unapproved) | Offered previously, never approved |
+| 7.1 | `crm.qalbit.com` booking pages — description, OG, X card, canonical | 55 | **DONE** — [PR #9](https://github.com/qalbit/app.liftup.sh/pull/9) | Fixed in `app.liftup.sh`, awaiting merge |
+| 7.2 | Blog posts whose `og:title` was the raw URL slug | 17 | **DONE** (WP only) | 36 overrides across 18 posts |
 | 7.3 | `title-tag-changed` (66), `meta-description-changed` (39), `h1-tag-changed` (13), `pages-to-submit-to-index` (125) | 243 | NO ACTION | These *are* our Phase-0 edits. Optional: submit via IndexNow/GSC |
 | 7.4 | `http://…` → `https://…` redirects (2) | 2 | NO ACTION | Correct behaviour |
-| 7.5 | `config/geo.php` still carries `– QalbIT` title suffixes | 0 | TODO (unapproved) | Not flagged this crawl; same pattern we fixed elsewhere |
+| 7.5 | `config/geo.php` `– QalbIT` title suffixes | 0 | **DONE** `655f606` | 19 locations, all 43–55 chars after stripping |
+
+#### 7.2 — slug `og:title` values
+
+Found by shape rather than from a hand-kept list: no spaces, at least three hyphen-separated words. That
+caught the 17 raw slugs **and** one hyphenated variant (`The-digital-reservations-revolution-…`) I would
+have missed, across both `og:title` and `twitter:title` — 36 overrides on 18 posts.
+
+The overrides were **deleted** rather than rewritten. With none set, Yoast renders its social template,
+which resolves to the SEO title each post already has. Writing 18 new social headlines would have been
+worse copy and more to maintain.
+
+One post carried `%%title%%` as its override. Checking the rendered page first showed Yoast substitutes it
+correctly, so it was left alone — it looked broken and was not.
+
+#### 7.1 — LiftUp booking pages
+
+The page is served by `app.liftup.sh` (Laravel), not by this repo, and every registered host has their own
+`/book/{slug}`. It shipped a `<title>` and nothing else.
+
+The canonical is the part that mattered most: hosts hand out the same link with `?utm_*`/`?ref=` attached
+per campaign, and with nothing folding them back together each variant registered as its own duplicate —
+the 9 rows in this audit. `url()->current()` carries no query string, so they all resolve to one URL.
+
+Descriptions are built per host rather than from a fixed string, since every tenant's page is a different
+person, meeting and duration. The manage page — a signed link from a confirmation email showing one guest's
+details — got `noindex, nofollow`.
+
+**No `og:image`, deliberately:** the only organisation logo route sits behind `cockpit.auth` so a social
+scraper cannot fetch it, and the bundled brand assets are SVG, which the major platforms will not render.
+Either would give a *broken* card rather than no card. Worth revisiting if a public raster asset is added.
+
+Three tests added; full suite **977 passed, 4103 assertions**. Delivered as a PR rather than merged: that
+repo deploys to production from CI on `master`.
 
 ---
 
@@ -587,3 +636,14 @@ copy and inputs sat flush against the border while the neighbouring widget was c
 > The blog theme and DB are outside git. Every change above is reversible from the listed backup. **1.5 lives
 > in a theme file — a theme update would revert it.** If that becomes a risk, move it to a child theme or an
 > mu-plugin filter.
+
+---
+
+## 6. WordPress-side changes, second batch (28 Jul)
+
+| Task | What | Backup |
+|---|---|---|
+| 7.2 | Deleted 36 slug-shaped `_yoast_wpseo_opengraph-title` / `_yoast_wpseo_twitter-title` overrides across 18 posts | `~/backups/social-titles-20260728.tsv` |
+| 4.5b | mu-plugin `qalbit-drop-fontawesome.php` dequeues the `fontawesome` handle on the front end | — (new file) |
+| 4.5b | `home-hero.php` + `inc/template-helpers.php` — 4 `<i class="fa…">` replaced with inline SVG | `~/backups/{home-hero,template-helpers}-20260728-pre-fa.php` |
+| 4.5b | `blog-modern.css` section 9 — CSS-mask stand-ins for the plugin-rendered envelope icon | `~/backups/blog-modern-20260728-pre-fa.css` |
