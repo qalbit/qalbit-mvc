@@ -417,12 +417,65 @@ worldwide. Verification is `cf-cache-status: HIT` and re-measured TTFB, not just
 
 | ID | Task | Rows | Where | Est | Status |
 |---|---|---:|---|---:|---|
-| 5.1 | Shorten 2 career-apply titles (86 and 80 chars) | 2 | `CareerController` | 45 m | TODO |
-| 5.2 | `/blog/an-in-depth-look-at-websockets-and-server-sent-events/` — page title vs SERP title mismatch | 1 | WP/Yoast | 30 m | TODO |
+| 5.1 | Shorten 2 career-apply titles (86 and 80 chars) | 2 | `CareerController` | 45 m | **DONE** `bdd9c4d` |
+| 5.2 | `/blog/an-in-depth-look-at-websockets-and-server-sent-events/` — page title vs SERP title mismatch | 1 | WP/Yoast | 30 m | **DONE** (WP only) |
 
 The other 3 SERP-title rows (`/`, `/services/`, `/blog/business-and-industry/`) are the pages we rewrote in
 Phase 0. Ahrefs compares against Google's *stored* SERP title, so they persist until Google recrawls.
 Expected, not actionable — see §4.
+
+#### 5.1 — career apply titles
+
+Role titles in `config/careers.php` carry an experience/location suffix (`React / Next.js Frontend
+Developer – 1–2 years – Ahmedabad`), and the apply page pasted the whole string between `Apply –` and the
+brand tail. The two **open** roles came out at 86 and 80 characters — Ahrefs only crawled those two because
+only open roles are linked, but five more roles carried the same latent bug at 69–86 characters.
+
+The title is now built from a ladder — full role title, role name alone, then a shorter brand tail — taking
+the longest rung that fits 60. Degrading the suffix keeps the job title readable where truncating it would
+not, and the shortest rung is the *default* rather than the last rung, so a role added later cannot
+overflow either. The description logic already trimmed to the role name; both now share one `$roleName`.
+
+Verified live, all seven roles: **39–56 characters**. Descriptions unchanged and still inside 140.
+
+#### 5.2 — the WebSockets post
+
+**The plan had this in the wrong bucket, and I put it there.** I checked `title-tag-changed` for the URL,
+found it absent, and concluded Google was actively rewriting a stable title. `title-tag-changed` tracks
+`<title>`; the string that moved was the **H1**. It is in `h1-tag-changed`:
+
+| | Value |
+|---|---|
+| H1 previous | Building Real-Time Web Applications: An In-depth Look at WebSocket and Server-Sent Events |
+| H1 now | WebSocket vs Server-Sent Events: Advantages, Limits and When to Use SSE |
+| Google's SERP title | An In-depth Look at WebSocket and Server-Sent Events |
+
+The post title was rewritten at **16:17 on 28 Jul**, roughly two hours before the crawl. Google's stored
+SERP title is the *old* H1. So this row is the **same stale-SERP case as the other three** and will clear on
+recrawl — no action would have changed it.
+
+One real finding survived that correction, though. Ahrefs' `Title` and `Title previous` are **identical**,
+which means Google preferred the H1 over this `<title>` across *both* crawls — that part is not staleness.
+The `<title>` was `WebSocket Advantages, Limits & When to Use SSE`: it never spelled out "Server-Sent
+Events", introduced "SSE" unexpanded, and read as a fragment, while the target keyword is `sse vs
+websockets` (US, position 36).
+
+Retitled to align with the H1 and carry the full term:
+
+```
+WebSockets vs Server-Sent Events (SSE): When to Use Each    (56 chars)
+```
+
+`wp post meta update 1464 _yoast_wpseo_title` — backup at `~/backups/websockets-title-20260728.tsv`.
+
+Two notes on the mechanics. Yoast serves titles from `wp_yoast_indexable`, not from post meta; the meta
+update hooks through and refreshed row 79, confirmed by query. And `wp litespeed-purge url <full-url>`
+returned `Success: Purged the URL!` while the clean URL kept serving `x-litespeed-cache: hit` with the old
+title — only `wp litespeed-purge post_id 1464` actually cleared it. A cache-busting query param was what
+exposed the difference. **Do not trust that command's success message.**
+
+**This may not hold.** Whether Google keeps a `<title>` is Google's call, and it has overridden this one
+twice. Aligning the title with the H1 is the documented lever, not a guarantee.
 
 ### Phase 6 — Structured data `3–4 h`
 
@@ -647,3 +700,4 @@ copy and inputs sat flush against the border while the neighbouring widget was c
 | 4.5b | mu-plugin `qalbit-drop-fontawesome.php` dequeues the `fontawesome` handle on the front end | — (new file) |
 | 4.5b | `home-hero.php` + `inc/template-helpers.php` — 4 `<i class="fa…">` replaced with inline SVG | `~/backups/{home-hero,template-helpers}-20260728-pre-fa.php` |
 | 4.5b | `blog-modern.css` section 9 — CSS-mask stand-ins for the plugin-rendered envelope icon | `~/backups/blog-modern-20260728-pre-fa.css` |
+| 5.2 | `_yoast_wpseo_title` on post 1464 → `WebSockets vs Server-Sent Events (SSE): When to Use Each` | `~/backups/websockets-title-20260728.tsv` |
