@@ -299,9 +299,11 @@ class CareerController
 
 
     /**
-     * Careers index – cached with TTL for the canonical /careers/ view.
-     * Any filtered views with query params will automatically bypass cache
-     * because PageCache::shouldBypass() returns true when $_GET is not empty.
+     * Careers index – cached with TTL.
+     *
+     * Filtered views (?team=, ?experience=, ?location=, ?type=) are cached too,
+     * each under its own key: PageCache folds those parameters into the cache
+     * key rather than bypassing the cache for any URL carrying a query string.
      */
     public function index(): string
     {
