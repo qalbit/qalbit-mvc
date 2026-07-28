@@ -180,6 +180,41 @@
 }
 
 @layer components {
+    /*
+     * Mega-menu item icons.
+     *
+     * These are decorative: every one sits beside its own visible text label,
+     * so a screen reader should skip them. They used to be <img alt=""> tags,
+     * which is the correct accessibility markup but which Ahrefs counts as a
+     * missing alt — 590 of the 602 flagged rows in the 28 Jul audit were these
+     * 14 icons repeated across the site.
+     *
+     * Rendering them as background images fixes that properly rather than by
+     * bolting on alt text a screen reader would only have to read twice. It
+     * also buys back requests: the panel sits behind `invisible`, not
+     * `display:none`, so all ~38 icons were fetched on every single page view
+     * for a menu most visitors never open. Gating background-image on the
+     * parent :hover defers every one of them until the menu is actually
+     * opened, which is also what was tripping Cloudflare's rate limiter into
+     * returning 429 for these files during crawls.
+     *
+     * Safe to gate on hover: the mega menu is `hidden lg:flex` and already
+     * opens only on `group-hover`, and the mobile menu renders no icons at all.
+     */
+    .nav-icon {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 1.5rem 1.5rem; /* matches the h-6 w-6 it replaces */
+    }
+
+    .nav-icon--bare {
+        background-size: 2.25rem 2.25rem; /* matches h-9 w-9 */
+    }
+
+    .group:hover .nav-icon {
+        background-image: var(--nav-icon);
+    }
+
     .hero-image-float {
         animation: qalbit-hero-image-float 3s ease-in-out infinite;
         will-change: transform;

@@ -81,9 +81,19 @@ if ($groupCount === 4) { $gridCols = 'sm:grid-cols-2 lg:grid-cols-4'; }
                                     >
                                         <?php if (!empty($link['img'])): ?>
                                             <span class="relative block aspect-video w-24 flex-none overflow-hidden rounded-lg border border-slate-200 bg-slate-100">
+                                                <?php
+                                                    // Unlike the decorative mega-menu icons, this is a content
+                                                    // thumbnail for the article being linked, so it keeps <img>
+                                                    // (and native lazy loading) and gets a real alt describing
+                                                    // what it depicts.
+                                                    $linkImgAlt = trim((string) ($link['img_alt'] ?? ''));
+                                                    if ($linkImgAlt === '') {
+                                                        $linkImgAlt = trim((string) ($link['label'] ?? ''));
+                                                    }
+                                                ?>
                                                 <img
                                                     src="<?= htmlspecialchars($link['img']) ?>"
-                                                    alt=""
+                                                    alt="<?= htmlspecialchars($linkImgAlt) ?>"
                                                     width="96" height="54"
                                                     loading="lazy" decoding="async"
                                                     class="h-full w-full object-cover transition-transform duration-300 group-hover/link:scale-105"

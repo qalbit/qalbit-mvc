@@ -151,14 +151,18 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
                                                         role="menuitem"
                                                     >
                                                         <?php if (!empty($childIcon)): ?>
+                                                            <?php
+                                                                // Decorative: each icon sits beside its own visible label.
+                                                                // Drawn as a background so it carries no image semantics
+                                                                // and is not fetched until the menu is opened. See
+                                                                // .nav-icon in resources/css/app.css.
+                                                                $childIconUrl = asset(ltrim($childIcon, '/'));
+                                                                $childIconVar = "--nav-icon:url('" . htmlspecialchars($childIconUrl, ENT_QUOTES) . "')";
+                                                            ?>
                                                             <?php if ($bareIcons): ?>
-                                                                <span class="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center">
-                                                                    <img src="<?= asset(ltrim($childIcon, '/')) ?>" alt="" class="h-9 w-9" loading="lazy" />
-                                                                </span>
+                                                                <span class="nav-icon nav-icon--bare mt-0.5 block h-11 w-11 shrink-0" style="<?= $childIconVar ?>" aria-hidden="true"></span>
                                                             <?php else: ?>
-                                                                <span class="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-50 ring-1 ring-slate-100 transition-all group-hover/item:bg-white group-hover/item:shadow-sm group-hover/item:ring-primary-200">
-                                                                    <img src="<?= asset(ltrim($childIcon, '/')) ?>" alt="" class="h-6 w-6" loading="lazy" />
-                                                                </span>
+                                                                <span class="nav-icon mt-0.5 block h-11 w-11 shrink-0 rounded-xl bg-slate-50 ring-1 ring-slate-100 transition-all group-hover/item:bg-white group-hover/item:shadow-sm group-hover/item:ring-primary-200" style="<?= $childIconVar ?>" aria-hidden="true"></span>
                                                             <?php endif; ?>
                                                         <?php endif; ?>
                                                         <span class="min-w-0">
