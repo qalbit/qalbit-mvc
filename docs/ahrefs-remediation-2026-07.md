@@ -249,9 +249,67 @@ The largest user-facing win in the whole plan, and it also clears 426 rows.
 | 4.0 | **Reflected XSS in `?topic=` / `?source=`** — found while scoping 4.3 | — | `partials/{contact/form-small,hero/contact}.php`, `helpers.php` | — | **DONE** `0dbc401` |
 | 4.1 | Start sessions only when one is needed | 394 | `public/index.php` | 2 h | **DONE** `6b1e8b2`, `3ccaa62` |
 | 4.2 | Cloudflare Cache Rule so HTML is cached at the edge | — | Cloudflare | 90 m | **BLOCKED** — permission, see below |
-| 4.3 | Cache param variants instead of bypassing | 411 | `app/Support/PageCache.php` | 2 h | TODO — unblocked by 4.0 |
-| 4.4 | `app.css` is 108,728 B — audit the Tailwind purge list | 2 | build | 2 h | TODO |
-| 4.5 | Blog: 2 stale LiteSpeed CSS 404s; combined CSS 97 KB | 32 | LiteSpeed plugin | 90 m | TODO |
+| 4.3 | Cache param variants instead of bypassing | 411 | `app/Support/PageCache.php` | 2 h | **DONE** `37862dd` |
+| 4.4 | `app.css` raw size | 2 | build | 2 h | **NO ACTION** — see below |
+| 4.5a | 2 stale LiteSpeed CSS 404s | 4 | LiteSpeed | — | **RESOLVED** — transient, now 200 |
+| 4.5b | Blog CSS weight — 449 KB raw / 102 KB compressed per page | 28 | LiteSpeed | — | **NEEDS A DECISION** — see below |
+
+#### 4.3 — variant caching
+
+Parameters now fall into three groups: campaign tags (`utm_*`, `gclid`, `fbclid`, `ref` …) are dropped from
+the key so every campaign variant shares one render; parameters that genuinely change the HTML (contact
+prefill, portfolio and career filters) are folded into the key; anything else still bypasses, including
+`?ajax=1`, which returns JSON.
+
+Verified live — variant files exist on the server and each renders its own prefill, so there is no
+cross-contamination:
+
+```
+page_contact_index__topic-fintech-brief.html
+page_contact_index__topic-fintech-brief_source-industries-page.html
+page_contact_index__topic-hire-laravel-developers.html
+page_portfolio__industry-sports-fitness.html
+```
+
+Variant values arrive from the URL, so they are accepted only as short slugs and the directory is capped at
+400 entries; on hitting the ceiling it sweeps expired entries first, so a bot cycling junk filter values
+cannot lock genuine variants out. Clean-URL keys are byte-identical to before, so nothing the warmer writes
+changed.
+
+#### 4.4 — `app.css` is not actually a problem
+
+| | |
+|---|---|
+| Raw | 108,728 B |
+| **Over the wire (brotli)** | **17,584 B** |
+
+Ahrefs measures the uncompressed file. 17.6 KB for the *entire* site stylesheet is healthy, and the rule
+breakdown (1,430 rules, ordinary Tailwind utility distribution) shows no sign of a purge failure. Only
+`app.css` is linked — there is one stylesheet, not several. Splitting or hand-pruning this would be
+busy-work with a real risk of breaking styles, so it is deliberately left alone.
+
+#### 4.5a — the CSS 404s were transient
+
+Both files Ahrefs reported as 404 now return **200**, and the pages reference `?ver=30055` where the audit
+saw `?ver=9755b`. This is the LiteSpeed combine race: HTML cached with a reference to a combined-CSS hash
+that a later purge regenerated. It self-heals, and it recurs whenever CSS is purged while HTML is still
+cached — including when we purge during this work. Not worth a settings change on its own.
+
+#### 4.5b — the blog's CSS is genuinely heavy, and this one needs your call
+
+| | Raw | Compressed |
+|---|---:|---:|
+| Main site `app.css` | 108 KB | **17.6 KB** |
+| Blog combined CSS | 449 KB | **102 KB** |
+
+Every blog page pulls roughly **six times** the entire main site's stylesheet. LiteSpeed settings:
+`optm-css_comb: 1`, `optm-css_min: 1`, `optm-ucss: 1`. UCSS is meant to strip unused rules per page, and a
+449 KB result says it is not doing so — most likely because UCSS generation depends on a QUIC.cloud
+connection, so it is silently falling back to plain concatenation of every theme and plugin stylesheet.
+
+**Not changed, because every option here can visibly break the blog:** turning off combine, forcing UCSS
+regeneration, or dequeueing plugin CSS all change what styles reach the page. This needs a decision and a
+staging check, not a live toggle.
 
 #### 4.0 — reflected XSS (unplanned, shipped first)
 
