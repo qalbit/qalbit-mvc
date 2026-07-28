@@ -487,6 +487,8 @@ Stated up front so the next crawl holds no surprises.
 | 1.3 | `wp search-replace 'https://qalbit.com/estimation/' 'https://qalbit.com/hire-developers/' wp_postmeta --precise` | `~/backups/postmeta-estimation-backup-20260728.tsv` |
 | 1.4 | 5 × `wp search-replace … wp_posts wp_postmeta --precise` (see `/tmp/fix-redirect-links.sh`) | `~/backups/blog-redirect-links-backup-20260728-{posts,meta}.tsv` |
 | 1.5 | Removed `base`/`format` overrides from `qalbit_pagination()` in `wp-content/themes/qalbit/inc/template-helpers.php` | `~/backups/template-helpers-20260728.php` |
+| B.1 | `theme/header.php` — favicons pointed at `/images/favicon/*`, which has never existed (3 × 404 per blog page). Repointed at the `/assets/` set the main site uses | `~/backups/theme-header-20260728.php` |
+| B.2 | `theme/footer.php` — DMCA badge was written `<img src ="…">` with a space. LiteSpeed's lazy-loader did not recognise it, so it *added* its own `src` placeholder and left the original: two `src` attributes, browser takes the first, badge never loaded. Now `src=` and LiteSpeed rewrites it correctly to `data-src` | `~/backups/theme-footer-20260728.php` |
 
 > The blog theme and DB are outside git. Every change above is reversible from the listed backup. **1.5 lives
 > in a theme file — a theme update would revert it.** If that becomes a risk, move it to a child theme or an
