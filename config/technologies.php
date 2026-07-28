@@ -821,7 +821,7 @@ return [
         'show_home'   => true,
 
         'meta_title'       => 'Node.js & NestJS Backend Development Services | QalbIT',
-        'meta_description' => 'Scalable Node.js and NestJS backend development from QalbIT – REST/GraphQL APIs, mobile backends, integrations and SaaS platforms built for performance and reliability.',
+        'meta_description' => 'Node.js and NestJS backend development – REST and GraphQL APIs, mobile backends, integrations and SaaS platforms built for scale and reliability.',
 
         'tagline'   => 'API-first Node.js and NestJS backends for SaaS, mobile and web products.',
         'summary'   => 'We design and build Node.js and NestJS backends that power APIs, integrations and real-time features for SaaS products, mobile apps and internal tools.',
@@ -1361,7 +1361,7 @@ return [
         'show_home'   => true,
 
         'meta_title'       => 'Laravel Development Services | QalbIT',
-        'meta_description' => 'Custom web applications, SaaS platforms and APIs built with QalbIT’s Laravel development services, using modern PHP, robust architecture and cloud-ready deployments.',
+        'meta_description' => 'Laravel development services for custom web apps, SaaS platforms and APIs. Modern PHP, secure architecture and cloud-ready deployment by QalbIT.',
 
         'tagline' => 'Custom web apps, SaaS platforms and APIs built on Laravel.',
         'summary' => 'We use Laravel to build reliable, secure and maintainable backends and full-stack applications – from internal tools and portals to multi-tenant SaaS products and public APIs.',

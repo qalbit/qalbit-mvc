@@ -13,7 +13,7 @@ return [
         'order'      => 10,
 
         'meta_title'       => 'Mobile Entertainment Solutions & Platforms | QalbIT',
-        'meta_description' => 'QalbIT builds mobile entertainment solutions and online entertainment platforms – from streaming apps to interactive content portals for media, creators and brands.',
+        'meta_description' => 'Entertainment app development for streaming platforms, media portals and creator brands – web and mobile products that keep audiences coming back.',
 
         'tagline' => 'Mobile entertainment solutions and platforms for media, creators and digital-first brands.',
         'summary' => 'We help media companies, entertainment startups and creator-led brands design and build mobile entertainment solutions, streaming apps and online entertainment platforms that keep audiences engaged, subscribed and coming back.',
@@ -284,7 +284,7 @@ return [
         'order'      => 20,
 
         'meta_title'       => 'Social Networking App Development Company | QalbIT',
-        'meta_description' => 'QalbIT is a social networking app development company building custom social networking app solutions and online community platforms for niche audiences and brands.',
+        'meta_description' => 'Social networking app development for communities, forums, dating and niche platforms – with feeds, messaging, groups and moderation built in.',
 
         'tagline' => 'Custom social networking app solutions and online community platforms for niche audiences.',
         'summary' => 'We help founders, product teams and organisations design and build social networking app solutions and online communities with the right mix of feeds, messaging, groups and moderation – without over-engineering or ignoring privacy and safety.',
@@ -554,7 +554,7 @@ return [
         'order'      => 30,
 
         'meta_title'       => 'Sports & Fitness App Development Company | QalbIT',
-        'meta_description' => 'QalbIT builds sports and fitness app solutions – from gym and studio management systems to workout tracking apps, sports academy platforms and wellness memberships.',
+        'meta_description' => 'Sports and fitness app development – gym and studio management, workout tracking, academy platforms, bookings and memberships, built by QalbIT.',
 
         'tagline' => 'Sports and fitness app solutions for gyms, trainers, academies and wellness brands.',
         'summary' => 'We help gyms, fitness studios, sports academies and wellness-focused startups design and build sports and fitness app solutions that improve member experience, streamline operations and support recurring revenue.',
