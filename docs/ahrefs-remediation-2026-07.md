@@ -843,6 +843,7 @@ copy and inputs sat flush against the border while the neighbouring widget was c
 | 6.3 | Yoast `company_name` / `company_alternate_name` / `company_logo` / `company_logo_id`, plus social profiles for `sameAs` | `~/backups/wpseo_titles-20260728.json`, `~/backups/wpseo_social-20260728.json` |
 | 6.3 | Media library: `qalbit-logo-512.png` imported as attachment **3424** | source is `public/assets/web-app-manifest-512x512.png` in this repo |
 | 6.3 | `header.php` — `ProfessionalService` given Yoast's `#organization` `@id`; `url`/`logo`/`image`/`sameAs` dropped as Yoast now states them | `~/backups/header-20260728-pre-schema.php` |
+| — | mu-plugin `qalbit-task-lists.php` — renders a leading `[ ]` in a list item as a real checkbox (**not audit work**, requested separately) | — (new file) |
 
 ---
 
