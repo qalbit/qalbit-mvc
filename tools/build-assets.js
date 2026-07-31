@@ -22,10 +22,14 @@ const jsEntryPoints = [
     "resources/js/services.js",
     "resources/js/technologies.js",
     "resources/js/technology-detail.js",
+    "resources/js/go-teardown.js",
 ];
 
 const cssEntryPoints = [
     "resources/css/home.css",
+    // Campaign landing pages bring their own stylesheet: plain CSS, not
+    // Tailwind, so it stays out of app.css and cannot affect the main site.
+    "resources/css/go-teardown.css",
 ];
 
 async function buildJs() {

@@ -1,0 +1,1270 @@
+/* ============================================================================
+ * /go/saas-product-development/ — "Engineered Editorial" landing system
+ *
+ * This is the ONLY stylesheet layouts/landing.php loads. It deliberately does
+ * not import the site's app.css: the campaign page runs a different palette
+ * (warm paper + a single cobalt accent) and a different type stack (Inter +
+ * JetBrains Mono, not Poppins), and cold ad traffic never sees the rest of
+ * qalbit.com, so visual continuity buys nothing here. Keeping the two systems
+ * in separate files means neither can leak into the other — no token
+ * collisions, no cascade accidents, and no risk that a tweak made for this
+ * page shifts a page that ranks.
+ *
+ * Depth comes from 1px hairlines + surface contrast, not shadows. Colour is
+ * functional: cobalt marks the one thing you can act on, nothing else.
+ *
+ * Every class is `gt-` prefixed (go-teardown).
+ * ========================================================================= */
+
+/* ---------------------------------------------------------------------------
+ * Metric-matched Inter fallback.
+ *
+ * The Google Fonts stylesheet loads render-blocking (same trade the main site
+ * makes in partials/head.php: a tiny blocking CSS file beats a swap that
+ * reflows the hero). This @font-face is the belt-and-braces half — if Inter is
+ * still in flight, Arial stands in at Inter's metrics so the swap costs no
+ * layout shift. Values are the standard Inter/Arial overrides.
+ * ------------------------------------------------------------------------ */
+@font-face {
+    font-family: "Inter Fallback";
+    src: local("Arial");
+    size-adjust: 107.4%;
+    ascent-override: 90%;
+    descent-override: 22.43%;
+    line-gap-override: 0%;
+}
+
+/* ---------------------------------------------------------------------------
+ * Tokens
+ * ------------------------------------------------------------------------ */
+:root {
+    /* Surfaces & ink */
+    --gt-canvas: #f6f4ef;           /* warm paper — the page, not pure white */
+    --gt-surface: #ffffff;          /* cards, form panel, sticky bar */
+    --gt-ink: #14151a;              /* primary text */
+    --gt-muted: #5b5f66;            /* secondary text — 5.9:1 on canvas */
+    --gt-hairline: #e7e3da;         /* 1px borders */
+    --gt-hairline-strong: #d9d4c8;  /* dividers needing more presence */
+
+    /* The one accent. Everything actionable, nothing decorative. */
+    --gt-accent: #2b3ae8;           /* white-on-accent = 7.7:1 */
+    --gt-accent-hover: #2230c4;
+    --gt-accent-tint: #eef0fe;
+
+    --gt-success: #0e9f6e;
+    --gt-error: #dc2b2b;
+
+    /* Radii */
+    --gt-r-sm: 6px;                 /* inputs, chips */
+    --gt-r-md: 10px;                /* buttons */
+    --gt-r-lg: 16px;                /* cards */
+    --gt-r-xl: 24px;                /* hero form panel */
+
+    /* The only two shadows in the system */
+    --gt-shadow-panel: 0 1px 2px rgba(20, 21, 26, 0.04), 0 8px 24px rgba(20, 21, 26, 0.06);
+    --gt-shadow-hover: 0 1px 2px rgba(20, 21, 26, 0.05), 0 4px 12px rgba(20, 21, 26, 0.05);
+
+    --gt-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --gt-section-y: clamp(4rem, 7vw, 8rem);
+    --gt-container: 75rem;
+
+    --gt-font-sans: "Inter", "Inter Fallback", system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --gt-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+        Consolas, monospace;
+}
+
+/* ---------------------------------------------------------------------------
+ * Reset
+ * ------------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background-color: var(--gt-canvas);
+    color: var(--gt-ink);
+    font-family: var(--gt-font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* The UA's `[hidden] { display: none }` loses to any class that sets display,
+   and several components here are flex. Without this, JS toggling `hidden` on
+   the progress bar or a step's actions would do nothing at all. */
+[hidden] {
+    display: none !important;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure {
+    margin: 0;
+}
+
+ul,
+ol {
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    color: var(--gt-accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* One focus treatment, applied globally — never removed without a replacement. */
+:focus-visible {
+    outline: 2px solid var(--gt-accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+}
+
+/* Programmatic focus targets (headings, legends) get the outline but no
+   lingering ring for mouse users, since they are never mouse-focusable. */
+[tabindex="-1"]:focus {
+    outline: none;
+}
+
+[tabindex="-1"]:focus-visible {
+    outline: 2px solid var(--gt-accent);
+    outline-offset: 4px;
+}
+
+.gt-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.gt-skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -100%;
+    z-index: 100;
+    padding: 0.75rem 1rem;
+    background-color: var(--gt-surface);
+    border: 1px solid var(--gt-hairline-strong);
+    border-radius: var(--gt-r-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.gt-skip-link:focus {
+    top: 1rem;
+}
+
+/* ---------------------------------------------------------------------------
+ * Layout primitives
+ * ------------------------------------------------------------------------ */
+.gt-container {
+    width: 100%;
+    max-width: var(--gt-container);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .gt-container {
+        padding-inline: 2rem;
+    }
+}
+
+.gt-section {
+    padding-block: var(--gt-section-y);
+}
+
+.gt-section--tight {
+    padding-block: clamp(3rem, 5vw, 5rem);
+}
+
+.gt-section + .gt-section {
+    border-top: 1px solid var(--gt-hairline);
+}
+
+.gt-section--surface {
+    background-color: var(--gt-surface);
+}
+
+/* ---------------------------------------------------------------------------
+ * Typography
+ * ------------------------------------------------------------------------ */
+.gt-h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+}
+
+.gt-h2 {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.gt-h3 {
+    font-size: clamp(1.5rem, 2.2vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+
+.gt-h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.gt-lead {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--gt-muted);
+}
+
+.gt-body {
+    color: var(--gt-muted);
+}
+
+.gt-small {
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.gt-measure {
+    max-width: 65ch;
+}
+
+/* The signature detail: a mono, uppercase, tracked label above every section
+   heading. Carries the section index so the page reads like a spec sheet. */
+.gt-eyebrow {
+    display: block;
+    font-family: var(--gt-font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gt-muted);
+}
+
+.gt-eyebrow--accent {
+    color: var(--gt-accent);
+}
+
+.gt-eyebrow + .gt-h1,
+.gt-eyebrow + .gt-h2,
+.gt-eyebrow + .gt-h3 {
+    margin-top: 1rem;
+}
+
+.gt-tag {
+    display: inline-block;
+    font-family: var(--gt-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    color: var(--gt-muted);
+    background-color: var(--gt-canvas);
+    border: 1px solid var(--gt-hairline);
+    border-radius: var(--gt-r-sm);
+    padding: 0.25rem 0.5rem;
+}
+
+/* ---------------------------------------------------------------------------
+ * Buttons
+ * ------------------------------------------------------------------------ */
+.gt-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid transparent;
+    border-radius: var(--gt-r-md);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        transform 0.1s ease;
+}
+
+.gt-btn:hover {
+    text-decoration: none;
+}
+
+.gt-btn:active {
+    transform: scale(0.99);
+}
+
+.gt-btn[disabled] {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.gt-btn--primary {
+    background-color: var(--gt-accent);
+    color: #ffffff;
+}
+
+.gt-btn--primary:hover {
+    background-color: var(--gt-accent-hover);
+}
+
+.gt-btn--quiet {
+    background-color: transparent;
+    color: var(--gt-muted);
+    padding-inline: 0.5rem;
+    font-weight: 500;
+}
+
+.gt-btn--quiet:hover {
+    color: var(--gt-ink);
+}
+
+.gt-btn--block {
+    width: 100%;
+}
+
+.gt-link {
+    font-weight: 500;
+    color: var(--gt-accent);
+}
+
+/* ---------------------------------------------------------------------------
+ * Cards
+ * ------------------------------------------------------------------------ */
+.gt-card {
+    background-color: var(--gt-surface);
+    border: 1px solid var(--gt-hairline);
+    border-radius: var(--gt-r-lg);
+    padding: 1.5rem;
+    transition:
+        box-shadow 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.gt-card:hover {
+    border-color: var(--gt-hairline-strong);
+    box-shadow: var(--gt-shadow-hover);
+}
+
+.gt-card__desc {
+    margin-top: 0.75rem;
+}
+
+.gt-card__tag {
+    margin-top: 1rem;
+}
+
+.gt-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+/* Section rhythm. Named rather than set inline, so the vertical spacing of
+   every section is adjusted in one place. */
+.gt-section__intro {
+    margin-top: 1.5rem;
+}
+
+.gt-section__grid {
+    margin-top: 3rem;
+}
+
+.gt-section__note {
+    margin-top: 2rem;
+}
+
+@media (min-width: 640px) {
+    .gt-grid--2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .gt-grid--3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2rem;
+    }
+
+    .gt-grid--cases {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+ * Header / footer
+ * ------------------------------------------------------------------------ */
+.gt-header {
+    background-color: var(--gt-surface);
+    border-bottom: 1px solid var(--gt-hairline);
+}
+
+.gt-header__inner {
+    display: flex;
+    align-items: center;
+    min-height: 68px;
+    padding-block: 0.75rem;
+}
+
+.gt-header__logo {
+    display: inline-flex;
+    align-items: center;
+}
+
+.gt-footer {
+    border-top: 1px solid var(--gt-hairline);
+    padding-block: 2.5rem;
+    color: var(--gt-muted);
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.gt-footer p + p {
+    margin-top: 0.25rem;
+}
+
+.gt-footer__name {
+    color: var(--gt-ink);
+}
+
+/* ---------------------------------------------------------------------------
+ * Hero
+ * ------------------------------------------------------------------------ */
+.gt-hero {
+    position: relative;
+    padding-block: clamp(2rem, 5vw, 5rem) clamp(3rem, 6vw, 6rem);
+    overflow: hidden;
+}
+
+/* Faint blueprint dot-grid, faded out before it reaches the copy. Pure CSS —
+   no image request, no decode, nothing that can shift layout. */
+.gt-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+        circle at 1px 1px,
+        rgba(20, 21, 26, 0.045) 1px,
+        transparent 0
+    );
+    background-size: 24px 24px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 65%);
+    mask-image: linear-gradient(to bottom, #000 0%, transparent 65%);
+    pointer-events: none;
+}
+
+/*
+ * Three grid items: copy, form panel, byline.
+ *
+ * On mobile they run copy → form → byline, so the form is the first thing past
+ * the pitch rather than being pushed under the founder credit — NN/g put ~57%
+ * of viewing time above the fold, and the form is what the fold is for. From
+ * 900px the byline moves back under the copy and the panel spans both rows.
+ */
+.gt-hero__inner {
+    position: relative;
+    display: grid;
+    gap: 2rem;
+    align-items: start;
+}
+
+.gt-hero__copy {
+    order: 1;
+}
+
+.gt-hero__inner .gt-panel {
+    order: 2;
+}
+
+.gt-byline {
+    order: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gt-hairline);
+    max-width: 30rem;
+}
+
+@media (min-width: 900px) {
+    .gt-hero__inner {
+        grid-template-columns: minmax(0, 1fr) minmax(420px, 480px);
+        column-gap: 3.5rem;
+        row-gap: 2rem;
+        align-content: start;
+    }
+
+    .gt-hero__copy {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .gt-byline {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .gt-hero__inner .gt-panel {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+    }
+}
+
+.gt-hero__title {
+    margin-top: 1rem;
+}
+
+.gt-hero__sub {
+    margin-top: 1.25rem;
+    max-width: 34rem;
+}
+
+.gt-hero__diff {
+    margin-top: 1.25rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.4;
+    max-width: 30rem;
+}
+
+.gt-byline__photo {
+    width: 44px;
+    height: 44px;
+    flex: none;
+    border-radius: 999px;
+    object-fit: cover;
+    background-color: var(--gt-hairline);
+}
+
+.gt-byline__text {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--gt-muted);
+}
+
+.gt-byline__text strong {
+    display: block;
+    color: var(--gt-ink);
+    font-weight: 600;
+}
+
+/* ---------------------------------------------------------------------------
+ * Form panel
+ * ------------------------------------------------------------------------ */
+.gt-panel {
+    background-color: var(--gt-surface);
+    border: 1px solid var(--gt-hairline);
+    border-radius: var(--gt-r-xl);
+    box-shadow: var(--gt-shadow-panel);
+    padding: 1.5rem;
+    scroll-margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .gt-panel {
+        padding: 2rem;
+    }
+}
+
+.gt-panel__head {
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--gt-hairline);
+}
+
+.gt-panel__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.gt-panel__note {
+    margin-top: 0.375rem;
+    font-size: 0.875rem;
+    color: var(--gt-muted);
+}
+
+.gt-panel__step {
+    margin-top: 1rem;
+}
+
+/* Progress: three segments, but the step is also stated in text — progress is
+   never conveyed by colour alone. */
+.gt-progress {
+    display: flex;
+    gap: 4px;
+    margin-top: 0.75rem;
+}
+
+.gt-progress li {
+    height: 3px;
+    flex: 1;
+    border-radius: 999px;
+    background-color: var(--gt-hairline);
+    transition: background-color 0.25s ease;
+}
+
+.gt-progress li.is-filled {
+    background-color: var(--gt-accent);
+}
+
+/* Applied by JS only when a step is revealed by a step change, never on load —
+   the form should be readable on the first frame, not fade in. */
+.gt-step.is-entering {
+    animation: gt-step-in 0.25s var(--gt-ease) both;
+}
+
+@keyframes gt-step-in {
+    from {
+        opacity: 0;
+        transform: translateX(16px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Without JS every step renders at once, so they need their own separation. */
+.gt-step + .gt-step {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--gt-hairline);
+}
+
+.gt-js .gt-step + .gt-step {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+}
+
+.gt-fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.gt-legend {
+    padding: 0;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.gt-field {
+    margin-top: 1.25rem;
+}
+
+.gt-field:first-child {
+    margin-top: 0;
+}
+
+.gt-label {
+    display: block;
+    margin-bottom: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.gt-label__hint {
+    font-weight: 400;
+    color: var(--gt-muted);
+}
+
+.gt-input,
+.gt-textarea {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 0.75rem 0.875rem;
+    background-color: var(--gt-surface);
+    border: 1px solid var(--gt-hairline-strong);
+    border-radius: var(--gt-r-sm);
+    font-size: 1rem; /* 16px minimum — anything smaller zooms on iOS */
+    line-height: 1.4;
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.gt-textarea {
+    min-height: 96px;
+    resize: vertical;
+}
+
+.gt-input::placeholder,
+.gt-textarea::placeholder {
+    color: #8b8f96;
+}
+
+.gt-input:hover,
+.gt-textarea:hover {
+    border-color: #c4bfb1;
+}
+
+.gt-input[aria-invalid="true"],
+.gt-textarea[aria-invalid="true"] {
+    border-color: var(--gt-error);
+}
+
+/* Radio cards — real inputs, visually styled. */
+.gt-choices {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.gt-choices--inline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Budget and timeline sit two-up, so the chips get tighter padding to keep
+   "3–6 months" and "Under $15k" on one line at 390px. */
+.gt-choices--inline .gt-choice {
+    padding-inline: 0.75rem;
+    gap: 0.5rem;
+}
+
+.gt-choices--inline .gt-choice__dot {
+    width: 16px;
+    height: 16px;
+}
+
+.gt-choices--inline .gt-choice:has(input:checked) .gt-choice__dot,
+.gt-choices--inline .gt-choice.is-checked .gt-choice__dot {
+    border-width: 5px;
+}
+
+/* Below ~360px two columns can no longer hold "3–6 months" on one line, and a
+   grid of wrapped chips reads worse than a single column. */
+@media (max-width: 360px) {
+    .gt-choices--inline {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.gt-choice {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 48px;
+    padding: 0.75rem 1rem;
+    background-color: var(--gt-surface);
+    border: 1px solid var(--gt-hairline-strong);
+    border-radius: var(--gt-r-sm);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+        border-color 0.15s ease,
+        background-color 0.15s ease;
+}
+
+.gt-choice:hover {
+    border-color: var(--gt-accent);
+}
+
+.gt-choice input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+}
+
+/* The dot is drawn on the label, so the visual state survives the input being
+   visually hidden — and it is a shape change, not only a colour change. */
+.gt-choice__dot {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--gt-hairline-strong);
+    border-radius: 999px;
+    transition:
+        border-color 0.15s ease,
+        border-width 0.15s ease;
+}
+
+.gt-choice:has(input:checked) {
+    border-color: var(--gt-accent);
+    background-color: var(--gt-accent-tint);
+}
+
+.gt-choice:has(input:checked) .gt-choice__dot {
+    border: 6px solid var(--gt-accent);
+}
+
+.gt-choice:has(input:focus-visible) {
+    outline: 2px solid var(--gt-accent);
+    outline-offset: 2px;
+}
+
+/* :has() is everywhere we care about, but the fallback below keeps the state
+   legible in anything that lacks it (the JS mirrors the class either way). */
+.gt-choice.is-checked {
+    border-color: var(--gt-accent);
+    background-color: var(--gt-accent-tint);
+}
+
+.gt-choice.is-checked .gt-choice__dot {
+    border: 6px solid var(--gt-accent);
+}
+
+.gt-error {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--gt-error);
+}
+
+.gt-hint {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--gt-muted);
+}
+
+/* An empty message slot takes no space. Messages are only ever added or
+   removed while no pointer is pressed (see go-teardown.js), so this cannot
+   move a button out from under a tap. */
+.gt-error:empty,
+.gt-hint:empty {
+    display: none;
+}
+
+.gt-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.gt-actions .gt-btn--primary {
+    flex: 1;
+}
+
+/* Honeypot: off-screen, untabbable, aria-hidden. Never seen by a person. */
+.gt-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.gt-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-top-color: #ffffff;
+    border-radius: 999px;
+    animation: gt-spin 0.7s linear infinite;
+}
+
+@keyframes gt-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.gt-form__alert {
+    margin-top: 1.25rem;
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--gt-error);
+    border-radius: var(--gt-r-sm);
+    background-color: #fdf2f2;
+    color: #9b1c1c;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+/* Success state — replaces the form in place. */
+.gt-success__mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background-color: #e6f6ef;
+    color: var(--gt-success);
+}
+
+.gt-success__title {
+    margin-top: 1.25rem;
+}
+
+.gt-success__body {
+    margin-top: 0.75rem;
+}
+
+.gt-success__link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-weight: 600;
+}
+
+/* ---------------------------------------------------------------------------
+ * Proof strip
+ * ------------------------------------------------------------------------ */
+.gt-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 0;
+    border-block: 1px solid var(--gt-hairline);
+    padding-block: 1.25rem;
+}
+
+.gt-proof__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-inline: 1.25rem;
+    flex: 1 1 auto;
+    justify-content: center;
+    font-family: var(--gt-font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.01em;
+    color: var(--gt-ink);
+    white-space: nowrap;
+}
+
+.gt-proof__item + .gt-proof__item {
+    border-left: 1px solid var(--gt-hairline);
+}
+
+.gt-proof__icon {
+    flex: none;
+    color: var(--gt-success);
+}
+
+@media (max-width: 767px) {
+    .gt-proof__item {
+        flex: 1 1 45%;
+        justify-content: flex-start;
+        padding-inline: 0.75rem;
+    }
+
+    .gt-proof__item + .gt-proof__item {
+        border-left: 0;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+ * Steps (what happens next)
+ * ------------------------------------------------------------------------ */
+.gt-steps {
+    counter-reset: gt-step;
+    margin-top: 3rem;
+}
+
+.gt-steps__item {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gt-hairline-strong);
+}
+
+.gt-steps__index {
+    font-family: var(--gt-font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--gt-accent);
+}
+
+.gt-steps__title {
+    margin-top: 0.75rem;
+}
+
+.gt-steps__body {
+    margin-top: 0.75rem;
+}
+
+/* ---------------------------------------------------------------------------
+ * Price anchor
+ * ------------------------------------------------------------------------ */
+.gt-price {
+    text-align: center;
+}
+
+.gt-price__line {
+    max-width: 32ch;
+    margin-inline: auto;
+}
+
+.gt-price__link {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+}
+
+/* ---------------------------------------------------------------------------
+ * Case studies
+ * ------------------------------------------------------------------------ */
+.gt-case {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.75rem;
+}
+
+.gt-case__body {
+    flex: 1;
+}
+
+/* Placeholder metric: dashed, labelled, and impossible to mistake for data.
+   Nothing on this page invents a number. */
+.gt-metric-placeholder {
+    padding: 1.25rem;
+    border: 1px dashed var(--gt-hairline-strong);
+    border-radius: var(--gt-r-md);
+    background-color: var(--gt-canvas);
+    text-align: center;
+}
+
+.gt-metric-placeholder__value {
+    font-family: var(--gt-font-mono);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gt-muted);
+}
+
+.gt-metric-placeholder__label {
+    margin-top: 0.375rem;
+    font-size: 0.75rem;
+    color: var(--gt-muted);
+}
+
+/* The same box once a real number exists: solid border, accent tint, and the
+   figure sized to be the thing you read first. */
+.gt-metric {
+    padding: 1.25rem;
+    border: 1px solid var(--gt-accent);
+    border-radius: var(--gt-r-md);
+    background-color: var(--gt-accent-tint);
+    text-align: center;
+}
+
+.gt-metric__value {
+    color: var(--gt-accent);
+}
+
+.gt-metric__label {
+    margin-top: 0.25rem;
+    color: var(--gt-muted);
+}
+
+/* ---------------------------------------------------------------------------
+ * Disqualifiers
+ * ------------------------------------------------------------------------ */
+.gt-disqualifiers {
+    margin-top: 2.5rem;
+    max-width: 44rem;
+}
+
+.gt-disqualifiers li {
+    display: flex;
+    gap: 1rem;
+    padding-block: 1.125rem;
+    border-top: 1px solid var(--gt-hairline-strong);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.gt-disqualifiers li::before {
+    content: "\2013"; /* en dash, not a checkmark — these are not features */
+    flex: none;
+    color: var(--gt-muted);
+    font-family: var(--gt-font-mono);
+}
+
+/* ---------------------------------------------------------------------------
+ * FAQ — native <details>, zero JS
+ * ------------------------------------------------------------------------ */
+.gt-faq {
+    margin-top: 2.5rem;
+    max-width: 48rem;
+}
+
+.gt-faq__item {
+    border-top: 1px solid var(--gt-hairline-strong);
+}
+
+.gt-faq__item:last-child {
+    border-bottom: 1px solid var(--gt-hairline-strong);
+}
+
+.gt-faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.25rem;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.4;
+    cursor: pointer;
+    list-style: none;
+}
+
+.gt-faq__q::-webkit-details-marker {
+    display: none;
+}
+
+.gt-faq__chevron {
+    flex: none;
+    color: var(--gt-muted);
+    transition: transform 0.2s ease;
+}
+
+.gt-faq__item[open] .gt-faq__chevron {
+    transform: rotate(180deg);
+}
+
+.gt-faq__a {
+    padding-bottom: 1.5rem;
+    max-width: 62ch;
+}
+
+/* ---------------------------------------------------------------------------
+ * Closing CTA
+ * ------------------------------------------------------------------------ */
+.gt-closing {
+    text-align: center;
+}
+
+.gt-closing__title {
+    max-width: 20ch;
+    margin-inline: auto;
+}
+
+.gt-closing__sub {
+    margin-top: 1rem;
+}
+
+.gt-closing__cta {
+    margin-top: 2rem;
+}
+
+/* ---------------------------------------------------------------------------
+ * Sticky mobile CTA
+ * ------------------------------------------------------------------------ */
+.gt-sticky {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+    background-color: var(--gt-surface);
+    border-top: 1px solid var(--gt-hairline);
+    box-shadow: var(--gt-shadow-panel);
+    transform: translateY(110%);
+    transition: transform 0.25s var(--gt-ease);
+}
+
+.gt-sticky.is-visible {
+    transform: none;
+}
+
+@media (min-width: 768px) {
+    .gt-sticky {
+        display: none;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+ * Scroll reveal
+ *
+ * Only applied once JS has confirmed it can un-apply it (.gt-js), so a failed
+ * script never leaves the page invisible. The hero is deliberately excluded:
+ * the H1 is the LCP element and must paint on the first frame.
+ * ------------------------------------------------------------------------ */
+.gt-js .gt-reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+        opacity 0.4s var(--gt-ease),
+        transform 0.4s var(--gt-ease);
+}
+
+.gt-js .gt-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* ---------------------------------------------------------------------------
+ * Reduced motion — decorative motion off, content at its final state.
+ * ------------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .gt-js .gt-reveal {
+        opacity: 1;
+        transform: none;
+    }
+
+    .gt-sticky {
+        transition: none;
+    }
+}

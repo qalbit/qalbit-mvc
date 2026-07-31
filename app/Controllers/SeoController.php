@@ -29,7 +29,11 @@ class SeoController
             return $baseUrl . $path;
         };
 
-        // Core pages
+        // Core pages.
+        //
+        // Campaign landing pages under /go/ are deliberately absent: they are
+        // noindex, so listing them would only ask Google to crawl a URL it is
+        // then told to drop. Keep them out when adding new routes here.
         $corePaths = [
             '/',
             '/about-us/',

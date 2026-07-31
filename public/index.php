@@ -101,6 +101,7 @@ use App\Controllers\ErrorController;
 use App\Controllers\GeoController;
 use App\Controllers\HireController;
 use App\Controllers\IndustryController;
+use App\Controllers\LandingController;
 use App\Controllers\PageController;
 use App\Controllers\ServiceController;
 use App\Controllers\SeoController;
@@ -191,6 +192,14 @@ $router->get('/engagement-model/', [ProcessController::class, 'engagementModel']
 // Contact
 $router->get('/contact-us/', [ContactController::class, 'index']);
 $router->post('/contact-us/', [ContactController::class, 'submit']);
+
+// Campaign landing pages (/go/).
+//
+// Not in navigation, not in the sitemap, noindex + X-Robots-Tag via
+// layouts/landing.php, and Disallow: /go/ in robots.txt. Paid traffic only —
+// these must never compete with a ranking page.
+$router->get('/go/saas-product-development/', [LandingController::class, 'saasTeardown']);
+$router->post('/go/saas-product-development/', [LandingController::class, 'saasTeardownSubmit']);
 
 // Policy Pages
 $router->get('/privacy-policy/', [LegalController::class, 'privacy']);

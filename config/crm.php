@@ -15,5 +15,10 @@ return [
         'calculator' => env('LIFTUP_FORM_CALCULATOR_ID', ''),
         'exit_popup' => env('LIFTUP_FORM_EXIT_ID', ''),
         'career'     => env('LIFTUP_FORM_CAREER_ID', ''),
+        // Campaign landing page /go/saas-product-development/. Until this is
+        // set, LiftUpCrm::pushLead() falls back to the contact form rather
+        // than dropping the lead — so leads are never lost, they are just
+        // filed in the wrong place until the token is configured.
+        'saas_teardown' => env('LIFTUP_FORM_SAAS_TEARDOWN_ID', ''),
     ],
 ];

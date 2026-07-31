@@ -5,6 +5,12 @@
 User-agent: *
 Allow: /
 
+# Paid-campaign landing pages. The real control is the noindex meta +
+# X-Robots-Tag header these pages serve (layouts/landing.php) — this rule
+# just saves the crawl budget. Robots.txt alone would not stop indexing:
+# a disallowed URL with inbound links can still be indexed URL-only.
+Disallow: /go/
+
 Disallow: /emailtemplates/
 Disallow: /vendor/
 Disallow: /sass/
