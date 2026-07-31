@@ -846,6 +846,7 @@ copy and inputs sat flush against the border while the neighbouring widget was c
 | — | mu-plugin `qalbit-task-lists.php` — renders a leading `[ ]` in a list item as a real checkbox (**not audit work**, requested separately) | — (new file) |
 | — | `.htaccess` CSP — added `https://*.mlcdn.com` to script/style/img/font/connect-src and `https://*.mailerlite.com https://*.mlcdn.com` to `frame-src` (MailerLite popup was rendering as Chrome's "content is blocked" placeholder) | `~/backups/htaccess-20260731-pre-csp-mailerlite` |
 | — | `inc/template-helpers.php` — `qalbit_breadcrumbs()` never emitted a final crumb on single posts; appends it as unlinked text from `_yoast_wpseo_bctitle` with the post title as fallback | `~/backups/template-helpers-20260731-pre-breadcrumb.php` |
+| — | `assets/blog-modern.css` §10 — single-post category badge cut from 18px to 12px/11px, scoped to `.single-blog` so shared `.category` styling elsewhere is untouched | `~/backups/blog-modern-20260731-pre-category-badge.css` |
 
 ---
 
