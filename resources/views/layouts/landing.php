@@ -65,10 +65,14 @@ $recaptchaSiteKey = (string) ($recaptchaConfig['site_key'] ?? '');
  * Google Ads and Cloudflare pixels, and reCAPTCHA. Dropped: tawk.to, plus
  * MailerLite and the CDNs, which this standalone layout provably never loads.
  *
- * One deliberate addition — www.linkedin.com in img-src. The edge policy allows
- * only *.ads.linkedin.com, so LinkedIn's li_sync pixel is currently blocked
- * site-wide and its ad attribution silently does not work. Widening it here
- * fixes that for this page; the same fix at the edge would fix it everywhere.
+ * www.linkedin.com is listed in img-src, but listing it here does NOT unblock
+ * it — intersection cuts both ways, and the edge policy allows only
+ * *.ads.linkedin.com, so LinkedIn's li_sync pixel stays blocked and its ad
+ * attribution keeps silently not working. Verified against production: the
+ * request still fails with net::ERR_BLOCKED_BY_CSP. Only widening the
+ * Cloudflare response-header rule can fix that, on this page or any other. It
+ * is kept in this list so the page stops being a second obstacle once the edge
+ * policy is corrected.
  */
 $csp = [
     "default-src 'self'",
