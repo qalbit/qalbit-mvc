@@ -300,6 +300,59 @@
             setSubmitting(true);
             hideGlobalError();
 
+            // The token has to be in the DOM before FormData reads the form.
+            mintRecaptchaToken(function () {
+                sendForm();
+            });
+        });
+
+        /*
+         * reCAPTCHA v3, minted per submit.
+         *
+         * Everything here fails open. api.js is 374 KB injected on first
+         * interaction, corporate proxies block google.com outright, and
+         * grecaptcha.execute can simply hang — none of which say anything about
+         * whether the person filling this in is real. So a missing token sends
+         * the lead anyway with the field empty, and the server decides what an
+         * unverified lead is worth. The 4-second cap is there because a promise
+         * that never settles would otherwise leave the button spinning forever.
+         */
+        function mintRecaptchaToken(done) {
+            var field   = form.querySelector("[data-gt-recaptcha]");
+            var siteKey = form.getAttribute("data-gt-recaptcha-key");
+
+            if (!field || !siteKey || !window.grecaptcha ||
+                typeof window.grecaptcha.ready !== "function") {
+                done();
+                return;
+            }
+
+            var settled = false;
+
+            function finish() {
+                if (settled) return;
+                settled = true;
+                done();
+            }
+
+            window.setTimeout(finish, 4000);
+
+            try {
+                window.grecaptcha.ready(function () {
+                    window.grecaptcha
+                        .execute(siteKey, { action: "saas_teardown" })
+                        .then(function (token) {
+                            field.value = token || "";
+                            finish();
+                        })
+                        .catch(finish);
+                });
+            } catch (e) {
+                finish();
+            }
+        }
+
+        function sendForm() {
             var payload = new URLSearchParams(new FormData(form));
 
             window
@@ -351,7 +404,7 @@
                         "Something went wrong sending that — please try again, or email sales@qalbit.com."
                     );
                 });
-        });
+        }
 
         /* ----------------------------------------------------------------- */
 

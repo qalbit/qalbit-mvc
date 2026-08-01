@@ -171,13 +171,27 @@ $brand = static function () use ($hasLogo, $logoPath, $page): string {
                     <div class="gt-progress__bar" data-gt-progress-bar style="width:33%"></div>
                 </div>
 
-                <form class="gt-form" method="post" action="<?= htmlspecialchars($formPath) ?>" data-gt-form>
+                <?php
+                $recaptchaCfg     = config('recaptcha', []);
+                $recaptchaSiteKey = !empty($recaptchaCfg['enabled']) ? (string) ($recaptchaCfg['site_key'] ?? '') : '';
+                ?>
+                <form class="gt-form" method="post" action="<?= htmlspecialchars($formPath) ?>" data-gt-form
+                    <?php if ($recaptchaSiteKey !== ''): ?>data-gt-recaptcha-key="<?= htmlspecialchars($recaptchaSiteKey, ENT_QUOTES) ?>"<?php endif; ?>>
 
                     <!-- Honeypot. A value here means a bot; the submission is dropped. -->
                     <div class="gt-honeypot" aria-hidden="true">
                         <label for="gt-website">Website</label>
                         <input type="text" id="gt-website" name="website" tabindex="-1" autocomplete="off">
                     </div>
+
+                    <?php if ($recaptchaSiteKey !== ''): ?>
+                        <?php /* Filled by go-teardown.js immediately before the fetch. It
+                                 stays empty on a no-JS submit, and the controller treats an
+                                 empty token as unverified rather than as a bot — this page
+                                 is built to work without JavaScript and a dropped lead here
+                                 is a paid click thrown away. */ ?>
+                        <input type="hidden" name="recaptcha_token" value="" data-gt-recaptcha>
+                    <?php endif; ?>
 
                     <!-- Attribution, filled by JS. Absent means absent, never guessed. -->
                     <input type="hidden" name="utm_source" value="" data-gt-utm="utm_source">

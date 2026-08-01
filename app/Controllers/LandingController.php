@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Support\LiftUpCrm;
 use App\Support\Mailer;
+use App\Support\Recaptcha;
 use App\Support\Session;
 use App\Support\View;
 
@@ -91,7 +92,33 @@ class LandingController
             $this->redirect($redirectTo);
         }
 
+        /*
+         * reCAPTCHA v3.
+         *
+         * Deliberately NOT the contact form's fail-closed rule. This page
+         * renders and submits with JavaScript off, api.js is a 374 KB script
+         * that plenty of corporate networks refuse to serve, and every visitor
+         * here arrived on a click somebody paid for. Rejecting a lead because
+         * Google was unreachable would throw away that spend on the visitors
+         * least able to do anything about it.
+         *
+         * So only a token that was actually checked and actually failed blocks
+         * the submission. Absent, unreachable and misconfigured all pass, and
+         * every outcome is recorded on the lead so the CRM can show which ones
+         * were verified and what they scored. The honeypot above is what
+         * catches the naive bots either way.
+         */
+        $recaptcha = Recaptcha::assess(
+            isset($_POST['recaptcha_token']) ? (string) $_POST['recaptcha_token'] : null,
+            'saas_teardown'
+        );
+
         $errors = $this->validate($data, $page);
+
+        if (in_array($recaptcha['outcome'], ['rejected', 'low_score', 'action_mismatch'], true)) {
+            $errors['global'] = 'We could not verify that submission. Please try again, or email '
+                . ($page['reply_email'] ?? 'sales@qalbit.com') . ' directly.';
+        }
 
         if (!empty($errors)) {
             if ($isAjax) {
@@ -120,9 +147,17 @@ class LandingController
             $data['product_or_idea'],
         ]);
 
+        // Built by hand, not array_filter: a score of 0.0 is the single most
+        // interesting value here and array_filter would drop it.
+        $recaptchaMeta = ['outcome' => $recaptcha['outcome']];
+        if ($recaptcha['score'] !== null) {
+            $recaptchaMeta['score'] = $recaptcha['score'];
+        }
+
         $metadata = array_filter([
             'stage'        => $data['stage'],
             'need'         => $data['need'],
+            'recaptcha'    => $recaptchaMeta,
             'utm'          => array_filter($utm, static fn ($v) => $v !== null),
             'referrer'     => $referrer,
             'page_path'    => $page['path'],

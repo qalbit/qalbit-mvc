@@ -43,6 +43,48 @@ header('X-Robots-Tag: noindex, nofollow', true);
 
 $gtmId = config('analytics.gtm_container_id', null);
 
+$recaptchaConfig  = config('recaptcha', []);
+$recaptchaEnabled = !empty($recaptchaConfig['enabled']) && !empty($recaptchaConfig['site_key']);
+$recaptchaSiteKey = (string) ($recaptchaConfig['site_key'] ?? '');
+
+/*
+ * Page-scoped Content-Security-Policy.
+ *
+ * The site-wide policy is set at the Cloudflare edge, not in this repo, and it
+ * allows tawk.to because every other page wants the chat widget. This one does
+ * not: the GTM container fires Tawk on all pages, and a campaign page with one
+ * decision on it should not grow a chat bubble.
+ *
+ * A <meta> CSP is enforced as the INTERSECTION of itself and any header policy,
+ * so this can only ever tighten — it cannot accidentally grant something the
+ * edge policy forbids. Blocking at the CSP layer rather than with a script
+ * guard is what stops the request being made at all; a MutationObserver only
+ * ever gets to remove the element after the fetch has already started.
+ *
+ * Kept, because the campaign needs them: GA/GTM, the Meta, LinkedIn, Apollo,
+ * Google Ads and Cloudflare pixels, and reCAPTCHA. Dropped: tawk.to, plus
+ * MailerLite and the CDNs, which this standalone layout provably never loads.
+ *
+ * One deliberate addition — www.linkedin.com in img-src. The edge policy allows
+ * only *.ads.linkedin.com, so LinkedIn's li_sync pixel is currently blocked
+ * site-wide and its ad attribution silently does not work. Widening it here
+ * fixes that for this page; the same fix at the edge would fix it everywhere.
+ */
+$csp = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' blob: https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://www.gstatic.com https://static.cloudflareinsights.com https://connect.facebook.net https://snap.licdn.com https://assets.apollo.io https://www.googleadservices.com https://googleads.g.doubleclick.net",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' data: https://fonts.gstatic.com",
+    "img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://www.google.co.in https://www.gstatic.com https://www.facebook.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://*.ads.linkedin.com https://www.linkedin.com https://aplo-evnt.com",
+    "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://static.cloudflareinsights.com https://connect.facebook.net https://snap.licdn.com https://assets.apollo.io https://www.googleadservices.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://*.ads.linkedin.com https://www.facebook.com https://aplo-evnt.com",
+    "frame-src 'self' https://www.google.com https://recaptcha.google.com https://www.googletagmanager.com https://www.facebook.com",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+];
+// frame-ancestors and upgrade-insecure-requests are ignored in <meta> (and warn
+// in the console when present) — the edge policy already carries both.
+
 // Space Grotesk carries the page, JetBrains Mono the labels — the campaign
 // page runs its own type stack, deliberately not the marketing site's Poppins.
 // Loaded render-blocking on purpose: the same trade partials/head.php makes,
@@ -54,6 +96,9 @@ $fontsCssUrl = $fonts ?? 'https://fonts.googleapis.com/css2?family=Space+Grotesk
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <?php /* First, so it governs everything below it. */ ?>
+    <meta http-equiv="Content-Security-Policy" content="<?= htmlspecialchars(implode('; ', $csp), ENT_QUOTES) ?>">
 
     <title><?= htmlspecialchars($title) ?></title>
 
@@ -98,7 +143,26 @@ $fontsCssUrl = $fonts ?? 'https://fonts.googleapis.com/css2?family=Space+Grotesk
         <!-- Consent Mode + GTM. Kept on a paid-traffic page: without it the
              campaign that pays for this page cannot be measured. GTM itself is
              deferred to first interaction by gtag-layer.js. -->
+        <?php /* Pushed before the container boots so GTM can read it on the very
+                 first evaluation. The CSP above already blocks the chat widget
+                 outright; this is the lever for switching it off properly at
+                 source — in GTM, add a Data Layer Variable on page_type and give
+                 the Tawk tag an exception trigger where page_type equals
+                 landing. Tags fired by the same trigger stay unaffected. */ ?>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ page_type: "landing", page_campaign: "saas_teardown", chat_enabled: false });
+        </script>
         <script src="<?= asset_v('/js/gtag-layer.js') ?>" data-gtm-id="<?= htmlspecialchars($gtmId) ?>"></script>
+    <?php endif; ?>
+
+    <?php if ($recaptchaEnabled): ?>
+        <?php /* Included only for its lazy loader: this file injects Google's
+                 374KB api.js on first interaction, and its submit handler binds
+                 to form[data-track="contact-form"], which this page has none of.
+                 The token itself is minted by go-teardown.js at submit time. */ ?>
+        <script src="<?= asset_v('/js/recaptcha-layer.js') ?>"
+            data-recaptcha-site-key="<?= htmlspecialchars($recaptchaSiteKey, ENT_QUOTES) ?>" defer></script>
     <?php endif; ?>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
