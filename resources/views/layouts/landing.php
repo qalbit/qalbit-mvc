@@ -43,10 +43,11 @@ header('X-Robots-Tag: noindex, nofollow', true);
 
 $gtmId = config('analytics.gtm_container_id', null);
 
-// Inter carries the UI; JetBrains Mono carries the spec-sheet labels. Loaded
-// render-blocking on purpose — the same trade partials/head.php makes, where
-// an async swap cost the hero 0.11 CLS on every load.
-$fontsCssUrl = $fonts ?? 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap';
+// Space Grotesk carries the page, JetBrains Mono the labels — the campaign
+// page runs its own type stack, deliberately not the marketing site's Poppins.
+// Loaded render-blocking on purpose: the same trade partials/head.php makes,
+// where an async swap cost the hero 0.11 CLS on every load.
+$fontsCssUrl = $fonts ?? 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,6 +103,12 @@ $fontsCssUrl = $fonts ?? 'https://fonts.googleapis.com/css2?family=Inter:wght@40
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <?php /* Space Grotesk is a variable font served as one file per subset, so
+             there is a single face to preload rather than one per weight. The
+             hero H1 is the LCP element, so it should be on the wire
+             immediately; if Google revs the version this degrades to a
+             harmless no-op. */ ?>
+    <link rel="preload" as="style" href="<?= htmlspecialchars($fontsCssUrl) ?>">
     <link rel="stylesheet" href="<?= htmlspecialchars($fontsCssUrl) ?>">
 
     <?php if ($pageCss): ?>

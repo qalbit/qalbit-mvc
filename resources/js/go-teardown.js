@@ -25,15 +25,20 @@
 
     var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+    var FREE_MAIL = [
+        "gmail.com", "yahoo.com", "yahoo.co.uk", "outlook.com", "hotmail.com",
+        "live.com", "icloud.com", "aol.com", "proton.me", "protonmail.com",
+        "gmx.com", "mail.com", "yandex.com"
+    ];
+
     /* -------------------------------------------------------------------------
      * Pointer gate.
      *
-     * Pressing "Continue" blurs whichever field had focus, and blur is when we
+     * Pressing a button blurs whichever field had focus, and blur is when we
      * validate. If that validation adds or removes a message, everything below
      * it moves — including the button being pressed. A click only fires when
      * mousedown and mouseup land on the same element, so the button slides out
-     * from under the press and the tap does nothing at all. The visitor presses
-     * again; on a phone it reads as a dead button.
+     * from under the press and the tap does nothing at all.
      *
      * So work that changes layout waits until the pointer is up. The flush is
      * scheduled rather than run inline because pointerup precedes mouseup and
@@ -49,7 +54,6 @@
     function markPointerUp() {
         pointerIsDown = false;
         if (!pendingWork) return;
-
         var work = pendingWork;
         pendingWork = null;
         window.setTimeout(work, 0);
@@ -71,14 +75,8 @@
         pendingWork = work;
     }
 
-    var FREE_MAIL = [
-        "gmail.com", "yahoo.com", "yahoo.co.uk", "outlook.com", "hotmail.com",
-        "live.com", "icloud.com", "aol.com", "proton.me", "protonmail.com",
-        "gmx.com", "mail.com", "yandex.com"
-    ];
-
     /*
-     * Per-step validation. `errorId` points at the live region already in the
+     * Per-step validation. `errorId` points at a live region already in the
      * markup, so a message never has to be injected into a new element the
      * screen reader has not been told about.
      */
@@ -93,32 +91,27 @@
         ],
         2: [
             {
-                name: "name",
-                errorId: "gt-err-name",
-                required: "Please enter your name.",
+                name: "need",
+                type: "radio",
+                errorId: "gt-err-need",
+                required: "Pick whichever is closest — you can change it later."
+            }
+        ],
+        3: [
+            {
+                name: "email",
+                errorId: "gt-err-email",
+                required: "We need an email to send the teardown to.",
                 check: function (value) {
-                    if (value.length < 2) {
-                        return "Please enter your full name — at least 2 characters.";
+                    if (!EMAIL_RE.test(value)) {
+                        return "Enter a valid email like you@company.com";
                     }
                     return null;
                 }
             },
             {
-                name: "email",
-                errorId: "gt-err-email",
-                required: "Please enter your email address.",
-                check: function (value) {
-                    if (!EMAIL_RE.test(value)) {
-                        return "Enter a valid work email like you@company.com";
-                    }
-                    return null;
-                }
-            }
-        ],
-        3: [
-            {
                 name: "product_or_idea",
-                errorId: "gt-err-product",
+                errorId: "gt-err-note",
                 required: "Add your product URL, or one line on the idea.",
                 check: function (value) {
                     if (value.length < 4) {
@@ -126,133 +119,38 @@
                     }
                     return null;
                 }
-            },
-            {
-                name: "budget",
-                type: "radio",
-                errorId: "gt-err-budget",
-                required: "Pick the band closest to your budget."
-            },
-            {
-                name: "timeline",
-                type: "radio",
-                errorId: "gt-err-timeline",
-                required: "Let us know roughly when you want to start."
             }
         ]
     };
 
     var LAST_STEP = 3;
+    var PROGRESS = { 1: "33%", 2: "66%", 3: "90%" };
 
     onReady(function () {
-        initReveal();
-        initSmoothScroll();
-
         var form = document.querySelector("[data-gt-form]");
-        if (form) {
-            initForm(form);
-        }
-
-        initStickyCta();
+        if (form) initForm(form);
+        initMarquee();
     });
 
     /* ---------------------------------------------------------------------
-     * Scroll reveal
+     * Marquee.
      *
-     * The hero carries no reveal class: its H1 is the LCP element and has to
-     * paint on the first frame. Without IntersectionObserver everything is
-     * simply shown.
+     * The track is duplicated in the markup so the -50% keyframe loops with no
+     * seam. Paused while off screen so a page scrolled past it is not paying
+     * for an animation nobody can see.
      * ------------------------------------------------------------------ */
-    function initReveal() {
-        var targets = document.querySelectorAll(".gt-reveal");
-        if (!targets.length) return;
+    function initMarquee() {
+        var track = document.querySelector(".gt-marquee__track");
+        if (!track || prefersReducedMotion) return;
+        if (!("IntersectionObserver" in window)) return;
 
-        if (prefersReducedMotion || !("IntersectionObserver" in window)) {
-            Array.prototype.forEach.call(targets, function (el) {
-                el.classList.add("is-visible");
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                track.style.animationPlayState = entry.isIntersecting ? "running" : "paused";
             });
-            return;
-        }
-
-        var io = new IntersectionObserver(
-            function (entries) {
-                entries.forEach(function (entry) {
-                    if (!entry.isIntersecting) return;
-                    entry.target.classList.add("is-visible");
-                    io.unobserve(entry.target);
-                });
-            },
-            { threshold: 0.15 }
-        );
-
-        Array.prototype.forEach.call(targets, function (el) {
-            io.observe(el);
         });
-    }
 
-    /* ---------------------------------------------------------------------
-     * Smooth scroll to the form. Reduced motion gets an instant jump.
-     * ------------------------------------------------------------------ */
-    function initSmoothScroll() {
-        document.addEventListener("click", function (event) {
-            var trigger = event.target.closest
-                ? event.target.closest("[data-gt-scroll]")
-                : null;
-            if (!trigger) return;
-
-            var target = document.querySelector(
-                trigger.getAttribute("href") || "#lead-form"
-            );
-            if (!target) return;
-
-            event.preventDefault();
-            target.scrollIntoView({
-                behavior: prefersReducedMotion ? "auto" : "smooth",
-                block: "start"
-            });
-
-            // Move focus with the viewport, or a keyboard user's next Tab
-            // resumes from wherever the button was.
-            var focusable = target.querySelector("input, textarea, button, a");
-            if (focusable) {
-                window.setTimeout(
-                    function () {
-                        focusable.focus({ preventScroll: true });
-                    },
-                    prefersReducedMotion ? 0 : 350
-                );
-            }
-        });
-    }
-
-    /* ---------------------------------------------------------------------
-     * Sticky mobile CTA — shown only while the form is off screen.
-     * ------------------------------------------------------------------ */
-    function initStickyCta() {
-        var bar = document.querySelector("[data-gt-sticky]");
-        var panel = document.querySelector("[data-gt-panel]");
-        if (!bar || !panel) return;
-
-        if (!("IntersectionObserver" in window)) return; // no bar rather than a stuck one
-
-        bar.hidden = false;
-
-        var io = new IntersectionObserver(
-            function (entries) {
-                entries.forEach(function (entry) {
-                    bar.classList.toggle("is-visible", !entry.isIntersecting);
-                });
-            },
-            { threshold: 0 }
-        );
-
-        io.observe(panel);
-
-        // Once the lead is captured there is nothing left to call to action.
-        bar.addEventListener("gt:submitted", function () {
-            io.disconnect();
-            bar.classList.remove("is-visible");
-        });
+        io.observe(track);
     }
 
     /* ---------------------------------------------------------------------
@@ -269,14 +167,12 @@
 
         var stepLabel = document.querySelector("[data-gt-step-label]");
         var progress = document.querySelector("[data-gt-progress]");
-        var progressSegments = progress
-            ? progress.querySelectorAll("li")
-            : [];
+        var progressBar = document.querySelector("[data-gt-progress-bar]");
+        var backBtn = document.querySelector("[data-gt-back]");
         var successBlock = document.querySelector("[data-gt-success]");
         var globalError = form.querySelector("[data-gt-global-error]");
         var submitBtn = form.querySelector("[data-gt-submit]");
         var submitLabel = form.querySelector("[data-gt-submit-label]");
-        var stickyBar = document.querySelector("[data-gt-sticky]");
 
         var current = 1;
         var submitting = false;
@@ -286,15 +182,8 @@
         // dies. Set only now, so a no-JS visitor keeps native validation.
         form.noValidate = true;
 
-        // Reveal the JS-only chrome.
         if (stepLabel) stepLabel.hidden = false;
         if (progress) progress.hidden = false;
-        Array.prototype.forEach.call(
-            form.querySelectorAll("[data-gt-nav], [data-gt-back]"),
-            function (el) {
-                el.hidden = false;
-            }
-        );
 
         captureAttribution(form);
         mirrorChoiceState(form);
@@ -302,115 +191,94 @@
         /*
          * A failed no-JS submit re-renders with server errors. Open on the
          * first step that has one, so the visitor is not dropped on step 1
-         * with an invisible problem three steps down.
+         * with an invisible problem two steps down.
          */
-        var firstErrored = firstStepWithError();
-        showStep(firstErrored, false);
+        showStep(firstStepWithError(), false);
 
         /*
-         * Step 1: choosing an answer is the answer.
+         * Steps 1 and 2: choosing an answer is the answer.
          *
-         * Auto-advance has to fire for a tap and NOT for arrow keys. Arrow keys
+         * Advancing has to fire for a tap and NOT for arrow keys. Arrow keys
          * move through a radio group by changing the selection, and Chrome
          * dispatches a synthetic `click` when they do — so neither `change` nor
          * `click` can tell the two apart on its own. Both would throw a
-         * keyboard visitor to step 2 on their first arrow press, before they
-         * had seen the remaining options.
-         *
-         * So: only a selection preceded by a real pointer press advances.
-         * Keyboard visitors pick freely and confirm with Continue.
+         * keyboard visitor forward on their first arrow press, before they had
+         * seen the remaining options. Only a selection preceded by a real
+         * pointer press advances; keyboard visitors pick freely and press
+         * Enter, which submits the step natively.
          */
-        var stageStep = steps["1"];
-        var pointerActivated = false;
-        var pointerTimer = null;
+        [1, 2].forEach(function (stepNumber) {
+            var stepEl = steps[String(stepNumber)];
+            if (!stepEl) return;
 
-        function markPointer() {
-            pointerActivated = true;
-            window.clearTimeout(pointerTimer);
-            pointerTimer = window.setTimeout(function () {
-                pointerActivated = false;
-            }, 700);
-        }
+            var pointerActivated = false;
+            var pointerTimer = null;
 
-        if (stageStep) {
             ["pointerdown", "mousedown", "touchstart"].forEach(function (type) {
-                stageStep.addEventListener(type, markPointer, { passive: true });
+                stepEl.addEventListener(type, function () {
+                    pointerActivated = true;
+                    window.clearTimeout(pointerTimer);
+                    pointerTimer = window.setTimeout(function () {
+                        pointerActivated = false;
+                    }, 700);
+                }, { passive: true });
             });
-        }
 
-        var stageInputs = form.querySelectorAll('input[name="stage"]');
-        Array.prototype.forEach.call(stageInputs, function (input) {
-            input.addEventListener("change", function () {
-                clearFieldError(STEPS[1][0]);
-
-                if (!pointerActivated || !input.checked) return;
-                pointerActivated = false;
-
-                // A beat, so the selection is visibly registered before the
-                // step changes under the pointer.
-                window.setTimeout(function () {
-                    if (current === 1) showStep(2, true);
-                }, 150);
-            });
-        });
-
-        // --- Continue / Back ----------------------------------------------
-        Array.prototype.forEach.call(
-            form.querySelectorAll("[data-gt-next]"),
-            function (btn) {
-                btn.addEventListener("click", function () {
-                    var from = parseInt(btn.getAttribute("data-gt-next"), 10);
-                    if (!validateStep(from)) return;
-                    showStep(from + 1, true);
-                });
-            }
-        );
-
-        Array.prototype.forEach.call(
-            form.querySelectorAll("[data-gt-back]"),
-            function (btn) {
-                btn.addEventListener("click", function () {
-                    var from = parseInt(btn.getAttribute("data-gt-back"), 10);
-                    // Values are never cleared going back (WCAG 3.3.7).
-                    showStep(from - 1, true);
-                });
-            }
-        );
-
-        // --- Validate on blur ---------------------------------------------
-        [2, 3].forEach(function (stepNumber) {
-            STEPS[stepNumber].forEach(function (field) {
-                if (field.type === "radio") return;
-                var input = form.elements[field.name];
-                if (!input) return;
-
-                input.addEventListener("blur", function () {
-                    if (input.value.trim() === "") return; // don't scold an untouched field
-
-                    whenPointerReleased(function () {
-                        validateField(field);
-                        if (field.name === "email") softHintFreeMail(input);
-                    });
-                });
-            });
-        });
-
-        // Radio choices in step 3 clear their own error as soon as they answer it.
-        ["budget", "timeline"].forEach(function (name) {
+            var field = STEPS[stepNumber][0];
             Array.prototype.forEach.call(
-                form.querySelectorAll('input[name="' + name + '"]'),
+                stepEl.querySelectorAll('input[type="radio"]'),
                 function (input) {
                     input.addEventListener("change", function () {
-                        var field = STEPS[3].filter(function (f) {
-                            return f.name === name;
-                        })[0];
-                        if (field) clearFieldError(field);
+                        clearFieldError(field);
+                    });
+
+                    /*
+                     * Advance on `click`, not `change`. Coming Back and tapping
+                     * the answer you already gave fires no change event at all,
+                     * so a change-driven flow would simply sit there — the
+                     * commonest thing to do after going back is to confirm the
+                     * same answer.
+                     *
+                     * `click` catches both, and the pointer gate is what keeps
+                     * it keyboard-safe: arrow-key selection dispatches a
+                     * synthetic click with no pointer press before it.
+                     */
+                    input.addEventListener("click", function () {
+                        if (!pointerActivated || !input.checked) return;
+                        pointerActivated = false;
+
+                        // A beat, so the selection is visibly registered before
+                        // the step changes under the pointer.
+                        window.setTimeout(function () {
+                            if (current === stepNumber) showStep(stepNumber + 1, true);
+                        }, 150);
                     });
                 }
             );
         });
 
-        // --- Submit --------------------------------------------------------
+        if (backBtn) {
+            backBtn.addEventListener("click", function () {
+                // Values are never cleared going back (WCAG 3.3.7).
+                showStep(current - 1, true);
+            });
+        }
+
+        // Validate on blur, deferred past any pointer press.
+        STEPS[LAST_STEP].forEach(function (field) {
+            var input = form.elements[field.name];
+            if (!input) return;
+
+            input.addEventListener("blur", function () {
+                if (input.value.trim() === "") return; // don't scold an untouched field
+
+                whenPointerReleased(function () {
+                    validateField(field);
+                    if (field.name === "email") softHintFreeMail(input);
+                });
+            });
+        });
+
         form.addEventListener("submit", function (event) {
             event.preventDefault();
             if (submitting) return;
@@ -448,9 +316,7 @@
                 .then(function (response) {
                     return response
                         .json()
-                        .catch(function () {
-                            return {};
-                        })
+                        .catch(function () { return {}; })
                         .then(function (data) {
                             return { ok: response.ok, data: data };
                         });
@@ -503,28 +369,15 @@
         function showStep(n, moveFocus) {
             if (n < 1) n = 1;
             if (n > LAST_STEP) n = LAST_STEP;
-
-            var isTransition = current !== n;
             current = n;
 
             Object.keys(steps).forEach(function (key) {
                 steps[key].hidden = parseInt(key, 10) !== n;
             });
 
-            // The slide-in belongs to the transition, not to page load.
-            if (isTransition && steps[n] && !prefersReducedMotion) {
-                steps[n].classList.remove("is-entering");
-                void steps[n].offsetWidth; // restart the animation
-                steps[n].classList.add("is-entering");
-            }
-
-            if (stepLabel) {
-                stepLabel.textContent = "Step " + n + " of " + LAST_STEP;
-            }
-
-            Array.prototype.forEach.call(progressSegments, function (seg, i) {
-                seg.classList.toggle("is-filled", i < n);
-            });
+            if (stepLabel) stepLabel.textContent = "Step " + n + " of " + LAST_STEP;
+            if (progressBar) progressBar.style.width = PROGRESS[n];
+            if (backBtn) backBtn.hidden = n === 1;
 
             if (moveFocus) {
                 var heading = steps[n]
@@ -539,15 +392,11 @@
 
             STEPS[stepNumber].forEach(function (field) {
                 var message = fieldError(field);
-
                 if (!silent) setFieldError(field, message);
-
                 if (message && !firstInvalid) firstInvalid = field;
             });
 
-            if (firstInvalid && !silent) {
-                focusField(firstInvalid);
-            }
+            if (firstInvalid && !silent) focusField(firstInvalid);
 
             return !firstInvalid;
         }
@@ -605,21 +454,18 @@
 
             target.focus({ preventScroll: true });
 
-            // Visually hidden radios: bring the choice group itself into view.
-            var anchor = field.type === "radio" ? target.closest(".gt-fieldset") : target;
-            if (!anchor || !anchor.scrollIntoView) return;
-
             /*
              * Only scroll if the field is actually off screen. Scrolling to a
              * field the visitor is already looking at moves the page under
              * their thumb for no reason — and on a phone that is how a tap
-             * meant for "Continue" lands on whatever slid into its place.
+             * meant for the button lands on whatever slid into its place.
              */
+            var anchor = field.type === "radio" ? target.closest(".gt-step") : target;
+            if (!anchor || !anchor.scrollIntoView) return;
+
             var rect = anchor.getBoundingClientRect();
             var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-            var margin = 24;
-
-            if (rect.top >= margin && rect.bottom <= viewportHeight - margin) return;
+            if (rect.top >= 88 && rect.bottom <= viewportHeight - 24) return;
 
             anchor.scrollIntoView({
                 behavior: prefersReducedMotion ? "auto" : "smooth",
@@ -666,7 +512,7 @@
                 }
             } else {
                 submitBtn.removeAttribute("aria-busy");
-                if (submitLabel) submitLabel.textContent = "Get my free teardown";
+                if (submitLabel) submitLabel.textContent = "Send my teardown request";
                 var existing = submitBtn.querySelector(".gt-spinner");
                 if (existing) existing.remove();
             }
@@ -687,18 +533,20 @@
         function onSuccess() {
             submitting = false;
 
-            var head = document.querySelector(".gt-panel__head");
+            var head = document.querySelector(".gt-card__head");
+            var note = document.querySelector(".gt-card__note");
+            var foot = document.querySelector(".gt-card__foot");
+
             if (head) head.hidden = true;
+            if (note) note.hidden = true;
+            if (progress) progress.hidden = true;
+            if (foot) foot.hidden = true;
             form.hidden = true;
 
             if (successBlock) {
                 successBlock.hidden = false;
                 var title = successBlock.querySelector("[data-gt-success-title]");
                 if (title) title.focus();
-            }
-
-            if (stickyBar) {
-                stickyBar.dispatchEvent(new CustomEvent("gt:submitted"));
             }
 
             // Conversion signal for GTM. gtag-layer.js defines dataLayer before

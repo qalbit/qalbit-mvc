@@ -72,11 +72,9 @@ class LandingController
 
         $data = [
             'stage'           => trim((string) ($_POST['stage'] ?? '')),
-            'name'            => trim((string) ($_POST['name'] ?? '')),
+            'need'            => trim((string) ($_POST['need'] ?? '')),
             'email'           => trim((string) ($_POST['email'] ?? '')),
             'product_or_idea' => trim((string) ($_POST['product_or_idea'] ?? '')),
-            'budget'          => trim((string) ($_POST['budget'] ?? '')),
-            'timeline'        => trim((string) ($_POST['timeline'] ?? '')),
         ];
 
         /*
@@ -109,16 +107,14 @@ class LandingController
         $referrer = $this->referrer();
 
         $labels = [
-            'stage'    => $page['stages'][$data['stage']] ?? $data['stage'],
-            'budget'   => $page['budgets'][$data['budget']] ?? $data['budget'],
-            'timeline' => $page['timelines'][$data['timeline']] ?? $data['timeline'],
+            'stage' => $page['stages'][$data['stage']] ?? $data['stage'],
+            'need'  => $page['needs'][$data['need']] ?? $data['need'],
         ];
 
         // Readable in any CRM view, whether or not custom fields are mapped.
         $message = implode("\n", [
             'Stage: ' . $labels['stage'],
-            'Budget: ' . $labels['budget'],
-            'Timeline: ' . $labels['timeline'],
+            'Needs: ' . $labels['need'],
             '',
             'Product / idea:',
             $data['product_or_idea'],
@@ -126,8 +122,7 @@ class LandingController
 
         $metadata = array_filter([
             'stage'        => $data['stage'],
-            'budget'       => $data['budget'],
-            'timeline'     => $data['timeline'],
+            'need'         => $data['need'],
             'utm'          => array_filter($utm, static fn ($v) => $v !== null),
             'referrer'     => $referrer,
             'page_path'    => $page['path'],
@@ -140,11 +135,25 @@ class LandingController
         // that the campaign is unknown — record that plainly.
         $leadSource = $utm['source'] ?? 'direct';
 
+        /*
+         * The form no longer asks for a name — the redesign dropped that field
+         * to cut the step-3 form to two inputs. The CRM and the notification
+         * email both want one, so it is derived from the address rather than
+         * invented: "dana.reyes@acme.io" becomes "Dana Reyes". It is clearly a
+         * derivation, not a claim about what they are called, and the real
+         * address sits next to it in every view.
+         */
+        $localPart = strstr($data['email'], '@', true) ?: $data['email'];
+        $leadName  = ucwords(trim(preg_replace('/[._+-]+/', ' ', $localPart)));
+        if ($leadName === '') {
+            $leadName = $data['email'];
+        }
+
         // CRM first: it is the system of record, and it has to survive an SMTP
         // outage. The API key stays server-side — the browser only ever talks
         // to this route.
         $crmCaptured = LiftUpCrm::pushLead([
-            'name'        => mb_substr($data['name'], 0, 200),
+            'name'        => mb_substr($leadName, 0, 200),
             'email'       => mb_substr($data['email'], 0, 200),
             'message'     => mb_substr($message, 0, 5000),
             'lead_from'   => $page['lead_from'],
@@ -156,7 +165,7 @@ class LandingController
 
         $mailer = new Mailer();
         $sent   = $mailer->sendContact([
-            'name'         => $data['name'],
+            'name'         => $leadName,
             'email'        => $data['email'],
             'phone'        => '',
             'message'      => $message,
@@ -202,22 +211,18 @@ class LandingController
             $errors['stage'] = 'Please choose one of the listed options.';
         }
 
-        if ($data['name'] === '') {
-            $errors['name'] = 'Please enter your name.';
-        } elseif (mb_strlen($data['name']) < 2) {
-            $errors['name'] = 'Please enter your full name — at least 2 characters.';
-        } elseif (mb_strlen($data['name']) > 100) {
-            $errors['name'] = 'Name must be 100 characters or fewer.';
-        } elseif (!preg_match('/\p{L}/u', $data['name'])) {
-            $errors['name'] = 'Please enter a valid name.';
+        if ($data['need'] === '') {
+            $errors['need'] = 'Pick whichever is closest — you can change it later.';
+        } elseif (!array_key_exists($data['need'], $page['needs'] ?? [])) {
+            $errors['need'] = 'Please choose one of the listed options.';
         }
 
         if ($data['email'] === '') {
-            $errors['email'] = 'Please enter your email address.';
+            $errors['email'] = 'We need an email to send the teardown to.';
         } elseif (mb_strlen($data['email']) > 200) {
             $errors['email'] = 'Email must be 200 characters or fewer.';
         } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = 'Enter a valid work email like you@company.com';
+            $errors['email'] = 'Enter a valid email like you@company.com';
         }
 
         if ($data['product_or_idea'] === '') {
@@ -228,17 +233,7 @@ class LandingController
             $errors['product_or_idea'] = 'Please keep this under 2000 characters.';
         }
 
-        if ($data['budget'] === '') {
-            $errors['budget'] = 'Pick the band closest to your budget.';
-        } elseif (!array_key_exists($data['budget'], $page['budgets'] ?? [])) {
-            $errors['budget'] = 'Please choose one of the listed budget bands.';
-        }
 
-        if ($data['timeline'] === '') {
-            $errors['timeline'] = 'Let us know roughly when you want to start.';
-        } elseif (!array_key_exists($data['timeline'], $page['timelines'] ?? [])) {
-            $errors['timeline'] = 'Please choose one of the listed timelines.';
-        }
 
         return $errors;
     }

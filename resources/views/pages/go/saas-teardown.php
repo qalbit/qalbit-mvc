@@ -4,16 +4,20 @@
  * /go/saas-product-development/ — cold-traffic lead capture for the free
  * "SaaS Teardown" offer.
  *
- * Expects: $page (config('landing.saas_teardown')), $errors, $old, $success.
+ * Ported from the approved prototype. Two deliberate differences from it:
  *
- * The form works without JavaScript: all three steps render at once and the
- * form posts normally to the same URL. go-teardown.js is what turns it into a
- * one-question-at-a-time flow. Nothing on this page invents a number — every
- * missing metric renders as a visible "client to supply" box.
+ *   1. The prototype drew striped placeholders where artwork belongs. Real
+ *      assets are wired in wherever a file exists; the stripe pattern remains
+ *      as the fallback, labelled with the exact path it wants, so a missing
+ *      file reads as outstanding work rather than a broken image.
+ *   2. The prototype's form was React state only. This one is a real form that
+ *      posts to the same URL: all three steps render without JavaScript and it
+ *      submits normally. go-teardown.js is what turns it into one question at
+ *      a time.
+ *
+ * Expects: $page (config('landing.saas_teardown')), $errors, $old, $success.
  */
 
-// View::render() extracts these; the fallbacks keep the file readable on its
-// own and mean a caller that forgets one gets an empty page, not a fatal.
 $page    = $page    ?? config('landing.saas_teardown', []);
 $errors  = $errors  ?? [];
 $old     = $old     ?? [];
@@ -21,19 +25,16 @@ $success = $success ?? null;
 
 $formPath   = $page['path'];
 $stages     = $page['stages'];
-$budgets    = $page['budgets'];
-$timelines  = $page['timelines'];
+$needs      = $page['needs'];
 $bookingUrl = $page['booking_url'];
 $pricingUrl = $page['pricing_url'];
 $senderMail = $page['sender_email'];
 $replyMail  = $page['reply_email'];
 
-/** Escape a previously submitted value for re-display. */
 $oldValue = static function (string $key) use ($old): string {
     return htmlspecialchars((string) ($old[$key] ?? ''), ENT_QUOTES);
 };
 
-/** Was this field selected on the last (failed) submit? */
 $wasChosen = static function (string $key, string $value) use ($old): bool {
     return ($old[$key] ?? null) === $value;
 };
@@ -42,135 +43,143 @@ $fieldError = static function (string $key) use ($errors): string {
     return isset($errors[$key]) ? htmlspecialchars((string) $errors[$key]) : '';
 };
 
-/*
- * `required` on the first radio of a group makes the whole group required to
- * the browser, which is what enforces these on the no-JS path. With JS the
- * script sets form.noValidate, so a hidden step's required field can never
- * block a submit the browser cannot show the visitor.
- */
+/* `required` on the first radio makes the whole group required to the browser,
+   which is what enforces it on the no-JS path. With JS the script sets
+   form.noValidate, so a hidden step can never block a submit. */
 $radioRequired = static function (int $index): string {
     return $index === 0 ? ' required aria-required="true"' : '';
 };
 
-$logoPath   = $page['logo'];
-$photoPath  = $page['founder_photo'];
-$logoFile   = __DIR__ . '/../../../../public/assets/' . ltrim($logoPath, '/');
-$photoFile  = __DIR__ . '/../../../../public/assets/' . ltrim($photoPath, '/');
-$hasLogo    = is_file($logoFile);
-$hasPhoto   = is_file($photoFile);
+/** Does an asset exist under /public/assets? */
+$assetExists = static function (string $path): bool {
+    return is_file(__DIR__ . '/../../../../public/assets/' . ltrim($path, '/'));
+};
+
+$photoPath = $page['founder_photo'];
+$hasPhoto  = $assetExists($photoPath);
+
+/*
+ * The brand lockup. Falls back to the wordmark-and-square from the prototype
+ * if the SVG ever goes missing from a deploy — a text wordmark reads as
+ * intentional where a broken image does not.
+ */
+$logoPath = $page['logo'];
+$hasLogo  = $assetExists($logoPath);
+
+$brand = static function () use ($hasLogo, $logoPath, $page): string {
+    if ($hasLogo) {
+        return '<img class="gt-brand__logo" src="' . htmlspecialchars(asset_v($logoPath), ENT_QUOTES) . '"'
+            . ' alt="' . htmlspecialchars($page['logo_alt'] ?? 'QalbIT Infotech Pvt Ltd', ENT_QUOTES) . '"'
+            . ' width="' . (int) ($page['logo_width'] ?? 139) . '"'
+            . ' height="' . (int) ($page['logo_height'] ?? 34) . '">';
+    }
+
+    return '<span class="gt-brand__mark">Qalbit</span>'
+        . '<span class="gt-brand__dot" aria-hidden="true"></span>';
+};
 ?>
 
 <a class="gt-skip-link" href="#main-content">Skip to content</a>
 
 <!-- ==========================================================================
-     1 — Header. Logo only: there is nowhere else to go from a landing page.
+     Header. Anchors only — no route away from the page.
      ======================================================================= -->
 <header class="gt-header">
-    <div class="gt-container gt-header__inner">
-        <?php if ($hasLogo): ?>
-            <img class="gt-header__logo" src="<?= asset_v($logoPath) ?>" alt="QalbIT Infotech"
-                width="132" height="32" fetchpriority="high">
-        <?php else: ?>
-            <?php /* PLACEHOLDER: QalbIT logo SVG → /public/assets/images/brand/qalbit-logo.svg
-                     Until the file exists the wordmark renders as text, which is
-                     correct-looking rather than a broken image. */ ?>
-            <span class="gt-header__logo gt-h4">QalbIT</span>
-        <?php endif; ?>
-    </div>
+    <div class="gt-brand"><?= $brand() ?></div>
+
+    <nav class="gt-nav" aria-label="Section navigation">
+        <a class="gt-nav__link" href="#work">Work</a>
+        <a class="gt-nav__link" href="#process">Process</a>
+        <a class="gt-nav__link" href="#price">Price</a>
+        <a class="gt-nav__link" href="#faq">FAQ</a>
+        <a class="gt-nav__cta" href="#teardown">Free teardown</a>
+    </nav>
 </header>
 
 <main id="main-content" tabindex="-1">
 
     <!-- ======================================================================
-         2 — Hero + form
+         Hero + form
          =================================================================== -->
-    <section class="gt-hero" aria-labelledby="gt-hero-title">
-        <div class="gt-container gt-hero__inner">
+    <section class="gt-hero" id="teardown" aria-labelledby="gt-hero-title">
+        <div class="gt-wrap gt-hero__grid">
 
-            <div class="gt-hero__copy">
-                <p class="gt-eyebrow">SAAS PRODUCT DEVELOPMENT</p>
+            <div>
+                <p class="gt-kicker">SaaS product development</p>
 
-                <h1 class="gt-h1 gt-hero__title" id="gt-hero-title">
-                    Get a real build plan for your SaaS. In 48 hours. Free.
+                <h1 class="gt-h1" id="gt-hero-title">
+                    Get a real build plan<br>for your SaaS.<br>
+                    <span class="gt-h1__hl">In 48 hours.</span>
+                    <span class="gt-h1__dim">Free.</span>
                 </h1>
 
-                <p class="gt-lead gt-hero__sub">
-                    Send us your idea or your live product. You'll get back a recorded
+                <p class="gt-hero__lede">
+                    Send us your idea or your live product. You get back a recorded
                     walkthrough — the architecture we'd use, the modules that actually
                     matter for v1, a realistic timeline, and a price range. No call
                     needed to get it.
                 </p>
 
-                <p class="gt-hero__diff">
+                <p class="gt-hero__claim">
                     From a team that builds and runs four of its own SaaS products.
                 </p>
 
-            </div>
-
-            <?php /* Its own grid item, not part of the copy block: on mobile it
-                     reorders below the form so the form itself stays near the
-                     fold. On desktop it sits back under the copy. */ ?>
-            <div class="gt-byline">
-                <?php if ($hasPhoto): ?>
-                    <img class="gt-byline__photo" src="<?= asset_v($photoPath) ?>"
-                        alt="Abid Chidi" width="44" height="44" loading="lazy" decoding="async">
-                <?php else: ?>
-                    <?php /* PLACEHOLDER: founder photo → /public/assets/images/team/abid-chidi.jpg
-                             Space is reserved either way, so dropping the file in
-                             causes no layout shift. */ ?>
-                    <span class="gt-byline__photo" aria-hidden="true"></span>
-                <?php endif; ?>
-                <p class="gt-byline__text">
-                    <strong>Abid Chidi — Founder, QalbIT Infotech</strong>
-                    I record these myself.
-                </p>
+                <div class="gt-byline">
+                    <?php if ($hasPhoto): ?>
+                        <img class="gt-byline__photo" src="<?= asset_v($photoPath) ?>"
+                            alt="<?= htmlspecialchars($page['founder_photo_alt']) ?>"
+                            width="52" height="52" loading="lazy" decoding="async">
+                    <?php else: ?>
+                        <span class="gt-byline__photo" aria-hidden="true"></span>
+                    <?php endif; ?>
+                    <div>
+                        <div class="gt-byline__name">Abidhusain Chidi — Founder, Qalbit Infotech</div>
+                        <div class="gt-byline__role">I record these myself</div>
+                    </div>
+                </div>
             </div>
 
             <!-- ---------------------------------------------------------------
                  Lead form. Three steps with JS, one long form without it.
                  ------------------------------------------------------------ -->
-            <div class="gt-panel" id="lead-form" data-gt-panel>
+            <div class="gt-card" data-gt-panel>
 
                 <?php if ($success): ?>
-                    <?php /* No-JS success: the POST redirected back here with a flash. */ ?>
-                    <div class="gt-success" role="status">
-                        <span class="gt-success__mark" aria-hidden="true">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <?php /* No-JS success: the POST redirected back with a flash. */ ?>
+                    <div role="status">
+                        <span class="gt-sent__mark" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                         </span>
-                        <h2 class="gt-h3 gt-success__title" tabindex="-1">Got it. Check your inbox in 48 hours.</h2>
-                        <p class="gt-body gt-success__body">
-                            Your teardown will come from <?= htmlspecialchars($senderMail) ?> — it may land in
-                            Promotions or spam, so keep an eye out.
+                        <h2 class="gt-sent__title" tabindex="-1">Queued. You'll have it within 48 hours.</h2>
+                        <p class="gt-sent__body">
+                            We record in order of arrival. It comes from <?= htmlspecialchars($senderMail) ?> —
+                            it may land in Promotions, so keep an eye out. Nothing else lands in
+                            your inbox unless you reply.
                         </p>
-                        <a class="gt-link gt-success__link" href="<?= htmlspecialchars($bookingUrl) ?>"
+                        <a class="gt-sent__link" href="<?= htmlspecialchars($bookingUrl) ?>"
                             target="_blank" rel="noopener">Prefer to talk sooner? Book a call →</a>
                     </div>
                 <?php else: ?>
 
-                <div class="gt-panel__head">
-                    <?php /* An h2 so the step headings below can be h3s — the form
-                             sits inside the hero, which owns the only h1. */ ?>
-                    <h2 class="gt-panel__title">Get your free teardown</h2>
-                    <p class="gt-panel__note">Three quick questions. No phone number, no sales call.</p>
-                    <p class="gt-eyebrow gt-panel__step" data-gt-step-label hidden>Step 1 of 3</p>
-                    <ol class="gt-progress" data-gt-progress aria-hidden="true" hidden>
-                        <li class="is-filled"></li>
-                        <li></li>
-                        <li></li>
-                    </ol>
+                <div class="gt-card__head">
+                    <h2 class="gt-card__title">Get your free teardown</h2>
+                    <span class="gt-card__step" data-gt-step-label hidden>Step 1 of 3</span>
+                </div>
+                <p class="gt-card__note">Three quick questions. No phone number, no sales call.</p>
+
+                <div class="gt-progress" data-gt-progress hidden aria-hidden="true">
+                    <div class="gt-progress__bar" data-gt-progress-bar style="width:33%"></div>
                 </div>
 
                 <form class="gt-form" method="post" action="<?= htmlspecialchars($formPath) ?>" data-gt-form>
 
-                    <!-- Honeypot. Off-screen, untabbable, hidden from AT: a value
-                         here means a bot, and the submission is dropped. -->
+                    <!-- Honeypot. A value here means a bot; the submission is dropped. -->
                     <div class="gt-honeypot" aria-hidden="true">
                         <label for="gt-website">Website</label>
                         <input type="text" id="gt-website" name="website" tabindex="-1" autocomplete="off">
                     </div>
 
-                    <!-- Attribution. Filled by JS from the query string and
-                         document.referrer; empty means empty, never guessed. -->
+                    <!-- Attribution, filled by JS. Absent means absent, never guessed. -->
                     <input type="hidden" name="utm_source" value="" data-gt-utm="utm_source">
                     <input type="hidden" name="utm_medium" value="" data-gt-utm="utm_medium">
                     <input type="hidden" name="utm_campaign" value="" data-gt-utm="utm_campaign">
@@ -180,205 +189,166 @@ $hasPhoto   = is_file($photoFile);
                     <input type="hidden" name="redirect_to" value="<?= htmlspecialchars($formPath) ?>">
 
                     <?php if (!empty($errors['global'])): ?>
-                        <p class="gt-form__alert"><?= htmlspecialchars($errors['global']) ?></p>
+                        <p class="gt-error" style="margin-bottom:14px"><?= htmlspecialchars($errors['global']) ?></p>
                     <?php endif; ?>
 
-                    <!-- Step 1 — one click, no typing -->
+                    <!-- Step 1 -->
                     <div class="gt-step" data-gt-step="1">
-                        <fieldset class="gt-fieldset">
-                            <legend class="gt-legend" tabindex="-1" data-gt-step-heading>Where is your SaaS today?</legend>
+                        <fieldset style="margin:0;padding:0;border:0">
+                            <legend class="gt-q" tabindex="-1" data-gt-step-heading>Where is your SaaS today?</legend>
                             <div class="gt-choices" data-gt-choices>
-                                <?php foreach (array_keys($stages) as $i => $value): $label = $stages[$value]; ?>
+                                <?php foreach (array_keys($stages) as $i => $value): ?>
                                     <label class="gt-choice<?= $wasChosen('stage', $value) ? ' is-checked' : '' ?>">
                                         <input type="radio" name="stage" value="<?= htmlspecialchars($value) ?>"
                                             <?= $wasChosen('stage', $value) ? 'checked' : '' ?><?= $radioRequired($i) ?>
                                             aria-describedby="gt-err-stage">
-                                        <span class="gt-choice__dot" aria-hidden="true"></span>
-                                        <span><?= htmlspecialchars($label) ?></span>
+                                        <?= htmlspecialchars($stages[$value]) ?>
                                     </label>
                                 <?php endforeach; ?>
                             </div>
                             <p class="gt-error" id="gt-err-stage" aria-live="polite"><?= $fieldError('stage') ?></p>
                         </fieldset>
-
-                        <div class="gt-actions" hidden data-gt-nav>
-                            <button type="button" class="gt-btn gt-btn--primary" data-gt-next="1">Continue</button>
-                        </div>
                     </div>
 
-                    <!-- Step 2 — who you are -->
+                    <!-- Step 2 -->
                     <div class="gt-step" data-gt-step="2">
-                        <h3 class="gt-legend" tabindex="-1" data-gt-step-heading>Where should we send it?</h3>
+                        <fieldset style="margin:0;padding:0;border:0">
+                            <legend class="gt-q" tabindex="-1" data-gt-step-heading>What do you need from us?</legend>
+                            <div class="gt-choices" data-gt-choices>
+                                <?php foreach (array_keys($needs) as $i => $value): ?>
+                                    <label class="gt-choice<?= $wasChosen('need', $value) ? ' is-checked' : '' ?>">
+                                        <input type="radio" name="need" value="<?= htmlspecialchars($value) ?>"
+                                            <?= $wasChosen('need', $value) ? 'checked' : '' ?><?= $radioRequired($i) ?>
+                                            aria-describedby="gt-err-need">
+                                        <?= htmlspecialchars($needs[$value]) ?>
+                                    </label>
+                                <?php endforeach; ?>
+                            </div>
+                            <p class="gt-error" id="gt-err-need" aria-live="polite"><?= $fieldError('need') ?></p>
+                        </fieldset>
+                    </div>
 
+                    <!-- Step 3 -->
+                    <div class="gt-step" data-gt-step="3">
+                        <h3 class="gt-q" tabindex="-1" data-gt-step-heading>Where should the teardown go?</h3>
                         <div class="gt-field">
-                            <label class="gt-label" for="gt-name">Name</label>
-                            <input class="gt-input" type="text" id="gt-name" name="name" autocomplete="name"
-                                required aria-required="true" aria-describedby="gt-err-name"
-                                value="<?= $oldValue('name') ?>">
-                            <p class="gt-error" id="gt-err-name" aria-live="polite"><?= $fieldError('name') ?></p>
-                        </div>
-
-                        <div class="gt-field">
-                            <label class="gt-label" for="gt-email">Work email</label>
-                            <input class="gt-input" type="email" id="gt-email" name="email" autocomplete="email"
-                                inputmode="email" required aria-required="true"
+                            <label class="gt-visually-hidden" for="gt-email">Work email</label>
+                            <input class="gt-input" type="email" id="gt-email" name="email"
+                                placeholder="you@company.com" autocomplete="email" inputmode="email"
+                                required aria-required="true"
                                 aria-describedby="gt-err-email gt-hint-email"
                                 value="<?= $oldValue('email') ?>">
                             <p class="gt-error" id="gt-err-email" aria-live="polite"><?= $fieldError('email') ?></p>
                             <p class="gt-hint" id="gt-hint-email" aria-live="polite" data-gt-email-hint></p>
-                        </div>
 
-                        <div class="gt-actions" hidden data-gt-nav>
-                            <button type="button" class="gt-btn gt-btn--primary" data-gt-next="2">Continue</button>
-                            <button type="button" class="gt-btn gt-btn--quiet" data-gt-back="2">Back</button>
-                        </div>
-                    </div>
+                            <label class="gt-visually-hidden" for="gt-note">Product URL or one line about the idea</label>
+                            <input class="gt-input" type="text" id="gt-note" name="product_or_idea"
+                                placeholder="Product URL or one line about the idea"
+                                required aria-required="true" aria-describedby="gt-err-note"
+                                value="<?= $oldValue('product_or_idea') ?>">
+                            <p class="gt-error" id="gt-err-note" aria-live="polite"><?= $fieldError('product_or_idea') ?></p>
 
-                    <!-- Step 3 — the brief -->
-                    <div class="gt-step" data-gt-step="3">
-                        <h3 class="gt-legend" tabindex="-1" data-gt-step-heading>What should we look at?</h3>
-
-                        <div class="gt-field">
-                            <label class="gt-label" for="gt-product">Your product URL — or one line on the idea</label>
-                            <textarea class="gt-textarea" id="gt-product" name="product_or_idea" rows="3"
-                                required aria-required="true" aria-describedby="gt-err-product"><?= $oldValue('product_or_idea') ?></textarea>
-                            <p class="gt-error" id="gt-err-product" aria-live="polite"><?= $fieldError('product_or_idea') ?></p>
-                        </div>
-
-                        <fieldset class="gt-fieldset gt-field">
-                            <legend class="gt-label">Budget band</legend>
-                            <div class="gt-choices gt-choices--inline" data-gt-choices>
-                                <?php foreach (array_keys($budgets) as $i => $value): $label = $budgets[$value]; ?>
-                                    <label class="gt-choice<?= $wasChosen('budget', $value) ? ' is-checked' : '' ?>">
-                                        <input type="radio" name="budget" value="<?= htmlspecialchars($value) ?>"
-                                            <?= $wasChosen('budget', $value) ? 'checked' : '' ?><?= $radioRequired($i) ?>
-                                            aria-describedby="gt-err-budget">
-                                        <span class="gt-choice__dot" aria-hidden="true"></span>
-                                        <span><?= htmlspecialchars($label) ?></span>
-                                    </label>
-                                <?php endforeach; ?>
-                            </div>
-                            <p class="gt-error" id="gt-err-budget" aria-live="polite"><?= $fieldError('budget') ?></p>
-                        </fieldset>
-
-                        <fieldset class="gt-fieldset gt-field">
-                            <legend class="gt-label">Timeline</legend>
-                            <div class="gt-choices gt-choices--inline" data-gt-choices>
-                                <?php foreach (array_keys($timelines) as $i => $value): $label = $timelines[$value]; ?>
-                                    <label class="gt-choice<?= $wasChosen('timeline', $value) ? ' is-checked' : '' ?>">
-                                        <input type="radio" name="timeline" value="<?= htmlspecialchars($value) ?>"
-                                            <?= $wasChosen('timeline', $value) ? 'checked' : '' ?><?= $radioRequired($i) ?>
-                                            aria-describedby="gt-err-timeline">
-                                        <span class="gt-choice__dot" aria-hidden="true"></span>
-                                        <span><?= htmlspecialchars($label) ?></span>
-                                    </label>
-                                <?php endforeach; ?>
-                            </div>
-                            <p class="gt-error" id="gt-err-timeline" aria-live="polite"><?= $fieldError('timeline') ?></p>
-                        </fieldset>
-
-                        <div class="gt-actions">
-                            <button type="submit" class="gt-btn gt-btn--primary" data-gt-submit>
-                                <span data-gt-submit-label>Get my free teardown</span>
+                            <button type="submit" class="gt-submit" data-gt-submit>
+                                <span data-gt-submit-label>Send my teardown request</span>
                             </button>
-                            <button type="button" class="gt-btn gt-btn--quiet" hidden data-gt-back="3">Back</button>
                         </div>
-
-                        <p class="gt-form__alert" hidden data-gt-global-error role="alert"></p>
+                        <p class="gt-error" data-gt-global-error role="alert" hidden style="margin-top:12px"></p>
                     </div>
                 </form>
 
-                <!-- Success state. Swapped in place of the form; JS moves focus
-                     to the heading so a screen-reader user lands on the answer. -->
-                <div class="gt-success" hidden data-gt-success role="status" aria-live="polite">
-                    <span class="gt-success__mark" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <!-- Success state, swapped in place of the form. -->
+                <div hidden data-gt-success role="status" aria-live="polite">
+                    <span class="gt-sent__mark" aria-hidden="true">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                     </span>
-                    <h2 class="gt-h3 gt-success__title" tabindex="-1" data-gt-success-title>Got it. Check your inbox in 48 hours.</h2>
-                    <p class="gt-body gt-success__body">
-                        Your teardown will come from <?= htmlspecialchars($senderMail) ?> — it may land in
-                        Promotions or spam, so keep an eye out.
+                    <h2 class="gt-sent__title" tabindex="-1" data-gt-success-title>Queued. You'll have it within 48 hours.</h2>
+                    <p class="gt-sent__body">
+                        We record in order of arrival. It comes from <?= htmlspecialchars($senderMail) ?> —
+                        it may land in Promotions, so keep an eye out. Nothing else lands in
+                        your inbox unless you reply.
                     </p>
-                    <a class="gt-link gt-success__link" href="<?= htmlspecialchars($bookingUrl) ?>"
+                    <a class="gt-sent__link" href="<?= htmlspecialchars($bookingUrl) ?>"
                         target="_blank" rel="noopener">Prefer to talk sooner? Book a call →</a>
+                </div>
+
+                <div class="gt-card__foot">
+                    <span>No phone number required</span>
+                    <button type="button" class="gt-back" data-gt-back hidden>← Back</button>
                 </div>
 
                 <?php endif; ?>
             </div>
+
         </div>
     </section>
 
     <!-- ======================================================================
-         3 — Proof strip. Static by design: proof that scrolls past cannot be
-         read, and a marquee reads as decoration rather than evidence.
+         Credentials marquee
          =================================================================== -->
-    <section class="gt-section gt-section--tight" aria-label="Credentials">
-        <div class="gt-container">
-            <ul class="gt-proof">
-                <li class="gt-proof__item">
-                    <span class="gt-proof__icon" aria-hidden="true">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
-                    </span>
-                    Clutch 5.0
-                </li>
-                <li class="gt-proof__item">
-                    <span class="gt-proof__icon" aria-hidden="true">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
-                    </span>
-                    Google 4.9
-                </li>
-                <li class="gt-proof__item">
-                    <span class="gt-proof__icon" aria-hidden="true">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    </span>
-                    Upwork &ldquo;Top Rated Plus&rdquo;
-                </li>
-                <li class="gt-proof__item">11 years</li>
-                <li class="gt-proof__item">4 live SaaS products</li>
-            </ul>
+    <?php
+    $marquee = [
+        'Clutch 5.0 ★', '◆', 'Google 4.9 ★', '◆', 'Upwork top rated plus', '◆',
+        '11 years shipping', '◆', '4 live SaaS products', '◆', '8 people, no bench', '◆',
+    ];
+    ?>
+    <div class="gt-marquee" role="group" aria-label="Credentials">
+        <div class="gt-marquee__track">
+            <?php /* Rendered twice so the -50% keyframe loops seamlessly. The
+                     duplicate is hidden from assistive tech. */ ?>
+            <?php foreach ($marquee as $item): ?>
+                <span><?= $item ?></span>
+            <?php endforeach; ?>
+            <?php foreach ($marquee as $item): ?>
+                <span aria-hidden="true"><?= $item ?></span>
+            <?php endforeach; ?>
         </div>
-    </section>
+    </div>
 
     <!-- ======================================================================
-         4 — Operator proof
+         01 — Who you're hiring
          =================================================================== -->
-    <section class="gt-section gt-section--surface" aria-labelledby="gt-operator-title">
-        <div class="gt-container">
-            <div class="gt-reveal">
-                <p class="gt-eyebrow gt-eyebrow--accent">01 / WHO YOU'RE HIRING</p>
+    <section class="gt-section gt-paper" aria-labelledby="gt-operator-title">
+        <div class="gt-wrap">
+            <p class="gt-eyebrow">01 — Who you're hiring</p>
+
+            <div class="gt-split">
                 <h2 class="gt-h2" id="gt-operator-title">We don't just build SaaS — we operate it.</h2>
-                <p class="gt-lead gt-measure gt-section__intro">
+                <p class="gt-split__lede">
                     Almost no offshore dev shop can say this: we build, ship, and pay the
-                    hosting bills for four of our own live SaaS products. We've felt
+                    hosting bill for four of our own live SaaS products. We've felt
                     multi-tenancy, billing, and infrastructure cost shocks first-hand — so
                     your build benefits from real operating experience, not just delivery.
                 </p>
             </div>
 
-            <div class="gt-grid gt-grid--2 gt-reveal gt-section__grid">
-                <article class="gt-card">
-                    <h3 class="gt-h4">LiftUp</h3>
-                    <p class="gt-body gt-card__desc">Multi-tenant CRM + CMS with AI editorial and analytics.</p>
-                    <p class="gt-card__tag"><span class="gt-tag">Laravel 12 · liftup.sh</span></p>
-                </article>
-                <article class="gt-card">
-                    <h3 class="gt-h4">PocketGST</h3>
-                    <p class="gt-body gt-card__desc">Offline-first mobile GST invoicing for India.</p>
-                    <p class="gt-card__tag"><span class="gt-tag">Mobile · offline-first</span></p>
-                </article>
-                <article class="gt-card">
-                    <h3 class="gt-h4">URLCrop</h3>
-                    <p class="gt-body gt-card__desc">Link management and analytics.</p>
-                    <p class="gt-card__tag"><span class="gt-tag">Links · analytics</span></p>
-                </article>
-                <article class="gt-card">
-                    <h3 class="gt-h4">Emplyft</h3>
-                    <p class="gt-body gt-card__desc">HR management.</p>
-                    <p class="gt-card__tag"><span class="gt-tag">HR</span></p>
-                </article>
+            <div class="gt-grid">
+                <?php foreach ($page['products'] as $product): ?>
+                    <?php
+                    $img    = '/images/products/' . $product['slug'] . '.webp';
+                    $hasImg = $assetExists($img);
+                    ?>
+                    <article class="gt-product">
+                        <?php if ($hasImg): ?>
+                            <img class="gt-product__media" src="<?= asset_v($img) ?>"
+                                alt="<?= htmlspecialchars($product['alt']) ?>"
+                                width="640" height="400" loading="lazy" decoding="async">
+                        <?php else: ?>
+                            <div class="gt-product__media gt-product__media--empty">
+                                <span>product shot — <?= htmlspecialchars($product['slug']) ?></span>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="gt-product__head">
+                            <h3 class="gt-product__name"><?= htmlspecialchars($product['name']) ?></h3>
+                            <span class="gt-product__dot" aria-hidden="true"></span>
+                        </div>
+                        <p class="gt-product__desc"><?= htmlspecialchars($product['desc']) ?></p>
+                        <p class="gt-product__stack"><?= htmlspecialchars($product['stack']) ?></p>
+                    </article>
+                <?php endforeach; ?>
             </div>
 
-            <p class="gt-body gt-measure gt-reveal gt-section__note">
+            <p class="gt-closer">
                 We use Razorpay and Stripe in production. We know what breaks at scale
                 because it broke for us first.
             </p>
@@ -386,93 +356,120 @@ $hasPhoto   = is_file($photoFile);
     </section>
 
     <!-- ======================================================================
-         5 — What happens next
+         02 — The process
          =================================================================== -->
-    <section class="gt-section" aria-labelledby="gt-how-title">
-        <div class="gt-container">
-            <div class="gt-reveal">
-                <p class="gt-eyebrow gt-eyebrow--accent">02 / THE PROCESS</p>
-                <h2 class="gt-h2" id="gt-how-title">What happens next</h2>
-            </div>
+    <section class="gt-section" id="process" aria-labelledby="gt-how-title">
+        <div class="gt-wrap">
+            <p class="gt-eyebrow">02 — The process</p>
+            <h2 class="gt-h2 gt-section-head" id="gt-how-title">What happens next</h2>
 
-            <ol class="gt-grid gt-grid--3 gt-steps gt-reveal">
-                <li class="gt-steps__item">
-                    <span class="gt-steps__index">01</span>
-                    <h3 class="gt-h4 gt-steps__title">You send it</h3>
-                    <p class="gt-body gt-steps__body">
-                        Share your idea or your live product URL in the form. Takes about a minute.
-                    </p>
-                </li>
-                <li class="gt-steps__item">
-                    <span class="gt-steps__index">02</span>
-                    <h3 class="gt-h4 gt-steps__title">We record a walkthrough — within 48 hours</h3>
-                    <p class="gt-body gt-steps__body">
-                        A 15–20 minute Loom covering the architecture we'd use, the v1 modules
-                        that matter, a realistic timeline, and a price range.
-                    </p>
-                </li>
-                <li class="gt-steps__item">
-                    <span class="gt-steps__index">03</span>
-                    <h3 class="gt-h4 gt-steps__title">You decide</h3>
-                    <p class="gt-body gt-steps__body">
-                        Watch it on your own time. Book a call only if it's useful. No pressure,
-                        no follow-up sequence.
-                    </p>
-                </li>
+            <?php
+            $steps = [
+                [
+                    'n' => '01', 'meta' => 'You · about a minute', 'title' => 'You send it',
+                    'body' => 'Share your idea or your live product URL in the form. Takes about a minute.',
+                ],
+                [
+                    'n' => '02', 'meta' => 'Us · within 48 hours', 'title' => 'We record a walkthrough',
+                    'body' => "A 15–30 minute recording covering the architecture we'd use, the v1 modules that matter, a realistic timeline, and a price range.",
+                    'key' => true,
+                ],
+                [
+                    'n' => '03', 'meta' => 'You · your own time', 'title' => 'You decide',
+                    'body' => "Watch it whenever. Book a call only if it's useful. No pressure, no follow-up sequence.",
+                ],
+            ];
+            ?>
+            <ol class="gt-steps">
+                <?php foreach ($steps as $step): ?>
+                    <li class="gt-stepcard<?= !empty($step['key']) ? ' gt-stepcard--key' : '' ?>">
+                        <div class="gt-stepcard__num" aria-hidden="true"><?= $step['n'] ?></div>
+                        <p class="gt-stepcard__meta"><?= htmlspecialchars($step['meta']) ?></p>
+                        <h3 class="gt-stepcard__title"><?= htmlspecialchars($step['title']) ?></h3>
+                        <p class="gt-stepcard__body"><?= htmlspecialchars($step['body']) ?></p>
+                    </li>
+                <?php endforeach; ?>
             </ol>
         </div>
     </section>
 
     <!-- ======================================================================
-         6 — Price anchor
+         03 — Price
          =================================================================== -->
-    <section class="gt-section gt-section--tight gt-section--surface" aria-labelledby="gt-price-title">
-        <div class="gt-container gt-price gt-reveal">
-            <p class="gt-eyebrow gt-eyebrow--accent">03 / PRICE</p>
-            <h2 class="gt-h3 gt-price__line" id="gt-price-title">
-                Most SaaS builds we take on start at $22,000. The teardown is free either way.
-            </h2>
-            <?php /* PLACEHOLDER: pricing link — config('landing.saas_teardown.pricing_url') */ ?>
-            <a class="gt-link gt-price__link" href="<?= htmlspecialchars($pricingUrl) ?>">See how we price →</a>
+    <section class="gt-section gt-paper" id="price" aria-labelledby="gt-price-title">
+        <div class="gt-wrap">
+            <p class="gt-eyebrow">03 — Price</p>
+
+            <div class="gt-price">
+                <div>
+                    <p class="gt-price__label"><?= htmlspecialchars($page['price_from_label']) ?></p>
+                    <p class="gt-price__amount"><?= htmlspecialchars($page['price_from']) ?></p>
+                </div>
+                <div>
+                    <h2 class="gt-price__claim" id="gt-price-title">Most SaaS builds we take on start here.</h2>
+                    <p class="gt-price__free">
+                        <span class="gt-tick" aria-hidden="true">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </span>
+                        The teardown is free either way.
+                    </p>
+                    <?php /* PLACEHOLDER: pricing link — config('landing.saas_teardown.pricing_url') */ ?>
+                    <a class="gt-btn-outline" href="<?= htmlspecialchars($pricingUrl) ?>">See how we price →</a>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- ======================================================================
-         7 — Case studies
+         04 — Recent work
          =================================================================== -->
-    <section class="gt-section" aria-labelledby="gt-cases-title">
-        <div class="gt-container">
-            <div class="gt-reveal">
-                <p class="gt-eyebrow gt-eyebrow--accent">04 / RECENT WORK</p>
-                <h2 class="gt-h2" id="gt-cases-title">Two things we've built recently</h2>
-            </div>
+    <section class="gt-section gt-paper" id="work" style="padding-top:0" aria-labelledby="gt-cases-title">
+        <div class="gt-wrap">
+            <p class="gt-eyebrow">04 — Recent work</p>
+            <h2 class="gt-h2 gt-section-head" id="gt-cases-title">Two things we've built recently</h2>
 
-            <div class="gt-grid gt-grid--cases gt-reveal gt-section__grid">
-                <?php foreach ($page['case_studies'] as $index => $case): ?>
-                    <article class="gt-card gt-case">
-                        <div class="gt-case__body">
-                            <h3 class="gt-h4"><?= htmlspecialchars($case['name']) ?></h3>
-                            <p class="gt-body gt-card__desc"><?= htmlspecialchars($case['summary']) ?></p>
-                            <p class="gt-card__tag"><span class="gt-tag"><?= htmlspecialchars($case['stack']) ?></span></p>
-                        </div>
-
-                        <?php if (!empty($case['metric']['value'])): ?>
-                            <div class="gt-metric">
-                                <p class="gt-h2 gt-metric__value"><?= htmlspecialchars($case['metric']['value']) ?></p>
-                                <p class="gt-small gt-metric__label"><?= htmlspecialchars($case['metric']['label'] ?? '') ?></p>
-                            </div>
+            <div class="gt-cases">
+                <?php foreach ($page['case_studies'] as $case): ?>
+                    <?php
+                    $csImg    = '/images/case-studies/go/' . $case['slug'] . '.webp';
+                    $hasCsImg = $assetExists($csImg);
+                    $metric   = $case['metric'];
+                    ?>
+                    <article class="gt-case">
+                        <?php if ($hasCsImg): ?>
+                            <img class="gt-case__media" src="<?= asset_v($csImg) ?>"
+                                alt="<?= htmlspecialchars($case['name'] . ' — ' . $case['kicker']) ?>"
+                                width="640" height="400" loading="lazy" decoding="async">
                         <?php else: ?>
-                            <?php /* PLACEHOLDER_METRIC_<?= $index + 1 ?>: outcome metric + label.
-                                     Set value/label in config/landing.php and this box becomes a
-                                     real metric. Rendered dashed and labelled so it can never be
-                                     mistaken for a number we actually measured. */ ?>
-                            <div class="gt-metric-placeholder">
-                                <p class="gt-metric-placeholder__value">Metric — client to supply</p>
-                                <p class="gt-metric-placeholder__label">
-                                    config/landing.php → case_studies.<?= $index ?>.metric
-                                </p>
+                            <div class="gt-case__media gt-case__media--empty">
+                                <span>case shot — <?= htmlspecialchars($case['slug']) ?></span>
                             </div>
                         <?php endif; ?>
+
+                        <div class="gt-case__body">
+                            <p class="gt-case__kicker"><?= htmlspecialchars($case['kicker']) ?></p>
+                            <h3 class="gt-case__name"><?= htmlspecialchars($case['name']) ?></h3>
+                            <p class="gt-case__desc"><?= htmlspecialchars($case['summary']) ?></p>
+                            <p class="gt-case__stack"><?= htmlspecialchars($case['stack']) ?></p>
+
+                            <?php if (!empty($metric['value'])): ?>
+                                <?php /* A published figure — CyberFind states these on its own site. */ ?>
+                                <div class="gt-metric">
+                                    <span class="gt-metric__value"><?= htmlspecialchars($metric['value']) ?></span>
+                                    <span class="gt-metric__label"><?= htmlspecialchars($metric['label']) ?></span>
+                                </div>
+                            <?php elseif (!empty($metric['outcome'])): ?>
+                                <?php /* No hard number was ever recorded for this build, so the
+                                         outcome is stated in words. Inventing a percentage here
+                                         would be the easiest lie on the page to tell. */ ?>
+                                <div class="gt-outcome">
+                                    <span class="gt-outcome__mark" aria-hidden="true">
+                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </span>
+                                    <span class="gt-outcome__text"><?= htmlspecialchars($metric['outcome']) ?></span>
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     </article>
                 <?php endforeach; ?>
             </div>
@@ -480,119 +477,144 @@ $hasPhoto   = is_file($photoFile);
     </section>
 
     <!-- ======================================================================
-         8 — When we're not a fit. Calm, on canvas, no card: honesty presented
-         as a feature reads as a sales trick.
+         05 — Honesty
          =================================================================== -->
-    <section class="gt-section gt-section--surface" aria-labelledby="gt-fit-title">
-        <div class="gt-container gt-reveal">
-            <p class="gt-eyebrow gt-eyebrow--accent">05 / HONESTY</p>
-            <h2 class="gt-h2" id="gt-fit-title">When we're not a fit</h2>
+    <section class="gt-section" aria-labelledby="gt-fit-title">
+        <div class="gt-wrap">
+            <p class="gt-eyebrow">05 — Honesty</p>
 
-            <ul class="gt-disqualifiers">
-                <li>We won't be the cheapest quote you get.</li>
-                <li>We're fully remote — no on-site, ever.</li>
-                <li>We're a poor fit if your requirements are locked and can't change.</li>
-                <li>We're eight people, not ten-plus engineers you can spin up next month.</li>
-            </ul>
-        </div>
-    </section>
+            <?php
+            $disqualifiers = [
+                "We won't be the cheapest quote you get.",
+                "We're fully remote — no on-site, ever.",
+                "We're a poor fit if your requirements are locked and can't change.",
+                "We're eight people, not ten-plus engineers you can spin up next month.",
+            ];
+            $fitImg    = '/images/go/not-a-fit.webp';
+            $hasFitImg = $assetExists($fitImg);
+            ?>
+            <div class="gt-fit">
+                <div>
+                    <h2 class="gt-h2" id="gt-fit-title">When we're not a fit</h2>
+                    <ul class="gt-fit__list">
+                        <?php foreach ($disqualifiers as $i => $line): ?>
+                            <li class="gt-fit__item">
+                                <span class="gt-fit__num" aria-hidden="true"><?= sprintf('%02d', $i + 1) ?></span>
+                                <?= htmlspecialchars($line) ?>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
 
-    <!-- ======================================================================
-         9 — FAQ. Native <details>: accessible and interactive with zero JS.
-         =================================================================== -->
-    <section class="gt-section" aria-labelledby="gt-faq-title">
-        <div class="gt-container gt-reveal">
-            <p class="gt-eyebrow gt-eyebrow--accent">06 / QUESTIONS</p>
-            <h2 class="gt-h2" id="gt-faq-title">Questions people ask before sending</h2>
-
-            <div class="gt-faq">
-                <details class="gt-faq__item">
-                    <summary class="gt-faq__q">
-                        Who owns the code and IP?
-                        <span class="gt-faq__chevron" aria-hidden="true">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </span>
-                    </summary>
-                    <p class="gt-body gt-faq__a">
-                        You do, from day one. The repository lives in your account and you get
-                        commit access from week one. There's no lock-in and nothing is held hostage.
-                    </p>
-                </details>
-
-                <details class="gt-faq__item">
-                    <summary class="gt-faq__q">
-                        What's the catch on a free teardown?
-                        <span class="gt-faq__chevron" aria-hidden="true">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </span>
-                    </summary>
-                    <p class="gt-body gt-faq__a">
-                        Honestly: roughly one in five teardown recipients ends up hiring us, and
-                        the rest don't. That's fine — the teardown is genuinely useful either way,
-                        and it's how we show what working with us is like instead of just claiming it.
-                    </p>
-                </details>
-
-                <details class="gt-faq__item">
-                    <summary class="gt-faq__q">
-                        How does timezone and communication work?
-                        <span class="gt-faq__chevron" aria-hidden="true">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </span>
-                    </summary>
-                    <p class="gt-body gt-faq__a">
-                        We keep daily overlap hours with your working day and send daily written
-                        updates. You'll always know what's happening without chasing us.
-                    </p>
-                </details>
-
-                <details class="gt-faq__item">
-                    <summary class="gt-faq__q">
-                        What if the build runs over?
-                        <span class="gt-faq__chevron" aria-hidden="true">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </span>
-                    </summary>
-                    <p class="gt-body gt-faq__a">
-                        We run an Architecture Sprint first, so build quotes are made after design —
-                        not guessed up front. Any scope change is priced and agreed before work
-                        starts, so there are no silent overruns.
-                    </p>
-                </details>
+                <?php if ($hasFitImg): ?>
+                    <?php /* Decorative: the meaning is carried entirely by the list
+                             beside it, so an empty alt keeps a screen reader from
+                             having a photograph described at it for no reason. */ ?>
+                    <img class="gt-fit__media" src="<?= asset_v($fitImg) ?>" alt=""
+                        width="1024" height="1024" loading="lazy" decoding="async">
+                <?php else: ?>
+                    <div class="gt-fit__media gt-fit__media--empty">
+                        <span>team photo — desk, laptop, coffee</span>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </section>
 
     <!-- ======================================================================
-         10 — Closing CTA
+         06 — Questions. Native <details>: accessible, keyboard-operable, zero JS.
          =================================================================== -->
-    <section class="gt-section gt-section--surface" aria-labelledby="gt-closing-title">
-        <div class="gt-container gt-closing gt-reveal">
-            <p class="gt-eyebrow gt-eyebrow--accent">07 / NEXT STEP</p>
-            <h2 class="gt-h2 gt-closing__title" id="gt-closing-title">
-                Send us your SaaS. Get your teardown in 48 hours.
-            </h2>
-            <p class="gt-lead gt-closing__sub">Free, and no call required to get it.</p>
-            <p class="gt-closing__cta">
-                <a class="gt-btn gt-btn--primary" href="#lead-form" data-gt-scroll>Get my free teardown</a>
-            </p>
+    <section class="gt-section gt-paper" id="faq" aria-labelledby="gt-faq-title">
+        <div class="gt-wrap">
+            <p class="gt-eyebrow">06 — Questions</p>
+
+            <?php
+            $faqs = [
+                [
+                    'q' => 'Who owns the code and IP?',
+                    'a' => "You do, from day one. The repository lives in your account and you get commit access from week one. There's no lock-in and nothing is held hostage.",
+                    'open' => true,
+                ],
+                [
+                    'q' => "What's the catch on a free teardown?",
+                    'a' => "None. It costs us half a day and it's the fastest way to show how we think. Roughly one in four people who get one hire us; the rest keep the plan.",
+                ],
+                [
+                    'q' => 'How does timezone and communication work?',
+                    'a' => "We're in Ahmedabad (IST) and hold a four-hour overlap with European mornings and US mornings on request. Written updates land daily; calls are weekly and optional.",
+                ],
+                [
+                    'q' => 'What if the build runs over?',
+                    'a' => 'Scope we agreed and mis-estimated is on us. Scope you add is quoted before we start it, in writing, so the number never moves quietly.',
+                ],
+            ];
+            ?>
+            <div class="gt-faq">
+                <h2 class="gt-h2" id="gt-faq-title">Questions people ask before sending</h2>
+
+                <div class="gt-faq__list">
+                    <?php foreach ($faqs as $faq): ?>
+                        <details class="gt-faq__item"<?= !empty($faq['open']) ? ' open' : '' ?>>
+                            <summary class="gt-faq__q">
+                                <span><?= htmlspecialchars($faq['q']) ?></span>
+                                <span class="gt-faq__sign" aria-hidden="true"></span>
+                            </summary>
+                            <p class="gt-faq__a"><?= htmlspecialchars($faq['a']) ?></p>
+                        </details>
+                    <?php endforeach; ?>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <!-- ======================================================================
+         07 — Next step
+         =================================================================== -->
+    <section class="gt-final gt-lime" aria-labelledby="gt-final-title">
+        <div class="gt-wrap">
+            <p class="gt-eyebrow">07 — Next step</p>
+            <div class="gt-final__grid">
+                <h2 class="gt-final__title" id="gt-final-title">Send us your SaaS. Get your teardown in 48 hours.</h2>
+                <p class="gt-final__sub">Free, and no call required to get it. Most people who send one never book a call — they just take the plan.</p>
+            </div>
+        </div>
+
+        <?php /* Outside .gt-wrap on purpose: this bar is full-bleed, so it
+                 cancels the section gutter rather than sitting inside the
+                 1320px container like everything above it. */ ?>
+        <a class="gt-final__cta" href="#teardown">
+            Get my free teardown
+            <span class="gt-final__arrow" aria-hidden="true">→</span>
+        </a>
     </section>
 </main>
 
 <!-- ==========================================================================
-     11 — Footer
+     Footer
      ======================================================================= -->
 <footer class="gt-footer">
-    <div class="gt-container">
-        <p><strong class="gt-footer__name">QalbIT Infotech Pvt Ltd</strong></p>
-        <p>C-109, Siddhi Vinayak Towers, Makarba, Ahmedabad 380051, India</p>
-        <p><a href="mailto:<?= htmlspecialchars($replyMail) ?>"><?= htmlspecialchars($replyMail) ?></a></p>
+    <div class="gt-wrap">
+        <div class="gt-footer__top">
+            <div>
+                <div class="gt-brand"><?= $brand() ?></div>
+                <p class="gt-footer__legal">QalbIT Infotech Pvt Ltd</p>
+            </div>
+            <div>
+                <p class="gt-footer__label">Office</p>
+                <p class="gt-footer__value">C-109, Siddhi Vinayak Towers,<br>Makarba, Ahmedabad 380051, India</p>
+            </div>
+            <div>
+                <p class="gt-footer__label">Enquiries</p>
+                <p class="gt-footer__value">
+                    <a href="mailto:<?= htmlspecialchars($replyMail) ?>"><?= htmlspecialchars($replyMail) ?></a>
+                </p>
+            </div>
+        </div>
+
+        <?php /* aria-hidden: the legal name is stated above it, and this instance
+                 is graphic, not information. */ ?>
+        <div class="gt-footer__wordmark" aria-hidden="true">QALBIT</div>
+
+        <p class="gt-footer__copyright">&copy; <?= date('Y') ?> Qalbit Infotech Pvt Ltd. All rights reserved.</p>
     </div>
 </footer>
-
-<!-- Sticky mobile CTA. Revealed once the form scrolls out of view and hidden
-     again whenever it is back on screen. -->
-<div class="gt-sticky" data-gt-sticky hidden>
-    <a class="gt-btn gt-btn--primary gt-btn--block" href="#lead-form" data-gt-scroll>Get my free teardown</a>
-</div>
