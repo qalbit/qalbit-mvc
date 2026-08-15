@@ -1,6 +1,28 @@
 <?php
 
 /*
+ * Static files under `php -S`.
+ *
+ * PHP's built-in server hands EVERY request to the router script, including
+ * ones that map to real files in public/. Without this, /assets/** falls
+ * through to the 404 route and the whole site renders unstyled and imageless
+ * locally — which looks exactly like a broken build. Returning false tells the
+ * built-in server to serve the file itself.
+ *
+ * realpath containment because $_SERVER['REQUEST_URI'] is attacker-shaped
+ * input; the built-in server already normalises `..`, but this file should not
+ * depend on that. No-op under every real SAPI (apache2handler, fpm, cgi).
+ */
+if (PHP_SAPI === 'cli-server') {
+    $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+    $real = realpath(__DIR__ . $path);
+
+    if ($real !== false && is_file($real) && str_starts_with($real, __DIR__ . DIRECTORY_SEPARATOR)) {
+        return false;
+    }
+}
+
+/*
  * Canonical host.
  *
  * qalbit.com serves the site; www.qalbit.com must not. Without this the whole
