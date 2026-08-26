@@ -382,7 +382,7 @@ $brand = static function () use ($hasLogo, $logoPath, $page): string {
          =================================================================== -->
     <?php
     $marquee = [
-        'Clutch 5.0 ★', '◆', 'Google 4.9 ★', '◆', 'Upwork top rated plus', '◆',
+        'Clutch 5.0 ★', '◆', 'Google 4.9 ★', '◆', 'Upwork top rated', '◆',
         '11 years shipping', '◆', '4 live SaaS products', '◆', '8 people, no bench', '◆',
     ];
     ?>
