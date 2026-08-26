@@ -602,13 +602,28 @@
                 if (title) title.focus();
             }
 
-            // Conversion signal for GTM. gtag-layer.js defines dataLayer before
-            // GTM loads and GTM replays anything pushed beforehand.
+            /*
+             * Conversion signal for GTM. gtag-layer.js defines dataLayer before
+             * GTM loads and GTM replays anything pushed beforehand.
+             *
+             * Both values used to be hardcoded here, which was fine while this
+             * file served one page. It now serves two, so every Gulf conversion
+             * was reporting form_name "saas_teardown" against the other page's
+             * path — the Gulf campaign looked like it converted nothing and the
+             * original looked like it converted twice.
+             *
+             * page_path comes from the URL, which cannot be wrong. form_name
+             * comes from the form, defaulting to the original page's value so a
+             * cached copy of that page's HTML keeps pushing exactly what it
+             * pushed before.
+             */
+            var formName = form.getAttribute("data-gt-campaign") || "saas_teardown";
+
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
                 event: "generate_lead",
-                form_name: "saas_teardown",
-                page_path: "/go/saas-product-development/"
+                form_name: formName,
+                page_path: window.location.pathname
             });
         }
 

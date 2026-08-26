@@ -231,7 +231,7 @@ $brand = static function () use ($hasLogo, $logoPath, $page): string {
                 $recaptchaCfg     = config('recaptcha', []);
                 $recaptchaSiteKey = !empty($recaptchaCfg['enabled']) ? (string) ($recaptchaCfg['site_key'] ?? '') : '';
                 ?>
-                <form class="gt-form" method="post" action="<?= htmlspecialchars($formPath) ?>" data-gt-form
+                <form class="gt-form" method="post" action="<?= htmlspecialchars($formPath) ?>" data-gt-form data-gt-campaign="gulf_saas"
                     <?php if ($recaptchaSiteKey !== ''): ?>data-gt-recaptcha-key="<?= htmlspecialchars($recaptchaSiteKey, ENT_QUOTES) ?>"<?php endif; ?>>
 
                     <!-- Honeypot. A value here means a bot; the submission is dropped. -->
