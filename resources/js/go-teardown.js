@@ -130,7 +130,44 @@
         var form = document.querySelector("[data-gt-form]");
         if (form) initForm(form);
         initMarquee();
+        initWhatsApp();
     });
+
+    /* ---------------------------------------------------------------------
+     * Click-to-WhatsApp attribution.
+     *
+     * The Gulf page offers WhatsApp alongside the form, and a visitor who takes
+     * that route leaves no trace: nothing posts, so no CRM record is created
+     * and no conversion is reported. Without this the campaign looks like it
+     * underperforms by exactly the number of people who chose the channel the
+     * page pushes hardest.
+     *
+     * The links open in a new tab, so this page is never unloaded and the push
+     * has time to be consumed — no beacon or unload handling needed. GTM boots
+     * on first interaction and replays whatever was pushed before it loaded,
+     * which is the same path generate_lead already relies on.
+     *
+     * A page with no WhatsApp links (the original campaign page) short-circuits.
+     * ------------------------------------------------------------------ */
+    function initWhatsApp() {
+        var links = document.querySelectorAll("[data-gt-wa]");
+        if (!links.length) return;
+
+        var form = document.querySelector("[data-gt-form]");
+        var campaign = (form && form.getAttribute("data-gt-campaign")) || "";
+
+        Array.prototype.forEach.call(links, function (link) {
+            link.addEventListener("click", function () {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    event: "whatsapp_click",
+                    form_name: campaign,
+                    link_location: link.getAttribute("data-gt-wa") || "unknown",
+                    page_path: window.location.pathname
+                });
+            });
+        });
+    }
 
     /* ---------------------------------------------------------------------
      * Marquee.

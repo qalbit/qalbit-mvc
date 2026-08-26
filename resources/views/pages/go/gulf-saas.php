@@ -56,9 +56,22 @@ $waIcon = '<svg class="gt-wa__icon" viewBox="0 0 24 24" aria-hidden="true" focus
     . '<path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.17 8.17 0 0 1-1.25-4.36c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23z"/>'
     . '</svg>';
 
-/** One click-to-WhatsApp link. $extra carries the variant class. */
+/**
+ * One click-to-WhatsApp link. $extra carries the variant class.
+ *
+ * data-gt-wa is the analytics hook, and its value is derived from the variant
+ * class rather than passed separately: a new call site cannot forget to label
+ * itself, and the label cannot drift from the placement it names.
+ */
 $waLink = static function (string $extra, string $label) use ($whatsappUrl, $waIcon): string {
+    $variant  = trim(strtok(trim($extra), ' ') ?: '');
+    $location = preg_replace('/^gt-wa--/', '', $variant);
+    if ($location === '' || $location === null) {
+        $location = 'unknown';
+    }
+
     return '<a class="gt-wa ' . $extra . '" href="' . htmlspecialchars($whatsappUrl, ENT_QUOTES) . '"'
+        . ' data-gt-wa="' . htmlspecialchars($location, ENT_QUOTES) . '"'
         . ' target="_blank" rel="noopener">'
         . $waIcon
         . '<span class="gt-wa__label">' . htmlspecialchars($label) . '</span>'
