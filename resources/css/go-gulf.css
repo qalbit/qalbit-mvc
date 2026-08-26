@@ -1,0 +1,1788 @@
+/* ============================================================================
+ * /go/gulf-saas-development/
+ *
+ * The Gulf / GCC campaign page. A copy of go-teardown.css, not an extension of
+ * it: layouts/landing.php loads exactly one stylesheet per landing page, and
+ * two paid campaigns that will be tuned independently should not be able to
+ * restyle each other. The Gulf-only additions are at the very bottom of this
+ * file, under "Gulf additions" — everything above that marker is the shared
+ * design system, unchanged.
+ *
+ * Original header follows.
+ * ---------------------------------------------------------------------------
+ * /go/saas-product-development/
+ *
+ * Ported from the approved prototype: near-black ink, warm paper, a single
+ * brand-blue accent, Space Grotesk for everything and JetBrains Mono for
+ * labels. Dark-first, with paper sections alternating in.
+ *
+ * The prototype carried its styling inline on every element. Here it lives in
+ * one stylesheet because this page ships through a PHP view, not a component
+ * tree — the rendered result is the same, but a colour or a size changes in
+ * one place instead of forty.
+ *
+ * This is the ONLY stylesheet layouts/landing.php loads: it does not import
+ * the site's app.css, so nothing here can leak into qalbit.com and nothing
+ * from qalbit.com can leak in.
+ * ========================================================================= */
+
+:root {
+    --ink: #111110;
+    --paper: #f2efe7;
+
+    /*
+     * Brand blue. It replaced an acid lime, and the swap is not a find-and-
+     * replace: the lime was a LIGHT surface carrying dark text, this is a DARK
+     * one. Anything sitting on the accent flips to white, and the accent used
+     * AS text on the near-black background needs a lighter tint to stay
+     * legible — #0066FF on #111110 is only 3.95:1, under the 4.5:1 floor.
+     */
+    --accent: #0066ff;
+    --on-accent: #ffffff;      /* text and icons sitting ON the accent — 4.6:1 */
+    --accent-text: #5b9dff;    /* the accent used as text on ink — 6.4:1 */
+
+    /* Hairlines, named for the surface they sit on. */
+    --ink-line: rgba(242, 239, 231, 0.16);
+    --paper-line: rgba(17, 17, 16, 0.16);
+
+    /* Text tiers on each surface. */
+    --on-ink: #f2efe7;
+    --on-ink-soft: rgba(242, 239, 231, 0.72);
+    --on-ink-muted: rgba(242, 239, 231, 0.5);
+    --on-paper: #111110;
+    --on-paper-soft: rgba(17, 17, 16, 0.66);
+    --on-paper-muted: rgba(17, 17, 16, 0.5);
+
+    --gutter: clamp(16px, 4vw, 56px);
+    --container: 1320px;
+    --section-y: clamp(56px, 8vw, 120px);
+
+    --font-sans: "Space Grotesk", "Space Grotesk Fallback", Helvetica, Arial, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* Metric-matched fallback so the Space Grotesk swap costs no layout shift. */
+@font-face {
+    font-family: "Space Grotesk Fallback";
+    src: local("Arial");
+    size-adjust: 103%;
+    ascent-override: 96%;
+    descent-override: 24%;
+    line-gap-override: 0%;
+}
+
+/* ---------------------------------------------------------------------------
+ * Reset
+ * ------------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* The header is sticky, so anchor targets must clear it. */
+    scroll-padding-top: 80px;
+}
+
+body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--on-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+    color: inherit;
+}
+
+h1, h2, h3, p, ul, ol, dl, dd, figure {
+    margin: 0;
+}
+
+ul, ol {
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--accent-text);
+}
+
+.gt-paper a:hover {
+    color: var(--accent);
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--on-accent);
+}
+
+/* The UA's [hidden] loses to any class that sets display, and several
+   components here are flex. Without this, JS toggling `hidden` does nothing. */
+[hidden] {
+    display: none !important;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.gt-paper :focus-visible {
+    outline-color: var(--ink);
+}
+
+/* The accent is now a dark surface, so its focus ring goes white. */
+.gt-lime :focus-visible,
+.gt-stepcard--key :focus-visible {
+    outline-color: #ffffff;
+}
+
+[tabindex="-1"]:focus {
+    outline: none;
+}
+
+.gt-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.gt-skip-link {
+    position: absolute;
+    left: 16px;
+    top: -100px;
+    z-index: 100;
+    padding: 12px 16px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.gt-skip-link:focus {
+    top: 12px;
+    color: var(--on-accent);
+}
+
+/* ---------------------------------------------------------------------------
+ * Layout primitives
+ * ------------------------------------------------------------------------ */
+.gt-wrap {
+    max-width: var(--container);
+    margin: 0 auto;
+}
+
+.gt-section {
+    padding: var(--section-y) var(--gutter);
+}
+
+.gt-paper {
+    background: var(--paper);
+    color: var(--on-paper);
+}
+
+.gt-lime {
+    background: var(--accent);
+    color: var(--on-accent);
+}
+
+/* Section eyebrow: mono, tracked, with a square marker and a rule beneath. */
+.gt-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--ink-line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--on-ink-muted);
+}
+
+.gt-paper .gt-eyebrow {
+    border-bottom-color: var(--paper-line);
+    color: var(--on-paper-muted);
+}
+
+.gt-eyebrow::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    flex: none;
+    background: var(--accent);
+}
+
+.gt-paper .gt-eyebrow::before {
+    background: var(--ink);
+}
+
+.gt-h2 {
+    font-size: clamp(32px, 4.4vw, 58px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    font-weight: 700;
+    text-wrap: balance;
+}
+
+.gt-section-head {
+    margin: clamp(28px, 3.5vw, 44px) 0 clamp(36px, 5vw, 64px);
+}
+
+/* ---------------------------------------------------------------------------
+ * Header
+ * ------------------------------------------------------------------------ */
+.gt-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    height: 68px;
+    padding: 0 var(--gutter);
+    background: rgba(17, 17, 16, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--ink-line);
+}
+
+.gt-brand {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+}
+
+/* The real lockup. Height-driven so the intrinsic 139x34 ratio holds and the
+   header reserves the right box before the SVG paints. */
+.gt-brand__logo {
+    height: 30px;
+    width: auto;
+}
+
+/* Fallback wordmark, only rendered if the SVG is missing from a deploy. */
+.gt-brand__mark {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.gt-brand__dot {
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    display: block;
+}
+
+.gt-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2.4vw, 34px);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(242, 239, 231, 0.62);
+}
+
+.gt-nav__link {
+    padding: 6px 0;
+}
+
+/* Links collapse below md; the CTA never does. */
+@media (max-width: 720px) {
+    .gt-nav__link {
+        display: none;
+    }
+}
+
+.gt-nav__cta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.gt-nav__cta:hover {
+    background: var(--paper);
+    color: var(--ink);
+}
+
+.gt-nav__cta::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: var(--on-accent);
+    display: block;
+    animation: gt-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes gt-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
+}
+
+/* ---------------------------------------------------------------------------
+ * Hero
+ * ------------------------------------------------------------------------ */
+.gt-hero {
+    padding: clamp(48px, 7vw, 104px) var(--gutter) clamp(40px, 5vw, 72px);
+    border-bottom: 1px solid var(--ink-line);
+}
+
+.gt-hero__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+}
+
+.gt-kicker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    margin-bottom: clamp(20px, 3vw, 34px);
+}
+
+.gt-kicker::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--accent-text);
+    display: block;
+}
+
+.gt-h1 {
+    font-size: clamp(42px, 6.6vw, 92px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 700;
+    text-wrap: balance;
+}
+
+/* The lime highlight wraps cleanly across lines. */
+.gt-h1__hl {
+    color: var(--on-accent);
+    background: var(--accent);
+    padding: 0 0.14em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+.gt-h1__dim {
+    opacity: 0.42;
+}
+
+.gt-hero__lede {
+    margin-top: clamp(24px, 3vw, 36px);
+    max-width: 52ch;
+    font-size: clamp(16px, 1.25vw, 19px);
+    line-height: 1.55;
+    color: var(--on-ink-soft);
+    text-wrap: pretty;
+}
+
+.gt-hero__claim {
+    margin-top: clamp(28px, 3.5vw, 40px);
+    border-left: 2px solid var(--accent);
+    padding: 2px 0 2px 20px;
+    font-size: clamp(16px, 1.2vw, 19px);
+    line-height: 1.45;
+    font-weight: 500;
+    max-width: 44ch;
+}
+
+.gt-byline {
+    margin-top: clamp(32px, 4vw, 48px);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.gt-byline__photo {
+    width: 52px;
+    height: 52px;
+    flex: 0 0 auto;
+    object-fit: cover;
+    border: 1px solid var(--ink-line);
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(242, 239, 231, 0.14) 0 5px,
+        transparent 5px 10px
+    );
+}
+
+.gt-byline__name {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.gt-byline__role {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--on-ink-muted);
+    margin-top: 5px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Form card
+ * ------------------------------------------------------------------------ */
+.gt-card {
+    background: var(--paper);
+    color: var(--on-paper);
+    padding: clamp(24px, 2.6vw, 34px);
+    position: relative;
+    box-shadow: 14px 14px 0 rgba(0, 102, 255, 0.9);
+    scroll-margin-top: 88px;
+}
+
+.gt-card__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.gt-card__title {
+    font-size: clamp(22px, 2vw, 27px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.gt-card__step {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: rgba(17, 17, 16, 0.55);
+    white-space: nowrap;
+}
+
+.gt-card__note {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(17, 17, 16, 0.62);
+}
+
+.gt-progress {
+    margin: 20px 0 24px;
+    height: 3px;
+    background: rgba(17, 17, 16, 0.12);
+    position: relative;
+}
+
+.gt-progress__bar {
+    position: absolute;
+    inset: 0 auto 0 0;
+    background: var(--ink);
+    transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.gt-q {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.gt-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Real radios, visually styled. The label carries the state so the control can
+   stay in the accessibility tree without being drawn twice. */
+.gt-choice {
+    position: relative;
+    display: block;
+    font-size: 15px;
+    padding: 14px 16px;
+    background: transparent;
+    border: 1px solid rgba(17, 17, 16, 0.2);
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.gt-choice input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+}
+
+.gt-choice:hover,
+.gt-choice:has(input:checked),
+.gt-choice.is-checked {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+}
+
+.gt-choice:has(input:focus-visible) {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+
+.gt-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.gt-input {
+    font-size: 15px;
+    padding: 15px 16px;
+    background: #fff;
+    border: 1px solid rgba(17, 17, 16, 0.2);
+    color: var(--ink);
+    outline: none;
+    width: 100%;
+}
+
+.gt-input::placeholder {
+    color: rgba(17, 17, 16, 0.35);
+}
+
+.gt-input:focus-visible {
+    border-color: var(--ink);
+}
+
+.gt-input[aria-invalid="true"] {
+    border-color: #b3261e;
+}
+
+.gt-submit {
+    margin-top: 6px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    padding: 16px;
+    background: var(--ink);
+    border: 1px solid var(--ink);
+    color: var(--paper);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.gt-submit:hover {
+    background: var(--accent);
+    color: var(--on-accent);
+    border-color: var(--accent);
+}
+
+.gt-submit[disabled] {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.gt-spinner {
+    width: 15px;
+    height: 15px;
+    border: 2px solid rgba(242, 239, 231, 0.4);
+    border-top-color: var(--paper);
+    border-radius: 999px;
+    animation: gt-spin 0.7s linear infinite;
+}
+
+@keyframes gt-spin {
+    to { transform: rotate(360deg); }
+}
+
+.gt-error {
+    font-size: 13px;
+    line-height: 1.45;
+    color: #8c1d18;
+}
+
+.gt-error:empty {
+    display: none;
+}
+
+.gt-hint {
+    font-size: 13px;
+    line-height: 1.45;
+    color: rgba(17, 17, 16, 0.55);
+}
+
+.gt-hint:empty {
+    display: none;
+}
+
+/* Honeypot: off-screen, untabbable, aria-hidden. Never seen by a person. */
+.gt-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.gt-sent__mark {
+    width: 38px;
+    height: 38px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--on-accent);
+}
+
+.gt-sent__title {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 16px 0 8px;
+}
+
+.gt-sent__body {
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(17, 17, 16, 0.62);
+}
+
+.gt-sent__link {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    border-bottom: 1px solid rgba(17, 17, 16, 0.3);
+}
+
+.gt-sent__link:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+}
+
+.gt-card__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 18px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(17, 17, 16, 0.45);
+}
+
+.gt-back {
+    font-family: inherit;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--ink);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Without JS every step renders at once and needs its own separation. */
+.gt-step + .gt-step {
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(17, 17, 16, 0.14);
+}
+
+.gt-js .gt-step + .gt-step {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+}
+
+/* ---------------------------------------------------------------------------
+ * Marquee
+ * ------------------------------------------------------------------------ */
+.gt-marquee {
+    background: var(--accent);
+    color: var(--on-accent);
+    overflow: hidden;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--ink);
+}
+
+.gt-marquee__track {
+    display: inline-flex;
+    align-items: center;
+    gap: 56px;
+    padding: 15px 28px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    animation: gt-marquee 32s linear infinite;
+    will-change: transform;
+}
+
+@keyframes gt-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* ---------------------------------------------------------------------------
+ * Section 01 — operator proof
+ * ------------------------------------------------------------------------ */
+.gt-split {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: clamp(24px, 4vw, 64px);
+    padding-top: clamp(28px, 3.5vw, 44px);
+}
+
+.gt-split__lede {
+    align-self: end;
+    max-width: 56ch;
+    font-size: clamp(15px, 1.15vw, 17px);
+    line-height: 1.6;
+    color: var(--on-paper-soft);
+    text-wrap: pretty;
+}
+
+/* A 1px gap over a hairline background draws every divider in one rule. */
+.gt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--paper-line);
+    border: 1px solid var(--paper-line);
+    margin-top: clamp(36px, 4.5vw, 60px);
+}
+
+.gt-product {
+    background: var(--paper);
+    padding: clamp(18px, 1.8vw, 26px);
+    transition: background 0.2s ease;
+}
+
+.gt-product:hover {
+    background: #e7e3d7;
+}
+
+.gt-product__media {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(17, 17, 16, 0.09) 0 6px,
+        transparent 6px 12px
+    );
+}
+
+.gt-product__media--empty {
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(17, 17, 16, 0.45);
+}
+
+.gt-product__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.gt-product__name {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.gt-product__dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    display: block;
+    border: 1px solid var(--ink);
+    flex: none;
+}
+
+.gt-product__desc {
+    margin: 8px 0 14px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--on-paper-soft);
+}
+
+.gt-product__stack {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    color: var(--on-paper-muted);
+    border-top: 1px solid var(--paper-line);
+    padding-top: 10px;
+}
+
+.gt-closer {
+    margin-top: clamp(24px, 3vw, 34px);
+    font-size: clamp(16px, 1.4vw, 21px);
+    line-height: 1.45;
+    font-weight: 500;
+    max-width: 40ch;
+    letter-spacing: -0.015em;
+}
+
+/* ---------------------------------------------------------------------------
+ * Section 02 — process
+ * ------------------------------------------------------------------------ */
+.gt-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--ink-line);
+    border-top: 1px solid var(--ink-line);
+    border-bottom: 1px solid var(--ink-line);
+}
+
+.gt-stepcard {
+    background: var(--ink);
+    padding: clamp(24px, 2.6vw, 36px) clamp(20px, 2vw, 30px);
+}
+
+/* The middle step is the promise the page rests on — the teardown arriving. */
+.gt-stepcard--key {
+    background: var(--accent);
+    color: var(--on-accent);
+}
+
+.gt-stepcard__num {
+    font-size: clamp(52px, 6vw, 84px);
+    line-height: 0.85;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(242, 239, 231, 0.4);
+}
+
+.gt-stepcard--key .gt-stepcard__num {
+    color: var(--on-accent);
+    -webkit-text-stroke: 0;
+}
+
+.gt-stepcard__meta {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(242, 239, 231, 0.45);
+    margin: 22px 0 12px;
+}
+
+/* Everything on the accent is pure white. Softening it with opacity to build
+   hierarchy drops small text under 4.5:1 against #0066FF — even 92% white only
+   reaches 4.33. Hierarchy comes from size, weight and tracking instead. */
+.gt-stepcard--key .gt-stepcard__meta {
+    color: #ffffff;
+}
+
+.gt-stepcard__title {
+    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.gt-stepcard__body {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(242, 239, 231, 0.68);
+}
+
+.gt-stepcard--key .gt-stepcard__body {
+    color: #ffffff;
+}
+
+/* ---------------------------------------------------------------------------
+ * Section 03 — price
+ * ------------------------------------------------------------------------ */
+.gt-price {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(24px, 4vw, 56px);
+    align-items: center;
+    padding-top: clamp(28px, 3.5vw, 44px);
+}
+
+.gt-price__label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--on-paper-muted);
+}
+
+.gt-price__amount {
+    font-size: clamp(72px, 12vw, 168px);
+    line-height: 0.82;
+    letter-spacing: -0.055em;
+    font-weight: 700;
+    margin-top: 14px;
+}
+
+.gt-price__claim {
+    font-size: clamp(26px, 2.8vw, 38px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    max-width: 20ch;
+    text-wrap: balance;
+}
+
+.gt-price__free {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.gt-tick {
+    width: 20px;
+    height: 20px;
+    background: var(--accent);
+    border: 1px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    color: var(--on-accent);
+}
+
+.gt-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 26px;
+    padding: 14px 22px;
+    border: 1px solid var(--ink);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.gt-btn-outline:hover {
+    background: var(--ink);
+    color: var(--paper);
+}
+
+/* ---------------------------------------------------------------------------
+ * Section 04 — recent work
+ * ------------------------------------------------------------------------ */
+.gt-cases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: clamp(20px, 2.4vw, 32px);
+}
+
+.gt-case {
+    border: 1px solid var(--paper-line);
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+}
+
+.gt-case__media {
+    width: 100%;
+    height: clamp(200px, 20vw, 280px);
+    object-fit: cover;
+    border-bottom: 1px solid var(--paper-line);
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(17, 17, 16, 0.09) 0 7px,
+        transparent 7px 14px
+    );
+}
+
+.gt-case__media--empty {
+    display: flex;
+    align-items: flex-end;
+    padding: 14px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(17, 17, 16, 0.45);
+}
+
+.gt-case__body {
+    padding: clamp(20px, 2.2vw, 30px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+}
+
+.gt-case__kicker {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--on-paper-muted);
+}
+
+.gt-case__name {
+    font-size: clamp(24px, 2.2vw, 30px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.gt-case__desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--on-paper-soft);
+}
+
+.gt-case__stack {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    color: var(--on-paper-muted);
+}
+
+/* A published figure gets the lime slab. */
+.gt-metric {
+    margin-top: auto;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    background: var(--accent);
+    color: var(--on-accent);
+    border: 1px solid var(--ink);
+    padding: 14px 18px;
+}
+
+.gt-metric__value {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+.gt-metric__label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+/* Where no number was ever recorded, the outcome is stated in words — and
+   drawn quieter, so it cannot pass itself off as a measurement. */
+.gt-outcome {
+    margin-top: auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    border: 1px solid var(--paper-line);
+    padding: 14px 18px;
+}
+
+.gt-outcome__mark {
+    width: 18px;
+    height: 18px;
+    background: var(--ink);
+    color: var(--accent-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    margin-top: 1px;
+}
+
+.gt-outcome__text {
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: rgba(17, 17, 16, 0.75);
+}
+
+/* ---------------------------------------------------------------------------
+ * Section 05 — honesty
+ * ------------------------------------------------------------------------ */
+.gt-fit {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: clamp(28px, 4vw, 64px);
+    padding-top: clamp(28px, 3.5vw, 44px);
+    align-items: start;
+}
+
+.gt-fit__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--ink-line);
+    border: 1px solid var(--ink-line);
+    margin-top: clamp(24px, 3vw, 36px);
+}
+
+.gt-fit__item {
+    background: var(--ink);
+    display: flex;
+    gap: 14px;
+    padding: 18px 20px;
+    font-size: 15.5px;
+    line-height: 1.5;
+}
+
+.gt-fit__num {
+    font-family: var(--font-mono);
+    color: var(--accent-text);
+    flex: 0 0 auto;
+}
+
+/* Square: the artwork here is a commissioned 1:1 vector, so the box matches it
+   exactly and nothing is cropped. `contain` rather than `cover` for the same
+   reason — an illustration loses its composition the moment it is cropped, in
+   a way a photograph does not.
+   Capped at 400px and pushed to the far edge of its column: the line work is
+   drawn at one weight, so blowing it up to a full 630px column thinned it out
+   next to the type it sits beside. Below ~840px the column is already narrower
+   than the cap, so the width falls back to 100% and the auto margin is inert. */
+.gt-fit__media {
+    width: 100%;
+    max-width: 400px;
+    margin-inline-start: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    border: 1px solid var(--ink-line);
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(242, 239, 231, 0.1) 0 8px,
+        transparent 8px 16px
+    );
+}
+
+.gt-fit__media--empty {
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(242, 239, 231, 0.45);
+}
+
+/* ---------------------------------------------------------------------------
+ * Section 06 — FAQ
+ * ------------------------------------------------------------------------ */
+.gt-faq {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(28px, 4vw, 64px);
+    padding-top: clamp(28px, 3.5vw, 44px);
+    align-items: start;
+}
+
+.gt-faq__list {
+    display: flex;
+    flex-direction: column;
+}
+
+.gt-faq__item {
+    border-top: 1px solid var(--paper-line);
+}
+
+.gt-faq__item:last-child {
+    border-bottom: 1px solid var(--paper-line);
+}
+
+.gt-faq__q {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    text-align: left;
+    padding: 22px 0;
+    font-family: inherit;
+    font-size: clamp(16px, 1.3vw, 19px);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+}
+
+.gt-faq__q::-webkit-details-marker {
+    display: none;
+}
+
+.gt-faq__sign {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    flex: 0 0 auto;
+}
+
+/* Native <details>: the sign flips without a line of JavaScript. */
+.gt-faq__item[open] .gt-faq__sign::before {
+    content: "−";
+}
+
+.gt-faq__item:not([open]) .gt-faq__sign::before {
+    content: "+";
+}
+
+.gt-faq__a {
+    padding: 0 0 24px;
+    max-width: 60ch;
+    font-size: 15.5px;
+    line-height: 1.62;
+    color: var(--on-paper-soft);
+}
+
+/* ---------------------------------------------------------------------------
+ * Section 07 — closing CTA
+ * ------------------------------------------------------------------------ */
+/* No bottom padding: the CTA bar below is the section's bottom edge and butts
+   straight into the footer. */
+.gt-final {
+    padding: clamp(44px, 5.5vw, 80px) var(--gutter) 0;
+}
+
+/* On the accent field the eyebrow's default treatment vanishes — the square
+   marker is accent-on-accent and the rule is a 16% white that reads as noise.
+   Text goes to full white rather than the 50% muted grey used elsewhere: at 11px
+   the translucent version measures 3.2:1 here, under the 4.5:1 it needs. */
+.gt-lime .gt-eyebrow {
+    color: var(--on-accent);
+    border-bottom-color: rgba(242, 239, 231, 0.3);
+}
+
+.gt-lime .gt-eyebrow::before {
+    background: var(--paper);
+}
+
+/* Headline left, the qualifier right, both sitting on the same baseline edge —
+   `end` so the short paragraph aligns to the bottom of the tall H2 instead of
+   floating beside its first line. Collapses to one column under 320px columns. */
+.gt-final__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: clamp(20px, 3vw, 48px);
+    align-items: end;
+    padding: clamp(28px, 3.5vw, 44px) 0 clamp(32px, 4vw, 52px);
+}
+
+.gt-final__title {
+    font-size: clamp(38px, 6.4vw, 92px);
+    line-height: 0.9;
+    letter-spacing: -0.045em;
+    font-weight: 700;
+    text-wrap: balance;
+}
+
+/* The qualifier and the WhatsApp line share the grid's second cell, so
+   align-items:end still lands the block on the H2's baseline edge. */
+.gt-final__aside {
+    min-width: 0;
+}
+
+.gt-final__alt {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    margin-top: 18px;
+    font-size: clamp(15px, 1.2vw, 17px);
+    font-weight: 500;
+    color: var(--on-accent);
+}
+
+/* Full white, not the prototype's 82% paper: that blend measures 3.3:1 against
+   #0066FF and this runs as small as 16px. */
+.gt-final__sub {
+    max-width: 34ch;
+    font-size: clamp(16px, 1.4vw, 21px);
+    line-height: 1.45;
+    font-weight: 500;
+    color: var(--on-accent);
+    text-wrap: pretty;
+}
+
+/* Full-bleed: cancels the section's own gutter so the bar runs edge to edge. */
+.gt-final__cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-inline: calc(var(--gutter) * -1);
+    padding: clamp(26px, 3vw, 40px) var(--gutter);
+    background: var(--ink);
+    color: var(--paper);
+    font-size: clamp(20px, 2.6vw, 36px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.gt-final__cta:hover {
+    background: var(--paper);
+    color: var(--ink);
+}
+
+.gt-final__arrow {
+    font-family: var(--font-mono);
+    font-size: clamp(22px, 2.6vw, 36px);
+    flex: none;
+}
+
+/* ---------------------------------------------------------------------------
+ * Footer
+ * ------------------------------------------------------------------------ */
+.gt-footer {
+    padding: clamp(48px, 6vw, 88px) var(--gutter) 0;
+    overflow: hidden;
+}
+
+.gt-footer__top {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: clamp(24px, 4vw, 56px);
+    padding-bottom: clamp(40px, 5vw, 64px);
+}
+
+.gt-footer__legal {
+    margin-top: 10px;
+    font-size: 14px;
+    color: rgba(242, 239, 231, 0.55);
+}
+
+.gt-footer__label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(242, 239, 231, 0.45);
+    margin-bottom: 12px;
+}
+
+.gt-footer__value {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: rgba(242, 239, 231, 0.78);
+}
+
+.gt-footer__value a {
+    border-bottom: 1px solid rgba(242, 239, 231, 0.3);
+}
+
+/* Outlined, oversized, and clipped by the footer's overflow. */
+.gt-footer__wordmark {
+    font-size: clamp(64px, 19vw, 300px);
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(242, 239, 231, 0.22);
+    white-space: nowrap;
+    user-select: none;
+}
+
+.gt-footer__copyright {
+    border-top: 1px solid var(--ink-line);
+    margin-top: clamp(20px, 3vw, 36px);
+    /* Below md the sticky CTA covers the bottom of the viewport, and at the end
+       of the page there is nothing left to scroll — so this needs clearance. */
+    padding: 20px 0 48px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(242, 239, 231, 0.4);
+}
+
+/* ---------------------------------------------------------------------------
+ * Reduced motion — decorative motion off, content at its final state.
+ * ------------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* A marquee frozen mid-slide would hide half its content, so it resets to
+       the start and simply sits still. */
+    .gt-marquee__track {
+        animation: none;
+        transform: none;
+    }
+
+    .gt-nav__cta::before {
+        animation: none;
+    }
+}
+
+
+/* ============================================================================
+ * Gulf additions
+ *
+ * Everything below this line is specific to /go/gulf-saas-development/ and has
+ * no counterpart on the original page.
+ * ========================================================================= */
+
+:root {
+    /*
+     * WhatsApp green, used as a surface with ink text on it (9.6:1). It is
+     * deliberately NOT the brand accent: the WhatsApp path and the form are two
+     * different actions, and a reader should be able to tell them apart at a
+     * glance rather than reading both buttons to find out.
+     */
+    --wa: #25d366;
+    --wa-hover: #1fb857;
+    --on-wa: #111110;
+}
+
+/* ---------------------------------------------------------------------------
+ * Click-to-WhatsApp
+ * ------------------------------------------------------------------------ */
+.gt-wa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--wa);
+    color: var(--on-wa);
+    font-weight: 700;
+    line-height: 1;
+    transition: background 0.15s ease;
+}
+
+.gt-wa:hover {
+    background: var(--wa-hover);
+    color: var(--on-wa);
+}
+
+.gt-wa__icon {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    fill: currentColor;
+}
+
+/* In the sticky header, matched to .gt-nav__cta so the two sit level. */
+.gt-wa--nav {
+    padding: 10px 16px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.gt-wa--nav .gt-wa__icon {
+    width: 15px;
+    height: 15px;
+}
+
+/*
+ * Below 420px the header carries the logo and two CTAs. The label goes and the
+ * icon stays: the glyph is the most recognised thing on the button anyway, and
+ * the accessible name is still on the link.
+ */
+@media (max-width: 420px) {
+    .gt-wa--nav {
+        padding: 10px 12px;
+    }
+
+    .gt-wa--nav .gt-wa__label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+}
+
+/* In the hero, sized to read as a peer of the form, not a footnote to it. */
+.gt-wa--hero {
+    margin-top: clamp(24px, 3vw, 32px);
+    padding: 16px 26px;
+    font-size: 16px;
+}
+
+/*
+ * The outboard variant is a link, not a button. WhatsApp green as *text* on the
+ * near-black hero measures 9.6:1, so it stays legible without a filled surface
+ * — and without a filled surface it cannot read as the form's next step.
+ */
+.gt-wa--alt {
+    background: none;
+    color: var(--wa);
+    padding: 0;
+    gap: 8px;
+    font-size: 14.5px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+}
+
+.gt-wa--alt:hover {
+    background: none;
+    color: var(--wa);
+    text-decoration-thickness: 2px;
+}
+
+/*
+ * Same link treatment as --alt, on the blue closing block.
+ *
+ * White rather than WhatsApp green, and not by preference: green as text on
+ * #0066FF is 2.44:1. White is 4.83:1 — the same colour the paragraph above it
+ * already runs. The glyph is fill: currentColor, so the mark comes along and
+ * keeps the channel identifiable without the brand colour.
+ */
+.gt-wa--onaccent {
+    background: none;
+    color: var(--on-accent);
+    padding: 0;
+    gap: 8px;
+    font-size: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+}
+
+.gt-wa--onaccent:hover {
+    background: none;
+    color: var(--on-accent);
+    text-decoration-thickness: 2px;
+}
+
+.gt-wa--onaccent .gt-wa__icon {
+    width: 16px;
+    height: 16px;
+}
+
+.gt-wa--alt .gt-wa__icon {
+    width: 16px;
+    height: 16px;
+}
+
+/*
+ * The line under the hero button. Mono keeps it in the page's label voice, but
+ * at 11px/muted it was set like a disclaimer and read like one — too small to
+ * scan and too dim against near-black. Up a point, opened out, and on the soft
+ * tier rather than the muted one.
+ */
+.gt-wa__aside {
+    margin-top: 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.65;
+    letter-spacing: 0.04em;
+    color: var(--on-ink-soft);
+    max-width: 46ch;
+}
+
+/* ---------------------------------------------------------------------------
+ * The card and its outboard WhatsApp line
+ * ------------------------------------------------------------------------ */
+
+/*
+ * One grid cell holding the card plus the line beneath it, so the WhatsApp
+ * alternative can sit outside the card without becoming a third column in
+ * .gt-hero__grid (which is auto-fit, and would happily make one).
+ */
+.gt-hero__panel {
+    min-width: 0;
+}
+
+/*
+ * Secondary by construction, not just by size: no filled background, sitting on
+ * the hero's dark ground rather than the card's paper. It cannot be mistaken
+ * for a control belonging to the form when it is visibly outside the form's
+ * surface. Clears the card's 14px offset shadow.
+ */
+.gt-alt {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    margin-top: 28px;
+    font-size: 14.5px;
+    color: var(--on-ink-muted);
+}
+
+/* ---------------------------------------------------------------------------
+ * Price — band rather than a single floor
+ * ------------------------------------------------------------------------ */
+
+/*
+ * "$8,000–$15,000" is fourteen characters where "$5,000" was six, so it cannot
+ * carry the 168px display size the single figure did — at that size it runs
+ * past its grid column on every viewport above mobile. Smaller, and allowed to
+ * break at the en dash if it still has to.
+ */
+.gt-price__amount--band {
+    font-size: clamp(28px, 3.6vw, 48px);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+}
+
+.gt-price__note {
+    margin-top: 16px;
+    max-width: 34ch;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--on-paper-soft);
+}
+
+/* The two price CTAs, side by side and wrapping together on narrow screens. */
+.gt-price__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+/* The margin that spaced the lone button now belongs to the row. */
+.gt-price__actions .gt-btn-outline {
+    margin-top: 0;
+}
+
+/*
+ * WhatsApp as a peer of .gt-btn-outline on the paper section.
+ *
+ * Every value below the colours is copied from .gt-btn-outline — padding, type,
+ * tracking, the 1px border — because two buttons in one row that disagree about
+ * any of them sit at different heights. Filled rather than outlined so the two
+ * are still telling apart at a glance.
+ */
+.gt-wa--pill {
+    padding: 14px 22px;
+    border: 1px solid var(--ink);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    gap: 10px;
+}
+
+.gt-wa--pill .gt-wa__icon {
+    width: 15px;
+    height: 15px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Gulf trust lines — working week, and data-handling posture
+ * ------------------------------------------------------------------------ */
+
+/*
+ * Sits under the process steps. Mono, hairline-boxed: it reads as a stated
+ * operating fact rather than as another marketing sentence.
+ */
+.gt-gulfnote {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-top: clamp(28px, 3.5vw, 44px);
+    padding: 18px 20px;
+    border: 1px solid var(--ink-line);
+    max-width: 62ch;
+}
+
+.gt-paper .gt-gulfnote {
+    border-color: var(--paper-line);
+}
+
+.gt-gulfnote__mark {
+    width: 8px;
+    height: 8px;
+    margin-top: 7px;
+    flex: 0 0 auto;
+    background: var(--accent);
+}
+
+.gt-gulfnote__text {
+    font-size: 15px;
+    line-height: 1.55;
+    text-wrap: pretty;
+}
+
+.gt-gulfnote__text strong {
+    font-weight: 700;
+}
+
+.gt-gulfnote__sub {
+    display: block;
+    margin-top: 6px;
+    font-size: 13.5px;
+    color: var(--on-ink-soft);
+}
+
+.gt-paper .gt-gulfnote__sub {
+    color: var(--on-paper-soft);
+}

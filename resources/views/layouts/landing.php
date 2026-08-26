@@ -19,6 +19,7 @@
  *   $pageId   body class suffix, e.g. 'go-saas-teardown'
  *   $pageCss  asset path, e.g. '/css/go-teardown.css'
  *   $pageJs   asset path, e.g. '/js/go-teardown.js'
+ *   $pageCampaign  GTM dataLayer campaign name (optional)
  *   $fonts    Google Fonts css2 family string (optional)
  */
 
@@ -26,6 +27,10 @@ $seo     = $seo ?? [];
 $pageId  = $pageId ?? 'landing';
 $pageCss = $pageCss ?? null;
 $pageJs  = $pageJs ?? null;
+
+// Named per campaign so GTM/Ads can tell two /go/ pages apart. Defaults to the
+// first campaign that shipped, so the existing page's markup is unchanged.
+$pageCampaign = $pageCampaign ?? 'saas_teardown';
 
 $siteName = config('app.name', 'QalbIT');
 $baseUrl  = rtrim(config('app.url', 'https://qalbit.com'), '/');
@@ -155,7 +160,7 @@ $fontsCssUrl = $fonts ?? 'https://fonts.googleapis.com/css2?family=Space+Grotesk
                  landing. Tags fired by the same trigger stay unaffected. */ ?>
         <script>
             window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({ page_type: "landing", page_campaign: "saas_teardown", chat_enabled: false });
+            window.dataLayer.push({ page_type: "landing", page_campaign: <?= json_encode($pageCampaign) ?>, chat_enabled: false });
         </script>
         <script src="<?= asset_v('/js/gtag-layer.js') ?>" data-gtm-id="<?= htmlspecialchars($gtmId) ?>"></script>
     <?php endif; ?>

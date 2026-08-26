@@ -30,6 +30,7 @@ const cssEntryPoints = [
     // Campaign landing pages bring their own stylesheet: plain CSS, not
     // Tailwind, so it stays out of app.css and cannot affect the main site.
     "resources/css/go-teardown.css",
+    "resources/css/go-gulf.css",
 ];
 
 async function buildJs() {

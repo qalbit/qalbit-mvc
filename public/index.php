@@ -223,6 +223,11 @@ $router->post('/contact-us/', [ContactController::class, 'submit']);
 $router->get('/go/saas-product-development/', [LandingController::class, 'saasTeardown']);
 $router->post('/go/saas-product-development/', [LandingController::class, 'saasTeardownSubmit']);
 
+// Gulf / GCC clone of the page above, for the Google Ads campaign in that
+// region. Same layout, same CRM form token, separate copy and lead tagging.
+$router->get('/go/gulf-saas-development/', [LandingController::class, 'gulfSaas']);
+$router->post('/go/gulf-saas-development/', [LandingController::class, 'gulfSaasSubmit']);
+
 // Policy Pages
 $router->get('/privacy-policy/', [LegalController::class, 'privacy']);
 $router->get('/terms-and-condition/', [LegalController::class, 'terms']);
