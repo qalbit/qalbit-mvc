@@ -1649,63 +1649,62 @@
 
     // --------------------------------------------------------
     // 7) Cookie banner – localStorage-based consent + GA4/GTM
+    //
+    // The consent contract (key, stored shape, granted/denied
+    // states) lives in gtag-layer.js and is shared with the
+    // WordPress blog, which sits on the same domain and therefore
+    // the same localStorage. Do not redefine it here.
     // --------------------------------------------------------
     function initCookieBanner() {
         var banner = document.querySelector("[data-cookie-banner]");
         if (!banner) return;
 
-        // MUST match the key used in head.php consent snippet
-        var consentKey = "cookie-consent";
+        var consent = window.qalbitConsent;
 
-        var defaultConsent = {
-            ad_storage: "granted",
-            analytics_storage: "granted",
-            personalization_storage: "granted",
-            functionality_storage: "granted",
-            security_storage: "granted"
-        };
+        // No consent layer means no GTM container, so there is
+        // nothing to ask permission for.
+        if (!consent) return;
 
-        var hasConsent = false;
-
-        try {
-            if (window.localStorage && localStorage.getItem(consentKey)) {
-                hasConsent = true;
-            }
-        } catch (e) {
-            hasConsent = false;
-        }
-
-        if (hasConsent) {
+        // Anything that is not a well-formed seven-signal object
+        // reads as absent, so visitors carrying the legacy "true"
+        // string or an older five-signal object are re-prompted
+        // instead of being silently trusted.
+        if (consent.read()) {
             return;
         }
 
         banner.classList.remove("hidden");
 
         var acceptBtn = banner.querySelector("[data-cookie-accept]");
+        var rejectBtn = banner.querySelector("[data-cookie-reject]");
 
-        function acceptCookies() {
-            try {
-                if (window.localStorage) {
-                    localStorage.setItem(consentKey, JSON.stringify(defaultConsent));
-                }
-            } catch (e) {
-            }
+        function applyConsent(state, eventName) {
+            // Persist before touching gtag: if the update throws,
+            // the visitor's choice must still survive the reload.
+            consent.write(state);
 
             banner.classList.add("hidden");
 
             if (window.dataLayer && Array.isArray(window.dataLayer)) {
-                window.dataLayer.push({ event: "cookie_consent_accepted" });
+                window.dataLayer.push({ event: eventName });
             }
 
-            if (typeof gtag === "function") {
-                gtag("consent", "update", defaultConsent);
+            if (typeof window.gtag === "function") {
+                window.gtag("consent", "update", state);
             }
         }
 
         if (acceptBtn) {
             acceptBtn.addEventListener("click", function (event) {
                 event.preventDefault();
-                acceptCookies();
+                applyConsent(consent.GRANTED, "cookie_consent_accepted");
+            });
+        }
+
+        if (rejectBtn) {
+            rejectBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+                applyConsent(consent.DENIED, "cookie_consent_rejected");
             });
         }
     }
