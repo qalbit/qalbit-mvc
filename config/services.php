@@ -4216,7 +4216,7 @@ return [
             'id'      => 'erp-project-types',
             'eyebrow' => 'Where custom ERPs fit best',
             'title'   => 'ERP projects we take on',
-            'intro'   => 'Most of our ERP work is for businesses whose operations have outgrown spreadsheets but who are not ready to surrender their processes to a heavyweight suite.',
+            'intro'   => 'These are the ERP engagements we take on – businesses whose operations have outgrown spreadsheets but who aren’t ready to surrender their processes to a heavyweight suite.',
 
             'items' => [
                 [
