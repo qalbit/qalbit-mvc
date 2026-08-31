@@ -141,11 +141,7 @@
         if (!section) return;
 
         const items = Array.from(section.querySelectorAll("[data-faq-item]"));
-        const triggers = Array.from(
-            section.querySelectorAll("[data-faq-trigger]")
-        );
-
-        if (!items.length || !triggers.length) return;
+        if (!items.length) return;
 
         // -----------------------------
         // A) Entrance reveal (once)
@@ -196,102 +192,106 @@
 
         // -----------------------------
         // B) Accordion behaviour
+        //
+        // Each item is a native <details>. The browser already handles
+        // open/close, keyboard and screen-reader semantics, and the answer
+        // text is in the DOM whether or not this script ever runs — so
+        // everything below is presentation only. We add:
+        //   1. a height transition on open/close
+        //   2. single-open behaviour (opening one closes the rest)
+        // Both degrade to the plain native toggle if GSAP is unavailable.
         // -----------------------------
-        const panelTweens = new WeakMap();
+        const animating = new WeakMap();
 
-        function setItemOpen(item, shouldOpen) {
-            const panel = item.querySelector("[data-faq-panel]");
-            const trigger = item.querySelector("[data-faq-trigger]");
-            if (!panel || !trigger) return;
+        function panelOf(item) {
+            return item.querySelector("[data-faq-panel]");
+        }
 
-            // Kill any running tween on this panel
-            const existingTween = panelTweens.get(panel);
-            if (existingTween) existingTween.kill();
+        // Animate a panel from 0 → natural height after <details> is open.
+        function animateOpen(item) {
+            const panel = panelOf(item);
+            if (!panel || !hasGsap || prefersReducedMotion) return;
 
-            item.classList.toggle("is-open", shouldOpen);
-            trigger.setAttribute(
-                "aria-expanded",
-                shouldOpen ? "true" : "false"
-            );
-            panel.hidden = false; // needed to measure
-
-            // No GSAP or reduced-motion → simple fallback (no jerk)
-            if (!hasGsap || prefersReducedMotion) {
-                const targetMax = shouldOpen
-                    ? panel.scrollHeight + "px"
-                    : "0px";
-                panel.style.maxHeight = targetMax;
-
-                if (!shouldOpen) {
-                    // hide after CSS transition
-                    setTimeout(() => {
-                        panel.hidden = true;
-                    }, 260);
-                }
-                return;
-            }
-
-            const startH = panel.offsetHeight;
-            const targetH = shouldOpen ? panel.scrollHeight : 0;
+            const existing = animating.get(panel);
+            if (existing) existing.kill();
 
             const tween = gsap.fromTo(
                 panel,
-                { height: startH },
+                { height: 0, overflow: "hidden" },
                 {
-                    height: targetH,
+                    height: panel.scrollHeight,
                     duration: 0.28,
                     ease: "power2.out",
                     onComplete: () => {
+                        // Hand height back to the browser so the panel can
+                        // reflow (long answers, resize, zoom).
                         panel.style.height = "";
-                        if (!shouldOpen) {
-                            panel.hidden = true;
-                        }
+                        panel.style.overflow = "";
+                        animating.delete(panel);
                     },
                 }
             );
 
-            panelTweens.set(panel, tween);
+            animating.set(panel, tween);
         }
 
-        function toggleItem(clickedItem) {
-            const isOpen = clickedItem.classList.contains("is-open");
+        // Animate a panel to 0, then actually close the <details>.
+        function animateClose(item, done) {
+            const panel = panelOf(item);
 
-            // Close all others to keep things tidy
-            items.forEach((item) => {
-                if (
-                    item !== clickedItem &&
-                    item.classList.contains("is-open")
-                ) {
-                    setItemOpen(item, false);
-                }
-            });
-
-            setItemOpen(clickedItem, !isOpen);
-        }
-
-        // Initial state: first FAQ open, rest closed
-        items.forEach((item, index) => {
-            const panel = item.querySelector("[data-faq-panel]");
-            const trigger = item.querySelector("[data-faq-trigger]");
-            if (!panel || !trigger) return;
-
-            // Make sure we never fight with CSS transitions on height
-            panel.style.overflow = "hidden";
-            panel.style.maxHeight = "none"; // we control via JS
-
-            const isFirst = index === 0;
-            item.classList.toggle("is-open", isFirst);
-            trigger.setAttribute("aria-expanded", isFirst ? "true" : "false");
-
-            if (isFirst) {
-                panel.hidden = false;
-                panel.style.height = "auto";
-            } else {
-                panel.hidden = true;
-                panel.style.height = "0";
+            if (!panel || !hasGsap || prefersReducedMotion) {
+                item.open = false;
+                if (done) done();
+                return;
             }
 
-            trigger.addEventListener("click", () => toggleItem(item));
+            const existing = animating.get(panel);
+            if (existing) existing.kill();
+
+            const tween = gsap.to(panel, {
+                height: 0,
+                overflow: "hidden",
+                duration: 0.22,
+                ease: "power2.in",
+                onComplete: () => {
+                    item.open = false;
+                    panel.style.height = "";
+                    panel.style.overflow = "";
+                    animating.delete(panel);
+                    if (done) done();
+                },
+            });
+
+            animating.set(panel, tween);
+        }
+
+        function closeOthers(exceptItem) {
+            items.forEach((item) => {
+                if (item !== exceptItem && item.open) {
+                    animateClose(item);
+                }
+            });
+        }
+
+        items.forEach((item) => {
+            const summary = item.querySelector("[data-faq-trigger]");
+            if (!summary) return;
+
+            summary.addEventListener("click", (event) => {
+                // Let modified clicks and anything inside a link behave natively.
+                if (event.metaKey || event.ctrlKey || event.shiftKey) return;
+
+                // Intercept so we can animate; we drive `open` ourselves.
+                event.preventDefault();
+
+                if (item.open) {
+                    animateClose(item);
+                } else {
+                    closeOthers(item);
+                    item.open = true;
+                    animateOpen(item);
+                }
+            });
         });
     }
 
@@ -961,6 +961,14 @@
             if (!el) {
                 el = document.createElement("div");
                 el.setAttribute(attr, "true");
+                // Announce submit outcomes. Errors interrupt (assertive),
+                // success waits for a pause (polite).
+                if (kind === "error") {
+                    el.setAttribute("role", "alert");
+                } else {
+                    el.setAttribute("role", "status");
+                    el.setAttribute("aria-live", "polite");
+                }
                 el.className =
                     kind === "error"
                         ? "mb-3 hidden rounded-md border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-800"
@@ -1220,6 +1228,33 @@
                                 json.message ||
                                     "Thank you. We have received your enquiry and will respond within 24 hours (business days)."
                             );
+
+                            // GA4 conversion. Fires only on a confirmed success,
+                            // and only for forms that opt in with data-ga4-lead,
+                            // so existing forms keep their current measurement.
+                            if (
+                                form.hasAttribute("data-ga4-lead") &&
+                                window.dataLayer &&
+                                typeof window.dataLayer.push === "function"
+                            ) {
+                                var topicField = form.querySelector(
+                                    'input[name="lead_topic"]'
+                                );
+                                window.dataLayer.push({
+                                    event: "generate_lead",
+                                    form_name:
+                                        form.getAttribute("data-ga4-lead") ||
+                                        "contact",
+                                    form_variant:
+                                        form.getAttribute("data-variant") ||
+                                        "unknown",
+                                    lead_topic: topicField
+                                        ? topicField.value
+                                        : "",
+                                    page_path: window.location.pathname,
+                                });
+                            }
+
                             form.reset();
                             validators.forEach(function (pair) {
                                 clearFieldError(pair[0]);

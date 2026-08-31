@@ -50,6 +50,12 @@ $footerVariant  = $layoutConfig['footer'] ?? 'default';
 // contains a phone field (e.g. via the contact CTA section or contact hero).
 $needsPhoneInput = strpos($content ?? '', 'data-intl-tel-input') !== false;
 
+// /services/erp-development/ ships its own design system (Archivo, a separate
+// token set) and its own behaviour. Both are sniffed out of the rendered
+// content rather than keyed off $pageId, because that page shares the
+// 'service-detail' id with eleven others that must not pay for either.
+$needsErpPage = strpos($content ?? '', 'class="erp-page"') !== false;
+
 // JSON-LD passed from controllers
 $jsonLd = $jsonLd ?? null;
 ?>
@@ -123,6 +129,10 @@ $jsonLd = $jsonLd ?? null;
 
     <?php if (isset($pageId) && $pageId === 'service-detail'): ?>
         <script src="<?= asset_v('/js/service-detail.js') ?>" defer></script>
+    <?php endif; ?>
+
+    <?php if ($needsErpPage): ?>
+        <script src="<?= asset_v('/js/erp-page.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'technologies'): ?>

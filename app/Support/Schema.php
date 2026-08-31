@@ -197,16 +197,33 @@ class Schema
         $appUrl = rtrim(config('app.url', 'https://qalbit.com'), '/');
         $orgId  = $appUrl . '#organization';
 
+        // Both of these fall back to the previous behaviour when a service does
+        // not declare them, so existing service pages are unaffected.
+        $serviceType = $service['schema_service_type'] ?? $name;
+
+        // `schema_area_served` takes ISO 3166-1 alpha-2 codes and emits proper
+        // Country nodes; without it, the long-standing 'Worldwide' string stands.
+        $areaServed = 'Worldwide';
+        if (!empty($service['schema_area_served']) && is_array($service['schema_area_served'])) {
+            $areaServed = array_values(array_map(
+                static fn (string $code): array => [
+                    '@type' => 'Country',
+                    'name'  => $code,
+                ],
+                $service['schema_area_served']
+            ));
+        }
+
         $schema = [
             '@context'    => 'https://schema.org',
             '@type'       => 'Service',
             'name'        => $name,
-            'serviceType' => $name,
+            'serviceType' => $serviceType,
             'url'         => $pageUrl,
             'provider'    => [
                 '@id' => $orgId,
             ],
-            'areaServed'  => 'Worldwide',
+            'areaServed'  => $areaServed,
         ];
 
         $description = $service['meta_description'] ?? ($service['short_description'] ?? null);

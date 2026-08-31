@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#0F172A" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true" focusable="false">
+  <path d="M20 20H28V28H20Z" stroke="#0066FF"/>
+  <path d="M7 7H14V14H7Z"/>
+  <path d="M34 7H41V14H34Z"/>
+  <path d="M34 34H41V41H34Z"/>
+  <path d="M14 14L20 20M28 20L34 14"/>
+  <path d="M28 28L34 34"/>
+</svg>

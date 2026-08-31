@@ -3999,15 +3999,20 @@ return [
     'erp_development' => [
         'slug'     => '/services/erp-development/',
         'name'     => 'ERP Development',
-        'h1'       => 'Custom ERP Software Development Company & Services',
+        'h1'       => 'Custom ERP Development Services',
         'enabled'  => true,
         'order'    => 18,
 
-        'meta_title'       => 'Custom ERP Development Company & Services – QalbIT',
-        'meta_description' => 'QalbIT builds custom ERP software for SMEs – inventory, purchase, production, finance and HR modules with Tally integration and legacy ERP modernisation.',
+        'meta_title'       => 'Custom ERP Development Services | Build vs Buy Costs – QalbIT',
+        'meta_description' => 'Custom ERP development for companies outgrowing spreadsheets and packaged suites. Compare real Odoo, Dynamics 365 and NetSuite licence costs against a custom build.',
 
         'short_description' => 'Custom ERP software development – modular systems for inventory, purchase, production, finance and HR, built for SMEs that have outgrown spreadsheets and rigid packaged ERPs.',
         'category'          => 'core',
+
+        // JSON-LD overrides. Without these, Schema::service() falls back to
+        // serviceType = name and areaServed = 'Worldwide'.
+        'schema_service_type' => 'Custom ERP Development',
+        'schema_area_served'  => ['US', 'GB', 'AE', 'SA', 'OM', 'KW', 'AU'],
         'template'          => 'pages/services/erp-development',
 
         'resources' => [
@@ -4022,7 +4027,14 @@ return [
         'iconAlt' => 'Icon representing Custom ERP Development',
 
         'faq_key'      => 'service_erp_development',
-        'faq_title'    => 'Frequently asked questions about custom ERP development with QalbIT',
+        'faq_title'    => 'Frequently asked questions about custom ERP development',
+        // Empty on purpose. The shared FAQ partial defaults to a three-bullet
+        // block about "custom software development, SaaS platforms, mobile
+        // apps and integrations" that is byte-identical on twelve pages. The
+        // content document supplies no ERP replacement, and inventing one
+        // would be adding copy, so the block is simply not rendered here.
+        'faq_bullets'  => [],
+        'faq_eyebrow'  => 'FAQs · Custom ERP development',
         'faq_subtitle' => 'These are the questions owners, operations heads and finance teams usually ask when they compare a custom ERP with packaged suites like SAP, Odoo or Tally-plus-spreadsheets setups.',
 
         'hero' => [
@@ -4092,60 +4104,62 @@ return [
         ],
 
         'capabilities' => [
-            'id'      => 'erp-development-capabilities',
-            'eyebrow' => 'What we build in custom ERPs',
-            'title'   => 'ERP development capabilities across operations, finance and people',
-            'intro'   => 'We build ERP modules that talk to each other – so a sales order flows into stock, purchase, production and accounts without re-entry.',
+            'id'      => 'erp-modules',
+            'eyebrow' => 'Modules',
+            'title'   => 'ERP modules we build',
+            'intro'   => 'We build modules that talk to each other, so a sales order flows into stock, purchase, production and accounts without anyone re-keying it.',
 
             'items' => [
                 [
                     'label'       => 'Inventory & warehouse management',
                     'description' => 'Multi-location stock, batches and serial numbers, barcode scanning, reorder levels, stock transfers and audits.',
                     'badge'       => 'Inventory',
-                    'icon'        => '/images/icons/modules.svg',
+                    'icon'        => '/images/icons/erp-inventory.svg',
+                    'icon_alt'    => '', // decorative: the H3 beside it says the same thing
                 ],
                 [
                     'label'       => 'Purchase & supplier management',
                     'description' => 'Indents, RFQs, purchase orders, GRNs, supplier ratings and approval workflows tuned to your buying process.',
                     'badge'       => 'Purchase',
-                    'icon'        => '/images/icons/automation.svg',
+                    'icon'        => '/images/icons/erp-purchase.svg',
+                    'icon_alt'    => '', // decorative: the H3 beside it says the same thing
                 ],
                 [
                     'label'       => 'Sales, orders & dispatch',
                     'description' => 'Quotations, sales orders, invoicing, dispatch planning and delivery tracking connected to stock and accounts.',
                     'badge'       => 'Sales',
-                    'icon'        => '/images/icons/report.svg',
+                    'icon'        => '/images/icons/erp-sales.svg',
+                    'icon_alt'    => '', // decorative: the H3 beside it says the same thing
                 ],
                 [
                     'label'       => 'Production & job work',
                     'description' => 'BOMs, work orders, job-work tracking, wastage and batch costing for manufacturers and processors.',
                     'badge'       => 'Production',
-                    'icon'        => '/images/icons/architecture.svg',
+                    'icon'        => '/images/icons/erp-production.svg',
+                    'icon_alt'    => '', // decorative: the H3 beside it says the same thing
                 ],
                 [
                     'label'       => 'Finance & accounting integrations',
-                    'description' => 'Two-way sync with Tally, Zoho Books or QuickBooks, e-invoicing/GST support and receivables dashboards – keep the accounting tool your CA trusts.',
+                    'description' => 'Two-way sync with QuickBooks, Xero and NetSuite, plus Zoho Books and Tally, with e-invoicing support and receivables dashboards – keep the accounting tool your finance team trusts.',
                     'badge'       => 'Finance',
-                    'icon'        => '/images/icons/api.svg',
+                    'icon'        => '/images/icons/erp-finance.svg',
+                    'icon_alt'    => '', // decorative: the H3 beside it says the same thing
                 ],
                 [
                     'label'       => 'HR, payroll & approvals',
                     'description' => 'Attendance, leave, expense claims and payroll inputs with role-based approvals and audit trails.',
                     'badge'       => 'People',
-                    'icon'        => '/images/icons/ops.svg',
+                    'icon'        => '/images/icons/erp-hr.svg',
+                    'icon_alt'    => '', // decorative: the H3 beside it says the same thing
                 ],
             ],
 
-            'cta' => [
-                'label' => 'Discuss your ERP scope',
-                'url'   => '/contact-us/?topic=erp-development-scope',
-            ],
         ],
 
         'process' => [
             'id'      => 'erp-development-process',
             'eyebrow' => 'How ERP projects work',
-            'title'   => 'A practical ERP development process that keeps your business running',
+            'title'   => 'A phased ERP process that doesn’t stop your operations',
             'intro'   => 'We roll out ERPs module by module with parallel runs and real data – so operations never stop while the system goes live.',
 
             'items' => [
@@ -4156,6 +4170,7 @@ return [
                     'duration'    => '2–3 weeks',
                     'outcome'     => 'Process maps, module roadmap and a realistic phase-one estimate.',
                     'icon'        => '/images/icons/discovery.svg',
+                    'icon_alt'    => '', // decorative: the step heading says the same thing
                 ],
                 [
                     'step'        => 2,
@@ -4164,6 +4179,7 @@ return [
                     'duration'    => '2–4 weeks',
                     'outcome'     => 'Approved data model, screen designs and integration plan.',
                     'icon'        => '/images/icons/architecture-design.svg',
+                    'icon_alt'    => '', // decorative: the step heading says the same thing
                 ],
                 [
                     'step'        => 3,
@@ -4172,6 +4188,7 @@ return [
                     'duration'    => '6–14+ weeks (scope-dependent)',
                     'outcome'     => 'Working modules validated against real operations scenarios.',
                     'icon'        => '/images/icons/core-modules.svg',
+                    'icon_alt'    => '', // decorative: the step heading says the same thing
                 ],
                 [
                     'step'        => 4,
@@ -4180,6 +4197,7 @@ return [
                     'duration'    => '3–6 weeks',
                     'outcome'     => 'Confident go-live with reconciled data and trained users.',
                     'icon'        => '/images/icons/launch.svg',
+                    'icon_alt'    => '', // decorative: the step heading says the same thing
                 ],
                 [
                     'step'        => 5,
@@ -4188,56 +4206,53 @@ return [
                     'duration'    => 'Ongoing, month-to-month',
                     'outcome'     => 'An ERP that grows with your operations instead of a big-bang risk.',
                     'icon'        => '/images/icons/scale.svg',
+                    'icon_alt'    => '', // decorative: the step heading says the same thing
                 ],
             ],
 
-            'cta' => [
-                'label' => 'Walk me through this process for my ERP',
-                'url'   => '/contact-us/?topic=process-erp-development',
-            ],
         ],
 
         'use_cases' => [
-            'id'      => 'erp-development-use-cases',
+            'id'      => 'erp-project-types',
             'eyebrow' => 'Where custom ERPs fit best',
-            'title'   => 'ERP development use cases we most often deliver',
+            'title'   => 'ERP projects we take on',
             'intro'   => 'Most of our ERP work is for businesses whose operations have outgrown spreadsheets but who are not ready to surrender their processes to a heavyweight suite.',
 
             'items' => [
                 [
-                    'label'       => 'First ERP for a growing SME',
+                    'label'       => 'First ERP for a growing business',
+                    'icon'        => '/images/icons/erp-project-first-build.svg',
+                    'icon_alt'    => '',
                     'description' => 'Replacing spreadsheets and disconnected tools with core inventory, purchase and sales modules integrated with existing accounting.',
                     'audience'    => 'Trading, distribution and manufacturing SMEs',
                     'badge'       => 'First ERP',
                 ],
                 [
                     'label'       => 'Legacy ERP modernisation',
+                    'icon'        => '/images/icons/erp-project-legacy.svg',
+                    'icon_alt'    => '',
                     'description' => 'Rebuilding old desktop or FoxPro/Access-era systems into modern web ERPs without losing years of data or retraining everyone overnight.',
                     'audience'    => 'Companies stuck on unsupported legacy systems',
                     'badge'       => 'Modernisation',
-                    'link'        => [
-                        'label' => 'Ask about a legacy ERP rebuild',
-                        'url'   => '/contact-us/?topic=legacy-erp-rebuild',
-                    ],
                 ],
                 [
                     'label'       => 'Industry-specific ERP modules',
+                    'icon'        => '/images/icons/erp-project-vertical.svg',
+                    'icon_alt'    => '',
                     'description' => 'Job work and batch tracking for manufacturers, multi-location stock for distributors, project billing for services firms.',
                     'audience'    => 'Businesses with flows generic ERPs handle poorly',
                     'badge'       => 'Vertical',
                 ],
                 [
                     'label'       => 'ERP integrations & portals',
-                    'description' => 'Connecting an existing ERP with e-commerce, CRM, supplier/customer portals and mobile apps for field or floor staff.',
+                    'icon'        => '/images/icons/erp-project-integrations.svg',
+                    'icon_alt'    => '',
+                    'description' => 'Connecting an existing ERP with e-commerce, CRM, supplier/customer portals and mobile apps for field or floor staff. This is where most of our operational-software work sits today. We’ve built custom modules and dashboards extending an existing ERP for a trading and distribution business, connecting systems that weren’t designed to talk to each other.',
                     'audience'    => 'Companies extending systems they already own',
                     'badge'       => 'Integration',
                 ],
             ],
 
-            'cta' => [
-                'label' => 'Ask if your operations fit these use cases',
-                'url'   => '/contact-us/?topic=use-cases-erp',
-            ],
         ],
 
         'stack' => [
@@ -4250,6 +4265,8 @@ return [
             'categories' => [
                 [
                     'name'        => 'Backend & business logic',
+                    'icon'        => '/images/icons/backend.svg',
+                    'icon_alt'    => '',
                     'description' => 'Document flows, validations and approvals that keep data trustworthy.',
                     'items'       => [
                         'Laravel (PHP 8.x) for modular ERP backends with strong audit trails.',
@@ -4259,6 +4276,12 @@ return [
                 ],
                 [
                     'name'        => 'Frontend & floor usability',
+                    // Filled brand blue in §12 — the section's single accent.
+                    // Flag-driven rather than positional so reordering the
+                    // categories cannot move the highlight to the wrong one.
+                    'accent'      => true,
+                    'icon'        => '/images/icons/ux.svg',
+                    'icon_alt'    => '',
                     'description' => 'Screens fast enough for billing counters and simple enough for the floor.',
                     'items'       => [
                         'Next.js (React) with keyboard-first data entry and fast list views.',
@@ -4268,6 +4291,8 @@ return [
                 ],
                 [
                     'name'        => 'Data & integrations',
+                    'icon'        => '/images/icons/integrations.svg',
+                    'icon_alt'    => '',
                     'description' => 'Accurate numbers everywhere, reconciled automatically.',
                     'items'       => [
                         'PostgreSQL/MySQL with strict constraints for inventory and financial integrity.',
@@ -4277,6 +4302,8 @@ return [
                 ],
                 [
                     'name'        => 'Security & continuity',
+                    'icon'        => '/images/icons/security.svg',
+                    'icon_alt'    => '',
                     'description' => 'Operations cannot stop – neither can the ERP.',
                     'items'       => [
                         'Role- and location-based permissions with full audit logging.',

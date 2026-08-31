@@ -38,7 +38,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
         Skip to main content
     </a>
 
-    <div class="max-w-7xl mx-auto flex h-16 items-center justify-between px-4">
+    <div class="max-w-[85rem] mx-auto flex h-16 items-center justify-between px-4">
         <!-- Brand -->
         <a
             href="/"
@@ -118,7 +118,7 @@ $activeClass = function (string $itemUrl) use ($currentPath): string {
                                     <!-- Brand accent line -->
                                     <div class="h-0.5 w-full bg-gradient-to-r from-primary-400 via-primary-700 to-accent-500"></div>
 
-                                    <div class="mx-auto max-w-7xl px-6 py-8 lg:px-10 lg:py-10">
+                                    <div class="mx-auto max-w-[85rem] px-6 py-8 lg:px-10 lg:py-10">
                                         <!-- Header row -->
                                         <div class="mb-4 flex items-center justify-between border-b border-slate-100 pb-3">
                                             <span class="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">

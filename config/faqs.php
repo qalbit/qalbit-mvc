@@ -396,38 +396,55 @@ return [
     // -------------------------------------------------
     'service_erp_development' => [
         [
-            'question' => 'What is custom ERP development and when does it make sense over SAP or Odoo?',
-            'answer'   => 'Custom ERP development means building the operations backbone of your business – inventory, purchase, sales, production, finance and HR modules – around your actual processes. Packaged suites like SAP or Oracle are powerful but heavy and expensive for SMEs, while flexible platforms like Odoo still force compromises once your workflows get specific. A custom ERP makes sense when your operations have outgrown spreadsheets, when packaged systems would require changing how you work, or when per-user licence costs no longer scale with your team.',
+            'question' => 'What is custom ERP development?',
+            'answer'   => 'Custom ERP development is building an enterprise resource planning system around one company’s specific workflows instead of configuring a packaged suite. It covers inventory, purchase, sales, production, finance and HR as connected modules, with the business owning the source code and paying no per-user licence fee.',
         ],
         [
-            'question' => 'How much does custom ERP software development cost?',
-            'answer'   => 'ERP costs depend on modules and complexity, which is why we never quote a single number upfront. A phase-one rollout covering inventory, purchase and sales for a single company typically sits in the range of a mid-sized annual licence bill for a packaged ERP – but it is a one-time build you own, not a recurring fee. After a 2–3 week discovery we give you a module-by-module estimate so you can start with the highest-pain area and expand only when each phase proves itself.',
+            'question' => 'How much does custom ERP development cost?',
+            'answer'   => 'Cost is driven by module count, integration complexity and data migration depth rather than user numbers. There’s no per-seat licence, so spend weights toward a one-time build plus an optional support retainer. We quote after a scoping call rather than publishing a range, because ranges spanning $10,000 to $1.5 million help nobody.',
+        ],
+        [
+            'question' => 'What factors most affect custom ERP development cost?',
+            'answer'   => 'Six: how many modules are in phase one, how many external systems you’re integrating and how modern their APIs are, how much historical data needs migrating, how complex your permission and approval structure is, your compliance requirements, and how non-standard your core processes are.',
         ],
         [
             'question' => 'How long does an ERP implementation take?',
-            'answer'   => 'Phase one – typically inventory, purchase and sales for one location or company – takes about 3–5 months including discovery, build, master data migration, training and a parallel run. Further modules (production, HR, portals) roll out incrementally after that. We deliberately avoid big-bang go-lives: your existing tools keep running until the new system’s numbers reconcile.',
+            'answer'   => 'Discovery and architecture typically run four to seven weeks, phase-one build six to fourteen weeks depending on scope, and migration with parallel run a further three to six. Panorama Consulting’s 2026 report found a median nine-month timeline across 170 organisations.',
         ],
         [
-            'question' => 'Can the ERP integrate with Tally, Zoho Books or QuickBooks?',
-            'answer'   => 'Yes – and for most SMEs we recommend it. Your accountant keeps the tool they trust while the ERP handles operations: vouchers, invoices and payments sync automatically, and e-invoicing/GST flows are supported. The same applies to banking APIs, e-commerce platforms and existing tools you want to keep.',
+            'question' => 'Should you build or buy an ERP?',
+            'answer'   => 'Buy when your processes are standard, you’re under roughly fifteen users, and you need to be live in weeks. Build when a non-standard process is central to how you compete, when per-seat licensing has stopped scaling, or when you’ve customised a packaged suite so heavily that upgrades have become projects.',
         ],
         [
-            'question' => 'How do you handle data migration and go-live without disrupting operations?',
-            'answer'   => 'We migrate master data (items, parties, locations) and opening balances first, then run the new ERP in parallel with your current tools for a defined period. Supervisors are trained on real transactions, and we only cut over once daily numbers match. This parallel-run approach is slower on paper but avoids the operational chaos that kills most ERP projects.',
+            'question' => 'Is custom ERP cheaper than Odoo, SAP or NetSuite?',
+            'answer'   => 'Not upfront. Across five years it often is, because there’s no per-seat licence. The crossover typically sits between 30 and 50 users. Odoo Custom renews around $61 per user per month and Dynamics 365 Business Central Premium lists at $110 – that compounds annually.',
         ],
         [
-            'question' => 'Can you modernise or replace our old legacy ERP?',
-            'answer'   => 'Yes. We regularly rebuild legacy desktop, FoxPro/Access-era or unsupported ERP systems into modern web-based ERPs. Your historical data is migrated, familiar workflows are preserved where they still make sense, and improvements are introduced gradually so long-tenured staff are not retrained overnight.',
+            'question' => 'What’s the difference between custom ERP and off-the-shelf ERP pricing?',
+            'answer'   => 'Off-the-shelf charges a recurring per-user subscription indefinitely, plus separate implementation fees most vendors don’t publish. Custom ERP is a one-time build with an optional support retainer. One scales with headcount forever; the other doesn’t.',
         ],
         [
-            'question' => 'Who owns the ERP source code, and what about long-term support?',
-            'answer'   => 'You own the code, database and infrastructure entirely – no per-user licences, no vendor lock-in. After go-live, most clients keep a monthly support retainer for enhancements, new reports and the next modules on the roadmap, but the system is documented and handover-ready at every stage.',
+            'question' => 'Can a custom ERP integrate with our existing accounting software?',
+            'answer'   => 'Yes, and we usually recommend keeping it. QuickBooks Online, Xero, Zoho Books and NetSuite offer modern REST APIs with webhooks, making bidirectional sync straightforward. Tally integration works through its XML-over-HTTP interface and needs a middleware layer, which we scope explicitly rather than assume.',
+        ],
+        [
+            'question' => 'What are the hidden costs in custom ERP development?',
+            'answer'   => 'Data migration is most often underestimated, particularly reconciling historical transactions against the old system. After that: user training and change management, integration work on legacy systems with poor APIs, and ongoing support after go-live. We scope all four upfront rather than discovering them in month four.',
+        ],
+        [
+            'question' => 'Can you modernise our existing legacy ERP instead of replacing it?',
+            'answer'   => 'Often yes. Where a legacy system holds years of usable data, we typically build alongside it, migrate module by module, and decommission the old system once each area has run in parallel and reconciled. Usually lower risk than replacement.',
+        ],
+        [
+            'question' => 'Who owns the source code?',
+            'answer'   => 'You do, in full, in your own repository, documented. No licence, no per-user fee, no restriction on hiring a different team later. We’d rather be retained because the work is good than because leaving is difficult.',
+        ],
+        [
+            'question' => 'Do you work with companies outside India?',
+            'answer'   => 'Yes. Most of our work is for businesses in the US, UK, Europe, the GCC and Australia. We work in your business hours for planning and reviews, and handle regional compliance requirements including GCC e-invoicing mandates.',
         ],
     ],
 
-    // -------------------------------------------------
-    // MVP Development service page FAQs
-    // -------------------------------------------------
     'service_mvp_development' => [
         [
             'question' => 'What is MVP development and what makes a good MVP?',

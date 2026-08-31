@@ -149,6 +149,17 @@ class ServiceController
         $cacheSlugSegment = $this->deriveCacheSlugSegment($service, $slug);
         $cacheKey         = self::CACHE_KEY_PREFIX . $cacheSlugSegment;
 
+        // A pending contact flash must never meet a cached page: the visitor
+        // would be redirected back here after submitting and see no
+        // confirmation at all. Checked without consuming, so the view still
+        // gets to read and render it. index() has always done this; show()
+        // did not, so every service page hosting a contact form silently
+        // swallowed its own success and error messages whenever the page
+        // happened to be warm in the cache.
+        if (Session::hasFlash('contact_success', 'contact_errors', 'contact_old')) {
+            return $this->renderServicePage($service, $cacheSlugSegment);
+        }
+
         return PageCache::remember(
             $cacheKey,
             self::CACHE_TTL,
@@ -208,7 +219,16 @@ class ServiceController
             $faqSchema,
         ]));
 
-        $content = View::render('pages/services/show', [
+        // A service may declare its own template when the shared layout cannot
+        // hold its content (currently only ERP). Everything else falls back to
+        // the shared `show` template, so this is inert for the other services.
+        $template = $service['template'] ?? 'pages/services/show';
+
+        if (!View::exists($template)) {
+            $template = 'pages/services/show';
+        }
+
+        $content = View::render($template, [
             'seo'     => $seo,
             'service' => $service,
             'faqs'    => $faqs,

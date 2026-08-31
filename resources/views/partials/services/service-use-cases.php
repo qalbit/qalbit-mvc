@@ -117,6 +117,9 @@ if (empty($items)) {
                         $audience    = trim($item['audience']    ?? '');
                         $badge       = trim($item['badge']       ?? '');
                         $link        = $item['link']             ?? null;
+                        $icon        = trim($item['icon']        ?? '');
+                        // Decorative unless a caller gives it meaningful alt text.
+                        $iconAlt     = trim((string) ($item['icon_alt'] ?? ''));
 
                         if ($label === '' && $description === '') {
                             continue;
@@ -138,6 +141,17 @@ if (empty($items)) {
                     >
 
                         <div class="mb-3 flex items-start justify-between gap-3">
+                            <?php if ($icon !== ''): ?>
+                                <img
+                                    src="<?= asset($icon); ?>"
+                                    alt="<?= htmlspecialchars($iconAlt, ENT_QUOTES); ?>"
+                                    <?= $iconAlt === '' ? 'aria-hidden="true"' : '' ?>
+                                    loading="lazy"
+                                    width="40"
+                                    height="40"
+                                    class="order-2 h-10 w-10 flex-none object-contain"
+                                >
+                            <?php endif; ?>
                             <div>
                                 <?php if ($label !== ''): ?>
                                     <h3 class="text-sm sm:text-base font-semibold text-slate-900 group-hover:text-sky-700" itemprop="name">

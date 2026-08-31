@@ -162,9 +162,20 @@ if (empty($items)) {
 
                                     <?php if (!empty($icon)): ?>
                                         <div class="flex-none">
+                                            <?php
+                                                // `icon_alt => ''` marks the icon decorative, for steps whose
+                                                // heading already carries the same words. Absent key keeps the
+                                                // previous title-as-alt behaviour for every other page.
+                                                $stepIconAltSet = array_key_exists('icon_alt', $item);
+                                                $stepIconAlt    = $stepIconAltSet
+                                                    ? trim((string) $item['icon_alt'])
+                                                    : ($titleStep !== '' ? $titleStep : 'Process step icon');
+                                                $stepIconDecorative = $stepIconAltSet && $stepIconAlt === '';
+                                            ?>
                                             <img
                                                 src="<?= asset($icon); ?>"
-                                                alt="<?= htmlspecialchars($titleStep !== '' ? $titleStep : 'Process step icon', ENT_QUOTES); ?>"
+                                                alt="<?= htmlspecialchars($stepIconAlt, ENT_QUOTES); ?>"
+                                                <?= $stepIconDecorative ? 'aria-hidden="true"' : '' ?>
                                                 loading="lazy"
                                                 width="36"
                                                 height="36"

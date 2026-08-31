@@ -384,13 +384,13 @@
        GSAP handles entrance (from y+24, autoAlpha 0). */
 }
 
-.faq-item[data-faq-item].is-open {
+.faq-item[data-faq-item][open] {
     border-color: hsl(var(--primary));
     box-shadow: 0 18px 50px rgba(37, 99, 235, 0.18);
     transform: translateY(-1px);
 }
 
-/* Trigger button (question row) */
+/* Trigger row (question) – a native <summary> element */
 .faq-trigger[data-faq-trigger] {
     display: flex;
     align-items: center;
@@ -404,11 +404,28 @@
     text-align: left;
     cursor: pointer;
     color: hsl(var(--foreground));
+    list-style: none; /* removes the default disclosure triangle */
 }
 
+/* Safari/older WebKit use a shadow pseudo-element for the triangle. */
+.faq-trigger[data-faq-trigger]::-webkit-details-marker {
+    display: none;
+}
+
+.faq-trigger[data-faq-trigger]::marker {
+    content: "";
+}
+
+/* The question is an <h3> inside the summary – keep it visually identical
+   to the old button label rather than inheriting heading metrics. */
 .faq-trigger-label {
     flex: 1 1 auto;
     padding-right: 1.3rem;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+    margin: 0;
 }
 
 /* Plus / minus icon bubble */
@@ -446,7 +463,7 @@
 }
 
 /* When open: turn "+" into "-" */
-.faq-item.is-open .faq-trigger-icon::after {
+.faq-item[open] .faq-trigger-icon::after {
     transform: rotate(90deg);
     opacity: 0;
 }
@@ -495,7 +512,6 @@
         font-size: 0.8rem;
     }
 }
-
 
 /* ------------------------------
  * Blog – latest posts teaser
@@ -690,7 +706,6 @@
     }
 }
 
-
 /* ------------------------------
  * Contact CTA – dark section
  * --------------------------- */
@@ -799,7 +814,6 @@
     }
 }
 
-
 html {
     scroll-behavior: smooth;
 }
@@ -812,4 +826,600 @@ html {
 .iti {
     width: 100%;
     display: block;
+}
+
+/* Page-scoped width for /services/erp-development/.
+   The shared service partials hardcode `max-w-6xl` (1152px), which leaves ~360px
+   dead on each side of a 1870px viewport. This widens every section on this page
+   to 82.5rem — the site's own `container.screens.2xl` token — so the hero and the
+   sections beneath it share one alignment grid. Scoped to `.erp-page`, so no
+   shared partial is edited and no other page changes. */
+.erp-page .max-w-6xl {
+    max-width: 82.5rem; /* 1320px — matches tailwind.config.cjs container 2xl */
+}
+
+@keyframes erp-hero-ping {
+    0%   { transform: scale(1);   opacity: 0.55; }
+    70%  { transform: scale(2.6); opacity: 0; }
+    100% { transform: scale(2.6); opacity: 0; }
+}
+
+@keyframes erp-hero-rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* Final cell: the section's single filled accent. */
+.erp-mod-cell--accent,
+.erp-mod-cell--accent:hover { background-color: #0066FF; }
+
+/*
+ * Icons are inlined SVG, so these rules reach inside them. CSS beats the
+ * presentation attributes written on the file, which is the whole reason for
+ * inlining: one icon set serves both the light and the dark ground.
+ */
+.erp-mod-icon,
+.erp-mod-icon svg {
+    display: block;
+    height: 2.25rem;
+    width: 2.25rem;
+}
+
+.erp-mod-icon svg { stroke: #F8FAFC; }                          /* 19.28:1 on #020617 */
+.erp-mod-icon svg [stroke="#0066FF"] { stroke: #48BCFF; }       /*  9.52:1 on #020617 */
+
+/* On the blue cell everything goes full white — 4.83:1, the only passing value. */
+.erp-mod-cell--accent .erp-mod-icon svg,
+.erp-mod-cell--accent .erp-mod-icon svg [stroke="#0066FF"] { stroke: #FFFFFF; }
+
+.erp-proc-icon,
+.erp-proc-icon svg {
+    display: block;
+    height: 1.625rem;
+    width: 1.625rem;
+    flex: none;
+}
+
+/* 2.25rem to match .erp-mod-icon. At 2rem these rendered a stroke-2 icon at
+   1.33px against the module set's 1.5px, so the two families read at different
+   weights on the same page. Matching the render size keeps one icon spec. */
+.erp-uc-icon,
+.erp-uc-icon svg {
+    display: block;
+    height: 2.25rem;
+    width: 2.25rem;
+    flex: none;
+}
+
+/* Icons, not the 480x360 illustrations this section used to reserve.
+   Deliberately larger than the other three bespoke sets: those sit at 2.25rem
+   as label marks beside a heading, whereas these stand in for the section's
+   artwork and lead each column. The trade is stroke weight — a stroke-2 icon
+   on a 48 grid renders at 1.5px at 2.25rem and 2.67px here. */
+.erp-ind-icon,
+.erp-ind-icon svg {
+    display: block;
+    height: 4rem;
+    width: 4rem;
+}
+
+/* The marker is 2rem tall against a 1.3em heading line, so centring the pair
+   pushed the country name below the first line of its own paragraph. Top-align
+   the pair and lift the marker by half the difference instead. */
+.erp-gcc-marker,
+.erp-gcc-marker svg {
+    display: block;
+    height: 2.25rem;
+    width: 2.25rem;
+}
+
+/* Offset recomputed for the larger marker: 36px against a 1.3em heading line
+   (~22px) needs half the difference, not the -0.3rem the 32px marker used. */
+.erp-gcc-marker { margin-top: -0.44rem; }
+
+.erp-stk-icon,
+.erp-stk-icon svg {
+    display: block;
+    height: 2rem;
+    width: 2rem;
+}
+
+/* ------------------------------------------------------------------
+   ERP §15 — FAQ (page-only component)
+   Open answers, no accordion, no JavaScript. Multi-column rather than
+   grid: the answers vary in length, and a two-column grid would align
+   them into rows and leave ragged gaps. Columns flow and balance.
+   ------------------------------------------------------------------ */
+.erp-faq {
+    column-gap: 3.5rem;
+}
+
+@media (min-width: 900px) {
+    .erp-faq { column-count: 2; }
+}
+
+/* ---- §12 accent column ----------------------------------------------
+   One filled block per section, same treatment as the §5 final module
+   cell and the §14 punchline. Everything on it is FULL white: 4.83:1 on
+   #0066FF, and nothing dimmer clears AA on this ground.
+   -------------------------------------------------------------------- */
+.erp-stk-col--accent { background: #0066FF; }
+
+/* This section's icons are the pre-existing generic site assets, which are
+   FILL-based (#B0D3F0 / #0284C7), not stroke-based like the bespoke ERP set.
+   A `stroke` remap does nothing to them, so recolour the fills instead —
+   skipping fill="none" so hollow shapes stay hollow. */
+.erp-stk-col--accent .erp-stk-icon svg [fill]:not([fill="none"]) { fill: #FFFFFF; }
+
+/* Hairlines either side of the fill would read as seams across a solid block.
+   Colour them away rather than removing the border, so the 1px the grid is
+   laid out against does not change and nothing shifts.
+   Scoped through `.erp-stk` deliberately: the responsive `border-left` rules
+   live in @media blocks that the build emits AFTER this one, and at equal
+   specificity source order would let them win. */
+.erp-stk .erp-stk-col--accent,
+.erp-stk .erp-stk-col--accent + .erp-stk-col { border-left-color: transparent; }
+
+/* ==================================================================
+   /services/erp-development/ — page design system
+   ------------------------------------------------------------------
+   The page was rebuilt to a standalone visual design whose markup is
+   almost entirely inline styles referencing custom properties. This
+   block supplies those properties and the handful of things inline
+   styles cannot express (pseudo-elements, media queries, :hover,
+   ::-webkit-slider-thumb).
+
+   EVERYTHING IS SCOPED TO `.erp-page`. The tokens are deliberately NOT
+   on :root — this design's palette, radii and type scale differ from
+   the site's, and eleven other service pages share this stylesheet.
+
+   The class names are prefixed `erp-` for the same reason: the design
+   ships components called `.btn` and `.grayscale`, both of which
+   already exist site-wide with different meanings.
+   ================================================================== */
+
+.erp-page {
+    /* ground */
+    --color-bg: #f3f2f2;
+    --color-surface: #eae9e9;
+    --color-text: #201e1d;
+
+    /* The site footer's ground (Tailwind bg-slate-950). The closing CTA band
+       sits directly above the footer and adopts this so the two read as one
+       dark block instead of meeting on a seam. Keep in step with the footer
+       class if that ever changes. */
+    --color-deep: #020617;
+    --color-divider: color-mix(in srgb, #201e1d 40%, transparent);
+
+    /* accent — the site's own brand blue, which the design adopts */
+    --color-accent: #0066ff;
+    --color-accent-100: #eaf1ff;
+    --color-accent-200: #cfe0ff;
+    --color-accent-300: #a6c6ff;
+    --color-accent-400: #6ba3ff;
+    --color-accent-500: #3d86ff;
+    --color-accent-600: #0057db;
+    --color-accent-700: #0046b0;
+    --color-accent-800: #003480;
+    --color-accent-900: #00214f;
+
+    --color-neutral-100: #f8f4f4;
+    --color-neutral-200: #eae7e7;
+    --color-neutral-300: #d7d3d3;
+    --color-neutral-400: #bab6b6;
+    --color-neutral-500: #9b9797;
+    --color-neutral-600: #7d7979;
+    --color-neutral-700: #605d5d;
+    --color-neutral-800: #444141;
+    --color-neutral-900: #2d2b2b;
+
+    /* The site's own stack, not a page-specific face. This page shipped with
+       Archivo; it now uses what every other page uses so the ERP page does not
+       read as a different site.
+
+       WEIGHT IS 700, NOT 800. head.php requests Poppins at 400;500;600;700 —
+       there is no 800 on the wire, so asking for it would get a synthesised
+       faux-bold, which is heavier-looking but visibly worse than the real cut.
+       If 800 is ever wanted here, add it to $fontsCssUrl in head.php first;
+       do not raise this number on its own. */
+    --font-heading: "Poppins", "Poppins Fallback", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-heading-weight: 700;
+    --font-body: "Poppins", "Poppins Fallback", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-6: 24px;
+    --space-8: 32px;
+
+    --shadow-sm: 0 1px 2px color-mix(in srgb, #2d2b2b 14%, transparent);
+    --shadow-md: 0 3px 10px color-mix(in srgb, #2d2b2b 16%, transparent);
+    --shadow-lg: 0 12px 32px color-mix(in srgb, #2d2b2b 22%, transparent);
+
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+/* Inline styles carry every font-size on this page; family, weight and
+   optical tracking are set once here. */
+.erp-page h1,
+.erp-page h2,
+.erp-page h3,
+.erp-page h4,
+.erp-page h5,
+.erp-page h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-heading-weight);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+}
+
+.erp-page a { color: var(--color-accent); text-underline-offset: 3px; }
+.erp-page a:hover { color: var(--color-accent-700); }
+.erp-page img { display: block; max-width: 100%; }
+.erp-page :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.erp-page ::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
+
+/* Every ERP content section shares the hero's 85rem / 1360px grid. The
+   page-specific scope leaves the shared header and footer untouched. Existing
+   section padding is inline, so the common 16px gutter needs !important. */
+.erp-page > section,
+.erp-page > [data-erp-process-note] {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 85rem;
+    margin-inline: auto;
+    padding-inline: 1rem !important;
+}
+
+/* Anchored sections already carry scroll-margin-top; this makes the jump
+   animate. Scoped by :has so no other page's scrolling changes. */
+html:has(.erp-page) { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+    html:has(.erp-page) { scroll-behavior: auto; }
+}
+
+/* ---- buttons ----------------------------------------------------
+   Named `erp-btn`, not `btn`: the site's own `.btn` is a 2px-bordered,
+   corner-rounded control with a custom cursor image, and this design is
+   square-cornered with no border. Sharing the name would mean fighting
+   the cascade on every instance. */
+.erp-page .erp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: var(--font-heading-weight);
+    font-size: 14px;
+    line-height: 1.2;
+    color: var(--color-text);
+    background: transparent;
+    border: 1px solid transparent;
+    padding: var(--space-2) calc(var(--space-3) * 1.2);
+    border-radius: 0;
+    transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+}
+.erp-page .erp-btn-primary { background: var(--color-accent); color: #ffffff; }
+.erp-page .erp-btn-primary:hover { background: var(--color-accent-600); color: #ffffff; }
+.erp-page .erp-btn-primary:active { background: var(--color-accent-700); }
+.erp-page .erp-btn:disabled { opacity: .45; cursor: not-allowed; }
+
+/* Photography on this page is desaturated so the single blue accent stays
+   the only colour event. Named `erp-gray` — Tailwind owns `.grayscale`. */
+.erp-page .erp-gray { filter: grayscale(1) contrast(1.08); }
+
+/* ---- responsive collapse ---------------------------------------
+   The design lays out with inline `grid-template-columns`; these two
+   attributes mark which grids collapse to one column, and at which
+   width. !important is required because it is overriding an inline
+   style, which is the only way this design can express layout. */
+@media (max-width: 900px) {
+    .erp-page [data-stack] { grid-template-columns: minmax(0, 1fr) !important; }
+}
+@media (max-width: 700px) {
+    .erp-page [data-stack-sm] { grid-template-columns: minmax(0, 1fr) !important; }
+}
+
+/* ---- FAQ accordion ---------------------------------------------
+   Native <details> with name="erp-faq", so single-open works with JavaScript
+   off. erp-page.js takes ownership when it loads: it preventDefaults the
+   summary click so it can animate the panel height and close the open sibling
+   on the way, which the native behaviour does instantly and cannot ease.
+   `is-closing` is what keeps the mark honest during that animation -- the
+   element still has [open] while it plays, so without it the cross would only
+   spring back to a plus after the panel had finished collapsing. It is
+   declared after the [open] rules and at equal specificity, so it wins. */
+.erp-page details > summary { list-style: none; cursor: pointer; }
+.erp-page details > summary::-webkit-details-marker { display: none; }
+.erp-page details[open] [data-plus] { transform: rotate(45deg); }
+.erp-page details[open] [data-q] { color: var(--color-accent); }
+.erp-page [data-plus] { transition: transform .3s cubic-bezier(.2, .7, .3, 1); }
+.erp-page details.is-closing [data-plus] { transform: rotate(0deg); }
+.erp-page details.is-closing [data-q] { color: var(--color-text); }
+
+/* The animated box. overflow is only clamped while a transition is running --
+   left on permanently it would clip focus rings on links inside an answer. */
+.erp-page [data-erp-faq-panel] { margin: 0; }
+.erp-page [data-erp-faq-panel].is-animating { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+    .erp-page [data-plus] { transition: none; }
+}
+
+/* ---- users slider (comparison table) ---------------------------- */
+.erp-page input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 2px;
+    background: var(--color-divider);
+    outline: none;
+    cursor: pointer;
+}
+.erp-page input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--color-accent);
+    cursor: grab;
+    border: 0;
+}
+.erp-page input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--color-accent);
+    cursor: grab;
+    border: 0;
+    border-radius: 0;
+}
+.erp-page input[type="range"]:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+
+/* ---- hover affordances ------------------------------------------ */
+.erp-page [data-hov] { transition: background-color .18s ease; }
+.erp-page [data-hov]:hover { background: color-mix(in srgb, var(--color-text) 5%, transparent); }
+.erp-page [data-arrow]:hover [data-arrow-g] { transform: translateX(6px); }
+.erp-page [data-arrow-g] { transition: transform .25s cubic-bezier(.2, .7, .3, 1); display: inline-block; }
+
+/* ---- scroll reveal ----------------------------------------------
+   erp-page.js adds `is-hidden` only to blocks that start below the fold,
+   then removes it on intersection. Nothing is hidden without JS, and
+   nothing is hidden for a reader who has asked for reduced motion. */
+.erp-page [data-reveal].is-hidden {
+    opacity: 0;
+    transform: translateY(22px);
+}
+.erp-page [data-reveal] {
+    transition: opacity .65s cubic-bezier(.2, .7, .3, 1), transform .65s cubic-bezier(.2, .7, .3, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+    .erp-page [data-reveal],
+    .erp-page [data-reveal].is-hidden {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+   ERP page — integrator rules owed to the rebuilt partials.
+   Each hook below is emitted by a partial purely so this file can reach it;
+   the partials cannot fix these themselves because inline styles cannot be
+   unwound at a breakpoint and the intl-tel-input DOM does not exist at render.
+   --------------------------------------------------------------------------- */
+
+/* Stacked view: the section grids collapse to one column at 900px via
+   [data-stack], but the columns keep a border-right and one-sided padding that
+   only make sense in a row. Unwind both, and restore separation as a top rule
+   on every column after the first. */
+@media (max-width: 900px) {
+    .erp-page [data-erp-bvb-col],
+    .erp-page [data-erp-ind-col],
+    .erp-page [data-erp-why-col],
+    .erp-page [data-erp-rel-col],
+    .erp-page .erp-proc-col,
+    .erp-page .erp-stk-cell {
+        border-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .erp-page [data-erp-bvb-col] + [data-erp-bvb-col],
+    .erp-page [data-erp-ind-col] + [data-erp-ind-col],
+    .erp-page [data-erp-why-col] + [data-erp-why-col],
+    .erp-page [data-erp-rel-col] + [data-erp-rel-col],
+    .erp-page .erp-proc-col + .erp-proc-col,
+    .erp-page .erp-stk-cell + .erp-stk-cell {
+        border-top: 1px solid var(--color-divider);
+    }
+
+    /* The industries headings reserve two lines so four accent rules stay on
+       one baseline in a row. Stacked, that reservation is dead space. */
+    .erp-page [data-erp-ind-name] {
+        min-height: 0 !important;
+    }
+}
+
+/* intl-tel-input sits inside the dark form card, so the widget inherits the
+   card's light ink onto its own white dropdown -- white on white. The widget
+   DOM is built by JS at runtime and carries no colour of its own, so the fix
+   has to live here. separateDialCode:true also renders the dial code ON the
+   dark card, so the two surfaces are coloured separately rather than with one
+   inherited value. */
+.erp-page [data-erp-form-card] .iti__dropdown-content,
+.erp-page [data-erp-form-card] .iti__search-input,
+.erp-page [data-erp-form-card] .iti__country-list {
+    background: #FFFFFF;
+    color: var(--color-text);
+}
+
+.erp-page [data-erp-form-card] .iti__country.iti__highlight,
+.erp-page [data-erp-form-card] .iti__country:hover {
+    background: var(--color-accent-100);
+    color: var(--color-text);
+}
+
+.erp-page [data-erp-form-card] .iti__dial-code {
+    color: color-mix(in srgb, var(--color-text) 62%, transparent);
+}
+
+/* main.js toggles border-red-400 / border-slate-300 on the inputs for
+   client-side validation. Those utilities cannot beat the fields' inline
+   border-bottom, so the error state renders invisibly. Re-express it against
+   the inline style. The page ships no red -- the accent ramp carries the
+   state, and hue is not the only signal: every invalid field also sets
+   aria-invalid and shows a message. Server-rendered errors colour their own
+   underline and are unaffected. */
+.erp-page [data-erp-form-card] .border-red-400,
+.erp-page [data-erp-form-card] input[aria-invalid="true"],
+.erp-page [data-erp-form-card] textarea[aria-invalid="true"],
+.erp-page [data-erp-form-card] select[aria-invalid="true"] {
+    border-bottom-color: var(--color-accent-300) !important;
+}
+
+/* A band that paints its own background must reach both viewport edges, so it
+   opts out of the shared 85rem cap that .erp-page > section applies. The cap
+   moves inward to [data-erp-wrap], which reproduces the SAME content box the
+   capped sections get -- 85rem less a 1rem gutter -- so a bleeding band's text
+   still lines up with every section above and below it. Change one of these
+   two rules and you must change the other, or the page loses its common
+   left edge. */
+.erp-page > [data-erp-bleed] {
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 0 !important;
+}
+
+.erp-page [data-erp-wrap] {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 85rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+/* Process stage rule. Rests as a light track; the stage's own colour wipes
+   across it on hover and retracts on leave. The rule is aria-hidden and the
+   stages hold no interactive content, so this is decoration only -- nothing
+   here conveys state a keyboard or screen-reader user needs. */
+.erp-page [data-erp-proc-rule] {
+    position: relative;
+    height: 3px;
+    margin: 14px 0 0;
+    background: var(--color-neutral-300);
+    overflow: hidden;
+}
+
+.erp-page [data-erp-proc-rule]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-text);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .45s cubic-bezier(.2, .7, .3, 1);
+}
+
+/* The closing stage keeps the accent it had before, now only while hovered. */
+.erp-page [data-erp-proc-rule][data-accent]::after {
+    background: var(--color-accent);
+}
+
+.erp-page .erp-proc-col:hover [data-erp-proc-rule]::after,
+.erp-page .erp-proc-col:focus-within [data-erp-proc-rule]::after {
+    transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .erp-page [data-erp-proc-rule]::after { transition: none; }
+}
+
+/* Photograph band: colour revealed under the pointer.
+   A colour copy sits over the grayscale one and is masked to a soft circle that
+   erp-page.js moves to the cursor. --x/--y are set on the element in px; the
+   50% fallbacks matter because the layer is painted before the first
+   pointermove, and without them the circle would sit at 0,0 and flash in the
+   top-left corner on entry.
+   background-size/position must keep matching the <img>'s object-fit:cover, or
+   the two layers drift and the revealed area no longer matches what is under
+   the cursor.
+   The radius scales with the viewport rather than sitting at a fixed px: the
+   band itself is clamp(260px,34vw,560px) tall, so a fixed circle reads as a
+   pinhole on a wide screen and swallows the whole band on a narrow one. */
+.erp-page [data-erp-photo-colour] {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .28s ease;
+    -webkit-mask-image: radial-gradient(circle var(--erp-photo-r, clamp(260px, 30vw, 520px)) at var(--erp-photo-x, 50%) var(--erp-photo-y, 50%), #000 0%, #000 42%, transparent 72%);
+    mask-image: radial-gradient(circle var(--erp-photo-r, clamp(260px, 30vw, 520px)) at var(--erp-photo-x, 50%) var(--erp-photo-y, 50%), #000 0%, #000 42%, transparent 72%);
+}
+
+.erp-page [data-erp-photo-reveal]:hover [data-erp-photo-colour] {
+    opacity: 1;
+}
+
+/* Pointer-only. On touch there is no hover to speak of -- the layer would latch
+   on after a tap and stay -- so it never paints there. */
+@media (hover: none), (pointer: coarse) {
+    .erp-page [data-erp-photo-colour] { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .erp-page [data-erp-photo-colour] { transition: none; }
+}
+
+/* Project-type cards: no background tint on hover -- the card is not a link and
+   a filled panel said it was. The card TITLE animates instead: its own colour
+   wipes left to right, the same gesture and easing as the process stage rule.
+
+   Base rule is a plain colour transition, so a browser without background-clip
+   still gets the hover. The wipe is layered on inside @supports because it
+   needs transparent text to show the gradient through the glyphs -- if that
+   were unconditional, a browser that ignored background-clip would paint
+   transparent text on a transparent ground and the headings would vanish. */
+.erp-page [data-erp-uc-title] {
+    display: inline-block;
+    transition: color .3s ease;
+}
+
+.erp-page [data-erp-uc-card]:hover [data-erp-uc-title],
+.erp-page [data-erp-uc-card]:focus-within [data-erp-uc-title] {
+    color: var(--color-accent);
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    /* Two hard stops at 50% on a double-width background: the right half is the
+       resting text colour, the left half the accent. Sliding the position from
+       100% to 0 wipes one into the other across the glyphs. */
+    .erp-page [data-erp-uc-title] {
+        background-image: linear-gradient(to right, var(--color-accent) 50%, var(--color-text) 50%);
+        background-size: 200% 100%;
+        background-position: 100% 0;
+        background-repeat: no-repeat;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        transition: background-position .5s cubic-bezier(.2, .7, .3, 1);
+    }
+
+    .erp-page [data-erp-uc-card]:hover [data-erp-uc-title],
+    .erp-page [data-erp-uc-card]:focus-within [data-erp-uc-title] {
+        background-position: 0 0;
+        color: transparent;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .erp-page [data-erp-uc-title] { transition: none; }
 }

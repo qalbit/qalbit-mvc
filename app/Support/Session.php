@@ -31,6 +31,25 @@ class Session
         $_SESSION['_flash'][$key] = $value;
     }
 
+    /**
+     * Is a flash key waiting, WITHOUT consuming it?
+     *
+     * getFlash() unsets on read, so a caller that only needs to know whether a
+     * flash exists — a controller deciding not to serve a cached page, say —
+     * cannot use it: the check itself would eat the message before the view
+     * ever rendered it.
+     */
+    public static function hasFlash(string ...$keys): bool
+    {
+        foreach ($keys as $key) {
+            if (!empty($_SESSION['_flash'][$key])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static function getFlash(string $key, $default = null)
     {
         if (!empty($_SESSION['_flash'][$key])) {

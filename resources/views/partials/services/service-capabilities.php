@@ -137,10 +137,21 @@ if (empty($items)) {
                             </div>
 
                             <?php if (!empty($icon)): ?>
+                                <?php
+                                    // `icon_alt => ''` marks the icon decorative: it sits next to a
+                                    // heading that already says the same thing. Omitting the key
+                                    // keeps the previous label-as-alt behaviour.
+                                    $iconAltSet = array_key_exists('icon_alt', $item);
+                                    $iconAlt    = $iconAltSet
+                                        ? trim((string) $item['icon_alt'])
+                                        : ($label !== '' ? $label : 'Capability icon');
+                                    $iconIsDecorative = $iconAltSet && $iconAlt === '';
+                                ?>
                                 <div class="flex-none">
                                     <img
                                         src="<?= asset($icon); ?>"
-                                        alt="<?= htmlspecialchars($label !== '' ? $label : 'Capability icon', ENT_QUOTES); ?>"
+                                        alt="<?= htmlspecialchars($iconAlt, ENT_QUOTES); ?>"
+                                        <?= $iconIsDecorative ? 'aria-hidden="true"' : '' ?>
                                         loading="lazy"
                                         width="40"
                                         height="40"

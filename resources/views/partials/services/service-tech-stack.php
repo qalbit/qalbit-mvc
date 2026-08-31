@@ -144,6 +144,9 @@ if (empty($categories)) {
                         $name        = trim($category['name']        ?? '');
                         $description = trim($category['description'] ?? '');
                         $items       = $category['items']            ?? [];
+                        $icon        = trim($category['icon']        ?? '');
+                        // Decorative unless a caller gives it meaningful alt text.
+                        $iconAlt     = trim((string) ($category['icon_alt'] ?? ''));
 
                         // Normalize items: allow both list of strings or list of [label => ...]
                         $normalizedItems = [];
@@ -173,6 +176,18 @@ if (empty($categories)) {
                         itemscope
                         itemtype="https://schema.org/Thing"
                     >
+
+                        <?php if ($icon !== ''): ?>
+                            <img
+                                src="<?= asset($icon); ?>"
+                                alt="<?= htmlspecialchars($iconAlt, ENT_QUOTES); ?>"
+                                <?= $iconAlt === '' ? 'aria-hidden="true"' : '' ?>
+                                loading="lazy"
+                                width="36"
+                                height="36"
+                                class="mb-3 h-9 w-9 object-contain"
+                            >
+                        <?php endif; ?>
 
                         <?php if ($name !== ''): ?>
                             <h3 class="mb-2 text-sm sm:text-base font-semibold text-slate-50" itemprop="name">
