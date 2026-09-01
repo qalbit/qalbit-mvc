@@ -69,7 +69,13 @@ $jsonLd = $jsonLd ?? null;
 <?php endif; ?>
 
 <!-- Twitter -->
-<meta name="twitter:card" content="summary">
+<?php /* summary_large_image, not summary. Every page that sets $ogImage ships a
+         1200x630 asset (declared as such immediately above), which is exactly
+         the size this card type expects; `summary` was cropping those to a
+         small square thumbnail site-wide. Pages WITHOUT an $ogImage degrade to
+         a text card either way, so this is safe unconditionally — the same
+         value layouts/landing.php has always used. */ ?>
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?= htmlspecialchars($title) ?>">
 <?php if (!empty($description)): ?>
     <meta name="twitter:description" content="<?= htmlspecialchars($description) ?>">
