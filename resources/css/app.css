@@ -1197,7 +1197,6 @@ html:has(.erp-page) { scroll-behavior: smooth; }
     background: var(--color-divider);
     border: 0;
 }
-/* ---- (old block below, superseded) ------------------------------- */
 .erp-page input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 18px;
@@ -1220,8 +1219,20 @@ html:has(.erp-page) { scroll-behavior: smooth; }
 
 /* The CRM seat model puts the same slider on the dark panel, where a track
    mixed from --color-text is invisible against --color-text. Re-mix it from the
-   panel's own ink instead. The thumb is already accent and needs no change. */
-.erp-page [data-crm-seat-slider] input[type="range"]::-webkit-slider-runnable-track,
+   panel's own ink instead. The thumb is already accent and needs no change.
+
+   NEVER GROUP THESE TWO SELECTORS. A selector list containing one selector the
+   browser cannot parse invalidates the WHOLE rule — so a list pairing
+   ::-webkit-slider-runnable-track with ::-moz-range-track is dropped by Chrome
+   (which rejects the -moz- half) AND by Firefox (which rejects the -webkit-
+   half), i.e. by everything. That shipped once: the track fell back to
+   --color-divider, which is --color-text at 40% and therefore invisible on a
+   --color-text panel. The thumb still moved, so it read as a slider with no
+   track. Same rule applies to the generic pair above; keep every vendor
+   pseudo-element in a rule of its own. */
+.erp-page [data-crm-seat-slider] input[type="range"]::-webkit-slider-runnable-track {
+    background: color-mix(in srgb, #f3f2f2 35%, transparent);
+}
 .erp-page [data-crm-seat-slider] input[type="range"]::-moz-range-track {
     background: color-mix(in srgb, #f3f2f2 35%, transparent);
 }
