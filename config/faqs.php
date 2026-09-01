@@ -360,34 +360,65 @@ return [
     // -------------------------------------------------
     // CRM Development service page FAQs
     // -------------------------------------------------
+    /**
+     * /services/crm-development/ — twelve questions, in real search phrasings.
+     *
+     * Every answer opens at 40–55 words so it is snippet- and extraction-shaped,
+     * and all twelve render server-side inside the accordion (open or closed) —
+     * that is what FAQPage schema is asserting, so it must stay true.
+     *
+     * The previous seven included "Vertical CRMs are a large part of our CRM
+     * work", which claimed a volume of delivered CRM projects that does not
+     * exist. It is gone, not softened. LiftUp is our own product and Q11 says so.
+     */
     'service_crm_development' => [
         [
-            'question' => 'What is custom CRM development and how is it different from Salesforce, HubSpot or Zoho?',
-            'answer'   => 'Custom CRM development means building a customer relationship management system around your exact sales cycle, fields, roles and reports – instead of adapting your process to a generic tool. Off-the-shelf CRMs like Salesforce, HubSpot or Zoho are excellent for standard pipelines, but teams with industry-specific workflows, deep integration needs or fast-growing seat counts often end up paying for features they never use while still relying on spreadsheets for the gaps. A custom CRM removes those gaps and the recurring per-seat licence cost.',
+            'question' => 'How much does a custom CRM cost?',
+            'answer'   => 'Cost is driven by module count, integration complexity and migration depth rather than seat numbers. There’s no per-seat licence, so spend is weighted toward a one-time build plus an optional retainer. We scope before quoting, because published ranges spanning $20,000 to $360,000 help nobody.',
         ],
         [
-            'question' => 'How much does custom CRM development cost?',
-            'answer'   => 'A focused first release – leads, pipeline, customer 360 view and basic reports – is typically comparable to two to three years of licence fees for a mid-sized team on a commercial CRM. The exact cost depends on modules, integrations (ERP, telephony, WhatsApp, accounting) and data migration complexity. We start with a short discovery phase and give you a module-by-module estimate, so you can compare it directly against your current licence spend before committing.',
+            'question' => 'Is it cheaper to build or buy a CRM?',
+            'answer'   => 'Buying is cheaper upfront and usually cheaper full stop below roughly 25 users. Building gets cheaper over time because there’s no per-seat fee. The crossover depends on seat count, growth rate and which tier you’d need. Compare against your current licence spend, not against zero.',
+        ],
+        [
+            'question' => 'Custom CRM vs Salesforce, HubSpot and Zoho – which is better?',
+            'answer'   => 'Depends how standard your process is. Salesforce and HubSpot are excellent for conventional pipelines and bring ecosystems no custom build can match. Custom wins when your process is unusual, when per-seat cost has stopped scaling, or when residency and compliance requirements sit behind a pricing tier.',
         ],
         [
             'question' => 'How long does it take to build a custom CRM?',
-            'answer'   => 'A usable first release usually takes 8–14 weeks: discovery and process mapping (1–2 weeks), design (1–3 weeks), then core modules built in weekly increments. We migrate your data, train team leads and go live module by module, so your team is working in the new CRM long before the full roadmap is delivered.',
+            'answer'   => 'A usable first release typically takes 8–14 weeks: discovery and process mapping (1–2 weeks), design (1–3 weeks), then core modules in weekly increments. Migration and training add 2–4 weeks. Your team works in the new CRM long before the full roadmap is delivered.',
         ],
         [
-            'question' => 'Can you migrate our data from spreadsheets or an existing CRM?',
-            'answer'   => 'Yes. Migration is planned from day one – we map your existing fields, de-duplicate contacts and companies, preserve deal history where the source system allows it, and run verification reports so your team can confirm nothing was lost. We can also run the old and new systems in parallel for a transition period.',
+            'question' => 'Does a custom CRM have recurring costs?',
+            'answer'   => 'No licence fee and no per-seat charge. You pay for hosting, which for most CRMs is modest, and optionally a support retainer. Cost stops scaling with headcount – that’s the structural difference from a subscription.',
         ],
         [
-            'question' => 'Can the CRM integrate with our ERP, accounting or telephony tools?',
-            'answer'   => 'Integration is usually the main reason clients choose a custom CRM. We build two-way syncs with ERPs and accounting tools (Tally, Zoho Books, QuickBooks and others), click-to-call and call-logging with telephony providers, WhatsApp and email conversation capture, and webhooks for your marketing stack – so customer data is entered once and flows everywhere.',
+            'question' => 'Is Salesforce worth it for a small business?',
+            'answer'   => 'Often, yes. Starter Suite is $25 per user per month and covers a conventional pipeline well. Below roughly 25 users with a standard process, a commercial CRM is usually the better economic choice, and we’d say so on the first call.',
         ],
         [
-            'question' => 'Do you build industry-specific CRMs, for example for real estate or healthcare?',
-            'answer'   => 'Yes. Vertical CRMs are a large part of our CRM work – real estate CRMs with property inventory, site-visit scheduling and broker management; healthcare CRMs with patient journeys and appointment flows; fintech CRMs with KYC and onboarding pipelines. Starting from your industry’s real workflow is exactly where custom CRM development beats generic tools.',
+            'question' => 'Why is HubSpot more expensive than it first appears?',
+            'answer'   => 'The advertised seat price excludes mandatory onboarding – $1,500 on Sales Hub Professional, $3,500 on Enterprise, charged on the first invoice. Some features also require paid Sales Seats rather than Core Seats. Five people on Professional runs about $6,900 in year one before any customisation.',
         ],
         [
-            'question' => 'Who owns the CRM source code and our customer data?',
-            'answer'   => 'You do. The code, database and infrastructure are yours as per the agreement – we hand over repositories, documentation and deployment configurations. There are no per-seat licences and no lock-in: any competent team can take the system forward if you build an internal team later.',
+            'question' => 'What is the true per-user cost of a commercial CRM?',
+            'answer'   => 'Add licence fees, mandatory onboarding, paid add-ons like API access on lower Salesforce tiers, sandbox costs, and annual increases. Salesforce raised list prices an average of 6% in August 2025. The advertised number is the floor, not the total.',
+        ],
+        [
+            'question' => 'Can we migrate our data off Salesforce, HubSpot or Zoho?',
+            'answer'   => 'Yes, with caveats worth knowing early. Records, deals and activity history export from all three. HubSpot’s Exports API allows 30 exports per rolling 24 hours with download links expiring after five minutes. Workflow and sequence configurations don’t export as files and get rebuilt.',
+        ],
+        [
+            'question' => 'Is HubSpot or Salesforce HIPAA compliant?',
+            'answer'   => 'Both sign a Business Associate Agreement, conditionally. HubSpot offers it only on Enterprise editions with sensitive data enabled, available since September 2024. Salesforce’s coverage is product-specific, with Health Cloud as the HIPAA-eligible product. Check which tier your compliance requirement actually forces you into.',
+        ],
+        [
+            'question' => 'You have your own CRM product – why would we pay you to build a custom one?',
+            'answer'   => 'Often you shouldn’t. LiftUp suits agencies and multi-product teams wanting leads, content and analytics in one console, and we’ll point you there when it fits. A build makes sense when your process, compliance requirements or integrations fall outside what any product covers.',
+        ],
+        [
+            'question' => 'Who owns the source code and the customer data?',
+            'answer'   => 'You do, both. Code in your repository with documentation and deployment configuration, database on infrastructure you control. No per-seat licences, no lock-in. Any competent team can pick the system up if you build in-house later.',
         ],
     ],
 

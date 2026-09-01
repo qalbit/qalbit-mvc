@@ -979,7 +979,11 @@ html {
    ================================================================== */
 
 .erp-page {
-    /* ground */
+    /* ground — four grounds, lightest to darkest. A section either takes the
+       page ground by painting nothing, or paints one of the other three AND
+       goes full-bleed; see the [data-erp-bleed] rule for why the second half is
+       not optional. */
+    --color-raised: #ffffff;
     --color-bg: #f3f2f2;
     --color-surface: #eae9e9;
     --color-text: #201e1d;
@@ -1153,15 +1157,47 @@ html:has(.erp-page) { scroll-behavior: smooth; }
     .erp-page [data-plus] { transition: none; }
 }
 
-/* ---- users slider (comparison table) ---------------------------- */
+/* ---- hero proof strip -------------------------------------------
+   The labels sit ABOVE the numbers and run one line at desktop but up to three
+   on a phone, so the numbers landed on three different baselines. Making each
+   cell a column flexbox and pushing the value to the bottom aligns them at any
+   label length -- grid already stretches the cells to a common height. The
+   `!important` is owed to the inline `margin:8px 0 0` on the <dd>; the gap it
+   provided comes back as padding-top, which `auto` does not absorb. */
+.erp-page [data-erp-hero-proof-col] {
+    display: flex;
+    flex-direction: column;
+}
+.erp-page [data-erp-hero-proof-col] > dd {
+    margin-top: auto !important;
+    padding-top: 8px;
+}
+
+/* ---- seat / users slider ----------------------------------------
+   THE ELEMENT IS THE HIT AREA, NOT THE TRACK. This used to set height:2px on
+   the input itself, which made the whole control a 2px-tall tap target -- on a
+   phone that is unhittable, and the thumb was the only thing you could grab.
+   The input is now a normal-height control with a transparent background, and
+   the 2px rule is drawn by the track pseudo-elements instead. Keep it that way:
+   putting a height back on the input re-creates the bug. */
 .erp-page input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
-    height: 2px;
-    background: var(--color-divider);
+    height: 32px;
+    background: transparent;
     outline: none;
     cursor: pointer;
 }
+.erp-page input[type="range"]::-webkit-slider-runnable-track {
+    height: 2px;
+    background: var(--color-divider);
+}
+.erp-page input[type="range"]::-moz-range-track {
+    height: 2px;
+    background: var(--color-divider);
+    border: 0;
+}
+/* ---- (old block below, superseded) ------------------------------- */
 .erp-page input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 18px;
@@ -1169,6 +1205,8 @@ html:has(.erp-page) { scroll-behavior: smooth; }
     background: var(--color-accent);
     cursor: grab;
     border: 0;
+    /* Centre an 18px thumb on a 2px track. */
+    margin-top: -8px;
 }
 .erp-page input[type="range"]::-moz-range-thumb {
     width: 18px;
@@ -1179,6 +1217,35 @@ html:has(.erp-page) { scroll-behavior: smooth; }
     border-radius: 0;
 }
 .erp-page input[type="range"]:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+
+/* The CRM seat model puts the same slider on the dark panel, where a track
+   mixed from --color-text is invisible against --color-text. Re-mix it from the
+   panel's own ink instead. The thumb is already accent and needs no change. */
+.erp-page [data-crm-seat-slider] input[type="range"]::-webkit-slider-runnable-track,
+.erp-page [data-crm-seat-slider] input[type="range"]::-moz-range-track {
+    background: color-mix(in srgb, #f3f2f2 35%, transparent);
+}
+
+/* ---- horizontal scrollers ---------------------------------------
+   Both pages carry one table too wide for a phone. They scroll, which is the
+   right call -- breaking the columns breaks the comparison -- but a table that
+   is simply clipped mid-word reads as broken rather than swipeable. These are
+   the classic pure-CSS scroll shadows: the two `local` layers scroll WITH the
+   content and mask the shadows at each end, so the cue appears only on the side
+   that actually has more to show, with no JS and no scroll listener.
+
+   --erp-scroller-ground MUST match the section's own background or the cover
+   layers paint a visible stripe. It defaults to the page ground; a section on
+   any other ground sets it inline. Layer order is load-bearing: covers first
+   (painted on top), shadows behind. */
+.erp-page [data-erp-scroller] {
+    --erp-scroller-ground: var(--color-bg);
+    background:
+        linear-gradient(to right, var(--erp-scroller-ground) 40%, transparent) left center / 44px 100% no-repeat local,
+        linear-gradient(to left, var(--erp-scroller-ground) 40%, transparent) right center / 44px 100% no-repeat local,
+        radial-gradient(farthest-side at 0 50%, color-mix(in srgb, var(--color-text) 20%, transparent), transparent) left center / 15px 100% no-repeat scroll,
+        radial-gradient(farthest-side at 100% 50%, color-mix(in srgb, var(--color-text) 20%, transparent), transparent) right center / 15px 100% no-repeat scroll;
+}
 
 /* ---- hover affordances ------------------------------------------ */
 .erp-page [data-hov] { transition: background-color .18s ease; }
@@ -1223,10 +1290,24 @@ html:has(.erp-page) { scroll-behavior: smooth; }
     .erp-page [data-erp-why-col],
     .erp-page [data-erp-rel-col],
     .erp-page .erp-proc-col,
-    .erp-page .erp-stk-cell {
+    .erp-page .erp-stk-cell,
+    .erp-page [data-crm-seat-hidden-col],
+    .erp-page [data-erp-uc-card],
+    .erp-page [data-erp-hero-snap-col],
+    .erp-page [data-erp-def-term],
+    .erp-page [data-erp-cmp-note] {
         border-right: 0 !important;
         padding-left: 0 !important;
         padding-right: 0 !important;
+    }
+
+    /* ...EXCEPT the one stack cell that paints a background. The rule above is
+       right for cells that sit on the page ground — flush to the gutter is the
+       point — but the accent cell's fill needs an inset or its text runs into
+       the edge of the colour. Put the horizontal padding back on that one. */
+    .erp-page .erp-stk-cell.erp-stk-col--accent {
+        padding-left: clamp(20px, 5vw, 26px) !important;
+        padding-right: clamp(20px, 5vw, 26px) !important;
     }
 
     .erp-page [data-erp-bvb-col] + [data-erp-bvb-col],
@@ -1234,14 +1315,47 @@ html:has(.erp-page) { scroll-behavior: smooth; }
     .erp-page [data-erp-why-col] + [data-erp-why-col],
     .erp-page [data-erp-rel-col] + [data-erp-rel-col],
     .erp-page .erp-proc-col + .erp-proc-col,
-    .erp-page .erp-stk-cell + .erp-stk-cell {
+    .erp-page .erp-stk-cell + .erp-stk-cell,
+    .erp-page [data-erp-uc-card] + [data-erp-uc-card],
+    .erp-page [data-erp-hero-snap-col] + [data-erp-hero-snap-col] {
         border-top: 1px solid var(--color-divider);
+    }
+
+    /* The comparison notes already draw their own 1px top rule on every item,
+       so they need the unwind above but no second border-top here.
+
+       The definition terms are the odd case: their <ol> carries one rule above
+       the whole row, and the LAST term ("custom ERP development" — ours) opens
+       on a 3px accent rule of its own. Stacked, that leaves the boundary
+       between terms one and two with nothing on it. Give a separator to every
+       term after the first EXCEPT the accented one, which would end up with a
+       hairline stacked on top of its 3px rule. */
+    .erp-page [data-erp-def-term] + [data-erp-def-term="other"] {
+        border-top: 1px solid var(--color-divider);
+    }
+
+    /* The ledger stacks to one column, so the left/right padding asymmetry that
+       kept the two-up gutter even is dead space. The numeral column stays. */
+    .erp-page [data-crm-seat-hidden-col] {
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
     }
 
     /* The industries headings reserve two lines so four accent rules stay on
        one baseline in a row. Stacked, that reservation is dead space. */
     .erp-page [data-erp-ind-name] {
         min-height: 0 !important;
+    }
+
+    /* Why QalbIT's lead screenshot. In a row it is a fixed-height crop in a
+       narrow column; stacked it spans the full measure and that same height
+       clamp swings the box to ~4:1 at 768px, cropping ~40% off the top and
+       bottom of the picture — logo included. Dropping the height lets the
+       inline aspect-ratio (the asset's own w/h) size it instead, so nothing is
+       cropped once the columns become rows. The partial emits both halves;
+       see its docblock before removing either. */
+    .erp-page [data-erp-why-shot] {
+        height: auto !important;
     }
 }
 
@@ -1423,3 +1537,4 @@ html:has(.erp-page) { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
     .erp-page [data-erp-uc-title] { transition: none; }
 }
+

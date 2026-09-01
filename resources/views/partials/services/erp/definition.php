@@ -123,7 +123,11 @@ $erpDefCta = $erp['inline_ctas']['fit_check'] ?? null;
                     }
                     $erpDefIsOurs = ($erpDefIndex === $erpDefLast);
                     ?>
-                    <li style="padding:<?= $erpDefPad ?>;<?= $erpDefIsOurs
+                    <?php /* data-erp-def-term: the divider and the one-sided
+                             padding describe a ROW. This list collapses to one
+                             column on a phone, where both stop making sense —
+                             the integrator's stacked-view rule unwinds them. */ ?>
+                    <li data-erp-def-term="<?= $erpDefIsOurs ? 'ours' : 'other' ?>" style="padding:<?= $erpDefPad ?>;<?= $erpDefIsOurs
                         ? 'border-top:3px solid var(--color-accent);margin-top:-1px'
                         : 'border-right:1px solid var(--color-divider)' ?>">
                         <span aria-hidden="true" style="font-family:var(--font-heading);font-weight:700;font-size:13px;letter-spacing:0.1em;color:<?= $erpDefIsOurs ? 'var(--color-accent)' : 'color-mix(in srgb, var(--color-text) 45%, transparent)' ?>">
@@ -138,8 +142,17 @@ $erpDefCta = $erp['inline_ctas']['fit_check'] ?? null;
                     </li>
                 <?php endforeach; ?>
             </ol>
+        </div>
+    <?php endif; ?>
 
-            <div data-stack style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;margin-top:36px;border-top:1px solid var(--color-divider);padding-top:28px">
+    <?php /* Closing line + inline CTA. This row USED TO SIT INSIDE the terms
+             block above, which meant a page that omits `terms` — the CRM page
+             does, having no three-term distinction to draw — silently lost its
+             §2 inline CTA as well. The two are unrelated, so the row is its own
+             block and renders whenever either half has content. */ ?>
+    <?php if (!empty($erpDef['closing']) || (!empty($erpDefCta['label']) && !empty($erpDefCta['url']))): ?>
+        <div data-reveal style="margin-top:clamp(36px,4vw,56px);border-top:2px solid var(--color-divider);padding-top:28px">
+            <div data-stack style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center">
                 <p style="margin:0;font-size:clamp(17px,1.5vw,21px);font-weight:600;letter-spacing:-0.015em;max-width:44ch">
                     <?= htmlspecialchars($erpDef['closing'] ?? '', ENT_QUOTES) ?>
                 </p>

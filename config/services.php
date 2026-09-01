@@ -3689,15 +3689,17 @@ return [
     'crm_development' => [
         'slug'     => '/services/crm-development/',
         'name'     => 'CRM Development',
-        'h1'       => 'Custom CRM Development Company & Services',
+        'h1'       => 'Custom CRM Development Services',
         'enabled'  => true,
         'order'    => 15,
 
-        'meta_title'       => 'Custom CRM Development Company & Services – QalbIT',
-        'meta_description' => 'QalbIT is a custom CRM development company building CRM software around your sales and support workflows – vertical CRMs, CRM–ERP integration, migrations.',
+        'meta_title'       => 'Custom CRM Development Services | What a CRM Seat Really Costs – QalbIT',
+        'meta_description' => 'Custom CRM development for teams outgrowing per-seat licences. Compare real Salesforce, HubSpot and Zoho costs – including the fees their pricing pages don’t lead with.',
 
         'short_description' => 'Custom CRM software development – sales pipelines, customer 360 views, vertical CRMs and CRM–ERP integrations built around how your team actually sells and serves.',
         'category'          => 'core',
+        'schema_service_type' => 'Custom CRM Development',
+        'schema_area_served'  => ['US', 'GB', 'AE', 'SA', 'OM', 'KW', 'AU'],
         'template'          => 'pages/services/crm-development',
 
         'resources' => [
@@ -3712,7 +3714,7 @@ return [
         'iconAlt' => 'Icon representing Custom CRM Development',
 
         'faq_key'      => 'service_crm_development',
-        'faq_title'    => 'Frequently asked questions about custom CRM development with QalbIT',
+        'faq_title'    => 'Frequently asked questions about custom CRM development',
         'faq_subtitle' => 'These are the questions founders, sales leaders and operations teams usually ask when they compare a custom CRM with off-the-shelf tools like Salesforce, HubSpot or Zoho.',
 
         'hero' => [
@@ -3784,7 +3786,20 @@ return [
         'capabilities' => [
             'id'      => 'crm-development-capabilities',
             'eyebrow' => 'What we build in custom CRMs',
-            'title'   => 'CRM development capabilities across sales, service and operations',
+            'title'   => 'CRM modules we build',
+            // w/h are the FILE'S REAL DIMENSIONS, not a target. The frame's
+            // aspect-ratio and the <img> width/height both read from these two
+            // numbers, so matching the file exactly means object-fit:cover has
+            // nothing to crop. 1600x624 is 2.564:1 — wider than 16:9 on
+            // purpose: a 16:9 source in this frame loses its top metric row and
+            // gets its panel titles sliced, which is what happened on the ERP
+            // build. Replacing the asset means changing all three together.
+            'dashboard_image' => [
+                'src' => '/images/services/crm-modules-dashboard.webp',
+                'w'   => 1600,
+                'h'   => 624,
+            ],
+            'dashboard_caption' => 'Pipeline, account 360 and reporting in one console',
             'intro'   => 'From lead capture to renewals, we build the CRM modules your team needs now and leave room for the ones you will need next year.',
 
             'items' => [
@@ -3835,7 +3850,7 @@ return [
         'process' => [
             'id'      => 'crm-development-process',
             'eyebrow' => 'How CRM projects work',
-            'title'   => 'A practical CRM development process from workflows to daily adoption',
+            'title'   => 'A CRM process built around adoption, not launch',
             'intro'   => 'CRMs fail when teams do not use them. Our process is built around early adoption – small releases, real data and feedback from the people who will live in the CRM every day.',
 
             'items' => [
@@ -3881,17 +3896,17 @@ return [
                 ],
             ],
 
-            'cta' => [
-                'label' => 'Walk me through this process for my CRM',
-                'url'   => '/contact-us/?topic=process-crm-development',
-            ],
+            // No CTA after §7. The content document's CTA map places eight on
+            // this page — three bands and five inline — and none of them sits
+            // here; §6 above and §8 below already carry one each, so a third in
+            // between reads as nagging. Same reason the ERP page unsets its own.
         ],
 
         'use_cases' => [
             'id'      => 'crm-development-use-cases',
             'eyebrow' => 'Where custom CRMs fit best',
-            'title'   => 'CRM development use cases we most often deliver',
-            'intro'   => 'Most of our CRM work replaces a mix of spreadsheets, generic CRM licences and manual follow-ups with one system the whole team trusts.',
+            'title'   => 'CRM projects we take on',
+            'intro'   => 'These are the CRM engagements we take on – teams running on spreadsheets and shared inboxes, or paying for a commercial CRM they’ve outgrown in one direction and underuse in another.',
 
             'items' => [
                 [
@@ -3933,7 +3948,7 @@ return [
         'stack' => [
             'id'      => 'crm-development-tech-stack',
             'eyebrow' => 'Tech stack & platforms',
-            'title'   => 'Tech stack we typically use for custom CRM development',
+            'title'   => 'The stack we build CRMs on',
             'intro'   => 'We use the same proven stack that powers our custom software work – chosen for maintainability, integration options and long-term cost of ownership.',
             'note'    => 'Already using an off-the-shelf CRM? We can also build extensions and integrations around it first, and only replace it when the business case is clear.',
 
@@ -3949,6 +3964,12 @@ return [
                 ],
                 [
                     'name'        => 'Frontend & user experience',
+                    // The section's single accent-filled card, per the design
+                    // comp. ONE card, not two — the fill is what makes the
+                    // grid a composition rather than four equal boxes, and a
+                    // second one cancels it. tech-stack.php reads this flag and
+                    // recolours the card, its numeral and its icon together.
+                    'accent'      => true,
                     'description' => 'Fast screens your sales team will actually enjoy using.',
                     'items'       => [
                         'Next.js (React) dashboards with keyboard-fast pipelines and list views.',

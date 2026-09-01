@@ -30,10 +30,29 @@
  * expressed as a length threshold that reproduces the design exactly for both
  * of today's posters and degrades sensibly for any third one.
  *
- * The final band's heading is rendered WHOLE. The design hand-splits it across
- * two lines with an accent-coloured second phrase; our title is a single config
- * string and splitting it here would mean deciding, in a template, where a
- * sentence breaks — so the grid column does the wrapping instead.
+ * The final band's heading is rendered WHOLE — the design hand-splits it across
+ * two lines and our title is a single config string, so splitting it here would
+ * mean deciding, in a template, where a sentence breaks. The grid column does
+ * the wrapping instead.
+ *
+ * ONE PHRASE MAY BE ACCENTED. `title_accent` names a phrase already inside the
+ * title and colours its first occurrence. It is a phrase, not markup: the title
+ * is escaped as a whole and only then is the (also escaped) phrase swapped for
+ * known-good span markup, so no config value can introduce tags. A phrase that
+ * does not appear is a no-op, never a fatal.
+ *
+ * The colour depends on the ground the variant paints, and is NOT the raw
+ * accent in both cases:
+ *
+ *   final   dark `--color-deep` ground → `--color-accent-400`. The raw
+ *           `--color-accent` measures ~3.3:1 there, which scrapes large-text AA
+ *           and fails outright the moment anyone shrinks the heading. The
+ *           lighter step is also what every other accent-on-dark on these pages
+ *           already uses.
+ *   poster  filled `--color-accent` ground → `#fff`. Accent on accent is
+ *           invisible; white is the only thing that reads as emphasis there.
+ *
+ * The ERP page sets the key on no band, so its output is unchanged.
  *
  * All copy comes from config('erp_page.bands.*'). Nothing here is hard-coded.
  *
@@ -70,6 +89,28 @@ $erpBandBodyGap = !empty($erpBand['body_2']) ? '14px' : '26px';
 // Muted foreground on the dark band, matching the design's two mixes.
 $erpBandDim  = 'color-mix(in srgb, #f3f2f2 78%, transparent)';
 $erpBandFine = 'color-mix(in srgb, #f3f2f2 55%, transparent)';
+
+/*
+ * Heading HTML. Escape first, then inject — see the accent note in the docblock.
+ * Both branches echo $erpBandTitleHtml raw, so every path into it is escaped.
+ */
+$erpBandTitleHtml   = htmlspecialchars($erpBand['title'], ENT_QUOTES);
+$erpBandAccentPhrase = trim((string) ($erpBand['title_accent'] ?? ''));
+
+if ($erpBandAccentPhrase !== '') {
+    $erpBandNeedle = htmlspecialchars($erpBandAccentPhrase, ENT_QUOTES);
+    $erpBandAt     = strpos($erpBandTitleHtml, $erpBandNeedle);
+
+    if ($erpBandAt !== false) {
+        $erpBandInk = $erpBandIsFinal ? 'var(--color-accent-400)' : '#fff';
+        $erpBandTitleHtml = substr_replace(
+            $erpBandTitleHtml,
+            '<span style="color:' . $erpBandInk . '">' . $erpBandNeedle . '</span>',
+            $erpBandAt,
+            strlen($erpBandNeedle)
+        );
+    }
+}
 ?>
 
 <?php if ($erpBandIsFinal): ?>
@@ -82,7 +123,7 @@ $erpBandFine = 'color-mix(in srgb, #f3f2f2 55%, transparent)';
     >
         <div data-erp-wrap data-stack style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);gap:clamp(28px,3.5vw,64px);align-items:end">
             <h2 style="margin:0;font-size:clamp(40px,6vw,88px);line-height:0.95;letter-spacing:-0.045em;color:#f3f2f2">
-                <?= htmlspecialchars($erpBand['title'], ENT_QUOTES) ?>
+                <?= $erpBandTitleHtml ?>
             </h2>
 
             <div>
@@ -140,7 +181,7 @@ $erpBandFine = 'color-mix(in srgb, #f3f2f2 55%, transparent)';
     >
         <div data-erp-wrap data-stack style="display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,0.75fr);gap:clamp(28px,3.5vw,56px);align-items:end">
             <h2 style="margin:0;line-height:1;<?= $erpBandPosterHeading ?>">
-                <?= htmlspecialchars($erpBand['title'], ENT_QUOTES) ?>
+                <?= $erpBandTitleHtml ?>
             </h2>
 
             <div>

@@ -50,11 +50,18 @@ $footerVariant  = $layoutConfig['footer'] ?? 'default';
 // contains a phone field (e.g. via the contact CTA section or contact hero).
 $needsPhoneInput = strpos($content ?? '', 'data-intl-tel-input') !== false;
 
-// /services/erp-development/ ships its own design system (Archivo, a separate
-// token set) and its own behaviour. Both are sniffed out of the rendered
-// content rather than keyed off $pageId, because that page shares the
-// 'service-detail' id with eleven others that must not pay for either.
-$needsErpPage = strpos($content ?? '', 'class="erp-page"') !== false;
+// The `.erp-page` design system ships its own token set and its own behaviour
+// (scroll reveal, the FAQ accordion, the cost slider, the photo spotlight).
+// Both are sniffed out of the rendered content rather than keyed off $pageId,
+// because the pages using it share the 'service-detail' id with ten others
+// that must not pay for either.
+//
+// MATCH THE CLASS AS A TOKEN, NOT AS THE WHOLE ATTRIBUTE. This used to test for
+// the literal string `class="erp-page"`, which silently failed the moment a
+// second page adopted the system and added a class of its own — the CRM page
+// renders `class="erp-page crm-page"`, so the page loaded its stylesheet and
+// none of its JavaScript. Nothing errored; the animations were simply absent.
+$needsErpPage = (bool) preg_match('/\bclass="[^"]*\berp-page\b/', $content ?? '');
 
 // JSON-LD passed from controllers
 $jsonLd = $jsonLd ?? null;

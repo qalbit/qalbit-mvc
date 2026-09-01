@@ -198,5 +198,46 @@ $erpInlineIcon = static function (?string $rel): ?string {
             </article>
         <?php endforeach; ?>
     </div>
+
+    <?php /* OPTIONAL. The ERP page ends this section on the last column; the
+             CRM page closes it with the line that turns the three verticals
+             into an argument. Omitted key renders nothing. */ ?>
+    <?php if (!empty($erpInd['closing'])): ?>
+        <p data-reveal style="margin:clamp(28px,3vw,40px) 0 0;max-width:70ch;border-top:2px solid var(--color-text);padding-top:20px;font-size:clamp(16px,1.4vw,19px);font-weight:600;line-height:1.5;letter-spacing:-0.015em">
+            <?= htmlspecialchars($erpInd['closing'], ENT_QUOTES) ?>
+        </p>
+    <?php endif; ?>
+
+    <?php /* OPTIONAL NESTED BLOCK. The page template may set $erpIndAfter to a
+             partial that belongs INSIDE this section rather than after it — the
+             CRM page's "Where your data lives" is the current and only user.
+             It has to render here, not as a sibling section, for two reasons:
+             this section is a full-bleed --color-surface band, so a sibling
+             would land on plain ground and read as detached; and the block's
+             heading is an <h3> under this section's <h2>.
+
+             Unset immediately after, like $erpIntData in integrations.php:
+             View::render() shares one variable scope across every partial, so a
+             value left behind here would be picked up by whatever includes this
+             file next.
+
+             The realpath check confines the include to the service partials
+             directory. The path comes from our own template, not from a
+             request, but a slot that includes an arbitrary path is the kind of
+             thing that later grows a config-driven caller. */ ?>
+    <?php if (!empty($erpIndAfter)): ?>
+        <?php
+            $erpIndAfterRoot = realpath(__DIR__ . '/..');
+            $erpIndAfterFile = realpath((string) $erpIndAfter);
+            if (
+                $erpIndAfterRoot !== false
+                && $erpIndAfterFile !== false
+                && str_starts_with($erpIndAfterFile, $erpIndAfterRoot . DIRECTORY_SEPARATOR)
+            ) {
+                include $erpIndAfterFile;
+            }
+            unset($erpIndAfter, $erpIndAfterRoot, $erpIndAfterFile);
+        ?>
+    <?php endif; ?>
     </div>
 </section>

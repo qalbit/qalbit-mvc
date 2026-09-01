@@ -126,7 +126,12 @@ $erpHeroSnapN   = max(1, count($erpHeroSnapshot));
                             $erpHeroPad = '18px 16px 0';
                         }
                         ?>
-                        <div style="padding:<?= $erpHeroPad ?><?= $erpHeroLast ? '' : ';border-right:' . $erpHeroRule ?>">
+                        <?php /* data-erp-hero-proof-col: the labels are one line
+                                 at desktop and up to three on a phone, so the big
+                                 numbers below them landed on three different
+                                 baselines — a staircase. The integrator rule
+                                 bottom-aligns the values instead. */ ?>
+                        <div data-erp-hero-proof-col style="padding:<?= $erpHeroPad ?><?= $erpHeroLast ? '' : ';border-right:' . $erpHeroRule ?>">
                             <dt style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:<?= $erpHeroAccent ? 'var(--color-accent-700)' : $erpHeroDimInk ?>">
                                 <?= htmlspecialchars($erpHeroStat['label'] ?? '', ENT_QUOTES) ?>
                             </dt>
@@ -162,7 +167,11 @@ $erpHeroSnapN   = max(1, count($erpHeroSnapshot));
                     $erpHeroPad = '20px';
                 }
                 ?>
-                <div style="padding:<?= $erpHeroPad ?><?= $erpHeroLast ? '' : ';border-right:' . $erpHeroRule ?>">
+                <?php /* data-erp-hero-snap-col: this strip collapses to one column at
+                         [data-stack-sm], where the divider on each cell's right
+                         edge and its one-sided padding stop describing a row.
+                         The integrator rule unwinds both. */ ?>
+                <div data-erp-hero-snap-col style="padding:<?= $erpHeroPad ?><?= $erpHeroLast ? '' : ';border-right:' . $erpHeroRule ?>">
                     <dt style="font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--color-accent-700)">
                         <?= htmlspecialchars($erpHeroItem['label'] ?? '', ENT_QUOTES) ?>
                     </dt>

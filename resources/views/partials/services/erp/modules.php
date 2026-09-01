@@ -38,6 +38,16 @@
  * is never written into a partial, so it renders only once someone adds
  * `capabilities.dashboard_caption`; until then the frame stands on its own.
  *
+ * THE FRAME CAN ALSO HOLD A PLACEHOLDER. `dashboard_image` normally names a
+ * real file; set `placeholder => true` on it instead and the frame renders
+ * empty, dashed, with a hint naming the asset it is waiting for. That is for a
+ * page whose screenshot is commissioned but not yet delivered — it reserves the
+ * exact space the picture will take, so nothing reflows when it lands. It is
+ * deliberately obvious rather than subtle: an empty frame that looked finished
+ * would ship as one. Swapping it in later is one config edit — drop
+ * `placeholder`, add `src`. The hint text lives in config like every other
+ * user-facing string on these pages.
+ *
  * THE FRAME RATIO TRACKS THE ASSET, it is not a clamped height. The comp used
  * `height:clamp(240px,30vw,520px)` and `object-fit:cover`, which crops — fine
  * for a photograph, wrong for a screenshot, which has no spare margin to lose.
@@ -60,6 +70,17 @@ $erpModItems   = $erpModCaps['items'];
 $erpModCount   = count($erpModItems);
 $erpModCta     = $erp['inline_ctas']['module_scope'] ?? null;
 $erpModCaption = $erpModCaps['dashboard_caption'] ?? null;
+
+/**
+ * The dashboard still. Optional, and its ratio must track the asset — see the
+ * frame note in the docblock above. The ERP page's own image is the default so
+ * that page is unchanged; a page with no dashboard asset sets
+ * `capabilities.dashboard_image` to null and the figure is skipped entirely
+ * rather than framing a missing file.
+ */
+$erpModShot = array_key_exists('dashboard_image', $erpModCaps)
+    ? $erpModCaps['dashboard_image']
+    : ['src' => '/images/services/erp-modules-dashboard.webp', 'w' => 1600, 'h' => 625];
 
 /**
  * Read an icon off disk for inlining. Confined to the icons directory: the
@@ -164,25 +185,41 @@ $erpInlineIcon = static function (?string $rel): ?string {
         <?php endforeach; ?>
     </div>
 
+    <?php if (!empty($erpModShot['src']) || !empty($erpModShot['placeholder'])): ?>
     <figure style="margin:clamp(28px,3vw,44px) 0 0">
-        <div style="position:relative;width:100%;aspect-ratio:1600/625;border:1px solid color-mix(in srgb, #f3f2f2 28%, transparent)">
-            <img
-                src="<?= asset('/images/services/erp-modules-dashboard.webp') ?>"
-                alt=""
-                aria-hidden="true"
-                width="1600"
-                height="625"
-                loading="lazy"
-                decoding="async"
-                style="width:100%;height:100%;object-fit:cover;display:block"
-            >
-        </div>
+        <?php if (!empty($erpModShot['placeholder'])): ?>
+            <?php /* Scaffolding, not content — aria-hidden, so the hint is not
+                     announced as if it were part of the page. The dashed rule
+                     and the centred label are what stop an empty frame reading
+                     as a finished design. */ ?>
+            <div aria-hidden="true" style="position:relative;width:100%;aspect-ratio:<?= (int) $erpModShot['w'] ?>/<?= (int) $erpModShot['h'] ?>;border:1px dashed color-mix(in srgb, #f3f2f2 40%, transparent);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px">
+                <?php if (!empty($erpModShot['hint'])): ?>
+                    <span style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;line-height:1.7;color:color-mix(in srgb, #f3f2f2 55%, transparent)">
+                        <?= htmlspecialchars($erpModShot['hint'], ENT_QUOTES) ?>
+                    </span>
+                <?php endif; ?>
+            </div>
+        <?php else: ?>
+            <div style="position:relative;width:100%;aspect-ratio:<?= (int) $erpModShot['w'] ?>/<?= (int) $erpModShot['h'] ?>;border:1px solid color-mix(in srgb, #f3f2f2 28%, transparent)">
+                <img
+                    src="<?= asset($erpModShot['src']) ?>"
+                    alt=""
+                    aria-hidden="true"
+                    width="<?= (int) $erpModShot['w'] ?>"
+                    height="<?= (int) $erpModShot['h'] ?>"
+                    loading="lazy"
+                    decoding="async"
+                    style="width:100%;height:100%;object-fit:cover;display:block"
+                >
+            </div>
+        <?php endif; ?>
         <?php if (!empty($erpModCaption)): ?>
             <figcaption style="margin-top:10px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:color-mix(in srgb, #f3f2f2 55%, transparent)">
                 <?= htmlspecialchars($erpModCaption, ENT_QUOTES) ?>
             </figcaption>
         <?php endif; ?>
     </figure>
+    <?php endif; ?>
 
     <?php if (!empty($erpModCta['label']) && !empty($erpModCta['url'])): ?>
         <?php /* Outline button on the dark ground. `data-erp-cta-button` rather than

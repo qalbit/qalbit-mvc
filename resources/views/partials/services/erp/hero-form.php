@@ -48,6 +48,21 @@ $erpFormSubLine = $erpForm['sub_line'] ?? '';
 $erpFormButton  = $erpForm['button']   ?? 'Request ERP scoping call';
 $erpFormMicro   = $erpForm['micro']    ?? '';
 
+/**
+ * Lead routing. Defaults are the ERP page's, so that page is unchanged; the
+ * CRM page overrides all three from config('crm_page.form'). These are NOT
+ * cosmetic: `lead_from` and `lead_topic` are what LiftUp files the enquiry
+ * under, so leaving a second page on the ERP values books its leads as ERP.
+ */
+$erpFormLeadFrom  = $erpForm['lead_from']  ?? 'lead_erp_hero';
+$erpFormLeadTopic = $erpForm['lead_topic'] ?? 'erp-development';
+//   `lead_topic` is passed to lead_param() AS ITS DEFAULT, not appended with
+//   `?:`. lead_param() already defaults to the string 'general', so it never
+//   returns a falsy value and a `?:` fallback after it is dead code — which is
+//   why every hero lead arriving without a ?topic= was being filed as
+//   'general' rather than as this page's own topic.
+$erpFormRedirect  = $erpForm['redirect']   ?? '/services/erp-development/';
+
 /*
  * Prefer what the controller already extracted; only read the flash directly if
  * it is not in scope.
@@ -133,7 +148,7 @@ $erpFormFieldCss = static function (bool $hasError, bool $isTextarea = false) us
         data-variant="erp-hero"
         style="display:flex;flex-direction:column;gap:16px;margin-top:26px"
     >
-        <input type="hidden" name="redirect_to" value="<?= htmlspecialchars($_SERVER['REQUEST_URI'] ?? '/services/erp-development/', ENT_QUOTES) ?>">
+        <input type="hidden" name="redirect_to" value="<?= htmlspecialchars($_SERVER['REQUEST_URI'] ?? $erpFormRedirect, ENT_QUOTES) ?>">
 
         <!-- Full name -->
         <div>
@@ -191,15 +206,27 @@ $erpFormFieldCss = static function (bool $hasError, bool $isTextarea = false) us
             <?php endif; ?>
         </div>
 
-        <!-- What's breaking today? -->
+        <?php /* The message field's wording is the only copy in this form that is
+                 page-specific: the ERP default asks about orders, stock and
+                 purchasing, which is nonsense on a CRM page. Both strings come
+                 from config with the ERP text as the fallback, so the ERP page
+                 renders byte-identically and any page that omits the keys
+                 inherits its behaviour. The FIELDS are unchanged — this is the
+                 same textarea, asked in the page's own language. */ ?>
+        <?php
+            $erpFormMsgLabel = $erpForm['message_label']
+                ?? 'What’s breaking today?';
+            $erpFormMsgPlaceholder = $erpForm['message_placeholder']
+                ?? 'How do orders, stock and purchasing move through your business today?';
+        ?>
         <div>
             <label for="erp-message" style="<?= $erpFormLabelCss ?>">
-                What’s breaking today? <span style="color:var(--color-accent-400)" aria-hidden="true">*</span>
+                <?= htmlspecialchars($erpFormMsgLabel, ENT_QUOTES) ?> <span style="color:var(--color-accent-400)" aria-hidden="true">*</span>
             </label>
             <textarea
                 id="erp-message" name="message" rows="3" required maxlength="5000"
                 style="<?= $erpFormFieldCss(!empty($erpFormErrors['message']), true) ?>"
-                placeholder="How do orders, stock and purchasing move through your business today?"
+                placeholder="<?= htmlspecialchars($erpFormMsgPlaceholder, ENT_QUOTES) ?>"
                 aria-required="true"
                 <?= !empty($erpFormErrors['message']) ? 'aria-invalid="true" aria-describedby="erp-message-err"' : '' ?>
             ><?= htmlspecialchars($erpFormOld['message'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
@@ -211,9 +238,9 @@ $erpFormFieldCss = static function (bool $hasError, bool $isTextarea = false) us
         <!-- Honeypot: bots fill this, humans never see it -->
         <input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
         <input type="hidden" name="recaptcha_token" value="">
-        <input type="hidden" name="lead_from" value="lead_erp_hero">
+        <input type="hidden" name="lead_from" value="<?= htmlspecialchars($erpFormLeadFrom, ENT_QUOTES) ?>">
         <input type="hidden" name="lead_source" value="<?= htmlspecialchars(lead_param('source'), ENT_QUOTES) ?>">
-        <input type="hidden" name="lead_topic" value="<?= htmlspecialchars(lead_param('topic') ?: 'erp-development', ENT_QUOTES) ?>">
+        <input type="hidden" name="lead_topic" value="<?= htmlspecialchars(lead_param('topic', $erpFormLeadTopic), ENT_QUOTES) ?>">
 
         <button type="submit" class="erp-btn erp-btn-primary" style="width:100%;justify-content:space-between;font-size:15px;padding:16px 18px;margin-top:6px">
             <?= htmlspecialchars($erpFormButton, ENT_QUOTES) ?> <span aria-hidden="true">→</span>

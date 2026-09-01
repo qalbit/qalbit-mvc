@@ -195,7 +195,11 @@ $erpCmpLinkStyle  = 'color:var(--color-accent-700);text-decoration:none;border-b
         <?php endif; ?>
     </div>
 
-    <div style="overflow-x:auto">
+    <?php /* data-erp-scroller paints the edge shadows that tell a reader this
+             table scrolls. --erp-scroller-ground must match the section's own
+             ground or the fade will show as a band; this section sits on the
+             page ground, which is the rule's default. */ ?>
+    <div data-erp-scroller style="overflow-x:auto">
         <table data-reveal="" style="width:100%;border-collapse:collapse;text-align:left;min-width:840px">
             <caption style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">
                 Published licence pricing for Odoo, Microsoft Dynamics 365 Business Central,
@@ -327,7 +331,11 @@ $erpCmpLinkStyle  = 'color:var(--color-accent-700);text-decoration:none;border-b
                         ? 'padding:22px 32px 22px 0;border-top:1px solid var(--color-divider);border-right:1px solid var(--color-divider)'
                         : 'padding:22px 0 22px 32px;border-top:1px solid var(--color-divider)');
             ?>
-            <li style="<?= $erpCmpNoteStyle ?>">
+            <?php /* data-erp-cmp-note: same trap as every other two-up on these
+                     pages — the right-hand divider and the 32px one-sided
+                     padding only describe a row, and this list stacks at
+                     [data-stack-sm]. Unwound by the integrator rule. */ ?>
+            <li data-erp-cmp-note style="<?= $erpCmpNoteStyle ?>">
                 <span aria-hidden="true" style="font-family:var(--font-heading);font-weight:700;font-size:13px;color:var(--color-accent)"><?= str_pad((string) ($erpCmpNoteIndex + 1), 2, '0', STR_PAD_LEFT) ?></span>
                 <p style="margin:0;font-size:14.5px;line-height:1.6;color:color-mix(in srgb, var(--color-text) 78%, transparent)">
                     <strong style="color:var(--color-text)"><?= htmlspecialchars($erpCmpNote['lead'], ENT_QUOTES) ?></strong>

@@ -1,12 +1,16 @@
 /**
- * /services/erp-development/ — page behaviour.
+ * /services/erp-development/ and /services/crm-development/ — page behaviour.
  *
- * Loaded only when the rendered page contains `.erp-page` (see layouts/main.php).
- * Two features, both progressive enhancements: with this file blocked the page
- * still renders correctly and the comparison table still shows real numbers.
+ * Loaded only when the rendered page carries `.erp-page` (see layouts/main.php),
+ * which is the design system's scope, not a page name — both service pages
+ * above render through it. Two features, both progressive enhancements: with
+ * this file blocked the pages still render correctly and both cost tables still
+ * show real numbers.
  *
  *   1. Scroll reveal for [data-reveal] blocks.
- *   2. The user-count slider that recomputes five-year licence costs.
+ *   2. The seat-count slider that recomputes licence costs. Two callers:
+ *      the ERP comparison table (five-year totals) and the CRM seat model
+ *      (per-row spans, one with a flat onboarding fee on top).
  *
  * No dependencies. The site loads GSAP globally, but pulling ScrollTrigger in
  * for six fade-ups would be heavier than the IntersectionObserver below.
@@ -50,10 +54,11 @@
     }());
 
     /* ---------------------------------------------------------------
-       2. Users slider — live five-year licence cost
-       The table is rendered server-side at the config default, so these
+       2. Users slider — live licence cost
+       Both callers render server-side at their config default, so these
        are already the correct numbers before this runs. We only re-render
-       on input.
+       on input. One slider per page: the ERP page has the comparison
+       table, the CRM page has the seat model, neither has both.
        --------------------------------------------------------------- */
     (function costModel() {
         var input = page.querySelector('[data-erp-users-input]');
@@ -96,7 +101,21 @@
                 // sentence that qualifies it.
                 var pre  = el.getAttribute('data-erp-cost-prefix') || '';
                 var post = el.getAttribute('data-erp-cost-suffix') || '';
-                el.textContent = pre + '$' + fmt.format(rate * 12 * 5 * users) + post;
+
+                // Span being priced, in months. The ERP comparison table is
+                // always a five-year total so it omits the attribute and gets
+                // 60; the CRM seat model prices a single year on some rows and
+                // five on others, so it states the span per cell.
+                var months = parseFloat(el.getAttribute('data-erp-cost-months'));
+                if (!isFinite(months) || months <= 0) months = 60;
+
+                // Flat one-off on top of the per-seat run rate -- HubSpot's
+                // mandatory onboarding fee is the only current user. It is NOT
+                // multiplied by seats or by months.
+                var plus = parseFloat(el.getAttribute('data-erp-cost-plus'));
+                if (!isFinite(plus)) plus = 0;
+
+                el.textContent = pre + '$' + fmt.format(rate * months * users + plus) + post;
             });
 
             input.setAttribute('aria-valuetext', users + ' users');

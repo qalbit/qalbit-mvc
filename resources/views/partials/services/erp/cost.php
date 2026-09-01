@@ -16,7 +16,10 @@
  *            search result or an AI answer, so it gets its own surface. The
  *            refusal itself is set at display size against an accent left rule:
  *            it is a claim, not body copy, and it must read as one.
- *   Band 2 — the two supporting paragraphs in two columns under a hairline.
+ *   Band 2 — the supporting paragraphs in two columns under a hairline. The
+ *            columns are filled top-to-bottom, not poured across — see the
+ *            note at the band itself. One paragraph may be marked
+ *            `lead` in config to carry the band's emphasis.
  *   Band 3 — the drivers as a ruled index with hanging numerals. No outer
  *            panel and no cards, so it cannot read as a restatement of §5.
  *   Band 4 — the closing CTA row plus the related-article pointer.
@@ -62,8 +65,20 @@ if (empty($erpCost['title'])) {
     return;
 }
 
-/** @var array<int,string> $erpCostPositioning */
-$erpCostPositioning = $erpCost['positioning'] ?? [];
+/**
+ * Positioning paragraphs. An entry is normally a plain string; it may instead be
+ * `['text' => …, 'lead' => true]` to mark it as the emphasised paragraph in
+ * band 2 (full ink, 16px, semibold). Normalised to `[text, lead]` pairs here so
+ * nothing below has to test the shape twice.
+ *
+ * @var array<int,array{text:string,lead:bool}> $erpCostPositioning
+ */
+$erpCostPositioning = array_map(
+    static fn ($erpCostEntry): array => is_array($erpCostEntry)
+        ? ['text' => (string) ($erpCostEntry['text'] ?? ''), 'lead' => !empty($erpCostEntry['lead'])]
+        : ['text' => (string) $erpCostEntry, 'lead' => false],
+    array_values($erpCost['positioning'] ?? [])
+);
 /** @var array<int,array{title:string,text:string,ref?:string,ref_text?:string}> $erpCostDrivers */
 $erpCostDrivers = $erpCost['drivers'] ?? [];
 // Keyed, not counted: if a driver is ever unset() or array_filter()ed out of
@@ -128,7 +143,7 @@ $erpCostLinkRef = static function (string $text, array $driver) use ($erpCostRef
 
             <?php if (isset($erpCostPositioning[0])): ?>
                 <p style="margin:32px 0 0;max-width:34ch;font-size:clamp(19px,1.8vw,26px);font-weight:700;font-family:var(--font-heading);line-height:1.25;letter-spacing:-0.025em;border-left:4px solid var(--color-accent);padding-left:20px">
-                    <?= htmlspecialchars($erpCostPositioning[0], ENT_QUOTES) ?>
+                    <?= htmlspecialchars($erpCostPositioning[0]['text'], ENT_QUOTES) ?>
                 </p>
             <?php endif; ?>
         </div>
@@ -143,13 +158,50 @@ $erpCostLinkRef = static function (string $text, array $driver) use ($erpCostRef
     </div>
 
     <!-- Band 2 — the reasoning behind the refusal -->
-    <?php $erpCostRest = array_slice($erpCostPositioning, 1); ?>
-    <?php if ($erpCostRest): ?>
+    <?php
+        /*
+         * TWO COLUMNS FILLED TOP-TO-BOTTOM, NOT PARAGRAPHS POURED INTO A GRID.
+         * These used to be emitted as direct grid children, which is correct for
+         * exactly two paragraphs and wrong for any other number: with four, the
+         * browser flowed them ACROSS into two rows, so paragraph three landed
+         * under paragraph one instead of under paragraph two, and the row
+         * heights aligned to the longest cell — stranding the short closing
+         * line under a column of whitespace, adrift from the driver index it
+         * introduces. Chunking into explicit column wrappers reads down each
+         * column and lets the columns be different heights.
+         *
+         * ceil() puts the odd one in the FIRST column, which is where the
+         * longer expository copy sits. Two paragraphs still give one per
+         * column, so the ERP page is unaffected.
+         */
+        $erpCostRest = array_slice($erpCostPositioning, 1);
+        $erpCostCols = $erpCostRest
+            ? array_chunk($erpCostRest, (int) ceil(count($erpCostRest) / 2))
+            : [];
+    ?>
+    <?php if ($erpCostCols): ?>
         <div data-stack data-reveal style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,56px);margin-top:clamp(32px,3.5vw,52px);border-top:1px solid var(--color-divider);padding-top:28px">
-            <?php foreach ($erpCostRest as $erpCostPara): ?>
-                <p style="margin:0;font-size:14.5px;line-height:1.65;color:color-mix(in srgb, var(--color-text) 76%, transparent)">
-                    <?= htmlspecialchars($erpCostPara, ENT_QUOTES) ?>
-                </p>
+            <?php foreach ($erpCostCols as $erpCostCol): ?>
+                <div>
+                    <?php $erpCostPrevLead = false; ?>
+                    <?php foreach ($erpCostCol as $erpCostIdx => $erpCostPara): ?>
+                        <?php
+                            // A follow-on gets more air after a lead paragraph
+                            // than after ordinary body copy.
+                            $erpCostTop = $erpCostIdx === 0 ? '0' : ($erpCostPrevLead ? '16px' : '14px');
+                            $erpCostPrevLead = $erpCostPara['lead'];
+                        ?>
+                        <?php if ($erpCostPara['lead']): ?>
+                            <p style="margin:<?= $erpCostTop ?> 0 0;font-size:16px;font-weight:600;line-height:1.55">
+                                <?= htmlspecialchars($erpCostPara['text'], ENT_QUOTES) ?>
+                            </p>
+                        <?php else: ?>
+                            <p style="margin:<?= $erpCostTop ?> 0 0;font-size:14.5px;line-height:1.65;color:color-mix(in srgb, var(--color-text) 76%, transparent)">
+                                <?= htmlspecialchars($erpCostPara['text'], ENT_QUOTES) ?>
+                            </p>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>

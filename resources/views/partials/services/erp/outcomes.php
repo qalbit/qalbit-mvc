@@ -47,11 +47,27 @@
  * config key for it. It is the one string in this file that is not read from
  * config, and that is intentional.
  *
- * The closing note is given real presence rather than a footnote's — a
- * left-bordered accent aside, full body size, immediately under the table. It
- * is the section's credibility move: the content document forbids quoting a
- * headline ERP failure rate, and this note is what replaces one. Burying it
- * undercuts it.
+ * The closing note is given real presence rather than a footnote's, full body
+ * size, immediately under the table. It is the section's credibility move: on
+ * both pages the content document forbids a flattering headline number, and
+ * this note is what replaces one. Burying it undercuts it.
+ *
+ * TWO SHAPES, chosen by the config value's type:
+ *
+ *   `note => 'a string'`   a left-bordered accent aside. The ERP page's note is
+ *                          one continuous argument with no number of its own to
+ *                          hold up, so a display figure would have nothing to
+ *                          show. This is the original and the default.
+ *   `note => [...]`        a 260px label column — eyebrow, a display `figure`
+ *                          and its `figure_sub` — against `body` paragraphs.
+ *                          For a note whose whole point IS a number, where the
+ *                          figure earns the space. The CRM page's note replaces
+ *                          a widely-quoted stat with the current one, so the
+ *                          two numbers are the argument.
+ *
+ * The rich shape hangs off a hairline rather than an accent left rule: it is
+ * already carrying an accent eyebrow and a display figure, and a third accent
+ * marker on the same block is one too many.
  *
  * Copy is config-only. The design comp has these exact sentences hard-coded;
  * they are read from `erp_page.outcomes` at runtime regardless, so an edit to
@@ -149,7 +165,32 @@ $erpOutMeasureInk = 'color:color-mix(in srgb, #f3f2f2 74%, transparent)';
         </tbody>
     </table>
 
-    <?php if (!empty($erpOut['note'])): ?>
+    <?php /* See the two note shapes in the docblock before changing either. */ ?>
+    <?php if (!empty($erpOut['note']) && is_array($erpOut['note'])): ?>
+        <?php $erpOutNote = $erpOut['note']; ?>
+        <aside data-stack style="display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:clamp(20px,3vw,48px);align-items:start;margin-top:36px;border-top:1px solid color-mix(in srgb, #f3f2f2 22%, transparent);padding-top:26px">
+            <div>
+                <?php if (!empty($erpOutNote['eyebrow'])): ?>
+                    <p style="margin:0;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-accent-400)">
+                        <?= htmlspecialchars($erpOutNote['eyebrow'], ENT_QUOTES) ?>
+                    </p>
+                <?php endif; ?>
+                <?php if (!empty($erpOutNote['figure'])): ?>
+                    <?php /* Left readable, not aria-hidden. It restates the prose
+                             beside it, but as "$3.10, not $8.71" it is a coherent
+                             summary rather than orphaned decoration. */ ?>
+                    <p style="margin:10px 0 0;font-family:var(--font-heading);font-weight:800;font-size:clamp(30px,3.2vw,46px);line-height:1;letter-spacing:-0.04em"><?= htmlspecialchars($erpOutNote['figure'], ENT_QUOTES) ?><?php if (!empty($erpOutNote['figure_sub'])): ?><span style="display:block;margin-top:6px;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:color-mix(in srgb, #f3f2f2 60%, transparent)"><?= htmlspecialchars($erpOutNote['figure_sub'], ENT_QUOTES) ?></span><?php endif; ?></p>
+                <?php endif; ?>
+            </div>
+            <div>
+                <?php foreach (($erpOutNote['body'] ?? []) as $erpOutNoteIdx => $erpOutNotePara): ?>
+                    <p style="margin:<?= $erpOutNoteIdx > 0 ? '14px' : '0' ?> 0 0;max-width:84ch;font-size:15px;line-height:1.65;color:color-mix(in srgb, #f3f2f2 80%, transparent)">
+                        <?= htmlspecialchars($erpOutNotePara, ENT_QUOTES) ?>
+                    </p>
+                <?php endforeach; ?>
+            </div>
+        </aside>
+    <?php elseif (!empty($erpOut['note'])): ?>
         <aside style="margin-top:32px;max-width:82ch;border-left:4px solid var(--color-accent);padding-left:22px">
             <p style="margin:0;font-size:15px;line-height:1.65;color:color-mix(in srgb, #f3f2f2 80%, transparent)">
                 <?= htmlspecialchars($erpOut['note'], ENT_QUOTES) ?>
