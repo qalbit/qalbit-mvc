@@ -396,7 +396,7 @@ $brand = static function () use ($hasLogo, $logoPath, $page): string {
     <?php
     $marquee = [
         'Clutch 5.0 ★', '◆', 'Google 4.9 ★', '◆', 'Upwork top rated', '◆',
-        '11 years shipping', '◆', '4 live SaaS products', '◆', '8 people, no bench', '◆',
+        '11 years shipping', '◆', '4 live SaaS products', '◆', '5 people, no bench', '◆',
     ];
     ?>
     <div class="gt-marquee" role="group" aria-label="Credentials">
@@ -422,7 +422,7 @@ $brand = static function () use ($hasLogo, $logoPath, $page): string {
             <div class="gt-split">
                 <h2 class="gt-h2" id="gt-operator-title">We don't just build SaaS — we operate it.</h2>
                 <p class="gt-split__lede">
-                    Almost no offshore dev shop can say this: we build, ship, and pay the
+                    Almost no development studio can say this: we build, ship, and pay the
                     hosting bill for four of our own live SaaS products. We've felt
                     multi-tenancy, billing, and infrastructure cost shocks first-hand — so
                     your build benefits from real operating experience, not just delivery.
@@ -669,7 +669,7 @@ $brand = static function () use ($hasLogo, $logoPath, $page): string {
                 ],
                 [
                     'q' => "What's the catch on a free teardown?",
-                    'a' => "None. It costs us half a day and it's the fastest way to show how we think. Roughly one in four people who get one hire us; the rest keep the plan.",
+                    'a' => "None. It costs us half a day and it's the fastest way to show how we think. Some people who get one hire us; the rest keep the plan.",
                 ],
                 [
                     'q' => 'How does timezone and communication work across the Gulf?',
