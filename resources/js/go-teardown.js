@@ -214,6 +214,10 @@
         var current = 1;
         var submitting = false;
 
+        // Latched by the Meta Pixel Lead fire below, so a retry after a failed
+        // attempt can never report the same lead twice.
+        var leadTracked = false;
+
         // Hand validation over to us: with steps hidden, the browser cannot
         // focus an invalid field it is not showing, and submission silently
         // dies. Set only now, so a no-JS visitor keeps native validation.
@@ -662,6 +666,23 @@
                 form_name: formName,
                 page_path: window.location.pathname
             });
+
+            /*
+             * Meta Pixel lead conversion. Scoped to the Gulf page because this
+             * file serves both /go/ pages and only that one carries the base
+             * pixel — the pixel is installed in the page, not through GTM, and
+             * this deliberately stays out of GTM too.
+             *
+             * Reached only from the success branch of sendForm(), so it cannot
+             * fire on a button click, a step change or a failed request. Both
+             * guards matter: fbq is undefined when Consent Mode v2 has the
+             * visitor declining cookies, and typeof is what keeps that a no-op
+             * rather than a ReferenceError under "use strict".
+             */
+            if (!leadTracked && formName === "gulf_saas" && typeof fbq !== "undefined") {
+                leadTracked = true;
+                fbq("track", "Lead");
+            }
         }
 
         function softHintFreeMail(input) {
