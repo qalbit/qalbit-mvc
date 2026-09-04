@@ -92,6 +92,12 @@ return [
 
         // Lead routing. These two differ from the ERP form and must: leaving
         // them at the ERP values files every CRM enquiry as an ERP lead.
+        // Measurement labels. Without these the shared hero-form partial
+        // falls back to its ERP defaults, and this page books every GA4
+        // conversion as 'erp_scoping_call' — which it did until now.
+        'ga4_lead'   => 'crm_scoping_call',
+        'variant'    => 'crm-hero',
+        'aria_label' => 'CRM scoping call enquiry form',
         'lead_from'  => 'lead_crm_hero',
         'lead_topic' => 'crm-development',
         'redirect'   => '/services/crm-development/',

@@ -23,6 +23,7 @@ const jsEntryPoints = [
     "resources/js/technologies.js",
     "resources/js/technology-detail.js",
     "resources/js/go-teardown.js",
+    "resources/js/lead-events.js",
 ];
 
 const cssEntryPoints = [

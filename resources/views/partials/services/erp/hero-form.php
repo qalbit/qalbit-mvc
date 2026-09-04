@@ -56,6 +56,26 @@ $erpFormMicro   = $erpForm['micro']    ?? '';
  */
 $erpFormLeadFrom  = $erpForm['lead_from']  ?? 'lead_erp_hero';
 $erpFormLeadTopic = $erpForm['lead_topic'] ?? 'erp-development';
+
+/**
+ * Measurement labels, for exactly the same reason as the two above and with the
+ * same trap. `data-ga4-lead` is the name main.js reports the GA4 generate_lead
+ * conversion under, and it used to be the hardcoded literal 'erp_scoping_call'
+ * — so the CRM page, which shares this partial, was booking every one of its
+ * leads into GA4 as an ERP lead. Its CRM-side attribution was right the whole
+ * time (lead_from/lead_topic above); only the analytics name was wrong, which
+ * is the kind of defect that reads as "CRM generates no leads" in a report.
+ *
+ * `data-variant` and the aria-label carried the same literal. The aria-label is
+ * not cosmetic either: it is what a screen reader announces the form as, so a
+ * visitor on the CRM or Riyadh page was told they were filling in an ERP form.
+ *
+ * Defaults are the ERP page's own values, so that page renders byte-identically
+ * and any page that omits these keys inherits its behaviour unchanged.
+ */
+$erpFormGa4Lead   = $erpForm['ga4_lead']   ?? 'erp_scoping_call';
+$erpFormVariant   = $erpForm['variant']    ?? 'erp-hero';
+$erpFormAriaLabel = $erpForm['aria_label'] ?? 'ERP scoping call enquiry form';
 //   `lead_topic` is passed to lead_param() AS ITS DEFAULT, not appended with
 //   `?:`. lead_param() already defaults to the string 'general', so it never
 //   returns a falsy value and a `?:` fallback after it is dead code — which is
@@ -139,13 +159,13 @@ $erpFormFieldCss = static function (bool $hasError, bool $isTextarea = false) us
     <form
         data-contact-form
         data-erp-hero-form
-        data-ga4-lead="erp_scoping_call"
+        data-ga4-lead="<?= htmlspecialchars($erpFormGa4Lead, ENT_QUOTES) ?>"
         data-track="erp-hero-form"
         method="post"
         action="/contact-us/"
         novalidate
-        aria-label="ERP scoping call enquiry form"
-        data-variant="erp-hero"
+        aria-label="<?= htmlspecialchars($erpFormAriaLabel, ENT_QUOTES) ?>"
+        data-variant="<?= htmlspecialchars($erpFormVariant, ENT_QUOTES) ?>"
         style="display:flex;flex-direction:column;gap:16px;margin-top:26px"
     >
         <input type="hidden" name="redirect_to" value="<?= htmlspecialchars($_SERVER['REQUEST_URI'] ?? $erpFormRedirect, ENT_QUOTES) ?>">

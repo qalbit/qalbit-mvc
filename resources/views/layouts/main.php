@@ -172,6 +172,24 @@ $jsonLd = $jsonLd ?? null;
 
     <?php if (isset($pageId) && $pageId === 'location-detail'): ?>
         <script src="<?= asset_v('/js/location-detail.js') ?>" defer></script>
+    <?php endif; ?><?php
+    /* Lead conversion reporting (GA4 + Meta Pixel) for the hero enquiry form
+       and the booking links. Keyed off $needsErpPage — the same `erp-page`
+       class sniff that ships the design system's own JavaScript — so it covers
+       every page built on it (ERP, CRM, Riyadh today) and any added later,
+       without a growing list of page ids here. Pages outside the design system
+       ship nothing.
+
+       THE OPENING TAG IS BUTTED AGAINST THE PREVIOUS `?>` ON PURPOSE, and the
+       formatting is load-bearing rather than sloppy. A newline plus indent
+       between the two tags is LITERAL TEMPLATE OUTPUT: it is emitted on every
+       page whether or not this condition is true, which put four stray spaces
+       into the markup of all ~50 pages using this layout. Written this way the
+       block emits nothing at all when the condition is false, which is what
+       keeps every page off this design system byte-identical. Do not "tidy" the
+       tags apart without re-running that check. */
+    if ($needsErpPage): ?>
+        <script src="<?= asset_v('/js/lead-events.js') ?>" defer></script>
     <?php endif; ?>
 
     <?php if (isset($pageId) && $pageId === 'hire-developer'): ?>
