@@ -25,6 +25,9 @@ $recaptchaSiteKey = $recaptchaConfig['site_key'] ?? '';
 
 // JSON-LD (if provided by controller)
 $jsonLd = $jsonLd ?? null;
+
+// Optional per-page hreflang set. Absent on every page but Riyadh today.
+$hreflang = $seo['hreflang'] ?? null;
 ?>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,6 +51,20 @@ $jsonLd = $jsonLd ?? null;
     <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 <?php endif; ?>
 
+<?php /* hreflang. Rendered ONLY for a page that sets $seo['hreflang'], which
+         today is /saudi-arabia/riyadh/ and nothing else — every other page on
+         the site renders byte-identically to before this block existed. Keys
+         are language codes (or 'x-default'), values absolute URLs. A page with
+         no translations still wants a self-referencing pair: it tells a crawler
+         the alternates were considered rather than forgotten. Do NOT add a
+         locale here for a page that does not exist. */ ?>
+<?php if (!empty($hreflang) && is_array($hreflang)): ?>
+    <?php foreach ($hreflang as $hreflangCode => $hreflangUrl): ?>
+        <?php if (is_string($hreflangCode) && is_string($hreflangUrl) && $hreflangUrl !== ''): ?>
+<link rel="alternate" hreflang="<?= htmlspecialchars($hreflangCode) ?>" href="<?= htmlspecialchars($hreflangUrl) ?>">
+        <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif; ?>
 <?php if (!empty($gscVerification)): ?>
     <meta name="google-site-verification" content="<?= htmlspecialchars($gscVerification) ?>">
 <?php endif; ?>

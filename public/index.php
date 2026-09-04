@@ -121,6 +121,7 @@ use App\Controllers\CareerController;
 use App\Controllers\ContactController;
 use App\Controllers\ErrorController;
 use App\Controllers\GeoController;
+use App\Controllers\RiyadhController;
 use App\Controllers\HireController;
 use App\Controllers\IndustryController;
 use App\Controllers\LandingController;
@@ -251,6 +252,16 @@ $router->get('/v1/health/', [HealthController::class, 'show']);
 
 // SEO: llms.txt – curated site overview for AI assistants (llmstxt.org)
 $router->get('/llms.txt', [SeoController::class, 'llms']);
+
+// Riyadh is decoupled from the shared location template and served by its own
+// controller and view. Registered BEFORE the geo catch-all for readability —
+// Router::dispatch() consults the static-route table before the dynamic one, so
+// this would win either way, but the order should still say what it means. The
+// URL is unchanged and config/geo.php still carries the entry, so the sitemap
+// and the footer's locations list keep listing it; this route simply shadows
+// GeoController for that one path. The other eighteen location pages are
+// untouched.
+$router->get('/saudi-arabia/riyadh/', [RiyadhController::class, 'show']);
 
 // Geolocations 
 $router->get('/{country}/{state}/', [GeoController::class, 'show']);
